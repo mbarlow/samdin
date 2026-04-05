@@ -2,6 +2,8 @@
 
 ![Samdin — 3D scene builder with viewer controls](screenshot.png)
 
+![Samdin — Clinic spec loaded in the viewer](clinic.png)
+
 A JSON-based 3D scene builder using Three.js. Create complex 3D scenes by composing primitives, prefabs, modules, nested CSG parts, and scene-level render settings through declarative JSON specifications.
 
 Latest changes are summarized in [RELEASE_NOTES.md](RELEASE_NOTES.md).
