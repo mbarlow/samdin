@@ -1,0 +1,171 @@
+{
+  "name": "bus",
+  "description": "City transit bus",
+  "root": "bus_root",
+  "parts": [
+    {
+      "name": "bus_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "body",
+      "type": "roundedBox",
+      "params": [5, 1.6, 1.2, 0.05, 2],
+      "material": { "preset": "painted-metal", "color": "#cc8822" },
+      "position": [0, 1.15, 0],
+      "parent": "bus_root"
+    },
+    {
+      "name": "roof",
+      "type": "box",
+      "params": [4.8, 0.1, 1.15],
+      "material": { "preset": "painted-metal", "color": "#e8e8e8" },
+      "position": [0, 1.95, 0],
+      "parent": "bus_root"
+    },
+    {
+      "name": "windshield",
+      "type": "box",
+      "params": [0.02, 1, 1.1],
+      "material": { "preset": "glass-tinted" },
+      "position": [2.45, 1.2, 0],
+      "rotation": [0, 0, 8],
+      "parent": "bus_root"
+    },
+    {
+      "name": "rear_window",
+      "type": "box",
+      "params": [0.02, 0.6, 1],
+      "material": { "preset": "glass-tinted" },
+      "position": [-2.48, 1.4, 0],
+      "parent": "bus_root"
+    },
+    {
+      "name": "window_strip_l",
+      "type": "box",
+      "params": [3.8, 0.5, 0.02],
+      "material": { "preset": "glass-tinted" },
+      "position": [-0.2, 1.4, 0.6],
+      "parent": "bus_root"
+    },
+    {
+      "name": "window_strip_r",
+      "type": "box",
+      "params": [3.8, 0.5, 0.02],
+      "material": { "preset": "glass-tinted" },
+      "position": [-0.2, 1.4, -0.6],
+      "parent": "bus_root"
+    },
+    {
+      "name": "door_front",
+      "type": "box",
+      "params": [0.5, 1.2, 0.03],
+      "material": { "preset": "glass" },
+      "position": [1.8, 0.95, 0.59],
+      "parent": "bus_root"
+    },
+    {
+      "name": "door_rear",
+      "type": "box",
+      "params": [0.7, 1.2, 0.03],
+      "material": { "preset": "glass" },
+      "position": [-0.5, 0.95, 0.59],
+      "parent": "bus_root"
+    },
+    {
+      "name": "headlight_l",
+      "type": "cylinder",
+      "params": [0.1, 0.1, 0.05, 8],
+      "material": { "preset": "glow", "color": "#ffffff", "emissiveIntensity": 1 },
+      "position": [2.48, 0.7, 0.4],
+      "rotation": [0, 90, 0],
+      "parent": "bus_root"
+    },
+    {
+      "name": "headlight_r",
+      "type": "cylinder",
+      "params": [0.1, 0.1, 0.05, 8],
+      "material": { "preset": "glow", "color": "#ffffff", "emissiveIntensity": 1 },
+      "position": [2.48, 0.7, -0.4],
+      "rotation": [0, 90, 0],
+      "parent": "bus_root"
+    },
+    {
+      "name": "taillight_l",
+      "type": "box",
+      "params": [0.03, 0.2, 0.15],
+      "material": { "preset": "glow", "color": "#ff0000", "emissiveIntensity": 0.8 },
+      "position": [-2.52, 0.8, 0.45],
+      "parent": "bus_root"
+    },
+    {
+      "name": "taillight_r",
+      "type": "box",
+      "params": [0.03, 0.2, 0.15],
+      "material": { "preset": "glow", "color": "#ff0000", "emissiveIntensity": 0.8 },
+      "position": [-2.52, 0.8, -0.45],
+      "parent": "bus_root"
+    },
+    {
+      "name": "wheel_fl",
+      "type": "cylinder",
+      "params": [0.28, 0.28, 0.15, 12],
+      "material": { "preset": "rubber" },
+      "position": [1.7, 0.28, 0.62],
+      "rotation": [90, 0, 0],
+      "parent": "bus_root"
+    },
+    {
+      "name": "wheel_fr",
+      "type": "cylinder",
+      "params": [0.28, 0.28, 0.15, 12],
+      "material": { "preset": "rubber" },
+      "position": [1.7, 0.28, -0.62],
+      "rotation": [90, 0, 0],
+      "parent": "bus_root"
+    },
+    {
+      "name": "wheel_rl",
+      "type": "cylinder",
+      "params": [0.28, 0.28, 0.2, 12],
+      "material": { "preset": "rubber" },
+      "position": [-1.7, 0.28, 0.62],
+      "rotation": [90, 0, 0],
+      "parent": "bus_root"
+    },
+    {
+      "name": "wheel_rr",
+      "type": "cylinder",
+      "params": [0.28, 0.28, 0.2, 12],
+      "material": { "preset": "rubber" },
+      "position": [-1.7, 0.28, -0.62],
+      "rotation": [90, 0, 0],
+      "parent": "bus_root"
+    },
+    {
+      "name": "mirror_l",
+      "type": "box",
+      "params": [0.15, 0.2, 0.05],
+      "material": { "color": "#1a1a1a" },
+      "position": [2.3, 1.5, 0.7],
+      "parent": "bus_root"
+    },
+    {
+      "name": "mirror_r",
+      "type": "box",
+      "params": [0.15, 0.2, 0.05],
+      "material": { "color": "#1a1a1a" },
+      "position": [2.3, 1.5, -0.7],
+      "parent": "bus_root"
+    },
+    {
+      "name": "destination_sign",
+      "type": "box",
+      "params": [1.2, 0.25, 0.03],
+      "material": { "preset": "glow", "color": "#ffaa00", "emissiveIntensity": 0.8 },
+      "position": [1.5, 1.75, 0.58],
+      "parent": "bus_root"
+    }
+  ]
+}

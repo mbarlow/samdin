@@ -1,0 +1,41 @@
+{
+  "name": "arch-fragment",
+  "root": "arch_root",
+  "parts": [
+    { "name": "arch_root", "type": "group", "position": [0, 0, 0] },
+    {
+      "name": "fragment",
+      "type": "csg",
+      "material": {
+        "preset": "concrete",
+        "color": "#d4cdc4",
+        "breakup": {
+          "noise": { "amount": 0.09, "scale": 3.1, "color": "#e8dfd6" },
+          "grime": { "amount": 0.18, "axis": "y", "color": "#7a756d" }
+        }
+      },
+      "output": "final",
+      "shapes": {
+        "arch": { "type": "box", "size": [3.8, 2.2, 0.8], "position": [0, 1.1, 0] },
+        "void_a": { "type": "box", "size": [1.8, 1.4, 1.2], "position": [0, 1.0, 0] },
+        "void_b": { "type": "box", "size": [1.4, 0.9, 1.2], "position": [-1.4, 1.85, 0], "rotation": [0, 0, -18] },
+        "void_c": { "type": "box", "size": [1.7, 1.2, 1.2], "position": [1.55, 1.45, 0], "rotation": [0, 0, 22] }
+      },
+      "operations": [
+        { "op": "subtract", "a": "arch", "b": "void_a", "result": "step_1" },
+        { "op": "subtract", "a": "step_1", "b": "void_b", "result": "step_2" },
+        { "op": "subtract", "a": "step_2", "b": "void_c", "result": "final" }
+      ],
+      "parent": "arch_root"
+    },
+    {
+      "name": "debris_chunk",
+      "type": "box",
+      "params": [0.8, 0.48, 0.72],
+      "material": { "preset": "concrete", "color": "#bdb7af" },
+      "position": [1.55, 0.28, 0.44],
+      "rotation": [8, -14, 12],
+      "parent": "arch_root"
+    }
+  ]
+}

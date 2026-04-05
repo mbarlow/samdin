@@ -1,0 +1,61 @@
+{
+  "name": "machine-altar",
+  "root": "altar_root",
+  "parts": [
+    { "name": "altar_root", "type": "group", "position": [0, 0, 0] },
+    {
+      "name": "base",
+      "type": "cylinder",
+      "params": [1.8, 2.1, 0.7, 16],
+      "options": { "pivot": "bottom" },
+      "material": {
+        "preset": "painted-metal",
+        "color": "#57534e",
+        "breakup": {
+          "noise": { "amount": 0.12, "scale": 2.2, "color": "#6f6b65" },
+          "grime": { "amount": 0.24, "axis": "y", "color": "#141211" },
+          "roughnessVariation": 0.06
+        },
+        "emissiveStrips": [
+          { "face": "front", "axis": "x", "count": 2, "spacing": 0.9, "width": 0.1, "length": 0.5, "color": "#ff6438", "intensity": 1.5 },
+          { "face": "back", "axis": "x", "count": 2, "spacing": 0.9, "width": 0.1, "length": 0.5, "color": "#ff6438", "intensity": 1.5 }
+        ]
+      },
+      "position": [0, 0, 0],
+      "parent": "altar_root"
+    },
+    {
+      "name": "plinth",
+      "type": "csg",
+      "output": "plinth_final",
+      "material": { "preset": "steel", "color": "#373532" },
+      "shapes": {
+        "outer": { "type": "box", "size": [2.1, 1.0, 2.1], "position": [0, 1.25, 0] },
+        "inner": { "type": "box", "size": [1.35, 1.2, 1.35], "position": [0, 1.35, 0] },
+        "socket": { "type": "cylinder", "radius": 0.42, "height": 0.7, "position": [0, 1.72, 0] }
+      },
+      "operations": [
+        { "op": "subtract", "a": "outer", "b": "inner", "result": "step_1" },
+        { "op": "subtract", "a": "step_1", "b": "socket", "result": "plinth_final" }
+      ],
+      "parent": "altar_root"
+    },
+    {
+      "name": "core",
+      "type": "sphere",
+      "params": [0.34, 1],
+      "material": { "preset": "glow", "color": "#ff6438", "emissiveIntensity": 2.6 },
+      "position": [0, 1.92, 0],
+      "parent": "altar_root"
+    },
+    {
+      "name": "ring",
+      "type": "torus",
+      "params": [0.62, 0.05, 10, 28],
+      "material": { "preset": "glow", "color": "#ff875a", "emissiveIntensity": 1.8 },
+      "position": [0, 1.92, 0],
+      "rotation": [90, 0, 0],
+      "parent": "altar_root"
+    }
+  ]
+}

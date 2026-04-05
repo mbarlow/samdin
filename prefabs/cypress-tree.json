@@ -1,0 +1,60 @@
+{
+  "name": "cypress-tree",
+  "description": "Tall narrow Italian cypress tree",
+  "root": "cypress_root",
+  "parts": [
+    {
+      "name": "cypress_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "trunk",
+      "type": "cylinder",
+      "params": [0.08, 0.12, 4, 6],
+      "material": { "preset": "wood", "color": "#4a3a2a" },
+      "position": [0, 2, 0],
+      "parent": "cypress_root"
+    },
+    {
+      "name": "foliage_base",
+      "type": "cone",
+      "params": [0.5, 1.5, 8],
+      "material": { "preset": "foliage", "color": "#1a3a1a" },
+      "position": [0, 1.2, 0],
+      "parent": "cypress_root"
+    },
+    {
+      "name": "foliage_lower",
+      "type": "cone",
+      "params": [0.45, 1.5, 8],
+      "material": { "preset": "foliage", "color": "#1f4020" },
+      "position": [0, 2.2, 0],
+      "parent": "cypress_root"
+    },
+    {
+      "name": "foliage_mid",
+      "type": "cone",
+      "params": [0.38, 1.5, 8],
+      "material": { "preset": "foliage", "color": "#1a3a1a" },
+      "position": [0, 3.2, 0],
+      "parent": "cypress_root"
+    },
+    {
+      "name": "foliage_upper",
+      "type": "cone",
+      "params": [0.28, 1.2, 8],
+      "material": { "preset": "foliage", "color": "#1f4020" },
+      "position": [0, 4.1, 0],
+      "parent": "cypress_root"
+    },
+    {
+      "name": "foliage_top",
+      "type": "cone",
+      "params": [0.15, 0.8, 6],
+      "material": { "preset": "foliage", "color": "#1a3a1a" },
+      "position": [0, 4.8, 0],
+      "parent": "cypress_root"
+    }
+  ]
+}

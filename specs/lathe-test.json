@@ -1,0 +1,150 @@
+{
+  "name": "lathe-test",
+  "description": "Test scene for lathe primitives - vases, bottles, goblets, and decorative items",
+  "parts": [
+    {
+      "name": "floor",
+      "type": "box",
+      "params": [6, 0.1, 4],
+      "material": { "color": "#3a3a3a", "roughness": 0.9 },
+      "position": [0, -0.05, 0]
+    },
+    {
+      "name": "pedestal_1",
+      "type": "box",
+      "params": [0.6, 0.8, 0.6],
+      "material": { "color": "#f5f5f5", "roughness": 0.3 },
+      "position": [-2, 0.4, 0]
+    },
+    {
+      "name": "pedestal_2",
+      "type": "box",
+      "params": [0.6, 0.8, 0.6],
+      "material": { "color": "#f5f5f5", "roughness": 0.3 },
+      "position": [-0.7, 0.4, 0]
+    },
+    {
+      "name": "pedestal_3",
+      "type": "box",
+      "params": [0.6, 0.8, 0.6],
+      "material": { "color": "#f5f5f5", "roughness": 0.3 },
+      "position": [0.7, 0.4, 0]
+    },
+    {
+      "name": "pedestal_4",
+      "type": "box",
+      "params": [0.6, 0.8, 0.6],
+      "material": { "color": "#f5f5f5", "roughness": 0.3 },
+      "position": [2, 0.4, 0]
+    },
+    {
+      "name": "vase_classic",
+      "comment": "Classic amphora-style vase",
+      "type": "lathe",
+      "params": [
+        [[0.08, 0], [0.12, 0.02], [0.1, 0.05], [0.06, 0.1], [0.04, 0.2], [0.06, 0.3], [0.12, 0.4], [0.14, 0.5], [0.12, 0.55], [0.08, 0.58], [0.1, 0.6]],
+        16
+      ],
+      "material": { "color": "#c9a86c", "roughness": 0.4, "metalness": 0.1 },
+      "position": [-2, 0.8, 0]
+    },
+    {
+      "name": "wine_glass",
+      "comment": "Wine glass with stem",
+      "type": "lathe",
+      "params": [
+        [[0.06, 0], [0.06, 0.01], [0.01, 0.02], [0.01, 0.15], [0.02, 0.16], [0.01, 0.17], [0.03, 0.2], [0.06, 0.35], [0.05, 0.36]],
+        12
+      ],
+      "material": { "preset": "glass" },
+      "position": [-0.7, 0.8, 0]
+    },
+    {
+      "name": "bottle",
+      "comment": "Wine bottle shape",
+      "type": "lathe",
+      "params": [
+        [[0.06, 0], [0.06, 0.01], [0.05, 0.02], [0.05, 0.25], [0.04, 0.28], [0.02, 0.32], [0.015, 0.45], [0.018, 0.46], [0.015, 0.47]],
+        12
+      ],
+      "material": { "preset": "glass", "color": "#1a4d1a" },
+      "position": [0.7, 0.8, 0]
+    },
+    {
+      "name": "goblet",
+      "comment": "Medieval-style goblet",
+      "type": "lathe",
+      "params": [
+        [[0.05, 0], [0.06, 0.01], [0.03, 0.02], [0.02, 0.05], [0.025, 0.06], [0.02, 0.07], [0.02, 0.12], [0.04, 0.14], [0.07, 0.22], [0.065, 0.23]],
+        8
+      ],
+      "material": { "preset": "gold" },
+      "position": [2, 0.8, 0]
+    },
+    {
+      "name": "back_wall",
+      "type": "box",
+      "params": [6, 2, 0.1],
+      "material": { "color": "#2a4a6a", "roughness": 0.8 },
+      "position": [0, 1, -1.5]
+    },
+    {
+      "name": "chess_pawn",
+      "comment": "Chess pawn piece",
+      "type": "lathe",
+      "params": [
+        [[0.04, 0], [0.05, 0.01], [0.04, 0.02], [0.02, 0.04], [0.015, 0.06], [0.02, 0.08], [0.015, 0.1], [0.025, 0.12], [0.02, 0.13], [0, 0.14]],
+        8
+      ],
+      "material": { "color": "#f5f5f5", "roughness": 0.3 },
+      "position": [-2, 0.8, 1]
+    },
+    {
+      "name": "chess_rook",
+      "comment": "Chess rook piece",
+      "type": "lathe",
+      "params": [
+        [[0.045, 0], [0.05, 0.01], [0.04, 0.02], [0.025, 0.04], [0.025, 0.1], [0.035, 0.11], [0.035, 0.13], [0.03, 0.13], [0.03, 0.15], [0.04, 0.15], [0.04, 0.13], [0.035, 0.13]],
+        6
+      ],
+      "material": { "color": "#1a1a1a", "roughness": 0.3 },
+      "position": [-1.5, 0, 1]
+    },
+    {
+      "name": "bowl",
+      "comment": "Simple bowl",
+      "type": "lathe",
+      "params": [
+        [[0.02, 0], [0.08, 0.04], [0.12, 0.08], [0.11, 0.09]],
+        12
+      ],
+      "material": { "preset": "ceramic", "color": "#e8d4b8" },
+      "position": [0, 0, 1]
+    },
+    {
+      "name": "candlestick",
+      "comment": "Decorative candlestick holder",
+      "type": "lathe",
+      "params": [
+        [[0.04, 0], [0.05, 0.01], [0.03, 0.02], [0.015, 0.05], [0.025, 0.06], [0.015, 0.07], [0.015, 0.15], [0.025, 0.16], [0.015, 0.17], [0.02, 0.2], [0.02, 0.22]],
+        8
+      ],
+      "material": { "preset": "brass" },
+      "position": [1.5, 0, 1]
+    },
+    {
+      "name": "half_vase",
+      "comment": "Partial lathe sweep - decorative wall piece",
+      "type": "lathe",
+      "params": [
+        [[0.05, 0], [0.08, 0.05], [0.1, 0.15], [0.08, 0.25], [0.06, 0.28]],
+        12,
+        0,
+        180
+      ],
+      "material": { "color": "#8b4513", "roughness": 0.5 },
+      "position": [0, 1.2, -1.4],
+      "rotation": [0, 0, 0]
+    }
+  ]
+}

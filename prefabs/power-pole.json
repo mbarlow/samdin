@@ -1,0 +1,123 @@
+{
+  "name": "power-pole",
+  "description": "Utility power pole with crossarm and catenary wires",
+  "root": "pole_root",
+  "parts": [
+    {
+      "name": "pole_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "pole",
+      "type": "cylinder",
+      "params": [0.12, 0.08, 8.0, 8],
+      "material": { "preset": "wood", "color": "#7a6550" },
+      "position": [0, 4.0, 0],
+      "parent": "pole_root"
+    },
+    {
+      "name": "crossarm",
+      "type": "box",
+      "params": [2.4, 0.1, 0.1],
+      "material": { "preset": "wood", "color": "#7a6550" },
+      "position": [0, 7.4, 0],
+      "parent": "pole_root"
+    },
+    {
+      "name": "crossarm_lower",
+      "type": "box",
+      "params": [1.8, 0.08, 0.08],
+      "material": { "preset": "wood", "color": "#7a6550" },
+      "position": [0, 6.8, 0],
+      "parent": "pole_root"
+    },
+    {
+      "name": "brace_l",
+      "type": "box",
+      "params": [0.04, 0.8, 0.04],
+      "material": { "preset": "wood", "color": "#7a6550" },
+      "position": [-0.4, 7.0, 0],
+      "rotation": [0, 0, 25],
+      "parent": "pole_root"
+    },
+    {
+      "name": "brace_r",
+      "type": "box",
+      "params": [0.04, 0.8, 0.04],
+      "material": { "preset": "wood", "color": "#7a6550" },
+      "position": [0.4, 7.0, 0],
+      "rotation": [0, 0, -25],
+      "parent": "pole_root"
+    },
+    {
+      "name": "insulator_1",
+      "type": "cylinder",
+      "params": [0.04, 0.04, 0.12, 6],
+      "material": { "preset": "ceramic", "color": "#c8d8c8" },
+      "position": [-1.1, 7.55, 0],
+      "parent": "pole_root"
+    },
+    {
+      "name": "insulator_2",
+      "type": "cylinder",
+      "params": [0.04, 0.04, 0.12, 6],
+      "material": { "preset": "ceramic", "color": "#c8d8c8" },
+      "position": [0, 7.55, 0],
+      "parent": "pole_root"
+    },
+    {
+      "name": "insulator_3",
+      "type": "cylinder",
+      "params": [0.04, 0.04, 0.12, 6],
+      "material": { "preset": "ceramic", "color": "#c8d8c8" },
+      "position": [1.1, 7.55, 0],
+      "parent": "pole_root"
+    },
+    {
+      "name": "insulator_4",
+      "type": "cylinder",
+      "params": [0.035, 0.035, 0.1, 6],
+      "material": { "preset": "ceramic", "color": "#c8d8c8" },
+      "position": [-0.8, 6.9, 0],
+      "parent": "pole_root"
+    },
+    {
+      "name": "insulator_5",
+      "type": "cylinder",
+      "params": [0.035, 0.035, 0.1, 6],
+      "material": { "preset": "ceramic", "color": "#c8d8c8" },
+      "position": [0.8, 6.9, 0],
+      "parent": "pole_root"
+    },
+    {
+      "name": "wire_l",
+      "type": "catenary",
+      "params": [[-1.1, 7.6, -5], [-1.1, 7.6, 5], 0.3, 0.012, 20, 4],
+      "material": { "color": "#333333", "metalness": 0.8, "roughness": 0.4 },
+      "parent": "pole_root"
+    },
+    {
+      "name": "wire_c",
+      "type": "catenary",
+      "params": [[0, 7.6, -5], [0, 7.6, 5], 0.3, 0.012, 20, 4],
+      "material": { "color": "#333333", "metalness": 0.8, "roughness": 0.4 },
+      "parent": "pole_root"
+    },
+    {
+      "name": "wire_r",
+      "type": "catenary",
+      "params": [[1.1, 7.6, -5], [1.1, 7.6, 5], 0.3, 0.012, 20, 4],
+      "material": { "color": "#333333", "metalness": 0.8, "roughness": 0.4 },
+      "parent": "pole_root"
+    },
+    {
+      "name": "transformer",
+      "type": "cylinder",
+      "params": [0.15, 0.15, 0.4, 8],
+      "material": { "preset": "steel", "color": "#777777" },
+      "position": [0.2, 6.2, 0.15],
+      "parent": "pole_root"
+    }
+  ]
+}

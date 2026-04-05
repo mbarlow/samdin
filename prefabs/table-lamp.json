@@ -1,0 +1,50 @@
+{
+  "name": "table-lamp",
+  "description": "Classic table lamp with shade",
+  "root": "lamp_root",
+  "parts": [
+    {
+      "name": "lamp_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "base",
+      "type": "lathe",
+      "params": [
+        [[0.06, 0], [0.08, 0.01], [0.07, 0.02], [0.03, 0.05], [0.025, 0.15], [0.03, 0.16]],
+        8
+      ],
+      "material": { "preset": "ceramic", "color": "#e8e0d0" },
+      "position": [0, 0, 0],
+      "parent": "lamp_root"
+    },
+    {
+      "name": "neck",
+      "type": "cylinder",
+      "params": [0.015, 0.02, 0.1, 6],
+      "material": { "preset": "brass" },
+      "position": [0, 0.21, 0],
+      "parent": "lamp_root"
+    },
+    {
+      "name": "shade",
+      "type": "lathe",
+      "params": [
+        [[0.04, 0], [0.1, 0.12], [0.11, 0.13], [0.1, 0.14]],
+        12
+      ],
+      "material": { "preset": "fabric", "color": "#f5efe5" },
+      "position": [0, 0.26, 0],
+      "parent": "lamp_root"
+    },
+    {
+      "name": "light",
+      "type": "pointLight",
+      "params": [1, 3, 2, true, 0.025],
+      "material": { "color": "#fff5e0" },
+      "position": [0, 0.33, 0],
+      "parent": "lamp_root"
+    }
+  ]
+}

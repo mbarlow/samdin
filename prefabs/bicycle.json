@@ -1,0 +1,179 @@
+{
+  "name": "bicycle",
+  "description": "Standard road bicycle",
+  "root": "bike_root",
+  "parts": [
+    {
+      "name": "bike_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "wheel_front",
+      "type": "torus",
+      "params": [0.32, 0.02, 8, 24],
+      "material": { "preset": "rubber" },
+      "position": [0.5, 0.32, 0],
+      "rotation": [90, 0, 0],
+      "parent": "bike_root"
+    },
+    {
+      "name": "wheel_rear",
+      "type": "torus",
+      "params": [0.32, 0.02, 8, 24],
+      "material": { "preset": "rubber" },
+      "position": [-0.5, 0.32, 0],
+      "rotation": [90, 0, 0],
+      "parent": "bike_root"
+    },
+    {
+      "name": "hub_front",
+      "type": "cylinder",
+      "params": [0.03, 0.03, 0.05, 8],
+      "material": { "preset": "chrome" },
+      "position": [0.5, 0.32, 0],
+      "rotation": [90, 0, 0],
+      "parent": "bike_root"
+    },
+    {
+      "name": "hub_rear",
+      "type": "cylinder",
+      "params": [0.04, 0.04, 0.06, 8],
+      "material": { "preset": "chrome" },
+      "position": [-0.5, 0.32, 0],
+      "rotation": [90, 0, 0],
+      "parent": "bike_root"
+    },
+    {
+      "name": "frame_top",
+      "type": "cylinder",
+      "params": [0.015, 0.015, 0.6, 6],
+      "material": { "preset": "painted-metal", "color": "#2255aa" },
+      "position": [-0.1, 0.65, 0],
+      "rotation": [0, 0, 80],
+      "parent": "bike_root"
+    },
+    {
+      "name": "frame_down",
+      "type": "cylinder",
+      "params": [0.018, 0.015, 0.55, 6],
+      "material": { "preset": "painted-metal", "color": "#2255aa" },
+      "position": [0.15, 0.45, 0],
+      "rotation": [0, 0, 55],
+      "parent": "bike_root"
+    },
+    {
+      "name": "frame_seat",
+      "type": "cylinder",
+      "params": [0.015, 0.015, 0.45, 6],
+      "material": { "preset": "painted-metal", "color": "#2255aa" },
+      "position": [-0.25, 0.52, 0],
+      "rotation": [0, 0, -15],
+      "parent": "bike_root"
+    },
+    {
+      "name": "frame_chainstay",
+      "type": "cylinder",
+      "params": [0.012, 0.012, 0.5, 6],
+      "material": { "preset": "painted-metal", "color": "#2255aa" },
+      "position": [-0.25, 0.32, 0],
+      "rotation": [0, 0, 90],
+      "parent": "bike_root"
+    },
+    {
+      "name": "frame_seatstay",
+      "type": "cylinder",
+      "params": [0.01, 0.01, 0.45, 6],
+      "material": { "preset": "painted-metal", "color": "#2255aa" },
+      "position": [-0.35, 0.48, 0],
+      "rotation": [0, 0, 120],
+      "parent": "bike_root"
+    },
+    {
+      "name": "fork",
+      "type": "cylinder",
+      "params": [0.015, 0.012, 0.4, 6],
+      "material": { "preset": "chrome" },
+      "position": [0.5, 0.5, 0],
+      "rotation": [0, 0, 10],
+      "parent": "bike_root"
+    },
+    {
+      "name": "handlebar_stem",
+      "type": "cylinder",
+      "params": [0.012, 0.012, 0.1, 6],
+      "material": { "preset": "chrome" },
+      "position": [0.48, 0.75, 0],
+      "rotation": [0, 0, 30],
+      "parent": "bike_root"
+    },
+    {
+      "name": "handlebar",
+      "type": "cylinder",
+      "params": [0.01, 0.01, 0.4, 6],
+      "material": { "preset": "chrome" },
+      "position": [0.52, 0.8, 0],
+      "rotation": [90, 0, 0],
+      "parent": "bike_root"
+    },
+    {
+      "name": "grip_l",
+      "type": "cylinder",
+      "params": [0.015, 0.015, 0.08, 6],
+      "material": { "preset": "rubber" },
+      "position": [0.52, 0.8, 0.18],
+      "rotation": [90, 0, 0],
+      "parent": "bike_root"
+    },
+    {
+      "name": "grip_r",
+      "type": "cylinder",
+      "params": [0.015, 0.015, 0.08, 6],
+      "material": { "preset": "rubber" },
+      "position": [0.52, 0.8, -0.18],
+      "rotation": [90, 0, 0],
+      "parent": "bike_root"
+    },
+    {
+      "name": "seat_post",
+      "type": "cylinder",
+      "params": [0.015, 0.015, 0.15, 6],
+      "material": { "preset": "chrome" },
+      "position": [-0.2, 0.8, 0],
+      "parent": "bike_root"
+    },
+    {
+      "name": "seat",
+      "type": "box",
+      "params": [0.22, 0.04, 0.12],
+      "material": { "color": "#1a1a1a", "roughness": 0.8 },
+      "position": [-0.18, 0.9, 0],
+      "parent": "bike_root"
+    },
+    {
+      "name": "pedal_l",
+      "type": "box",
+      "params": [0.08, 0.015, 0.06],
+      "material": { "color": "#2a2a2a" },
+      "position": [0, 0.32, 0.1],
+      "parent": "bike_root"
+    },
+    {
+      "name": "pedal_r",
+      "type": "box",
+      "params": [0.08, 0.015, 0.06],
+      "material": { "color": "#2a2a2a" },
+      "position": [0, 0.32, -0.1],
+      "parent": "bike_root"
+    },
+    {
+      "name": "crank",
+      "type": "cylinder",
+      "params": [0.05, 0.05, 0.03, 12],
+      "material": { "preset": "chrome" },
+      "position": [0, 0.32, 0],
+      "rotation": [90, 0, 0],
+      "parent": "bike_root"
+    }
+  ]
+}

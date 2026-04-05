@@ -1,0 +1,64 @@
+{
+  "name": "rock-large",
+  "description": "Large boulder with irregular shape",
+  "root": "rock_root",
+  "parts": [
+    {
+      "name": "rock_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "main_mass",
+      "type": "dodecahedron",
+      "params": [0.8],
+      "material": { "color": "#7a7268", "roughness": 0.95 },
+      "position": [0, 0.55, 0],
+      "scale": [1.2, 0.85, 1.0],
+      "parent": "rock_root"
+    },
+    {
+      "name": "lobe_side",
+      "type": "icosahedron",
+      "params": [0.45, 0],
+      "material": { "color": "#6a6258", "roughness": 0.95 },
+      "position": [0.5, 0.4, 0.2],
+      "scale": [1.0, 0.8, 0.9],
+      "parent": "rock_root"
+    },
+    {
+      "name": "lobe_top",
+      "type": "icosahedron",
+      "params": [0.35, 0],
+      "material": { "color": "#8a8278", "roughness": 0.95 },
+      "position": [-0.15, 0.9, -0.1],
+      "scale": [1.1, 0.7, 1.0],
+      "parent": "rock_root"
+    },
+    {
+      "name": "base_settle",
+      "type": "icosahedron",
+      "params": [0.5, 0],
+      "material": { "color": "#5a5248", "roughness": 0.98 },
+      "position": [0, 0.1, 0],
+      "scale": [1.5, 0.3, 1.3],
+      "parent": "rock_root"
+    },
+    {
+      "name": "chip_1",
+      "type": "dodecahedron",
+      "params": [0.12],
+      "material": { "color": "#7a7268", "roughness": 0.95 },
+      "position": [0.9, 0.06, -0.3],
+      "parent": "rock_root"
+    },
+    {
+      "name": "chip_2",
+      "type": "dodecahedron",
+      "params": [0.08],
+      "material": { "color": "#6a6258", "roughness": 0.95 },
+      "position": [-0.7, 0.04, 0.5],
+      "parent": "rock_root"
+    }
+  ]
+}

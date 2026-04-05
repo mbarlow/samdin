@@ -1,0 +1,137 @@
+{
+  "name": "japanese-lantern",
+  "description": "Showcase: Stone Japanese garden lantern (toro) with emissive interior",
+  "root": "lantern_root",
+  "parts": [
+    { "name": "lantern_root", "type": "group", "position": [0, 0, 0] },
+    {
+      "name": "base_slab",
+      "type": "cylinder", "params": [0.45, 0.5, 0.08, 12],
+      "material": { "color": "#8a8478", "roughness": 0.95, "breakup": { "noise": { "amount": 0.12, "scale": 2.0, "color": "#9a9488" }, "grime": { "amount": 0.15, "axis": "y", "color": "#3a3830" }, "roughnessVariation": 0.06 } },
+      "position": [0, 0.04, 0], "parent": "lantern_root"
+    },
+    {
+      "name": "base_post",
+      "type": "cylinder", "params": [0.12, 0.15, 0.3, 10],
+      "material": { "color": "#7a7268", "roughness": 0.95, "breakup": { "noise": { "amount": 0.1, "scale": 2.5, "color": "#8a8278" }, "grime": { "amount": 0.12, "axis": "y", "color": "#3a3830" }, "roughnessVariation": 0.05 } },
+      "position": [0, 0.23, 0], "parent": "lantern_root"
+    },
+    {
+      "name": "mid_platform",
+      "type": "cylinder", "params": [0.25, 0.28, 0.06, 10],
+      "material": { "color": "#8a8478", "roughness": 0.95, "breakup": { "noise": { "amount": 0.1, "scale": 2.5, "color": "#9a9488" }, "grime": { "amount": 0.1, "axis": "y", "color": "#3a3830" }, "roughnessVariation": 0.05 } },
+      "position": [0, 0.41, 0], "parent": "lantern_root"
+    },
+    {
+      "name": "pillar_1",
+      "type": "box", "params": [0.06, 0.5, 0.06],
+      "material": { "color": "#7a7268", "roughness": 0.95, "breakup": { "noise": { "amount": 0.1, "scale": 3.0, "color": "#8a8278" }, "roughnessVariation": 0.05 } },
+      "position": [0.12, 0.69, 0.12], "parent": "lantern_root"
+    },
+    {
+      "name": "pillar_2",
+      "type": "box", "params": [0.06, 0.5, 0.06],
+      "material": { "color": "#7a7268", "roughness": 0.95, "breakup": { "noise": { "amount": 0.1, "scale": 3.0, "color": "#8a8278" }, "roughnessVariation": 0.05 } },
+      "position": [-0.12, 0.69, 0.12], "parent": "lantern_root"
+    },
+    {
+      "name": "pillar_3",
+      "type": "box", "params": [0.06, 0.5, 0.06],
+      "material": { "color": "#7a7268", "roughness": 0.95, "breakup": { "noise": { "amount": 0.1, "scale": 3.0, "color": "#8a8278" }, "roughnessVariation": 0.05 } },
+      "position": [0.12, 0.69, -0.12], "parent": "lantern_root"
+    },
+    {
+      "name": "pillar_4",
+      "type": "box", "params": [0.06, 0.5, 0.06],
+      "material": { "color": "#7a7268", "roughness": 0.95, "breakup": { "noise": { "amount": 0.1, "scale": 3.0, "color": "#8a8278" }, "roughnessVariation": 0.05 } },
+      "position": [-0.12, 0.69, -0.12], "parent": "lantern_root"
+    },
+    {
+      "name": "fire_box_floor",
+      "type": "box", "params": [0.2, 0.02, 0.2],
+      "material": { "color": "#5a5248", "roughness": 0.9 },
+      "position": [0, 0.45, 0], "parent": "lantern_root"
+    },
+    {
+      "name": "fire_glow",
+      "type": "sphere", "params": [0.08, 1],
+      "material": { "preset": "glow", "color": "#ffaa44", "emissiveIntensity": 2.5 },
+      "position": [0, 0.62, 0], "parent": "lantern_root"
+    },
+    {
+      "name": "fire_light",
+      "type": "pointLight", "params": [1.5, 3, 2, 0],
+      "material": { "color": "#ffaa44" },
+      "position": [0, 0.65, 0], "parent": "lantern_root"
+    },
+    {
+      "name": "window_panel_1",
+      "type": "box", "params": [0.22, 0.4, 0.01],
+      "material": { "color": "#f0e8d0", "roughness": 0.8, "opacity": 0.4, "transmission": 0.3 },
+      "position": [0, 0.65, 0.145], "parent": "lantern_root"
+    },
+    {
+      "name": "window_panel_2",
+      "type": "box", "params": [0.22, 0.4, 0.01],
+      "material": { "color": "#f0e8d0", "roughness": 0.8, "opacity": 0.4, "transmission": 0.3 },
+      "position": [0, 0.65, -0.145], "parent": "lantern_root"
+    },
+    {
+      "name": "window_panel_3",
+      "type": "box", "params": [0.01, 0.4, 0.22],
+      "material": { "color": "#f0e8d0", "roughness": 0.8, "opacity": 0.4, "transmission": 0.3 },
+      "position": [0.145, 0.65, 0], "parent": "lantern_root"
+    },
+    {
+      "name": "window_panel_4",
+      "type": "box", "params": [0.01, 0.4, 0.22],
+      "material": { "color": "#f0e8d0", "roughness": 0.8, "opacity": 0.4, "transmission": 0.3 },
+      "position": [-0.145, 0.65, 0], "parent": "lantern_root"
+    },
+    {
+      "name": "roof_platform",
+      "type": "cylinder", "params": [0.3, 0.25, 0.05, 10],
+      "material": { "color": "#6a6258", "roughness": 0.95, "breakup": { "noise": { "amount": 0.1, "scale": 2.0, "color": "#7a7268" }, "grime": { "amount": 0.1, "axis": "y", "color": "#2a2820" }, "roughnessVariation": 0.05 } },
+      "position": [0, 0.97, 0], "parent": "lantern_root"
+    },
+    {
+      "name": "roof",
+      "type": "pyramid", "params": [0.6, 0.25],
+      "material": { "color": "#5a5248", "roughness": 0.95, "breakup": { "noise": { "amount": 0.14, "scale": 2.0, "color": "#6a6258" }, "grime": { "amount": 0.18, "axis": "y", "color": "#2a2820" }, "edgeWear": { "amount": 0.08, "color": "#8a8278" }, "roughnessVariation": 0.06 } },
+      "position": [0, 1.12, 0], "parent": "lantern_root"
+    },
+    {
+      "name": "roof_finial",
+      "type": "sphere", "params": [0.04, 1],
+      "material": { "color": "#7a7268", "roughness": 0.9, "breakup": { "noise": { "amount": 0.08, "scale": 4.0, "color": "#8a8278" }, "roughnessVariation": 0.04 } },
+      "position": [0, 1.27, 0], "parent": "lantern_root"
+    },
+    {
+      "name": "moss_patch_1",
+      "type": "sphere", "params": [0.06, 0],
+      "material": { "preset": "foliage", "color": "#2a5a22", "breakup": { "noise": { "amount": 0.15, "scale": 5.0, "color": "#3a6a30" }, "roughnessVariation": 0.08 } },
+      "position": [0.2, 1.0, 0.15], "scale": [1, 0.4, 1], "parent": "lantern_root"
+    },
+    {
+      "name": "moss_patch_2",
+      "type": "sphere", "params": [0.04, 0],
+      "material": { "preset": "foliage", "color": "#1a4a18", "breakup": { "noise": { "amount": 0.15, "scale": 5.0, "color": "#2a5a26" }, "roughnessVariation": 0.08 } },
+      "position": [-0.15, 0.42, 0.2], "scale": [1, 0.3, 1], "parent": "lantern_root"
+    }
+  ],
+  "scene": {
+    "quality": "high",
+    "background": { "type": "gradient", "color": "#1a2a1a", "color2": "#050808" },
+    "lighting": { "preset": "warm", "environment": "sunset", "envMapIntensity": 0.6, "shadowQuality": "high" },
+    "ground": { "reflective": true },
+    "exposure": 0.95,
+    "postfx": {
+      "ssao": { "enabled": true, "kernelRadius": 10 },
+      "dof": { "enabled": true, "focus": 3.5, "aperture": 0.003 },
+      "bloom": { "enabled": true, "strength": 0.6, "radius": 0.4, "threshold": 0.7 },
+      "colorGrade": { "enabled": true, "saturation": 0.9, "brightness": 0.95, "contrast": 1.05 },
+      "vignette": { "enabled": true, "intensity": 0.4 },
+      "fxaa": true
+    }
+  }
+}

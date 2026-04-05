@@ -1,0 +1,169 @@
+{
+  "name": "prefab-test",
+  "description": "Test scene demonstrating prefabs and material presets",
+  "root": "scene_root",
+  "parts": [
+    {
+      "name": "scene_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "ground",
+      "type": "box",
+      "params": [20, 0.1, 20],
+      "material": { "preset": "asphalt" },
+      "position": [0, -0.05, 0],
+      "parent": "scene_root"
+    },
+    {
+      "name": "sidewalk",
+      "type": "box",
+      "params": [3, 0.15, 20],
+      "material": { "preset": "concrete" },
+      "position": [-6, 0.075, 0],
+      "parent": "scene_root"
+    },
+    {
+      "name": "tuktuk_1",
+      "type": "prefab",
+      "src": "tuk-tuk",
+      "position": [2, 0, -3],
+      "rotation": [0, -20, 0],
+      "parent": "scene_root"
+    },
+    {
+      "name": "tuktuk_2",
+      "type": "prefab",
+      "src": "tuk-tuk",
+      "position": [-1, 0, 4],
+      "rotation": [0, 160, 0],
+      "parent": "scene_root"
+    },
+    {
+      "name": "moto_1",
+      "type": "prefab",
+      "src": "motorbike",
+      "position": [0, 0, -1],
+      "rotation": [0, 45, 0],
+      "parent": "scene_root"
+    },
+    {
+      "name": "moto_2",
+      "type": "prefab",
+      "src": "motorbike",
+      "position": [3, 0, 2],
+      "rotation": [0, -90, 0],
+      "parent": "scene_root"
+    },
+    {
+      "name": "lamp_1",
+      "type": "prefab",
+      "src": "street-lamp",
+      "position": [-5, 0, -4],
+      "parent": "scene_root"
+    },
+    {
+      "name": "lamp_2",
+      "type": "prefab",
+      "src": "street-lamp",
+      "position": [-5, 0, 0],
+      "parent": "scene_root"
+    },
+    {
+      "name": "lamp_3",
+      "type": "prefab",
+      "src": "street-lamp",
+      "position": [-5, 0, 4],
+      "parent": "scene_root"
+    },
+    {
+      "name": "vendor_1",
+      "type": "prefab",
+      "src": "street-vendor",
+      "position": [-6, 0.15, -2],
+      "rotation": [0, 90, 0],
+      "parent": "scene_root"
+    },
+    {
+      "name": "vendor_2",
+      "type": "prefab",
+      "src": "street-vendor",
+      "position": [-6, 0.15, 3],
+      "rotation": [0, 90, 0],
+      "parent": "scene_root"
+    },
+    {
+      "name": "seven_eleven",
+      "type": "prefab",
+      "src": "seven-eleven",
+      "position": [-4, 0, -6],
+      "rotation": [0, 180, 0],
+      "parent": "scene_root"
+    },
+    {
+      "name": "building_1",
+      "type": "roundedBox",
+      "params": [4, 8, 4, 0.05, 2],
+      "material": { "preset": "concrete", "color": "#d0c8b8" },
+      "position": [6, 4, -5],
+      "parent": "scene_root"
+    },
+    {
+      "name": "building_1_windows",
+      "type": "box",
+      "params": [3.5, 6, 0.05],
+      "material": { "preset": "glass-tinted" },
+      "position": [0, 0.5, -2.03],
+      "parent": "building_1"
+    },
+    {
+      "name": "building_2",
+      "type": "roundedBox",
+      "params": [3, 6, 5, 0.05, 2],
+      "material": { "preset": "concrete", "color": "#b8b8c0" },
+      "position": [6, 3, 3],
+      "parent": "scene_root"
+    },
+    {
+      "name": "building_2_windows",
+      "type": "box",
+      "params": [2.5, 4, 0.05],
+      "material": { "preset": "glass-tinted" },
+      "position": [0, 0.5, -2.53],
+      "parent": "building_2"
+    },
+    {
+      "name": "trash_can",
+      "type": "cylinder",
+      "params": [0.25, 0.22, 0.7, 8],
+      "material": { "preset": "plastic", "color": "#336633" },
+      "position": [-5.5, 0.35, 1.5],
+      "parent": "scene_root"
+    },
+    {
+      "name": "bench",
+      "type": "box",
+      "params": [1.5, 0.08, 0.4],
+      "material": { "preset": "wood" },
+      "position": [-6.5, 0.5, -5],
+      "parent": "scene_root"
+    },
+    {
+      "name": "bench_leg_1",
+      "type": "box",
+      "params": [0.08, 0.4, 0.35],
+      "material": { "preset": "steel" },
+      "position": [-0.6, -0.24, 0],
+      "parent": "bench"
+    },
+    {
+      "name": "bench_leg_2",
+      "type": "box",
+      "params": [0.08, 0.4, 0.35],
+      "material": { "preset": "steel" },
+      "position": [0.6, -0.24, 0],
+      "parent": "bench"
+    }
+  ]
+}

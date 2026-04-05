@@ -1,0 +1,66 @@
+{
+  "name": "roof-section",
+  "description": "Angled roof panel with shingles, 2m wide",
+  "root": "roof_root",
+  "parts": [
+    {
+      "name": "roof_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "roof_panel",
+      "type": "box",
+      "params": [2.0, 0.06, 2.2],
+      "material": { "color": "#6b4c3b", "roughness": 0.9 },
+      "position": [0, 0, 0],
+      "rotation": [25, 0, 0],
+      "parent": "roof_root"
+    },
+    {
+      "name": "sheathing",
+      "type": "box",
+      "params": [1.98, 0.03, 2.18],
+      "material": { "preset": "wood", "color": "#c4a97d" },
+      "position": [0, -0.04, 0],
+      "rotation": [25, 0, 0],
+      "parent": "roof_root"
+    },
+    {
+      "name": "rafter_1",
+      "type": "box",
+      "params": [0.06, 0.12, 2.2],
+      "material": { "preset": "wood", "color": "#a08060" },
+      "position": [-0.7, -0.1, 0],
+      "rotation": [25, 0, 0],
+      "parent": "roof_root"
+    },
+    {
+      "name": "rafter_2",
+      "type": "box",
+      "params": [0.06, 0.12, 2.2],
+      "material": { "preset": "wood", "color": "#a08060" },
+      "position": [0, -0.1, 0],
+      "rotation": [25, 0, 0],
+      "parent": "roof_root"
+    },
+    {
+      "name": "rafter_3",
+      "type": "box",
+      "params": [0.06, 0.12, 2.2],
+      "material": { "preset": "wood", "color": "#a08060" },
+      "position": [0.7, -0.1, 0],
+      "rotation": [25, 0, 0],
+      "parent": "roof_root"
+    },
+    {
+      "name": "fascia",
+      "type": "box",
+      "params": [2.0, 0.15, 0.025],
+      "material": { "preset": "wood", "color": "#f5f0e8" },
+      "position": [0, -0.05, 1.1],
+      "rotation": [25, 0, 0],
+      "parent": "roof_root"
+    }
+  ]
+}

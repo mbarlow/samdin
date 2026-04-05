@@ -1,0 +1,131 @@
+{
+  "name": "rubble-pile",
+  "description": "Pile of concrete and brick rubble debris",
+  "root": "rubble_root",
+  "parts": [
+    {
+      "name": "rubble_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "chunk_large_1",
+      "type": "box",
+      "params": [0.8, 0.35, 0.6],
+      "material": { "preset": "concrete", "color": "#9a9590" },
+      "position": [-0.1, 0.17, 0.1],
+      "rotation": [5, 15, -8],
+      "parent": "rubble_root"
+    },
+    {
+      "name": "chunk_large_2",
+      "type": "box",
+      "params": [0.5, 0.4, 0.7],
+      "material": { "preset": "concrete", "color": "#8a8580" },
+      "position": [0.4, 0.25, -0.3],
+      "rotation": [-12, -20, 5],
+      "parent": "rubble_root"
+    },
+    {
+      "name": "slab_broken",
+      "type": "wedge",
+      "params": [0.9, 0.2, 0.5],
+      "material": { "preset": "concrete", "color": "#a09a95" },
+      "position": [-0.5, 0.1, -0.4],
+      "rotation": [0, 35, 10],
+      "parent": "rubble_root"
+    },
+    {
+      "name": "chunk_med_1",
+      "type": "box",
+      "params": [0.35, 0.25, 0.3],
+      "material": { "preset": "concrete", "color": "#8a8278" },
+      "position": [0.6, 0.12, 0.4],
+      "rotation": [20, -10, 15],
+      "parent": "rubble_root"
+    },
+    {
+      "name": "chunk_med_2",
+      "type": "box",
+      "params": [0.25, 0.2, 0.35],
+      "material": { "preset": "brick", "color": "#a0705a" },
+      "position": [-0.6, 0.1, 0.5],
+      "rotation": [-8, 45, 12],
+      "parent": "rubble_root"
+    },
+    {
+      "name": "brick_1",
+      "type": "box",
+      "params": [0.22, 0.07, 0.1],
+      "material": { "preset": "brick", "color": "#b87a5a" },
+      "position": [0.2, 0.45, 0.0],
+      "rotation": [0, 30, 5],
+      "parent": "rubble_root"
+    },
+    {
+      "name": "brick_2",
+      "type": "box",
+      "params": [0.22, 0.07, 0.1],
+      "material": { "preset": "brick", "color": "#c08060" },
+      "position": [-0.3, 0.35, 0.2],
+      "rotation": [10, -15, 0],
+      "parent": "rubble_root"
+    },
+    {
+      "name": "brick_3",
+      "type": "box",
+      "params": [0.22, 0.07, 0.1],
+      "material": { "preset": "brick", "color": "#a87050" },
+      "position": [0.5, 0.03, -0.1],
+      "rotation": [0, 60, 3],
+      "parent": "rubble_root"
+    },
+    {
+      "name": "small_debris_1",
+      "type": "dodecahedron",
+      "params": [0.08],
+      "material": { "preset": "concrete", "color": "#999490" },
+      "position": [0.7, 0.04, 0.0],
+      "parent": "rubble_root"
+    },
+    {
+      "name": "small_debris_2",
+      "type": "dodecahedron",
+      "params": [0.06],
+      "material": { "preset": "concrete", "color": "#8a8580" },
+      "position": [-0.7, 0.03, -0.2],
+      "parent": "rubble_root"
+    },
+    {
+      "name": "small_debris_3",
+      "type": "dodecahedron",
+      "params": [0.1],
+      "material": { "preset": "concrete", "color": "#908880" },
+      "position": [0.0, 0.05, 0.6],
+      "parent": "rubble_root"
+    },
+    {
+      "name": "rebar_1",
+      "type": "cable",
+      "params": [[[0.1, 0.3, -0.1], [0.0, 0.55, 0.1], [-0.15, 0.7, 0.0]], 0.008, 8, 4, "normal"],
+      "material": { "preset": "rusted-metal" },
+      "parent": "rubble_root"
+    },
+    {
+      "name": "rebar_2",
+      "type": "cable",
+      "params": [[[0.4, 0.35, -0.2], [0.5, 0.5, -0.1], [0.35, 0.6, 0.1]], 0.008, 8, 4, "normal"],
+      "material": { "preset": "rusted-metal" },
+      "parent": "rubble_root"
+    },
+    {
+      "name": "dust_mound",
+      "type": "sphere",
+      "params": [0.6, 1],
+      "material": { "preset": "dirt-path", "color": "#a09888" },
+      "position": [0, -0.15, 0],
+      "scale": [1.8, 0.35, 1.5],
+      "parent": "rubble_root"
+    }
+  ]
+}

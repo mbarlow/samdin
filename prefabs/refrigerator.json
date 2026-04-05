@@ -1,0 +1,84 @@
+{
+  "name": "refrigerator",
+  "description": "Double-door refrigerator with freezer compartment",
+  "root": "fridge_root",
+  "parts": [
+    {
+      "name": "fridge_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "body",
+      "type": "roundedBox",
+      "params": [0.85, 1.8, 0.7, 0.02, 2],
+      "material": { "preset": "painted-metal", "color": "#e8e8e8" },
+      "position": [0, 0.92, 0],
+      "parent": "fridge_root"
+    },
+    {
+      "name": "freezer_door",
+      "type": "roundedBox",
+      "params": [0.82, 0.5, 0.04, 0.01, 2],
+      "material": { "preset": "painted-metal", "color": "#f0f0f0" },
+      "position": [0, 1.57, 0.36],
+      "parent": "fridge_root"
+    },
+    {
+      "name": "fridge_door",
+      "type": "roundedBox",
+      "params": [0.82, 1.15, 0.04, 0.01, 2],
+      "material": { "preset": "painted-metal", "color": "#f0f0f0" },
+      "position": [0, 0.62, 0.36],
+      "parent": "fridge_root"
+    },
+    {
+      "name": "divider",
+      "type": "box",
+      "params": [0.84, 0.025, 0.04],
+      "material": { "color": "#cccccc", "roughness": 0.5 },
+      "position": [0, 1.28, 0.36],
+      "parent": "fridge_root"
+    },
+    {
+      "name": "handle_top",
+      "type": "roundedBox",
+      "params": [0.03, 0.3, 0.04, 0.01, 2],
+      "material": { "preset": "chrome" },
+      "position": [0.32, 1.57, 0.41],
+      "parent": "fridge_root"
+    },
+    {
+      "name": "handle_bottom",
+      "type": "roundedBox",
+      "params": [0.03, 0.5, 0.04, 0.01, 2],
+      "material": { "preset": "chrome" },
+      "position": [0.32, 0.72, 0.41],
+      "parent": "fridge_root"
+    },
+    {
+      "name": "ice_dispenser",
+      "type": "roundedBox",
+      "params": [0.2, 0.12, 0.03, 0.01, 2],
+      "material": { "color": "#333333", "roughness": 0.3 },
+      "position": [-0.15, 1.55, 0.39],
+      "parent": "fridge_root"
+    },
+    {
+      "name": "foot_l",
+      "type": "cylinder",
+      "params": [0.02, 0.02, 0.03, 6],
+      "material": { "color": "#444444" },
+      "position": [-0.35, 0.015, 0.25],
+      "parent": "fridge_root"
+    },
+    {
+      "name": "foot_r",
+      "type": "cylinder",
+      "params": [0.02, 0.02, 0.03, 6],
+      "material": { "color": "#444444" },
+      "position": [0.35, 0.015, 0.25],
+      "parent": "fridge_root"
+    }
+  ]
+}

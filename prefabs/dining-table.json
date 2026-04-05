@@ -1,0 +1,274 @@
+{
+  "name": "dining-table",
+  "description": "Rectangular dining table with four chairs",
+  "root": "table_root",
+  "parts": [
+    {
+      "name": "table_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "tabletop",
+      "type": "roundedBox",
+      "params": [1.6, 0.06, 0.9, 0.02, 2],
+      "material": { "preset": "wood", "color": "#8b6914" },
+      "position": [0, 0.75, 0],
+      "parent": "table_root"
+    },
+    {
+      "name": "leg_1",
+      "type": "box",
+      "params": [0.08, 0.72, 0.08],
+      "material": { "preset": "wood", "color": "#7a5a10" },
+      "position": [-0.7, 0.36, -0.35],
+      "parent": "table_root"
+    },
+    {
+      "name": "leg_2",
+      "type": "box",
+      "params": [0.08, 0.72, 0.08],
+      "material": { "preset": "wood", "color": "#7a5a10" },
+      "position": [0.7, 0.36, -0.35],
+      "parent": "table_root"
+    },
+    {
+      "name": "leg_3",
+      "type": "box",
+      "params": [0.08, 0.72, 0.08],
+      "material": { "preset": "wood", "color": "#7a5a10" },
+      "position": [-0.7, 0.36, 0.35],
+      "parent": "table_root"
+    },
+    {
+      "name": "leg_4",
+      "type": "box",
+      "params": [0.08, 0.72, 0.08],
+      "material": { "preset": "wood", "color": "#7a5a10" },
+      "position": [0.7, 0.36, 0.35],
+      "parent": "table_root"
+    },
+    {
+      "name": "chair_1",
+      "type": "group",
+      "position": [-0.5, 0, -0.65],
+      "parent": "table_root"
+    },
+    {
+      "name": "c1_seat",
+      "type": "roundedBox",
+      "params": [0.4, 0.04, 0.4, 0.02, 2],
+      "material": { "preset": "wood", "color": "#8b6914" },
+      "position": [0, 0.45, 0],
+      "parent": "chair_1"
+    },
+    {
+      "name": "c1_back",
+      "type": "roundedBox",
+      "params": [0.38, 0.4, 0.03, 0.01, 2],
+      "material": { "preset": "wood", "color": "#8b6914" },
+      "position": [0, 0.7, -0.18],
+      "rotation": [-5, 0, 0],
+      "parent": "chair_1"
+    },
+    {
+      "name": "c1_leg_1",
+      "type": "box",
+      "params": [0.035, 0.43, 0.035],
+      "material": { "preset": "wood", "color": "#7a5a10" },
+      "position": [-0.16, 0.22, -0.16],
+      "parent": "chair_1"
+    },
+    {
+      "name": "c1_leg_2",
+      "type": "box",
+      "params": [0.035, 0.43, 0.035],
+      "material": { "preset": "wood", "color": "#7a5a10" },
+      "position": [0.16, 0.22, -0.16],
+      "parent": "chair_1"
+    },
+    {
+      "name": "c1_leg_3",
+      "type": "box",
+      "params": [0.035, 0.43, 0.035],
+      "material": { "preset": "wood", "color": "#7a5a10" },
+      "position": [-0.16, 0.22, 0.16],
+      "parent": "chair_1"
+    },
+    {
+      "name": "c1_leg_4",
+      "type": "box",
+      "params": [0.035, 0.43, 0.035],
+      "material": { "preset": "wood", "color": "#7a5a10" },
+      "position": [0.16, 0.22, 0.16],
+      "parent": "chair_1"
+    },
+    {
+      "name": "chair_2",
+      "type": "group",
+      "position": [0.5, 0, -0.65],
+      "parent": "table_root"
+    },
+    {
+      "name": "c2_seat",
+      "type": "roundedBox",
+      "params": [0.4, 0.04, 0.4, 0.02, 2],
+      "material": { "preset": "wood", "color": "#8b6914" },
+      "position": [0, 0.45, 0],
+      "parent": "chair_2"
+    },
+    {
+      "name": "c2_back",
+      "type": "roundedBox",
+      "params": [0.38, 0.4, 0.03, 0.01, 2],
+      "material": { "preset": "wood", "color": "#8b6914" },
+      "position": [0, 0.7, -0.18],
+      "rotation": [-5, 0, 0],
+      "parent": "chair_2"
+    },
+    {
+      "name": "c2_leg_1",
+      "type": "box",
+      "params": [0.035, 0.43, 0.035],
+      "material": { "preset": "wood", "color": "#7a5a10" },
+      "position": [-0.16, 0.22, -0.16],
+      "parent": "chair_2"
+    },
+    {
+      "name": "c2_leg_2",
+      "type": "box",
+      "params": [0.035, 0.43, 0.035],
+      "material": { "preset": "wood", "color": "#7a5a10" },
+      "position": [0.16, 0.22, -0.16],
+      "parent": "chair_2"
+    },
+    {
+      "name": "c2_leg_3",
+      "type": "box",
+      "params": [0.035, 0.43, 0.035],
+      "material": { "preset": "wood", "color": "#7a5a10" },
+      "position": [-0.16, 0.22, 0.16],
+      "parent": "chair_2"
+    },
+    {
+      "name": "c2_leg_4",
+      "type": "box",
+      "params": [0.035, 0.43, 0.035],
+      "material": { "preset": "wood", "color": "#7a5a10" },
+      "position": [0.16, 0.22, 0.16],
+      "parent": "chair_2"
+    },
+    {
+      "name": "chair_3",
+      "type": "group",
+      "position": [-0.5, 0, 0.65],
+      "rotation": [0, 180, 0],
+      "parent": "table_root"
+    },
+    {
+      "name": "c3_seat",
+      "type": "roundedBox",
+      "params": [0.4, 0.04, 0.4, 0.02, 2],
+      "material": { "preset": "wood", "color": "#8b6914" },
+      "position": [0, 0.45, 0],
+      "parent": "chair_3"
+    },
+    {
+      "name": "c3_back",
+      "type": "roundedBox",
+      "params": [0.38, 0.4, 0.03, 0.01, 2],
+      "material": { "preset": "wood", "color": "#8b6914" },
+      "position": [0, 0.7, -0.18],
+      "rotation": [-5, 0, 0],
+      "parent": "chair_3"
+    },
+    {
+      "name": "c3_leg_1",
+      "type": "box",
+      "params": [0.035, 0.43, 0.035],
+      "material": { "preset": "wood", "color": "#7a5a10" },
+      "position": [-0.16, 0.22, -0.16],
+      "parent": "chair_3"
+    },
+    {
+      "name": "c3_leg_2",
+      "type": "box",
+      "params": [0.035, 0.43, 0.035],
+      "material": { "preset": "wood", "color": "#7a5a10" },
+      "position": [0.16, 0.22, -0.16],
+      "parent": "chair_3"
+    },
+    {
+      "name": "c3_leg_3",
+      "type": "box",
+      "params": [0.035, 0.43, 0.035],
+      "material": { "preset": "wood", "color": "#7a5a10" },
+      "position": [-0.16, 0.22, 0.16],
+      "parent": "chair_3"
+    },
+    {
+      "name": "c3_leg_4",
+      "type": "box",
+      "params": [0.035, 0.43, 0.035],
+      "material": { "preset": "wood", "color": "#7a5a10" },
+      "position": [0.16, 0.22, 0.16],
+      "parent": "chair_3"
+    },
+    {
+      "name": "chair_4",
+      "type": "group",
+      "position": [0.5, 0, 0.65],
+      "rotation": [0, 180, 0],
+      "parent": "table_root"
+    },
+    {
+      "name": "c4_seat",
+      "type": "roundedBox",
+      "params": [0.4, 0.04, 0.4, 0.02, 2],
+      "material": { "preset": "wood", "color": "#8b6914" },
+      "position": [0, 0.45, 0],
+      "parent": "chair_4"
+    },
+    {
+      "name": "c4_back",
+      "type": "roundedBox",
+      "params": [0.38, 0.4, 0.03, 0.01, 2],
+      "material": { "preset": "wood", "color": "#8b6914" },
+      "position": [0, 0.7, -0.18],
+      "rotation": [-5, 0, 0],
+      "parent": "chair_4"
+    },
+    {
+      "name": "c4_leg_1",
+      "type": "box",
+      "params": [0.035, 0.43, 0.035],
+      "material": { "preset": "wood", "color": "#7a5a10" },
+      "position": [-0.16, 0.22, -0.16],
+      "parent": "chair_4"
+    },
+    {
+      "name": "c4_leg_2",
+      "type": "box",
+      "params": [0.035, 0.43, 0.035],
+      "material": { "preset": "wood", "color": "#7a5a10" },
+      "position": [0.16, 0.22, -0.16],
+      "parent": "chair_4"
+    },
+    {
+      "name": "c4_leg_3",
+      "type": "box",
+      "params": [0.035, 0.43, 0.035],
+      "material": { "preset": "wood", "color": "#7a5a10" },
+      "position": [-0.16, 0.22, 0.16],
+      "parent": "chair_4"
+    },
+    {
+      "name": "c4_leg_4",
+      "type": "box",
+      "params": [0.035, 0.43, 0.035],
+      "material": { "preset": "wood", "color": "#7a5a10" },
+      "position": [0.16, 0.22, 0.16],
+      "parent": "chair_4"
+    }
+  ]
+}

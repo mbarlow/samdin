@@ -1,0 +1,94 @@
+{
+  "name": "tv-stand",
+  "description": "Modern TV console with shelves",
+  "root": "stand_root",
+  "parts": [
+    {
+      "name": "stand_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "cabinet",
+      "type": "roundedBox",
+      "params": [1.6, 0.45, 0.4, 0.01, 2],
+      "material": { "preset": "wood", "color": "#2a2a2a" },
+      "position": [0, 0.225, 0],
+      "parent": "stand_root"
+    },
+    {
+      "name": "top",
+      "type": "box",
+      "params": [1.65, 0.025, 0.42],
+      "material": { "preset": "wood", "color": "#3a3a3a" },
+      "position": [0, 0.462, 0],
+      "parent": "stand_root"
+    },
+    {
+      "name": "shelf_1",
+      "type": "box",
+      "params": [0.45, 0.02, 0.35],
+      "material": { "preset": "wood", "color": "#2a2a2a" },
+      "position": [-0.5, 0.22, 0],
+      "parent": "stand_root"
+    },
+    {
+      "name": "shelf_2",
+      "type": "box",
+      "params": [0.45, 0.02, 0.35],
+      "material": { "preset": "wood", "color": "#2a2a2a" },
+      "position": [0.5, 0.22, 0],
+      "parent": "stand_root"
+    },
+    {
+      "name": "door_l",
+      "type": "box",
+      "params": [0.38, 0.35, 0.02],
+      "material": { "color": "#1a1a1a", "roughness": 0.3 },
+      "position": [-0.5, 0.22, 0.19],
+      "parent": "stand_root"
+    },
+    {
+      "name": "door_r",
+      "type": "box",
+      "params": [0.38, 0.35, 0.02],
+      "material": { "color": "#1a1a1a", "roughness": 0.3 },
+      "position": [0.5, 0.22, 0.19],
+      "parent": "stand_root"
+    },
+    {
+      "name": "handle_l",
+      "type": "cylinder",
+      "params": [0.01, 0.01, 0.08, 6],
+      "material": { "preset": "chrome" },
+      "position": [-0.3, 0.22, 0.21],
+      "rotation": [0, 0, 90],
+      "parent": "stand_root"
+    },
+    {
+      "name": "handle_r",
+      "type": "cylinder",
+      "params": [0.01, 0.01, 0.08, 6],
+      "material": { "preset": "chrome" },
+      "position": [0.3, 0.22, 0.21],
+      "rotation": [0, 0, 90],
+      "parent": "stand_root"
+    },
+    {
+      "name": "leg_l",
+      "type": "box",
+      "params": [0.04, 0.08, 0.35],
+      "material": { "preset": "steel" },
+      "position": [-0.75, 0.04, 0],
+      "parent": "stand_root"
+    },
+    {
+      "name": "leg_r",
+      "type": "box",
+      "params": [0.04, 0.08, 0.35],
+      "material": { "preset": "steel" },
+      "position": [0.75, 0.04, 0],
+      "parent": "stand_root"
+    }
+  ]
+}

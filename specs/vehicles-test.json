@@ -1,0 +1,306 @@
+{
+  "name": "vehicles-test",
+  "description": "Showcase of vehicle prefab varieties",
+  "root": "scene_root",
+  "parts": [
+    {
+      "name": "scene_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "ground",
+      "type": "box",
+      "params": [40, 0.1, 30],
+      "material": { "preset": "asphalt" },
+      "position": [0, -0.05, 0],
+      "parent": "scene_root"
+    },
+    {
+      "name": "road_markings",
+      "type": "box",
+      "params": [35, 0.01, 0.15],
+      "material": { "color": "#ffff00" },
+      "position": [0, 0.01, 0],
+      "parent": "scene_root"
+    },
+
+    {
+      "name": "cars_section",
+      "type": "group",
+      "position": [-10, 0, -8],
+      "parent": "scene_root"
+    },
+    {
+      "name": "label_cars",
+      "type": "box",
+      "params": [1.5, 0.5, 0.1],
+      "material": { "preset": "painted-metal", "color": "#2a4a6a" },
+      "position": [5, 0.25, 5],
+      "parent": "cars_section"
+    },
+    {
+      "name": "sedan_1",
+      "type": "prefab",
+      "src": "sedan",
+      "position": [0, 0, 0],
+      "rotation": [0, 15, 0],
+      "parent": "cars_section"
+    },
+    {
+      "name": "sports_car_1",
+      "type": "prefab",
+      "src": "sports-car",
+      "position": [4, 0, 0],
+      "rotation": [0, -10, 0],
+      "parent": "cars_section"
+    },
+    {
+      "name": "suv_1",
+      "type": "prefab",
+      "src": "suv",
+      "position": [8.5, 0, 0],
+      "rotation": [0, 5, 0],
+      "parent": "cars_section"
+    },
+    {
+      "name": "pickup_1",
+      "type": "prefab",
+      "src": "pickup-truck",
+      "position": [13, 0, 0],
+      "rotation": [0, -8, 0],
+      "parent": "cars_section"
+    },
+
+    {
+      "name": "commercial_section",
+      "type": "group",
+      "position": [-8, 0, 0],
+      "parent": "scene_root"
+    },
+    {
+      "name": "label_commercial",
+      "type": "box",
+      "params": [2, 0.5, 0.1],
+      "material": { "preset": "painted-metal", "color": "#2a4a6a" },
+      "position": [6, 0.25, 4],
+      "parent": "commercial_section"
+    },
+    {
+      "name": "van_1",
+      "type": "prefab",
+      "src": "van",
+      "position": [0, 0, 0],
+      "rotation": [0, 10, 0],
+      "parent": "commercial_section"
+    },
+    {
+      "name": "bus_1",
+      "type": "prefab",
+      "src": "bus",
+      "position": [8, 0, 0],
+      "rotation": [0, -5, 0],
+      "parent": "commercial_section"
+    },
+
+    {
+      "name": "two_wheel_section",
+      "type": "group",
+      "position": [-10, 0, 8],
+      "parent": "scene_root"
+    },
+    {
+      "name": "label_two_wheel",
+      "type": "box",
+      "params": [1.8, 0.5, 0.1],
+      "material": { "preset": "painted-metal", "color": "#2a4a6a" },
+      "position": [6, 0.25, -3],
+      "parent": "two_wheel_section"
+    },
+    {
+      "name": "motorbike_1",
+      "type": "prefab",
+      "src": "motorbike",
+      "position": [0, 0, 0],
+      "rotation": [0, 30, 0],
+      "parent": "two_wheel_section"
+    },
+    {
+      "name": "motorbike_2",
+      "type": "prefab",
+      "src": "motorbike",
+      "position": [2, 0, 0],
+      "rotation": [0, 25, 0],
+      "parent": "two_wheel_section"
+    },
+    {
+      "name": "bicycle_1",
+      "type": "prefab",
+      "src": "bicycle",
+      "position": [4.5, 0, 0],
+      "rotation": [0, 15, 0],
+      "parent": "two_wheel_section"
+    },
+    {
+      "name": "bicycle_2",
+      "type": "prefab",
+      "src": "bicycle",
+      "position": [6, 0, 0.3],
+      "rotation": [0, 20, 0],
+      "parent": "two_wheel_section"
+    },
+    {
+      "name": "scooter_1",
+      "type": "prefab",
+      "src": "scooter",
+      "position": [8, 0, 0],
+      "rotation": [0, -15, 0],
+      "parent": "two_wheel_section"
+    },
+    {
+      "name": "scooter_2",
+      "type": "prefab",
+      "src": "scooter",
+      "position": [9, 0, 0.2],
+      "rotation": [0, -20, 0],
+      "parent": "two_wheel_section"
+    },
+
+    {
+      "name": "exotic_section",
+      "type": "group",
+      "position": [8, 0, 8],
+      "parent": "scene_root"
+    },
+    {
+      "name": "label_exotic",
+      "type": "box",
+      "params": [1.5, 0.5, 0.1],
+      "material": { "preset": "painted-metal", "color": "#2a4a6a" },
+      "position": [0, 0.25, -3],
+      "parent": "exotic_section"
+    },
+    {
+      "name": "tuktuk_1",
+      "type": "prefab",
+      "src": "tuk-tuk",
+      "position": [-2, 0, 0],
+      "rotation": [0, 20, 0],
+      "parent": "exotic_section"
+    },
+    {
+      "name": "tuktuk_2",
+      "type": "prefab",
+      "src": "tuk-tuk",
+      "position": [1.5, 0, 0],
+      "rotation": [0, -15, 0],
+      "parent": "exotic_section"
+    },
+    {
+      "name": "speedboat_1",
+      "type": "prefab",
+      "src": "speedboat",
+      "position": [5, 0, 0],
+      "rotation": [0, 25, 0],
+      "parent": "exotic_section"
+    },
+
+    {
+      "name": "parking_lot_scene",
+      "type": "group",
+      "position": [0, 0, -5],
+      "parent": "scene_root"
+    },
+    {
+      "name": "parking_line_1",
+      "type": "box",
+      "params": [0.1, 0.01, 2.5],
+      "material": { "color": "#ffffff" },
+      "position": [-6, 0.01, -6],
+      "parent": "parking_lot_scene"
+    },
+    {
+      "name": "parking_line_2",
+      "type": "box",
+      "params": [0.1, 0.01, 2.5],
+      "material": { "color": "#ffffff" },
+      "position": [-3.5, 0.01, -6],
+      "parent": "parking_lot_scene"
+    },
+    {
+      "name": "parking_line_3",
+      "type": "box",
+      "params": [0.1, 0.01, 2.5],
+      "material": { "color": "#ffffff" },
+      "position": [-1, 0.01, -6],
+      "parent": "parking_lot_scene"
+    },
+    {
+      "name": "parking_line_4",
+      "type": "box",
+      "params": [0.1, 0.01, 2.5],
+      "material": { "color": "#ffffff" },
+      "position": [1.5, 0.01, -6],
+      "parent": "parking_lot_scene"
+    },
+    {
+      "name": "parked_sedan",
+      "type": "prefab",
+      "src": "sedan",
+      "position": [-4.75, 0, -6],
+      "rotation": [0, 90, 0],
+      "parent": "parking_lot_scene"
+    },
+    {
+      "name": "parked_suv",
+      "type": "prefab",
+      "src": "suv",
+      "position": [-2.25, 0, -6],
+      "rotation": [0, 90, 0],
+      "parent": "parking_lot_scene"
+    },
+    {
+      "name": "parked_sports",
+      "type": "prefab",
+      "src": "sports-car",
+      "position": [0.25, 0, -6],
+      "rotation": [0, 90, 0],
+      "parent": "parking_lot_scene"
+    },
+
+    {
+      "name": "street_lamps",
+      "type": "group",
+      "position": [0, 0, 0],
+      "parent": "scene_root"
+    },
+    {
+      "name": "lamp_1",
+      "type": "prefab",
+      "src": "street-lamp",
+      "position": [-15, 0, -12],
+      "parent": "street_lamps"
+    },
+    {
+      "name": "lamp_2",
+      "type": "prefab",
+      "src": "street-lamp",
+      "position": [-5, 0, -12],
+      "parent": "street_lamps"
+    },
+    {
+      "name": "lamp_3",
+      "type": "prefab",
+      "src": "street-lamp",
+      "position": [5, 0, -12],
+      "parent": "street_lamps"
+    },
+    {
+      "name": "lamp_4",
+      "type": "prefab",
+      "src": "street-lamp",
+      "position": [15, 0, -12],
+      "parent": "street_lamps"
+    }
+  ]
+}

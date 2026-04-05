@@ -1,0 +1,69 @@
+{
+  "name": "bush-flowering",
+  "description": "Flowering bush with pink/purple blooms",
+  "root": "bush_root",
+  "parts": [
+    {
+      "name": "bush_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "foliage_base",
+      "type": "icosahedron",
+      "params": [0.5, 1],
+      "material": { "preset": "foliage", "color": "#3a5a3a" },
+      "position": [0, 0.4, 0],
+      "scale": [1, 0.8, 1],
+      "parent": "bush_root"
+    },
+    {
+      "name": "foliage_top",
+      "type": "icosahedron",
+      "params": [0.35, 1],
+      "material": { "preset": "foliage", "color": "#4a6a4a" },
+      "position": [0, 0.7, 0],
+      "parent": "bush_root"
+    },
+    {
+      "name": "flower_1",
+      "type": "sphere",
+      "params": [0.08, 1],
+      "material": { "color": "#dd77aa", "roughness": 0.8 },
+      "position": [0.3, 0.6, 0.2],
+      "parent": "bush_root"
+    },
+    {
+      "name": "flower_2",
+      "type": "sphere",
+      "params": [0.07, 1],
+      "material": { "color": "#cc6699", "roughness": 0.8 },
+      "position": [-0.25, 0.55, 0.15],
+      "parent": "bush_root"
+    },
+    {
+      "name": "flower_3",
+      "type": "sphere",
+      "params": [0.09, 1],
+      "material": { "color": "#dd77aa", "roughness": 0.8 },
+      "position": [0.1, 0.75, -0.2],
+      "parent": "bush_root"
+    },
+    {
+      "name": "flower_4",
+      "type": "sphere",
+      "params": [0.06, 1],
+      "material": { "color": "#bb5588", "roughness": 0.8 },
+      "position": [-0.15, 0.7, -0.25],
+      "parent": "bush_root"
+    },
+    {
+      "name": "flower_5",
+      "type": "sphere",
+      "params": [0.08, 1],
+      "material": { "color": "#cc6699", "roughness": 0.8 },
+      "position": [0.35, 0.5, -0.1],
+      "parent": "bush_root"
+    }
+  ]
+}

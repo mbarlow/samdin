@@ -1,0 +1,162 @@
+{
+  "name": "dresser",
+  "description": "Six-drawer bedroom dresser",
+  "root": "dresser_root",
+  "parts": [
+    {
+      "name": "dresser_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "body",
+      "type": "box",
+      "params": [1.2, 0.8, 0.45],
+      "material": { "preset": "wood", "color": "#e8dcc8" },
+      "position": [0, 0.45, 0],
+      "parent": "dresser_root"
+    },
+    {
+      "name": "top",
+      "type": "box",
+      "params": [1.25, 0.03, 0.48],
+      "material": { "preset": "wood", "color": "#d8ccb8" },
+      "position": [0, 0.865, 0],
+      "parent": "dresser_root"
+    },
+    {
+      "name": "drawer_1",
+      "type": "box",
+      "params": [0.52, 0.18, 0.02],
+      "material": { "preset": "wood", "color": "#f0e4d0" },
+      "position": [-0.3, 0.74, 0.21],
+      "parent": "dresser_root"
+    },
+    {
+      "name": "drawer_2",
+      "type": "box",
+      "params": [0.52, 0.18, 0.02],
+      "material": { "preset": "wood", "color": "#f0e4d0" },
+      "position": [0.3, 0.74, 0.21],
+      "parent": "dresser_root"
+    },
+    {
+      "name": "drawer_3",
+      "type": "box",
+      "params": [0.52, 0.18, 0.02],
+      "material": { "preset": "wood", "color": "#f0e4d0" },
+      "position": [-0.3, 0.52, 0.21],
+      "parent": "dresser_root"
+    },
+    {
+      "name": "drawer_4",
+      "type": "box",
+      "params": [0.52, 0.18, 0.02],
+      "material": { "preset": "wood", "color": "#f0e4d0" },
+      "position": [0.3, 0.52, 0.21],
+      "parent": "dresser_root"
+    },
+    {
+      "name": "drawer_5",
+      "type": "box",
+      "params": [0.52, 0.18, 0.02],
+      "material": { "preset": "wood", "color": "#f0e4d0" },
+      "position": [-0.3, 0.3, 0.21],
+      "parent": "dresser_root"
+    },
+    {
+      "name": "drawer_6",
+      "type": "box",
+      "params": [0.52, 0.18, 0.02],
+      "material": { "preset": "wood", "color": "#f0e4d0" },
+      "position": [0.3, 0.3, 0.21],
+      "parent": "dresser_root"
+    },
+    {
+      "name": "handle_1",
+      "type": "cylinder",
+      "params": [0.012, 0.012, 0.06, 6],
+      "material": { "preset": "brass" },
+      "position": [-0.3, 0.74, 0.23],
+      "rotation": [0, 0, 90],
+      "parent": "dresser_root"
+    },
+    {
+      "name": "handle_2",
+      "type": "cylinder",
+      "params": [0.012, 0.012, 0.06, 6],
+      "material": { "preset": "brass" },
+      "position": [0.3, 0.74, 0.23],
+      "rotation": [0, 0, 90],
+      "parent": "dresser_root"
+    },
+    {
+      "name": "handle_3",
+      "type": "cylinder",
+      "params": [0.012, 0.012, 0.06, 6],
+      "material": { "preset": "brass" },
+      "position": [-0.3, 0.52, 0.23],
+      "rotation": [0, 0, 90],
+      "parent": "dresser_root"
+    },
+    {
+      "name": "handle_4",
+      "type": "cylinder",
+      "params": [0.012, 0.012, 0.06, 6],
+      "material": { "preset": "brass" },
+      "position": [0.3, 0.52, 0.23],
+      "rotation": [0, 0, 90],
+      "parent": "dresser_root"
+    },
+    {
+      "name": "handle_5",
+      "type": "cylinder",
+      "params": [0.012, 0.012, 0.06, 6],
+      "material": { "preset": "brass" },
+      "position": [-0.3, 0.3, 0.23],
+      "rotation": [0, 0, 90],
+      "parent": "dresser_root"
+    },
+    {
+      "name": "handle_6",
+      "type": "cylinder",
+      "params": [0.012, 0.012, 0.06, 6],
+      "material": { "preset": "brass" },
+      "position": [0.3, 0.3, 0.23],
+      "rotation": [0, 0, 90],
+      "parent": "dresser_root"
+    },
+    {
+      "name": "leg_fl",
+      "type": "cylinder",
+      "params": [0.03, 0.025, 0.08, 6],
+      "material": { "preset": "wood", "color": "#d8ccb8" },
+      "position": [-0.55, 0.04, 0.18],
+      "parent": "dresser_root"
+    },
+    {
+      "name": "leg_fr",
+      "type": "cylinder",
+      "params": [0.03, 0.025, 0.08, 6],
+      "material": { "preset": "wood", "color": "#d8ccb8" },
+      "position": [0.55, 0.04, 0.18],
+      "parent": "dresser_root"
+    },
+    {
+      "name": "leg_bl",
+      "type": "cylinder",
+      "params": [0.03, 0.025, 0.08, 6],
+      "material": { "preset": "wood", "color": "#d8ccb8" },
+      "position": [-0.55, 0.04, -0.18],
+      "parent": "dresser_root"
+    },
+    {
+      "name": "leg_br",
+      "type": "cylinder",
+      "params": [0.03, 0.025, 0.08, 6],
+      "material": { "preset": "wood", "color": "#d8ccb8" },
+      "position": [0.55, 0.04, -0.18],
+      "parent": "dresser_root"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "name": "broken-column",
+  "root": "column_root",
+  "parts": [
+    { "name": "column_root", "type": "group", "position": [0, 0, 0] },
+    {
+      "name": "pedestal",
+      "type": "cylinder",
+      "params": [0.95, 1.05, 0.55, 14],
+      "options": { "pivot": "bottom" },
+      "material": {
+        "preset": "concrete",
+        "color": "#cfc8bf",
+        "breakup": {
+          "noise": { "amount": 0.08, "scale": 3.6, "color": "#e1d8cf" },
+          "grime": { "amount": 0.16, "axis": "y", "color": "#655f58" },
+          "edgeWear": { "amount": 0.1, "color": "#f4eee6" }
+        }
+      },
+      "position": [0, 0, 0],
+      "parent": "column_root"
+    },
+    {
+      "name": "shaft",
+      "type": "csg",
+      "material": {
+        "preset": "concrete",
+        "color": "#d7d0c7",
+        "breakup": {
+          "noise": { "amount": 0.1, "scale": 2.8, "color": "#ece4db" },
+          "grime": { "amount": 0.14, "axis": "y", "color": "#807970" },
+          "roughnessVariation": 0.05
+        }
+      },
+      "output": "broken",
+      "shapes": {
+        "main": { "type": "cylinder", "radius": 0.58, "height": 3.6, "position": [0, 1.8, 0] },
+        "chip_a": { "type": "box", "size": [0.7, 0.9, 0.9], "position": [0.45, 3.25, 0.1], "rotation": [18, 0, 25] },
+        "chip_b": { "type": "box", "size": [0.8, 0.7, 0.7], "position": [-0.4, 2.6, -0.22], "rotation": [-10, 12, -20] }
+      },
+      "operations": [
+        { "op": "subtract", "a": "main", "b": "chip_a", "result": "cut_a" },
+        { "op": "subtract", "a": "cut_a", "b": "chip_b", "result": "broken" }
+      ],
+      "parent": "column_root"
+    },
+    {
+      "name": "capstone",
+      "type": "box",
+      "params": [1.5, 0.28, 1.5],
+      "material": { "preset": "concrete", "color": "#cbc4bb" },
+      "position": [0, 3.72, 0],
+      "rotation": [4, 10, -3],
+      "parent": "column_root"
+    }
+  ]
+}

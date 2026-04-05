@@ -1,0 +1,359 @@
+{
+  "name": "sports-car",
+  "description": "Low-profile sports car",
+  "root": "car_root",
+  "parts": [
+    {
+      "name": "car_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "body_main",
+      "type": "box",
+      "params": [1.8, 0.35, 0.85],
+      "material": {
+        "preset": "painted-metal",
+        "color": "#cc2020",
+        "clearcoat": 0.7,
+        "clearcoatRoughness": 0.1,
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#d43030" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [0, 0.4, 0],
+      "parent": "car_root"
+    },
+    {
+      "name": "body_front",
+      "type": "box",
+      "params": [0.5, 0.25, 0.8],
+      "material": {
+        "preset": "painted-metal",
+        "color": "#cc2020",
+        "clearcoat": 0.7,
+        "clearcoatRoughness": 0.1,
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#d43030" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [1.0, 0.35, 0],
+      "parent": "car_root"
+    },
+    {
+      "name": "hood",
+      "type": "box",
+      "params": [0.6, 0.08, 0.75],
+      "material": {
+        "preset": "painted-metal",
+        "color": "#cc2020",
+        "clearcoat": 0.7,
+        "clearcoatRoughness": 0.1,
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#d43030" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [0.7, 0.52, 0],
+      "rotation": [-5, 0, 0],
+      "parent": "car_root"
+    },
+    {
+      "name": "cabin",
+      "type": "box",
+      "params": [0.7, 0.3, 0.75],
+      "material": {
+        "preset": "painted-metal",
+        "color": "#cc2020",
+        "clearcoat": 0.7,
+        "clearcoatRoughness": 0.1,
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#d43030" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [-0.15, 0.65, 0],
+      "parent": "car_root"
+    },
+    {
+      "name": "windshield",
+      "type": "box",
+      "params": [0.02, 0.28, 0.7],
+      "material": { "preset": "glass-tinted" },
+      "position": [0.22, 0.68, 0],
+      "rotation": [0, 0, 25],
+      "parent": "car_root"
+    },
+    {
+      "name": "rear_window",
+      "type": "box",
+      "params": [0.02, 0.22, 0.65],
+      "material": { "preset": "glass-tinted" },
+      "position": [-0.48, 0.62, 0],
+      "rotation": [0, 0, -30],
+      "parent": "car_root"
+    },
+    {
+      "name": "side_window_l",
+      "type": "box",
+      "params": [0.4, 0.18, 0.02],
+      "material": { "preset": "glass-tinted" },
+      "position": [-0.1, 0.7, 0.38],
+      "parent": "car_root"
+    },
+    {
+      "name": "side_window_r",
+      "type": "box",
+      "params": [0.4, 0.18, 0.02],
+      "material": { "preset": "glass-tinted" },
+      "position": [-0.1, 0.7, -0.38],
+      "parent": "car_root"
+    },
+    {
+      "name": "trunk",
+      "type": "box",
+      "params": [0.4, 0.2, 0.78],
+      "material": {
+        "preset": "painted-metal",
+        "color": "#cc2020",
+        "clearcoat": 0.7,
+        "clearcoatRoughness": 0.1,
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#d43030" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [-0.7, 0.45, 0],
+      "parent": "car_root"
+    },
+    {
+      "name": "front_bumper",
+      "type": "box",
+      "params": [0.08, 0.12, 0.82],
+      "material": {
+        "preset": "chrome",
+        "breakup": {
+          "noise": { "amount": 0.03, "scale": 4.0, "color": "#dddddd" },
+          "roughnessVariation": 0.02
+        }
+      },
+      "position": [1.26, 0.3, 0],
+      "parent": "car_root"
+    },
+    {
+      "name": "rear_bumper",
+      "type": "box",
+      "params": [0.06, 0.1, 0.82],
+      "material": {
+        "preset": "chrome",
+        "breakup": {
+          "noise": { "amount": 0.03, "scale": 4.0, "color": "#dddddd" },
+          "roughnessVariation": 0.02
+        }
+      },
+      "position": [-0.93, 0.32, 0],
+      "parent": "car_root"
+    },
+    {
+      "name": "grille",
+      "type": "box",
+      "params": [0.04, 0.1, 0.5],
+      "material": {
+        "preset": "chrome",
+        "breakup": {
+          "noise": { "amount": 0.03, "scale": 4.0, "color": "#dddddd" },
+          "roughnessVariation": 0.02
+        }
+      },
+      "position": [1.27, 0.38, 0],
+      "parent": "car_root"
+    },
+    {
+      "name": "side_mirror_l",
+      "type": "box",
+      "params": [0.08, 0.06, 0.04],
+      "material": {
+        "preset": "painted-metal",
+        "color": "#cc2020",
+        "clearcoat": 0.7,
+        "clearcoatRoughness": 0.1
+      },
+      "position": [0.18, 0.68, 0.46],
+      "parent": "car_root"
+    },
+    {
+      "name": "side_mirror_r",
+      "type": "box",
+      "params": [0.08, 0.06, 0.04],
+      "material": {
+        "preset": "painted-metal",
+        "color": "#cc2020",
+        "clearcoat": 0.7,
+        "clearcoatRoughness": 0.1
+      },
+      "position": [0.18, 0.68, -0.46],
+      "parent": "car_root"
+    },
+    {
+      "name": "headlight_l",
+      "type": "box",
+      "params": [0.05, 0.06, 0.15],
+      "material": { "preset": "glow", "color": "#ffffff", "emissiveIntensity": 1.2 },
+      "position": [1.23, 0.38, 0.28],
+      "parent": "car_root"
+    },
+    {
+      "name": "headlight_r",
+      "type": "box",
+      "params": [0.05, 0.06, 0.15],
+      "material": { "preset": "glow", "color": "#ffffff", "emissiveIntensity": 1.2 },
+      "position": [1.23, 0.38, -0.28],
+      "parent": "car_root"
+    },
+    {
+      "name": "headlight_housing_l",
+      "type": "box",
+      "params": [0.06, 0.08, 0.17],
+      "material": { "preset": "chrome" },
+      "position": [1.22, 0.38, 0.28],
+      "parent": "car_root"
+    },
+    {
+      "name": "headlight_housing_r",
+      "type": "box",
+      "params": [0.06, 0.08, 0.17],
+      "material": { "preset": "chrome" },
+      "position": [1.22, 0.38, -0.28],
+      "parent": "car_root"
+    },
+    {
+      "name": "taillight_l",
+      "type": "box",
+      "params": [0.03, 0.06, 0.18],
+      "material": { "preset": "glow", "color": "#ff0000", "emissiveIntensity": 0.9 },
+      "position": [-0.92, 0.42, 0.28],
+      "parent": "car_root"
+    },
+    {
+      "name": "taillight_r",
+      "type": "box",
+      "params": [0.03, 0.06, 0.18],
+      "material": { "preset": "glow", "color": "#ff0000", "emissiveIntensity": 0.9 },
+      "position": [-0.92, 0.42, -0.28],
+      "parent": "car_root"
+    },
+    {
+      "name": "wheel_fl",
+      "type": "cylinder",
+      "params": [0.18, 0.18, 0.12, 12],
+      "material": {
+        "preset": "rubber",
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#2a2a2a" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [0.6, 0.18, 0.48],
+      "rotation": [90, 0, 0],
+      "parent": "car_root"
+    },
+    {
+      "name": "wheel_fr",
+      "type": "cylinder",
+      "params": [0.18, 0.18, 0.12, 12],
+      "material": {
+        "preset": "rubber",
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#2a2a2a" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [0.6, 0.18, -0.48],
+      "rotation": [90, 0, 0],
+      "parent": "car_root"
+    },
+    {
+      "name": "wheel_rl",
+      "type": "cylinder",
+      "params": [0.2, 0.2, 0.14, 12],
+      "material": {
+        "preset": "rubber",
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#2a2a2a" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [-0.55, 0.2, 0.48],
+      "rotation": [90, 0, 0],
+      "parent": "car_root"
+    },
+    {
+      "name": "wheel_rr",
+      "type": "cylinder",
+      "params": [0.2, 0.2, 0.14, 12],
+      "material": {
+        "preset": "rubber",
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#2a2a2a" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [-0.55, 0.2, -0.48],
+      "rotation": [90, 0, 0],
+      "parent": "car_root"
+    },
+    {
+      "name": "rim_fl",
+      "type": "cylinder",
+      "params": [0.1, 0.1, 0.13, 6],
+      "material": { "preset": "chrome" },
+      "position": [0.6, 0.18, 0.48],
+      "rotation": [90, 0, 0],
+      "parent": "car_root"
+    },
+    {
+      "name": "rim_fr",
+      "type": "cylinder",
+      "params": [0.1, 0.1, 0.13, 6],
+      "material": { "preset": "chrome" },
+      "position": [0.6, 0.18, -0.48],
+      "rotation": [90, 0, 0],
+      "parent": "car_root"
+    },
+    {
+      "name": "rim_rl",
+      "type": "cylinder",
+      "params": [0.11, 0.11, 0.15, 6],
+      "material": { "preset": "chrome" },
+      "position": [-0.55, 0.2, 0.48],
+      "rotation": [90, 0, 0],
+      "parent": "car_root"
+    },
+    {
+      "name": "rim_rr",
+      "type": "cylinder",
+      "params": [0.11, 0.11, 0.15, 6],
+      "material": { "preset": "chrome" },
+      "position": [-0.55, 0.2, -0.48],
+      "rotation": [90, 0, 0],
+      "parent": "car_root"
+    },
+    {
+      "name": "spoiler",
+      "type": "box",
+      "params": [0.08, 0.15, 0.7],
+      "material": {
+        "preset": "painted-metal",
+        "color": "#1a1a1a",
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#282828" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [-0.88, 0.62, 0],
+      "parent": "car_root"
+    }
+  ]
+}

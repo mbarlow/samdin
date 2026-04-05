@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SamDin</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Three.js canvas container -->
+    <div id="viewport"></div>
+
+    <!-- First-person crosshair overlay -->
+    <div id="fp-crosshair" class="hidden">
+      <div class="crosshair-h"></div>
+      <div class="crosshair-v"></div>
+    </div>
+
+    <!-- Control panel -->
+    <aside id="panel">
+      <header>
+        <h1>SAM DIN</h1>
+        <span class="version">v0.0.1</span>
+      </header>
+
+      <!-- Model controls -->
+      <section id="model-section">
+        <h2>MODEL</h2>
+        <div class="section-body">
+          <div class="control-group">
+            <button id="btn-load">Load GLTF/GLB</button>
+            <button id="btn-export">Export GLTF</button>
+            <input type="file" id="file-input" accept=".gltf,.glb,.GLB,.GLTF" hidden>
+          </div>
+          <div class="control-group">
+            <button id="btn-load-spec">Load Spec</button>
+            <button id="btn-paste-spec">Paste</button>
+            <button id="btn-open-editor">Editor</button>
+            <input type="file" id="spec-file-input" accept=".json" hidden>
+          </div>
+          <div class="control-group">
+            <select id="spec-select">
+              <option value="">Built-in specs...</option>
+            </select>
+            <button id="btn-build">Build</button>
+          </div>
+          <div class="control-group">
+            <label>Quality</label>
+            <select id="quality-tier">
+              <option value="draft">Draft</option>
+              <option value="standard" selected>Standard</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+          <div id="upload-progress">
+            <div class="upload-info">
+              <span class="upload-filename" id="upload-filename"></span>
+              <span class="upload-percent" id="upload-percent"></span>
+            </div>
+            <div class="upload-bar-track">
+              <div class="upload-bar-fill" id="upload-bar-fill"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Info display — compact chips -->
+      <section id="info-section">
+        <h2>INFO</h2>
+        <div class="section-body">
+          <div id="model-info">
+            <div class="info-chip"><span id="info-tris">0</span><small>Tris</small></div>
+            <div class="info-chip"><span id="info-verts">0</span><small>Verts</small></div>
+            <div class="info-chip"><span id="info-objects">0</span><small>Obj</small></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Part Inspector -->
+      <section id="part-section">
+        <h2>SELECTED PART</h2>
+        <div class="section-body">
+          <div id="part-info">
+            <p class="no-selection">Click a part to inspect</p>
+            <div class="part-details" style="display: none;">
+              <p>Name: <span id="part-name">-</span></p>
+              <p>Position: <span id="part-position">-</span></p>
+              <p>Geometry: <span id="part-geometry">-</span></p>
+            </div>
+            <div class="hotkey-hints">
+              <small>G move &middot; R rotate &middot; S scale &middot; X delete &middot; Shift+D duplicate &middot; Ctrl+Z undo</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Camera/View controls -->
+      <section id="camera-section">
+        <h2>CAMERA</h2>
+        <div class="section-body">
+          <div class="control-group">
+            <label>Mode</label>
+            <select id="camera-mode">
+              <option value="orbit">Orbit</option>
+              <option value="firstPerson">First-Person</option>
+            </select>
+          </div>
+          <div class="control-group fp-controls" style="display: none;">
+            <label>Speed</label>
+            <input type="range" id="fp-speed" min="1" max="20" step="0.5" value="5">
+            <span id="fp-speed-label">5.0</span>
+          </div>
+          <div class="control-group fp-hint" style="display: none;">
+            <small>WASD move, Space/Shift up/down, ESC exit</small>
+          </div>
+          <div class="camera-settings fp-controls" style="display: none;">
+            <div class="camera-settings-title">PHOTO MODE</div>
+            <div class="control-group">
+              <label>Aspect</label>
+              <select id="camera-aspect">
+                <option value="1:1" selected>1:1</option>
+                <option value="4:3">4:3</option>
+                <option value="3:2">3:2</option>
+              </select>
+            </div>
+            <div class="control-group">
+              <label><input type="checkbox" id="camera-flash" checked> Flash</label>
+            </div>
+            <div class="control-group">
+              <small>Right-click: viewfinder, Scroll: zoom, F: flash</small>
+            </div>
+          </div>
+          <div class="control-group orbit-controls">
+            <label>View</label>
+            <select id="camera-select">
+              <option value="threeQuarter">3/4</option>
+              <option value="front">Front</option>
+              <option value="back">Back</option>
+              <option value="left">Left</option>
+              <option value="right">Right</option>
+              <option value="top">Top</option>
+              <option value="lowAngle">Low</option>
+              <option value="highAngle">High</option>
+            </select>
+          </div>
+          <div class="control-group orbit-controls">
+            <button id="btn-fit">Fit</button>
+            <button id="btn-screenshot">Screenshot</button>
+          </div>
+          <div class="control-group">
+            <label><input type="checkbox" id="cam-wireframe"> Wireframe</label>
+            <label><input type="checkbox" id="cam-design-grid"> Grid</label>
+          </div>
+          <div class="control-group orbit-controls">
+            <label><input type="checkbox" id="cam-autorotate"> Auto-Rotate</label>
+            <input type="range" id="cam-rotate-speed" min="0.5" max="5" step="0.5" value="1" disabled>
+          </div>
+        </div>
+      </section>
+
+      <!-- Lighting controls -->
+      <section id="lighting-section" class="collapsed">
+        <h2>LIGHTING</h2>
+        <div class="section-body">
+          <div class="control-group">
+            <label>Preset</label>
+            <select id="lighting-select">
+              <option value="studio">Studio</option>
+              <option value="sunset">Sunset</option>
+              <option value="night">Night</option>
+              <option value="overcast">Overcast</option>
+              <option value="dramatic">Dramatic</option>
+              <option value="neon">Neon</option>
+              <option value="cyberpunk">Cyberpunk</option>
+              <option value="warm">Warm</option>
+              <option value="cool">Cool</option>
+              <option value="rim">Rim Light</option>
+              <option value="backlit">Backlit</option>
+              <option value="goldenHour">Golden Hour</option>
+              <option value="noir">Film Noir</option>
+              <option value="underwater">Underwater</option>
+              <option value="horror">Horror</option>
+              <option value="industrialRuin">Industrial Ruin</option>
+              <option value="showcase">Showcase</option>
+            </select>
+          </div>
+          <div class="control-group">
+            <label>Intensity</label>
+            <input type="range" id="light-intensity" min="0" max="2" step="0.1" value="1">
+          </div>
+          <div class="control-group">
+            <label>Azimuth</label>
+            <input type="range" id="light-azimuth" min="0" max="360" step="5" value="45">
+          </div>
+          <div class="control-group">
+            <label>Elevation</label>
+            <input type="range" id="light-elevation" min="0" max="90" step="5" value="45">
+          </div>
+          <div class="control-group">
+            <label>Color</label>
+            <input type="color" id="light-color" value="#ffffff">
+          </div>
+          <div class="control-group">
+            <label>Shadows</label>
+            <select id="shadow-quality">
+              <option value="low">Low</option>
+              <option value="medium" selected>Medium</option>
+              <option value="high">High</option>
+              <option value="ultra">Ultra</option>
+            </select>
+          </div>
+          <div class="control-group">
+            <label>Exposure</label>
+            <input type="range" id="exposure" min="0.1" max="3" step="0.1" value="1">
+          </div>
+        </div>
+      </section>
+
+      <!-- Environment controls -->
+      <section id="env-section" class="collapsed">
+        <h2>ENVIRONMENT</h2>
+        <div class="section-body">
+          <div class="control-group">
+            <label>BG</label>
+            <select id="env-select">
+              <option value="solid">Solid</option>
+              <option value="gradient">Gradient</option>
+              <option value="grid">Grid</option>
+              <option value="void">Void</option>
+            </select>
+            <input type="color" id="env-color" value="#1a1a2e">
+          </div>
+          <div class="control-group">
+            <label>IBL</label>
+            <select id="env-map-select">
+              <option value="none">None</option>
+              <option value="studio">Studio</option>
+              <option value="outdoor">Outdoor</option>
+              <option value="sunset">Sunset</option>
+              <option value="night">Night</option>
+            </select>
+          </div>
+          <div class="control-group" id="env-intensity-group" style="display:none">
+            <label>Reflect</label>
+            <input type="range" id="env-map-intensity" min="0" max="3" step="0.1" value="1">
+          </div>
+          <div class="control-group">
+            <label><input type="checkbox" id="env-floor" checked> Floor</label>
+            <label><input type="checkbox" id="env-ground-reflect"> Reflect</label>
+          </div>
+        </div>
+      </section>
+
+      <!-- Post-processing controls -->
+      <section id="post-section" class="collapsed">
+        <h2>POST-FX</h2>
+        <div class="section-body">
+          <div class="control-group">
+            <label><input type="checkbox" id="fx-ssao"> SSAO</label>
+            <input type="range" id="fx-ssao-radius" min="1" max="32" step="1" value="8" disabled>
+          </div>
+          <div class="control-group">
+            <label><input type="checkbox" id="fx-dof"> DoF</label>
+            <input type="range" id="fx-dof-focus" min="0.5" max="20" step="0.5" value="5" disabled>
+          </div>
+          <div class="control-group">
+            <label><input type="checkbox" id="fx-dof-aperture-group" style="display:none"> </label>
+            <label style="font-size:9px;color:var(--text-dim)">Aperture</label>
+            <input type="range" id="fx-dof-aperture" min="0" max="0.01" step="0.0005" value="0.002" disabled>
+          </div>
+          <div class="control-group">
+            <label><input type="checkbox" id="fx-ssr"> SSR</label>
+            <input type="range" id="fx-ssr-opacity" min="0" max="1" step="0.05" value="0.5" disabled>
+          </div>
+          <div class="control-group">
+            <label><input type="checkbox" id="fx-bloom"> Bloom</label>
+            <label><input type="checkbox" id="fx-outline"> Outline</label>
+            <label><input type="checkbox" id="fx-fxaa"> FXAA</label>
+          </div>
+          <div class="control-group">
+            <label><input type="checkbox" id="fx-pixel"> Pixelate</label>
+            <input type="range" id="fx-pixel-size" min="1" max="8" step="1" value="4" disabled>
+          </div>
+          <div class="control-group">
+            <label><input type="checkbox" id="fx-vignette"> Vignette</label>
+            <input type="range" id="fx-vignette-intensity" min="0" max="1" step="0.05" value="0.5" disabled>
+          </div>
+          <div class="control-group">
+            <label><input type="checkbox" id="fx-chromatic"> Chromatic</label>
+            <input type="range" id="fx-chromatic-amount" min="0" max="0.02" step="0.001" value="0.005" disabled>
+          </div>
+          <div class="control-group">
+            <label><input type="checkbox" id="fx-grain"> Grain</label>
+            <input type="range" id="fx-grain-intensity" min="0" max="0.5" step="0.02" value="0.15" disabled>
+          </div>
+          <div class="control-group">
+            <label><input type="checkbox" id="fx-scanlines"> Scanlines</label>
+            <input type="range" id="fx-scanlines-intensity" min="0" max="1" step="0.05" value="0.3" disabled>
+          </div>
+          <div class="control-group">
+            <label><input type="checkbox" id="fx-colorgrade"> Color Grade</label>
+          </div>
+          <div class="control-group color-grade-controls" style="display: none;">
+            <label>Color Grading</label>
+            <div class="sub-control">
+              <span>Hue</span>
+              <input type="range" id="fx-hue" min="-1" max="1" step="0.05" value="0">
+            </div>
+            <div class="sub-control">
+              <span>Saturation</span>
+              <input type="range" id="fx-saturation" min="0" max="2" step="0.05" value="1">
+            </div>
+            <div class="sub-control">
+              <span>Brightness</span>
+              <input type="range" id="fx-brightness" min="0" max="2" step="0.05" value="1">
+            </div>
+            <div class="sub-control">
+              <span>Contrast</span>
+              <input type="range" id="fx-contrast" min="0" max="2" step="0.05" value="1">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Animation controls -->
+      <section id="anim-section" class="collapsed">
+        <h2>ANIMATION</h2>
+        <div class="section-body">
+          <div class="control-group" id="clip-controls" style="display: none;">
+            <label>Clips</label>
+            <select id="clip-select">
+              <option value="">-- select --</option>
+            </select>
+          </div>
+          <div class="control-group" id="clip-speed-group" style="display: none;">
+            <label>Speed</label>
+            <input type="range" id="clip-speed" min="0.1" max="2" step="0.1" value="1">
+            <span id="clip-speed-label">1.0x</span>
+          </div>
+          <div class="control-group" id="state-controls" style="display: none;">
+            <label>State</label>
+            <select id="state-select">
+              <option value="">-- select --</option>
+            </select>
+          </div>
+          <div class="control-group">
+            <label>Behavior</label>
+            <select id="anim-select">
+              <option value="">-- none --</option>
+              <option value="idle">Idle Bob</option>
+              <option value="breathe">Breathe</option>
+              <option value="spin">Spin</option>
+              <option value="shake">Shake</option>
+              <option value="sweep">Sweep</option>
+            </select>
+          </div>
+          <div class="control-group">
+            <button id="btn-play">Play</button>
+            <button id="btn-stop">Stop</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Part Library -->
+      <section id="library-section" class="collapsed">
+        <h2>PART LIBRARY</h2>
+        <div class="section-body">
+          <div class="library-tabs">
+            <button class="lib-tab active" data-tab="primitives">Primitives</button>
+            <button class="lib-tab" data-tab="prefabs">Prefabs</button>
+            <button class="lib-tab" data-tab="csg">CSG</button>
+          </div>
+          <div id="library-content">
+            <div class="lib-panel active" data-panel="primitives">
+              <div class="lib-grid" id="primitives-grid"></div>
+            </div>
+            <div class="lib-panel" data-panel="prefabs">
+              <div class="lib-grid" id="prefabs-grid"></div>
+            </div>
+            <div class="lib-panel" data-panel="csg">
+              <div class="lib-grid" id="csg-grid"></div>
+            </div>
+          </div>
+          <div id="library-insert-hint">Click to copy to clipboard</div>
+        </div>
+      </section>
+    </aside>
+  </div>
+
+  <!-- Three.js r182 CDN -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/",
+      "three-mesh-bvh": "https://cdn.jsdelivr.net/npm/three-mesh-bvh@0.7.8/build/index.module.js",
+      "three-bvh-csg": "https://cdn.jsdelivr.net/npm/three-bvh-csg@0.0.16/build/index.module.js"
+    }
+  }
+  </script>
+
+  <!-- Anime.js -->
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+
+  <!-- Paste Spec Modal -->
+  <div id="paste-modal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <h3>Paste Spec JSON</h3>
+      <textarea id="paste-textarea" placeholder="Paste your spec JSON here..."></textarea>
+      <div class="modal-actions">
+        <button id="btn-paste-cancel">Cancel</button>
+        <button id="btn-paste-build" class="primary">Build</button>
+      </div>
+      <p id="paste-error" class="error"></p>
+    </div>
+  </div>
+
+  <!-- Spec Editor Panel -->
+  <div id="editor-panel" class="editor-panel hidden">
+    <div class="editor-header">
+      <h3>SPEC EDITOR</h3>
+      <div class="editor-controls">
+        <label>
+          <input type="checkbox" id="editor-live-preview" checked> Live
+        </label>
+        <button id="btn-editor-build">Build</button>
+        <button id="btn-editor-close">X</button>
+      </div>
+    </div>
+    <div class="editor-body">
+      <div class="editor-textarea-wrapper">
+        <div id="editor-line-numbers"></div>
+        <textarea id="editor-textarea" spellcheck="false" placeholder="Enter spec JSON..."></textarea>
+      </div>
+      <div id="editor-status">
+        <span id="editor-status-text">Ready</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Collapsible section toggle -->
+  <script>
+    document.querySelectorAll('#panel h2').forEach(h2 => {
+      h2.addEventListener('click', () => {
+        h2.closest('section').classList.toggle('collapsed');
+      });
+    });
+  </script>
+
+  <div id="toast-container"></div>
+
+  <!-- App modules -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

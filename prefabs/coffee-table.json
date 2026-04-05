@@ -1,0 +1,60 @@
+{
+  "name": "coffee-table",
+  "description": "Modern rectangular coffee table",
+  "root": "table_root",
+  "parts": [
+    {
+      "name": "table_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "top",
+      "type": "roundedBox",
+      "params": [1, 0.04, 0.5, 0.01, 2],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [0, 0.4, 0],
+      "parent": "table_root"
+    },
+    {
+      "name": "shelf",
+      "type": "box",
+      "params": [0.9, 0.02, 0.4],
+      "material": { "preset": "wood", "color": "#4a3525" },
+      "position": [0, 0.15, 0],
+      "parent": "table_root"
+    },
+    {
+      "name": "leg_1",
+      "type": "box",
+      "params": [0.04, 0.38, 0.04],
+      "material": { "preset": "steel" },
+      "position": [0.43, 0.19, 0.18],
+      "parent": "table_root"
+    },
+    {
+      "name": "leg_2",
+      "type": "box",
+      "params": [0.04, 0.38, 0.04],
+      "material": { "preset": "steel" },
+      "position": [-0.43, 0.19, 0.18],
+      "parent": "table_root"
+    },
+    {
+      "name": "leg_3",
+      "type": "box",
+      "params": [0.04, 0.38, 0.04],
+      "material": { "preset": "steel" },
+      "position": [0.43, 0.19, -0.18],
+      "parent": "table_root"
+    },
+    {
+      "name": "leg_4",
+      "type": "box",
+      "params": [0.04, 0.38, 0.04],
+      "material": { "preset": "steel" },
+      "position": [-0.43, 0.19, -0.18],
+      "parent": "table_root"
+    }
+  ]
+}

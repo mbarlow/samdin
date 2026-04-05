@@ -1,0 +1,36 @@
+{
+  "name": "wall-section",
+  "description": "Modular wall panel, 2m wide x 2.8m tall",
+  "root": "wall_root",
+  "parts": [
+    {
+      "name": "wall_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "wall_body",
+      "type": "box",
+      "params": [2.0, 2.8, 0.15],
+      "material": { "preset": "wall-paint", "color": "#f0ece4" },
+      "position": [0, 1.4, 0],
+      "parent": "wall_root"
+    },
+    {
+      "name": "baseboard",
+      "type": "box",
+      "params": [2.0, 0.1, 0.03],
+      "material": { "preset": "wood", "color": "#f5f0e8" },
+      "position": [0, 0.05, 0.09],
+      "parent": "wall_root"
+    },
+    {
+      "name": "crown_molding",
+      "type": "box",
+      "params": [2.0, 0.06, 0.03],
+      "material": { "preset": "wood", "color": "#f5f0e8" },
+      "position": [0, 2.77, 0.09],
+      "parent": "wall_root"
+    }
+  ]
+}

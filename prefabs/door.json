@@ -1,0 +1,127 @@
+{
+  "name": "door",
+  "description": "Standard interior door with frame and handle",
+  "root": "door_root",
+  "parts": [
+    {
+      "name": "door_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "frame_left",
+      "type": "box",
+      "params": [0.08, 2.1, 0.12],
+      "material": { "preset": "wood", "color": "#f5f5f5" },
+      "position": [-0.46, 1.05, 0],
+      "parent": "door_root"
+    },
+    {
+      "name": "frame_right",
+      "type": "box",
+      "params": [0.08, 2.1, 0.12],
+      "material": { "preset": "wood", "color": "#f5f5f5" },
+      "position": [0.46, 1.05, 0],
+      "parent": "door_root"
+    },
+    {
+      "name": "frame_top",
+      "type": "box",
+      "params": [1.0, 0.08, 0.12],
+      "material": { "preset": "wood", "color": "#f5f5f5" },
+      "position": [0, 2.06, 0],
+      "parent": "door_root"
+    },
+    {
+      "name": "door_panel",
+      "type": "box",
+      "params": [0.82, 2.0, 0.04],
+      "material": { "preset": "wood", "color": "#f8f8f8" },
+      "position": [0, 1.0, 0],
+      "parent": "door_root"
+    },
+    {
+      "name": "panel_upper",
+      "type": "roundedBox",
+      "params": [0.32, 0.6, 0.02, 0.02, 2],
+      "material": { "preset": "wood", "color": "#eeeeee" },
+      "position": [0, 1.55, 0.025],
+      "parent": "door_root"
+    },
+    {
+      "name": "panel_lower_left",
+      "type": "roundedBox",
+      "params": [0.28, 0.7, 0.02, 0.02, 2],
+      "material": { "preset": "wood", "color": "#eeeeee" },
+      "position": [-0.2, 0.55, 0.025],
+      "parent": "door_root"
+    },
+    {
+      "name": "panel_lower_right",
+      "type": "roundedBox",
+      "params": [0.28, 0.7, 0.02, 0.02, 2],
+      "material": { "preset": "wood", "color": "#eeeeee" },
+      "position": [0.2, 0.55, 0.025],
+      "parent": "door_root"
+    },
+    {
+      "name": "handle_plate",
+      "type": "roundedBox",
+      "params": [0.06, 0.18, 0.01, 0.01, 2],
+      "material": { "preset": "chrome" },
+      "position": [0.32, 1.0, 0.03],
+      "parent": "door_root"
+    },
+    {
+      "name": "handle",
+      "type": "cylinder",
+      "params": [0.015, 0.015, 0.12, 6],
+      "material": { "preset": "chrome" },
+      "position": [0.35, 1.0, 0.08],
+      "rotation": [0, 0, 90],
+      "parent": "door_root"
+    },
+    {
+      "name": "handle_base",
+      "type": "cylinder",
+      "params": [0.025, 0.025, 0.03, 8],
+      "material": { "preset": "chrome" },
+      "position": [0.32, 1.0, 0.05],
+      "rotation": [90, 0, 0],
+      "parent": "door_root"
+    },
+    {
+      "name": "keyhole",
+      "type": "cylinder",
+      "params": [0.008, 0.008, 0.01, 6],
+      "material": { "color": "#1a1a1a" },
+      "position": [0.32, 0.92, 0.03],
+      "rotation": [90, 0, 0],
+      "parent": "door_root"
+    },
+    {
+      "name": "hinges_top",
+      "type": "box",
+      "params": [0.03, 0.1, 0.02],
+      "material": { "preset": "chrome" },
+      "position": [-0.4, 1.8, 0.03],
+      "parent": "door_root"
+    },
+    {
+      "name": "hinges_mid",
+      "type": "box",
+      "params": [0.03, 0.1, 0.02],
+      "material": { "preset": "chrome" },
+      "position": [-0.4, 1.0, 0.03],
+      "parent": "door_root"
+    },
+    {
+      "name": "hinges_bottom",
+      "type": "box",
+      "params": [0.03, 0.1, 0.02],
+      "material": { "preset": "chrome" },
+      "position": [-0.4, 0.2, 0.03],
+      "parent": "door_root"
+    }
+  ]
+}

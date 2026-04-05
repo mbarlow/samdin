@@ -1,0 +1,28 @@
+{
+  "name": "floor-tile",
+  "description": "Modular floor section, 2m x 2m",
+  "root": "floor_root",
+  "parts": [
+    {
+      "name": "floor_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "floor_slab",
+      "type": "box",
+      "params": [2.0, 0.08, 2.0],
+      "material": { "preset": "wood", "color": "#c4a97d" },
+      "position": [0, -0.04, 0],
+      "parent": "floor_root"
+    },
+    {
+      "name": "subfloor",
+      "type": "box",
+      "params": [2.0, 0.04, 2.0],
+      "material": { "preset": "concrete", "color": "#999999" },
+      "position": [0, -0.1, 0],
+      "parent": "floor_root"
+    }
+  ]
+}

@@ -1,0 +1,526 @@
+{
+  "name": "shalom-clinic",
+  "description": "Luxury aesthetic clinic lobby — SHALOM BANGKOK. Ultra-clean white interior with rose-gold LED ceiling accents, large display screens, low-profile seating.",
+  "root": "room",
+  "parts": [
+    {
+      "name": "room",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "floor",
+      "type": "box",
+      "params": [12, 0.05, 10],
+      "material": { "color": "#f0ece8", "metalness": 0.3, "roughness": 0.1 },
+      "position": [0, -0.025, 0],
+      "parent": "room",
+      "receiveShadow": true
+    },
+    {
+      "name": "wall_back",
+      "type": "box",
+      "params": [12, 3.8, 0.15],
+      "material": { "color": "#f5f0ed", "metalness": 0.0, "roughness": 0.6 },
+      "position": [0, 1.9, -5.075],
+      "parent": "room"
+    },
+    {
+      "name": "wall_left",
+      "type": "box",
+      "params": [0.15, 3.8, 10],
+      "material": { "color": "#f5f0ed", "metalness": 0.0, "roughness": 0.6 },
+      "position": [-6.075, 1.9, 0],
+      "parent": "room"
+    },
+    {
+      "name": "wall_right",
+      "type": "box",
+      "params": [0.15, 3.8, 10],
+      "material": { "color": "#f5f0ed", "metalness": 0.0, "roughness": 0.6 },
+      "position": [6.075, 1.9, 0],
+      "parent": "room"
+    },
+    {
+      "name": "ceiling_outer",
+      "type": "box",
+      "params": [12, 0.15, 10],
+      "material": { "color": "#f5f0ed", "metalness": 0.0, "roughness": 0.5 },
+      "position": [0, 3.8, 0],
+      "parent": "room"
+    },
+    {
+      "name": "ceiling_inner",
+      "type": "box",
+      "params": [9.5, 0.1, 7.5],
+      "material": { "color": "#faf7f4", "metalness": 0.0, "roughness": 0.4 },
+      "position": [0, 3.55, 0],
+      "parent": "room"
+    },
+    {
+      "name": "ceiling_rim_back",
+      "type": "box",
+      "params": [10, 0.3, 0.12],
+      "material": { "color": "#f5f0ed", "metalness": 0.0, "roughness": 0.5 },
+      "position": [0, 3.58, -3.85],
+      "parent": "room"
+    },
+    {
+      "name": "ceiling_rim_front",
+      "type": "box",
+      "params": [10, 0.3, 0.12],
+      "material": { "color": "#f5f0ed", "metalness": 0.0, "roughness": 0.5 },
+      "position": [0, 3.58, 3.85],
+      "parent": "room"
+    },
+    {
+      "name": "ceiling_rim_left",
+      "type": "box",
+      "params": [0.12, 0.3, 8],
+      "material": { "color": "#f5f0ed", "metalness": 0.0, "roughness": 0.5 },
+      "position": [-4.85, 3.58, 0],
+      "parent": "room"
+    },
+    {
+      "name": "ceiling_rim_right",
+      "type": "box",
+      "params": [0.12, 0.3, 8],
+      "material": { "color": "#f5f0ed", "metalness": 0.0, "roughness": 0.5 },
+      "position": [4.85, 3.58, 0],
+      "parent": "room"
+    },
+    {
+      "name": "led_back",
+      "type": "box",
+      "params": [9.5, 0.03, 0.06],
+      "material": { "color": "#ffcdb2", "emissive": "#ffcdb2", "emissiveIntensity": 3.0, "metalness": 0, "roughness": 1 },
+      "position": [0, 3.65, -3.7],
+      "parent": "room"
+    },
+    {
+      "name": "led_front",
+      "type": "box",
+      "params": [9.5, 0.03, 0.06],
+      "material": { "color": "#ffcdb2", "emissive": "#ffcdb2", "emissiveIntensity": 3.0, "metalness": 0, "roughness": 1 },
+      "position": [0, 3.65, 3.7],
+      "parent": "room"
+    },
+    {
+      "name": "led_left",
+      "type": "box",
+      "params": [0.06, 0.03, 7.5],
+      "material": { "color": "#ffcdb2", "emissive": "#ffcdb2", "emissiveIntensity": 3.0, "metalness": 0, "roughness": 1 },
+      "position": [-4.7, 3.65, 0],
+      "parent": "room"
+    },
+    {
+      "name": "led_right",
+      "type": "box",
+      "params": [0.06, 0.03, 7.5],
+      "material": { "color": "#ffcdb2", "emissive": "#ffcdb2", "emissiveIntensity": 3.0, "metalness": 0, "roughness": 1 },
+      "position": [4.7, 3.65, 0],
+      "parent": "room"
+    },
+    {
+      "name": "center_panel_backing",
+      "type": "box",
+      "params": [4.5, 3.0, 0.12],
+      "material": { "color": "#faf8f5", "metalness": 0.05, "roughness": 0.4 },
+      "position": [0, 1.6, -4.94],
+      "parent": "room"
+    },
+    {
+      "name": "center_screen",
+      "type": "box",
+      "params": [3.8, 1.6, 0.04],
+      "material": { "color": "#ede5dc", "emissive": "#ede5dc", "emissiveIntensity": 1.2, "metalness": 0, "roughness": 0.9 },
+      "position": [0, 2.2, -4.86],
+      "parent": "room"
+    },
+    {
+      "name": "center_screen_frame",
+      "type": "frame",
+      "params": [3.9, 1.7, 0.03, 0.06],
+      "material": { "color": "#e0d8d0", "metalness": 0.4, "roughness": 0.3 },
+      "position": [0, 2.2, -4.85],
+      "parent": "room"
+    },
+    {
+      "name": "logo_text_backing",
+      "type": "box",
+      "params": [2.8, 0.7, 0.02],
+      "material": { "color": "#faf8f5", "emissive": "#faf8f5", "emissiveIntensity": 0.6, "metalness": 0, "roughness": 0.8 },
+      "position": [0, 1.1, -4.86],
+      "parent": "room"
+    },
+    {
+      "name": "panel_base_light",
+      "type": "box",
+      "params": [4.5, 0.04, 0.15],
+      "material": { "color": "#ffdac1", "emissive": "#ffdac1", "emissiveIntensity": 2.0, "metalness": 0, "roughness": 1 },
+      "position": [0, 0.08, -4.92],
+      "parent": "room"
+    },
+    {
+      "name": "screen_left",
+      "type": "box",
+      "params": [3.2, 1.8, 0.04],
+      "material": { "color": "#ede5dc", "emissive": "#ede5dc", "emissiveIntensity": 1.0, "metalness": 0, "roughness": 0.9 },
+      "position": [-4.2, 2.0, -2.5],
+      "rotation": [0, 25, 0],
+      "parent": "room"
+    },
+    {
+      "name": "screen_left_frame",
+      "type": "frame",
+      "params": [3.3, 1.9, 0.03, 0.06],
+      "material": { "color": "#e0d8d0", "metalness": 0.4, "roughness": 0.3 },
+      "position": [-4.2, 2.0, -2.5],
+      "rotation": [0, 25, 0],
+      "parent": "room"
+    },
+    {
+      "name": "screen_right",
+      "type": "box",
+      "params": [3.2, 1.8, 0.04],
+      "material": { "color": "#ede5dc", "emissive": "#ede5dc", "emissiveIntensity": 1.0, "metalness": 0, "roughness": 0.9 },
+      "position": [4.2, 2.0, -2.5],
+      "rotation": [0, -25, 0],
+      "parent": "room"
+    },
+    {
+      "name": "screen_right_frame",
+      "type": "frame",
+      "params": [3.3, 1.9, 0.03, 0.06],
+      "material": { "color": "#e0d8d0", "metalness": 0.4, "roughness": 0.3 },
+      "position": [4.2, 2.0, -2.5],
+      "rotation": [0, -25, 0],
+      "parent": "room"
+    },
+    {
+      "name": "sofa_left_grp",
+      "type": "group",
+      "position": [-4.0, 0, 1.0],
+      "rotation": [0, 15, 0],
+      "parent": "room"
+    },
+    {
+      "name": "sofa_left_base",
+      "type": "roundedBox",
+      "params": [2.4, 0.35, 0.9, 0.08, 2],
+      "material": { "color": "#f5f0ec", "metalness": 0.0, "roughness": 0.7 },
+      "position": [0, 0.175, 0],
+      "parent": "sofa_left_grp",
+      "castShadow": true
+    },
+    {
+      "name": "sofa_left_seat",
+      "type": "roundedBox",
+      "params": [2.2, 0.12, 0.7, 0.06, 2],
+      "material": { "color": "#faf7f4", "metalness": 0.0, "roughness": 0.8 },
+      "position": [0, 0.41, 0],
+      "parent": "sofa_left_grp"
+    },
+    {
+      "name": "sofa_left_back",
+      "type": "roundedBox",
+      "params": [2.2, 0.4, 0.15, 0.06, 2],
+      "material": { "color": "#f5f0ec", "metalness": 0.0, "roughness": 0.7 },
+      "position": [0, 0.5, -0.42],
+      "parent": "sofa_left_grp"
+    },
+    {
+      "name": "sofa_left_arm_l",
+      "type": "roundedBox",
+      "params": [0.15, 0.3, 0.7, 0.06, 2],
+      "material": { "color": "#f5f0ec", "metalness": 0.0, "roughness": 0.7 },
+      "position": [-1.1, 0.45, 0],
+      "parent": "sofa_left_grp"
+    },
+    {
+      "name": "sofa_left_pillow",
+      "type": "roundedBox",
+      "params": [0.5, 0.18, 0.35, 0.06, 2],
+      "material": { "color": "#faf7f4", "metalness": 0.0, "roughness": 0.85 },
+      "position": [-0.6, 0.55, -0.15],
+      "rotation": [10, -5, 0],
+      "parent": "sofa_left_grp"
+    },
+    {
+      "name": "sofa_right_grp",
+      "type": "group",
+      "position": [4.0, 0, 1.0],
+      "rotation": [0, -15, 0],
+      "parent": "room"
+    },
+    {
+      "name": "sofa_right_base",
+      "type": "roundedBox",
+      "params": [2.4, 0.35, 0.9, 0.08, 2],
+      "material": { "color": "#f5f0ec", "metalness": 0.0, "roughness": 0.7 },
+      "position": [0, 0.175, 0],
+      "parent": "sofa_right_grp",
+      "castShadow": true
+    },
+    {
+      "name": "sofa_right_seat",
+      "type": "roundedBox",
+      "params": [2.2, 0.12, 0.7, 0.06, 2],
+      "material": { "color": "#faf7f4", "metalness": 0.0, "roughness": 0.8 },
+      "position": [0, 0.41, 0],
+      "parent": "sofa_right_grp"
+    },
+    {
+      "name": "sofa_right_back",
+      "type": "roundedBox",
+      "params": [2.2, 0.4, 0.15, 0.06, 2],
+      "material": { "color": "#f5f0ec", "metalness": 0.0, "roughness": 0.7 },
+      "position": [0, 0.5, -0.42],
+      "parent": "sofa_right_grp"
+    },
+    {
+      "name": "sofa_right_arm_r",
+      "type": "roundedBox",
+      "params": [0.15, 0.3, 0.7, 0.06, 2],
+      "material": { "color": "#f5f0ec", "metalness": 0.0, "roughness": 0.7 },
+      "position": [1.1, 0.45, 0],
+      "parent": "sofa_right_grp"
+    },
+    {
+      "name": "sofa_right_pillow",
+      "type": "roundedBox",
+      "params": [0.5, 0.18, 0.35, 0.06, 2],
+      "material": { "color": "#faf7f4", "metalness": 0.0, "roughness": 0.85 },
+      "position": [0.6, 0.55, -0.15],
+      "rotation": [10, 5, 0],
+      "parent": "sofa_right_grp"
+    },
+    {
+      "name": "coffee_table",
+      "type": "cylinder",
+      "params": [0.65, 0.65, 0.06, 24],
+      "material": { "color": "#f0ebe6", "metalness": 0.1, "roughness": 0.3 },
+      "position": [0, 0.38, 0.2],
+      "parent": "room",
+      "castShadow": true
+    },
+    {
+      "name": "coffee_table_pedestal",
+      "type": "cylinder",
+      "params": [0.35, 0.4, 0.35, 16],
+      "material": { "color": "#ebe5df", "metalness": 0.05, "roughness": 0.4 },
+      "position": [0, 0.175, 0.2],
+      "parent": "room"
+    },
+    {
+      "name": "table_products_grp",
+      "type": "group",
+      "position": [0, 0.41, 0.2],
+      "parent": "room"
+    },
+    {
+      "name": "product_bottle_1",
+      "type": "cylinder",
+      "params": [0.03, 0.03, 0.1, 8],
+      "material": { "color": "#faf7f4", "metalness": 0.2, "roughness": 0.3 },
+      "position": [-0.08, 0.05, 0],
+      "parent": "table_products_grp"
+    },
+    {
+      "name": "product_bottle_2",
+      "type": "cylinder",
+      "params": [0.035, 0.035, 0.08, 8],
+      "material": { "color": "#f0ebe6", "metalness": 0.2, "roughness": 0.3 },
+      "position": [0.06, 0.04, 0.04],
+      "parent": "table_products_grp"
+    },
+    {
+      "name": "product_jar",
+      "type": "cylinder",
+      "params": [0.04, 0.04, 0.05, 8],
+      "material": { "color": "#faf7f4", "metalness": 0.15, "roughness": 0.35 },
+      "position": [0.02, 0.025, -0.06],
+      "parent": "table_products_grp"
+    },
+    {
+      "name": "ottoman_1",
+      "type": "cylinder",
+      "params": [0.3, 0.3, 0.38, 16],
+      "material": { "color": "#f5f0ec", "metalness": 0.0, "roughness": 0.8 },
+      "position": [-0.55, 0.19, 0.9],
+      "parent": "room",
+      "castShadow": true
+    },
+    {
+      "name": "ottoman_1_top",
+      "type": "cylinder",
+      "params": [0.28, 0.28, 0.04, 16],
+      "material": { "color": "#faf7f4", "metalness": 0.0, "roughness": 0.85 },
+      "position": [-0.55, 0.4, 0.9],
+      "parent": "room"
+    },
+    {
+      "name": "ottoman_2",
+      "type": "cylinder",
+      "params": [0.3, 0.3, 0.38, 16],
+      "material": { "color": "#f5f0ec", "metalness": 0.0, "roughness": 0.8 },
+      "position": [0.55, 0.19, 0.9],
+      "parent": "room",
+      "castShadow": true
+    },
+    {
+      "name": "ottoman_2_top",
+      "type": "cylinder",
+      "params": [0.28, 0.28, 0.04, 16],
+      "material": { "color": "#faf7f4", "metalness": 0.0, "roughness": 0.85 },
+      "position": [0.55, 0.4, 0.9],
+      "parent": "room"
+    },
+    {
+      "name": "ottoman_3",
+      "type": "cylinder",
+      "params": [0.25, 0.25, 0.35, 16],
+      "material": { "color": "#f5f0ec", "metalness": 0.0, "roughness": 0.8 },
+      "position": [0, 0.175, 1.35],
+      "parent": "room",
+      "castShadow": true
+    },
+    {
+      "name": "ottoman_3_top",
+      "type": "cylinder",
+      "params": [0.23, 0.23, 0.04, 16],
+      "material": { "color": "#faf7f4", "metalness": 0.0, "roughness": 0.85 },
+      "position": [0, 0.375, 1.35],
+      "parent": "room"
+    },
+    {
+      "name": "product_shelf_back",
+      "type": "box",
+      "params": [0.8, 0.25, 0.3],
+      "material": { "color": "#f0ebe6", "metalness": 0.1, "roughness": 0.3 },
+      "position": [1.8, 0.125, -4.82],
+      "parent": "room"
+    },
+    {
+      "name": "back_product_1",
+      "type": "cylinder",
+      "params": [0.03, 0.03, 0.12, 8],
+      "material": { "color": "#faf7f4", "metalness": 0.2, "roughness": 0.3 },
+      "position": [1.65, 0.31, -4.82],
+      "parent": "room"
+    },
+    {
+      "name": "back_product_2",
+      "type": "cylinder",
+      "params": [0.035, 0.035, 0.1, 8],
+      "material": { "color": "#f0ebe6", "metalness": 0.2, "roughness": 0.3 },
+      "position": [1.8, 0.3, -4.82],
+      "parent": "room"
+    },
+    {
+      "name": "back_product_3",
+      "type": "cylinder",
+      "params": [0.04, 0.04, 0.06, 8],
+      "material": { "color": "#faf7f4", "metalness": 0.15, "roughness": 0.35 },
+      "position": [1.95, 0.28, -4.82],
+      "parent": "room"
+    },
+    {
+      "name": "ceiling_light_center",
+      "type": "pointLight",
+      "params": [8, 20, 1, false],
+      "material": { "color": "#fff5ee" },
+      "position": [0, 3.4, 0],
+      "parent": "room"
+    },
+    {
+      "name": "ceiling_light_left",
+      "type": "pointLight",
+      "params": [6, 20, 1, false],
+      "material": { "color": "#fff5ee" },
+      "position": [-3.5, 3.4, -1],
+      "parent": "room"
+    },
+    {
+      "name": "ceiling_light_right",
+      "type": "pointLight",
+      "params": [6, 20, 1, false],
+      "material": { "color": "#fff5ee" },
+      "position": [3.5, 3.4, -1],
+      "parent": "room"
+    },
+    {
+      "name": "ceiling_light_front",
+      "type": "pointLight",
+      "params": [5, 20, 1, false],
+      "material": { "color": "#fff5ee" },
+      "position": [0, 3.4, 2.5],
+      "parent": "room"
+    },
+    {
+      "name": "accent_light_back",
+      "type": "pointLight",
+      "params": [4, 15, 1, false],
+      "material": { "color": "#ffdac1" },
+      "position": [0, 3.0, -4.5],
+      "parent": "room"
+    },
+    {
+      "name": "fill_light_floor_center",
+      "type": "pointLight",
+      "params": [3, 15, 1, false],
+      "material": { "color": "#fff8f2" },
+      "position": [0, 0.5, 0],
+      "parent": "room"
+    },
+    {
+      "name": "fill_light_floor_left",
+      "type": "pointLight",
+      "params": [2, 12, 1, false],
+      "material": { "color": "#fff8f2" },
+      "position": [-4, 0.5, 0.5],
+      "parent": "room"
+    },
+    {
+      "name": "fill_light_floor_right",
+      "type": "pointLight",
+      "params": [2, 12, 1, false],
+      "material": { "color": "#fff8f2" },
+      "position": [4, 0.5, 0.5],
+      "parent": "room"
+    },
+    {
+      "name": "area_light_ceiling",
+      "type": "areaLight",
+      "params": [8, 6, 5, false],
+      "material": { "color": "#fff5ee" },
+      "position": [0, 3.5, 0],
+      "rotation": [90, 0, 0],
+      "parent": "room"
+    },
+    {
+      "name": "spot_left",
+      "type": "spotLight",
+      "params": [3, 8, 0.6, 0.5, false],
+      "material": { "color": "#ffffff" },
+      "position": [-3.5, 3.5, -2.5],
+      "parent": "room"
+    },
+    {
+      "name": "spot_right",
+      "type": "spotLight",
+      "params": [3, 8, 0.6, 0.5, false],
+      "material": { "color": "#ffffff" },
+      "position": [3.5, 3.5, -2.5],
+      "parent": "room"
+    },
+    {
+      "name": "spot_center",
+      "type": "spotLight",
+      "params": [2.5, 8, 0.5, 0.6, false],
+      "material": { "color": "#fff8f0" },
+      "position": [0, 3.5, -3.0],
+      "parent": "room"
+    }
+  ]
+}

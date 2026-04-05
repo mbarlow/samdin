@@ -1,0 +1,292 @@
+{
+  "name": "scooter",
+  "description": "Electric kick scooter",
+  "root": "scooter_root",
+  "parts": [
+    {
+      "name": "scooter_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "deck",
+      "type": "roundedBox",
+      "params": [0.5, 0.04, 0.15, 0.01, 2],
+      "material": {
+        "color": "#3a3a3a",
+        "roughness": 0.7,
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#484848" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [0, 0.12, 0],
+      "parent": "scooter_root"
+    },
+    {
+      "name": "deck_grip",
+      "type": "roundedBox",
+      "params": [0.42, 0.005, 0.13, 0.005, 2],
+      "material": {
+        "color": "#555555",
+        "roughness": 0.95,
+        "breakup": {
+          "noise": { "amount": 0.08, "scale": 5.0, "color": "#666666" },
+          "roughnessVariation": 0.06
+        }
+      },
+      "position": [0, 0.145, 0],
+      "parent": "scooter_root"
+    },
+    {
+      "name": "wheel_front",
+      "type": "cylinder",
+      "params": [0.1, 0.1, 0.04, 12],
+      "material": {
+        "preset": "rubber",
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#2a2a2a" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [0.25, 0.1, 0],
+      "rotation": [90, 0, 0],
+      "parent": "scooter_root"
+    },
+    {
+      "name": "wheel_rear",
+      "type": "cylinder",
+      "params": [0.1, 0.1, 0.04, 12],
+      "material": {
+        "preset": "rubber",
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#2a2a2a" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [-0.22, 0.1, 0],
+      "rotation": [90, 0, 0],
+      "parent": "scooter_root"
+    },
+    {
+      "name": "hub_front",
+      "type": "cylinder",
+      "params": [0.04, 0.04, 0.045, 8],
+      "material": {
+        "preset": "chrome",
+        "breakup": {
+          "noise": { "amount": 0.03, "scale": 4.0, "color": "#dddddd" },
+          "roughnessVariation": 0.02
+        }
+      },
+      "position": [0.25, 0.1, 0],
+      "rotation": [90, 0, 0],
+      "parent": "scooter_root"
+    },
+    {
+      "name": "hub_rear",
+      "type": "cylinder",
+      "params": [0.04, 0.04, 0.045, 8],
+      "material": {
+        "preset": "chrome",
+        "breakup": {
+          "noise": { "amount": 0.03, "scale": 4.0, "color": "#dddddd" },
+          "roughnessVariation": 0.02
+        }
+      },
+      "position": [-0.22, 0.1, 0],
+      "rotation": [90, 0, 0],
+      "parent": "scooter_root"
+    },
+    {
+      "name": "stem",
+      "type": "cylinder",
+      "params": [0.02, 0.02, 0.8, 8],
+      "material": {
+        "preset": "steel",
+        "color": "#808080",
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#909090" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [0.22, 0.52, 0],
+      "rotation": [0, 0, -8],
+      "parent": "scooter_root"
+    },
+    {
+      "name": "stem_clamp",
+      "type": "cylinder",
+      "params": [0.025, 0.025, 0.04, 8],
+      "material": {
+        "preset": "chrome",
+        "breakup": {
+          "noise": { "amount": 0.03, "scale": 4.0, "color": "#dddddd" },
+          "roughnessVariation": 0.02
+        }
+      },
+      "position": [0.22, 0.35, 0],
+      "parent": "scooter_root"
+    },
+    {
+      "name": "handlebar",
+      "type": "cylinder",
+      "params": [0.015, 0.015, 0.4, 6],
+      "material": {
+        "preset": "steel",
+        "color": "#808080",
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#909090" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [0.16, 0.9, 0],
+      "rotation": [90, 0, 0],
+      "parent": "scooter_root"
+    },
+    {
+      "name": "grip_l",
+      "type": "cylinder",
+      "params": [0.022, 0.022, 0.09, 8],
+      "material": {
+        "color": "#cc4400",
+        "roughness": 0.85,
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#dd5511" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [0.16, 0.9, 0.2],
+      "rotation": [90, 0, 0],
+      "parent": "scooter_root"
+    },
+    {
+      "name": "grip_r",
+      "type": "cylinder",
+      "params": [0.022, 0.022, 0.09, 8],
+      "material": {
+        "color": "#cc4400",
+        "roughness": 0.85,
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#dd5511" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [0.16, 0.9, -0.2],
+      "rotation": [90, 0, 0],
+      "parent": "scooter_root"
+    },
+    {
+      "name": "grip_end_l",
+      "type": "cylinder",
+      "params": [0.024, 0.024, 0.01, 8],
+      "material": { "preset": "chrome" },
+      "position": [0.16, 0.9, 0.25],
+      "rotation": [90, 0, 0],
+      "parent": "scooter_root"
+    },
+    {
+      "name": "grip_end_r",
+      "type": "cylinder",
+      "params": [0.024, 0.024, 0.01, 8],
+      "material": { "preset": "chrome" },
+      "position": [0.16, 0.9, -0.25],
+      "rotation": [90, 0, 0],
+      "parent": "scooter_root"
+    },
+    {
+      "name": "fork",
+      "type": "cylinder",
+      "params": [0.015, 0.015, 0.15, 6],
+      "material": {
+        "preset": "steel",
+        "color": "#808080",
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#909090" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [0.25, 0.18, 0],
+      "parent": "scooter_root"
+    },
+    {
+      "name": "rear_fender",
+      "type": "box",
+      "params": [0.12, 0.02, 0.08],
+      "material": {
+        "color": "#555555",
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#666666" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [-0.22, 0.18, 0],
+      "parent": "scooter_root"
+    },
+    {
+      "name": "brake",
+      "type": "box",
+      "params": [0.08, 0.015, 0.06],
+      "material": {
+        "color": "#cc3333",
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#dd4444" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [-0.22, 0.21, 0],
+      "rotation": [-20, 0, 0],
+      "parent": "scooter_root"
+    },
+    {
+      "name": "headlight",
+      "type": "cylinder",
+      "params": [0.02, 0.02, 0.015, 8],
+      "material": { "preset": "glow", "color": "#ffffff", "emissiveIntensity": 1.2 },
+      "position": [0.17, 0.86, 0],
+      "rotation": [90, 90, 0],
+      "parent": "scooter_root"
+    },
+    {
+      "name": "headlight_housing",
+      "type": "cylinder",
+      "params": [0.025, 0.025, 0.012, 8],
+      "material": { "preset": "chrome" },
+      "position": [0.17, 0.86, 0],
+      "rotation": [90, 90, 0],
+      "parent": "scooter_root"
+    },
+    {
+      "name": "taillight",
+      "type": "box",
+      "params": [0.02, 0.015, 0.04],
+      "material": { "preset": "glow", "color": "#ff0000", "emissiveIntensity": 0.8 },
+      "position": [-0.28, 0.19, 0],
+      "parent": "scooter_root"
+    },
+    {
+      "name": "battery_indicator",
+      "type": "box",
+      "params": [0.02, 0.01, 0.03],
+      "material": { "preset": "glow", "color": "#00cc44", "emissiveIntensity": 0.6 },
+      "position": [0.18, 0.92, 0],
+      "parent": "scooter_root"
+    },
+    {
+      "name": "kickstand",
+      "type": "cylinder",
+      "params": [0.008, 0.008, 0.12, 4],
+      "material": {
+        "preset": "steel",
+        "color": "#707070",
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#808080" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [-0.1, 0.06, 0.06],
+      "rotation": [0, 0, 25],
+      "parent": "scooter_root"
+    }
+  ]
+}

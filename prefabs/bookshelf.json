@@ -1,0 +1,286 @@
+{
+  "name": "bookshelf",
+  "description": "Tall bookshelf with books and decorations",
+  "root": "shelf_root",
+  "parts": [
+    {
+      "name": "shelf_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "frame_left",
+      "type": "box",
+      "params": [0.03, 1.8, 0.3],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [-0.45, 0.9, 0],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "frame_right",
+      "type": "box",
+      "params": [0.03, 1.8, 0.3],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [0.45, 0.9, 0],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "frame_top",
+      "type": "box",
+      "params": [0.93, 0.03, 0.32],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [0, 1.79, 0],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "frame_back",
+      "type": "box",
+      "params": [0.87, 1.76, 0.02],
+      "material": { "preset": "wood", "color": "#4a3525" },
+      "position": [0, 0.9, -0.14],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "shelf_1",
+      "type": "box",
+      "params": [0.87, 0.025, 0.28],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [0, 0.02, 0],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "shelf_2",
+      "type": "box",
+      "params": [0.87, 0.025, 0.28],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [0, 0.38, 0],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "shelf_3",
+      "type": "box",
+      "params": [0.87, 0.025, 0.28],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [0, 0.74, 0],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "shelf_4",
+      "type": "box",
+      "params": [0.87, 0.025, 0.28],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [0, 1.1, 0],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "shelf_5",
+      "type": "box",
+      "params": [0.87, 0.025, 0.28],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [0, 1.46, 0],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "book_1a",
+      "type": "box",
+      "params": [0.12, 0.28, 0.04],
+      "material": { "color": "#8b2942" },
+      "position": [-0.32, 0.19, 0.02],
+      "rotation": [0, 3, 0],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "book_1b",
+      "type": "box",
+      "params": [0.1, 0.26, 0.035],
+      "material": { "color": "#1e3a5f" },
+      "position": [-0.2, 0.18, 0.02],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "book_1c",
+      "type": "box",
+      "params": [0.14, 0.3, 0.045],
+      "material": { "color": "#2d5a27" },
+      "position": [-0.06, 0.2, 0.02],
+      "rotation": [0, -2, 0],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "book_1d",
+      "type": "box",
+      "params": [0.08, 0.24, 0.03],
+      "material": { "color": "#d97706" },
+      "position": [0.08, 0.17, 0.02],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "book_1e",
+      "type": "box",
+      "params": [0.11, 0.27, 0.04],
+      "material": { "color": "#6b21a8" },
+      "position": [0.2, 0.19, 0.02],
+      "rotation": [0, 5, 0],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "book_2a",
+      "type": "box",
+      "params": [0.13, 0.29, 0.045],
+      "material": { "color": "#0e7490" },
+      "position": [-0.28, 0.55, 0.02],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "book_2b",
+      "type": "box",
+      "params": [0.09, 0.25, 0.035],
+      "material": { "color": "#854d0e" },
+      "position": [-0.14, 0.53, 0.02],
+      "rotation": [0, -3, 0],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "book_2c",
+      "type": "box",
+      "params": [0.15, 0.31, 0.05],
+      "material": { "color": "#374151" },
+      "position": [0.02, 0.56, 0.02],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "plant_pot",
+      "type": "cylinder",
+      "params": [0.06, 0.05, 0.1, 8],
+      "material": { "preset": "ceramic", "color": "#d4a574" },
+      "position": [0.28, 0.47, 0.02],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "plant",
+      "type": "sphere",
+      "params": [0.08, 1],
+      "material": { "color": "#22863a" },
+      "position": [0.28, 0.6, 0.02],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "book_3a",
+      "type": "box",
+      "params": [0.11, 0.28, 0.04],
+      "material": { "color": "#dc2626" },
+      "position": [-0.3, 0.91, 0.02],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "book_3b",
+      "type": "box",
+      "params": [0.1, 0.26, 0.04],
+      "material": { "color": "#1d4ed8" },
+      "position": [-0.18, 0.9, 0.02],
+      "rotation": [0, 2, 0],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "book_3c",
+      "type": "box",
+      "params": [0.12, 0.29, 0.04],
+      "material": { "color": "#15803d" },
+      "position": [-0.05, 0.91, 0.02],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "frame_photo",
+      "type": "box",
+      "params": [0.15, 0.12, 0.02],
+      "material": { "color": "#1a1a1a" },
+      "position": [0.18, 0.87, 0.05],
+      "rotation": [-10, 0, 0],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "frame_photo_glass",
+      "type": "box",
+      "params": [0.12, 0.09, 0.005],
+      "material": { "preset": "glass" },
+      "position": [0.18, 0.87, 0.06],
+      "rotation": [-10, 0, 0],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "book_4a",
+      "type": "box",
+      "params": [0.14, 0.3, 0.05],
+      "material": { "color": "#7c3aed" },
+      "position": [-0.25, 1.27, 0.02],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "book_4b",
+      "type": "box",
+      "params": [0.1, 0.26, 0.035],
+      "material": { "color": "#ea580c" },
+      "position": [-0.1, 1.25, 0.02],
+      "rotation": [0, -4, 0],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "bookend",
+      "type": "wedge",
+      "params": [0.06, 0.2, 0.12],
+      "material": { "preset": "steel" },
+      "position": [0.05, 1.22, 0.02],
+      "rotation": [0, 90, 0],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "vase",
+      "type": "cylinder",
+      "params": [0.04, 0.03, 0.18, 8],
+      "material": { "preset": "ceramic", "color": "#3b82f6" },
+      "position": [0.25, 1.24, 0.02],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "book_5a",
+      "type": "box",
+      "params": [0.12, 0.28, 0.04],
+      "material": { "color": "#059669" },
+      "position": [-0.28, 1.63, 0.02],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "book_5b",
+      "type": "box",
+      "params": [0.1, 0.25, 0.035],
+      "material": { "color": "#be185d" },
+      "position": [-0.15, 1.61, 0.02],
+      "rotation": [0, 3, 0],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "book_5c",
+      "type": "box",
+      "params": [0.13, 0.27, 0.04],
+      "material": { "color": "#0369a1" },
+      "position": [-0.02, 1.62, 0.02],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "globe",
+      "type": "sphere",
+      "params": [0.08, 1],
+      "material": { "color": "#3b82f6" },
+      "position": [0.25, 1.58, 0.02],
+      "parent": "shelf_root"
+    },
+    {
+      "name": "globe_stand",
+      "type": "cylinder",
+      "params": [0.04, 0.04, 0.02, 8],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [0.25, 1.49, 0.02],
+      "parent": "shelf_root"
+    }
+  ]
+}

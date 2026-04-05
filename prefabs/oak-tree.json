@@ -1,0 +1,79 @@
+{
+  "name": "oak-tree",
+  "description": "Broad deciduous oak tree with spreading canopy",
+  "root": "oak_root",
+  "parts": [
+    {
+      "name": "oak_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "trunk",
+      "type": "cylinder",
+      "params": [0.15, 0.2, 1.8, 8],
+      "material": { "preset": "wood", "color": "#4a3728" },
+      "position": [0, 0.9, 0],
+      "parent": "oak_root"
+    },
+    {
+      "name": "trunk_base",
+      "type": "cylinder",
+      "params": [0.2, 0.25, 0.3, 8],
+      "material": { "preset": "wood", "color": "#3d2d1f" },
+      "position": [0, 0.15, 0],
+      "parent": "oak_root"
+    },
+    {
+      "name": "branch_1",
+      "type": "cylinder",
+      "params": [0.06, 0.04, 0.8, 6],
+      "material": { "preset": "wood", "color": "#4a3728" },
+      "position": [-0.3, 1.6, 0],
+      "rotation": [0, 0, -40],
+      "parent": "oak_root"
+    },
+    {
+      "name": "branch_2",
+      "type": "cylinder",
+      "params": [0.05, 0.03, 0.7, 6],
+      "material": { "preset": "wood", "color": "#4a3728" },
+      "position": [0.25, 1.5, 0.2],
+      "rotation": [20, 0, 35],
+      "parent": "oak_root"
+    },
+    {
+      "name": "canopy_main",
+      "type": "icosahedron",
+      "params": [1.2, 1],
+      "material": { "preset": "foliage", "color": "#2d5a2d" },
+      "position": [0, 2.8, 0],
+      "scale": [1, 0.7, 1],
+      "parent": "oak_root"
+    },
+    {
+      "name": "canopy_left",
+      "type": "icosahedron",
+      "params": [0.7, 1],
+      "material": { "preset": "foliage", "color": "#3a6a3a" },
+      "position": [-0.8, 2.5, 0],
+      "parent": "oak_root"
+    },
+    {
+      "name": "canopy_right",
+      "type": "icosahedron",
+      "params": [0.6, 1],
+      "material": { "preset": "foliage", "color": "#2a5a2a" },
+      "position": [0.7, 2.4, 0.3],
+      "parent": "oak_root"
+    },
+    {
+      "name": "canopy_back",
+      "type": "icosahedron",
+      "params": [0.5, 1],
+      "material": { "preset": "foliage", "color": "#3a6a3a" },
+      "position": [0.2, 2.6, -0.6],
+      "parent": "oak_root"
+    }
+  ]
+}

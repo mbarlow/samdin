@@ -1,0 +1,144 @@
+{
+  "name": "kitchen-counter",
+  "description": "L-shaped kitchen counter with sink and cabinets",
+  "root": "counter_root",
+  "parts": [
+    {
+      "name": "counter_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "base_long",
+      "type": "roundedBox",
+      "params": [2.4, 0.85, 0.6, 0.02, 2],
+      "material": { "preset": "wood", "color": "#f5f0e8" },
+      "position": [0, 0.425, 0],
+      "parent": "counter_root"
+    },
+    {
+      "name": "base_short",
+      "type": "roundedBox",
+      "params": [0.6, 0.85, 1.2, 0.02, 2],
+      "material": { "preset": "wood", "color": "#f5f0e8" },
+      "position": [-0.9, 0.425, -0.9],
+      "parent": "counter_root"
+    },
+    {
+      "name": "countertop_long",
+      "type": "roundedBox",
+      "params": [2.5, 0.06, 0.65, 0.015, 2],
+      "material": { "color": "#3a3a3a", "roughness": 0.15, "metalness": 0.0 },
+      "position": [0, 0.88, 0],
+      "parent": "counter_root"
+    },
+    {
+      "name": "countertop_short",
+      "type": "roundedBox",
+      "params": [0.65, 0.06, 1.25, 0.015, 2],
+      "material": { "color": "#3a3a3a", "roughness": 0.15, "metalness": 0.0 },
+      "position": [-0.9, 0.88, -0.9],
+      "parent": "counter_root"
+    },
+    {
+      "name": "sink_basin",
+      "type": "hollowBox",
+      "params": [0.45, 0.15, 0.35, 0.02],
+      "material": { "preset": "chrome" },
+      "position": [0.3, 0.85, 0],
+      "parent": "counter_root"
+    },
+    {
+      "name": "faucet_base",
+      "type": "cylinder",
+      "params": [0.02, 0.02, 0.2, 8],
+      "material": { "preset": "chrome" },
+      "position": [0.3, 1.01, -0.2],
+      "parent": "counter_root"
+    },
+    {
+      "name": "faucet_spout",
+      "type": "elbow",
+      "params": [0.08, 0.012, 90, 8],
+      "material": { "preset": "chrome" },
+      "position": [0.3, 1.1, -0.14],
+      "rotation": [0, 90, 0],
+      "parent": "counter_root"
+    },
+    {
+      "name": "door_1",
+      "type": "box",
+      "params": [0.38, 0.5, 0.02],
+      "material": { "preset": "wood", "color": "#f5f0e8" },
+      "position": [-0.4, 0.35, 0.3],
+      "parent": "counter_root"
+    },
+    {
+      "name": "door_2",
+      "type": "box",
+      "params": [0.38, 0.5, 0.02],
+      "material": { "preset": "wood", "color": "#f5f0e8" },
+      "position": [0.0, 0.35, 0.3],
+      "parent": "counter_root"
+    },
+    {
+      "name": "door_3",
+      "type": "box",
+      "params": [0.38, 0.5, 0.02],
+      "material": { "preset": "wood", "color": "#f5f0e8" },
+      "position": [0.7, 0.35, 0.3],
+      "parent": "counter_root"
+    },
+    {
+      "name": "handle_1",
+      "type": "cylinder",
+      "params": [0.008, 0.008, 0.1, 6],
+      "material": { "preset": "chrome" },
+      "position": [-0.4, 0.5, 0.32],
+      "rotation": [0, 0, 90],
+      "parent": "counter_root"
+    },
+    {
+      "name": "handle_2",
+      "type": "cylinder",
+      "params": [0.008, 0.008, 0.1, 6],
+      "material": { "preset": "chrome" },
+      "position": [0.0, 0.5, 0.32],
+      "rotation": [0, 0, 90],
+      "parent": "counter_root"
+    },
+    {
+      "name": "handle_3",
+      "type": "cylinder",
+      "params": [0.008, 0.008, 0.1, 6],
+      "material": { "preset": "chrome" },
+      "position": [0.7, 0.5, 0.32],
+      "rotation": [0, 0, 90],
+      "parent": "counter_root"
+    },
+    {
+      "name": "backsplash_long",
+      "type": "box",
+      "params": [2.5, 0.5, 0.03],
+      "material": { "preset": "tile", "color": "#e8e4dd" },
+      "position": [0, 1.16, -0.31],
+      "parent": "counter_root"
+    },
+    {
+      "name": "backsplash_short",
+      "type": "box",
+      "params": [0.03, 0.5, 1.25],
+      "material": { "preset": "tile", "color": "#e8e4dd" },
+      "position": [-1.22, 1.16, -0.9],
+      "parent": "counter_root"
+    },
+    {
+      "name": "kickplate",
+      "type": "box",
+      "params": [2.4, 0.08, 0.02],
+      "material": { "color": "#2a2a2a", "roughness": 0.8 },
+      "position": [0, 0.04, 0.3],
+      "parent": "counter_root"
+    }
+  ]
+}

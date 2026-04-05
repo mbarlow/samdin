@@ -1,0 +1,178 @@
+{
+  "name": "park-bench",
+  "description": "Classic wooden park bench with metal frame",
+  "root": "bench_root",
+  "parts": [
+    {
+      "name": "bench_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "leg_left_front",
+      "type": "box",
+      "params": [0.05, 0.42, 0.05],
+      "material": { "color": "#2a2a2a", "metalness": 0.6, "roughness": 0.4 },
+      "position": [-0.6, 0.21, 0.2],
+      "parent": "bench_root"
+    },
+    {
+      "name": "leg_left_back",
+      "type": "box",
+      "params": [0.05, 0.42, 0.05],
+      "material": { "color": "#2a2a2a", "metalness": 0.6, "roughness": 0.4 },
+      "position": [-0.6, 0.21, -0.2],
+      "parent": "bench_root"
+    },
+    {
+      "name": "leg_right_front",
+      "type": "box",
+      "params": [0.05, 0.42, 0.05],
+      "material": { "color": "#2a2a2a", "metalness": 0.6, "roughness": 0.4 },
+      "position": [0.6, 0.21, 0.2],
+      "parent": "bench_root"
+    },
+    {
+      "name": "leg_right_back",
+      "type": "box",
+      "params": [0.05, 0.42, 0.05],
+      "material": { "color": "#2a2a2a", "metalness": 0.6, "roughness": 0.4 },
+      "position": [0.6, 0.21, -0.2],
+      "parent": "bench_root"
+    },
+    {
+      "name": "frame_left",
+      "type": "box",
+      "params": [0.04, 0.04, 0.45],
+      "material": { "color": "#2a2a2a", "metalness": 0.6, "roughness": 0.4 },
+      "position": [-0.6, 0.42, 0],
+      "parent": "bench_root"
+    },
+    {
+      "name": "frame_right",
+      "type": "box",
+      "params": [0.04, 0.04, 0.45],
+      "material": { "color": "#2a2a2a", "metalness": 0.6, "roughness": 0.4 },
+      "position": [0.6, 0.42, 0],
+      "parent": "bench_root"
+    },
+    {
+      "name": "seat_slat_1",
+      "type": "roundedBox",
+      "params": [1.5, 0.03, 0.08, 0.01, 2],
+      "material": { "preset": "wood", "color": "#8b6914" },
+      "position": [0, 0.46, 0.18],
+      "parent": "bench_root"
+    },
+    {
+      "name": "seat_slat_2",
+      "type": "roundedBox",
+      "params": [1.5, 0.03, 0.08, 0.01, 2],
+      "material": { "preset": "wood", "color": "#8b6914" },
+      "position": [0, 0.46, 0.08],
+      "parent": "bench_root"
+    },
+    {
+      "name": "seat_slat_3",
+      "type": "roundedBox",
+      "params": [1.5, 0.03, 0.08, 0.01, 2],
+      "material": { "preset": "wood", "color": "#8b6914" },
+      "position": [0, 0.46, -0.02],
+      "parent": "bench_root"
+    },
+    {
+      "name": "seat_slat_4",
+      "type": "roundedBox",
+      "params": [1.5, 0.03, 0.08, 0.01, 2],
+      "material": { "preset": "wood", "color": "#8b6914" },
+      "position": [0, 0.46, -0.12],
+      "parent": "bench_root"
+    },
+    {
+      "name": "back_support_left",
+      "type": "box",
+      "params": [0.04, 0.5, 0.04],
+      "material": { "color": "#2a2a2a", "metalness": 0.6, "roughness": 0.4 },
+      "position": [-0.6, 0.67, -0.22],
+      "rotation": [-12, 0, 0],
+      "parent": "bench_root"
+    },
+    {
+      "name": "back_support_right",
+      "type": "box",
+      "params": [0.04, 0.5, 0.04],
+      "material": { "color": "#2a2a2a", "metalness": 0.6, "roughness": 0.4 },
+      "position": [0.6, 0.67, -0.22],
+      "rotation": [-12, 0, 0],
+      "parent": "bench_root"
+    },
+    {
+      "name": "back_slat_1",
+      "type": "roundedBox",
+      "params": [1.5, 0.03, 0.08, 0.01, 2],
+      "material": { "preset": "wood", "color": "#8b6914" },
+      "position": [0, 0.58, -0.25],
+      "rotation": [-12, 0, 0],
+      "parent": "bench_root"
+    },
+    {
+      "name": "back_slat_2",
+      "type": "roundedBox",
+      "params": [1.5, 0.03, 0.08, 0.01, 2],
+      "material": { "preset": "wood", "color": "#8b6914" },
+      "position": [0, 0.68, -0.27],
+      "rotation": [-12, 0, 0],
+      "parent": "bench_root"
+    },
+    {
+      "name": "back_slat_3",
+      "type": "roundedBox",
+      "params": [1.5, 0.03, 0.08, 0.01, 2],
+      "material": { "preset": "wood", "color": "#8b6914" },
+      "position": [0, 0.78, -0.29],
+      "rotation": [-12, 0, 0],
+      "parent": "bench_root"
+    },
+    {
+      "name": "back_slat_4",
+      "type": "roundedBox",
+      "params": [1.5, 0.03, 0.08, 0.01, 2],
+      "material": { "preset": "wood", "color": "#8b6914" },
+      "position": [0, 0.88, -0.31],
+      "rotation": [-12, 0, 0],
+      "parent": "bench_root"
+    },
+    {
+      "name": "armrest_left",
+      "type": "roundedBox",
+      "params": [0.06, 0.04, 0.35, 0.01, 2],
+      "material": { "preset": "wood", "color": "#7a5a10" },
+      "position": [-0.6, 0.65, 0],
+      "parent": "bench_root"
+    },
+    {
+      "name": "armrest_right",
+      "type": "roundedBox",
+      "params": [0.06, 0.04, 0.35, 0.01, 2],
+      "material": { "preset": "wood", "color": "#7a5a10" },
+      "position": [0.6, 0.65, 0],
+      "parent": "bench_root"
+    },
+    {
+      "name": "armrest_support_left",
+      "type": "box",
+      "params": [0.03, 0.18, 0.03],
+      "material": { "color": "#2a2a2a", "metalness": 0.6, "roughness": 0.4 },
+      "position": [-0.6, 0.54, 0.1],
+      "parent": "bench_root"
+    },
+    {
+      "name": "armrest_support_right",
+      "type": "box",
+      "params": [0.03, 0.18, 0.03],
+      "material": { "color": "#2a2a2a", "metalness": 0.6, "roughness": 0.4 },
+      "position": [0.6, 0.54, 0.1],
+      "parent": "bench_root"
+    }
+  ]
+}

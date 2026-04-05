@@ -1,0 +1,17 @@
+{
+  "name": "samdin-cli",
+  "version": "1.0.0",
+  "description": "CLI tool to convert Samdin specs to GLB",
+  "type": "module",
+  "bin": {
+    "samdin": "./index.js"
+  },
+  "scripts": {
+    "build": "node index.js"
+  },
+  "dependencies": {
+    "@gltf-transform/core": "^4.3.0",
+    "playwright": "^1.58.0",
+    "three": "^0.160.0"
+  }
+}

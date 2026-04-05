@@ -1,0 +1,60 @@
+{
+  "name": "pine-tree",
+  "description": "Tall coniferous pine tree with layered branches",
+  "root": "pine_root",
+  "parts": [
+    {
+      "name": "pine_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "trunk",
+      "type": "cylinder",
+      "params": [0.12, 0.18, 3.5, 8],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [0, 1.75, 0],
+      "parent": "pine_root"
+    },
+    {
+      "name": "layer_1",
+      "type": "cone",
+      "params": [0.9, 1.2, 8],
+      "material": { "preset": "foliage", "color": "#1a4a2a" },
+      "position": [0, 1.8, 0],
+      "parent": "pine_root"
+    },
+    {
+      "name": "layer_2",
+      "type": "cone",
+      "params": [0.75, 1.0, 8],
+      "material": { "preset": "foliage", "color": "#1f5030" },
+      "position": [0, 2.6, 0],
+      "parent": "pine_root"
+    },
+    {
+      "name": "layer_3",
+      "type": "cone",
+      "params": [0.55, 0.9, 8],
+      "material": { "preset": "foliage", "color": "#1a4a2a" },
+      "position": [0, 3.3, 0],
+      "parent": "pine_root"
+    },
+    {
+      "name": "layer_4",
+      "type": "cone",
+      "params": [0.35, 0.7, 8],
+      "material": { "preset": "foliage", "color": "#1f5030" },
+      "position": [0, 3.9, 0],
+      "parent": "pine_root"
+    },
+    {
+      "name": "top",
+      "type": "cone",
+      "params": [0.15, 0.4, 6],
+      "material": { "preset": "foliage", "color": "#1a4a2a" },
+      "position": [0, 4.35, 0],
+      "parent": "pine_root"
+    }
+  ]
+}

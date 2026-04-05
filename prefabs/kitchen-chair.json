@@ -1,0 +1,95 @@
+{
+  "name": "kitchen-chair",
+  "description": "Simple wooden kitchen/dining chair",
+  "root": "chair_root",
+  "parts": [
+    {
+      "name": "chair_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "seat",
+      "type": "box",
+      "params": [0.4, 0.03, 0.38],
+      "material": { "preset": "wood", "color": "#c4a882" },
+      "position": [0, 0.45, 0],
+      "parent": "chair_root"
+    },
+    {
+      "name": "leg_fl",
+      "type": "cylinder",
+      "params": [0.02, 0.02, 0.43, 6],
+      "material": { "preset": "wood", "color": "#b09872" },
+      "position": [0.15, 0.215, 0.14],
+      "parent": "chair_root"
+    },
+    {
+      "name": "leg_fr",
+      "type": "cylinder",
+      "params": [0.02, 0.02, 0.43, 6],
+      "material": { "preset": "wood", "color": "#b09872" },
+      "position": [-0.15, 0.215, 0.14],
+      "parent": "chair_root"
+    },
+    {
+      "name": "leg_bl",
+      "type": "cylinder",
+      "params": [0.02, 0.02, 0.85, 6],
+      "material": { "preset": "wood", "color": "#b09872" },
+      "position": [0.15, 0.425, -0.14],
+      "parent": "chair_root"
+    },
+    {
+      "name": "leg_br",
+      "type": "cylinder",
+      "params": [0.02, 0.02, 0.85, 6],
+      "material": { "preset": "wood", "color": "#b09872" },
+      "position": [-0.15, 0.425, -0.14],
+      "parent": "chair_root"
+    },
+    {
+      "name": "back_top",
+      "type": "box",
+      "params": [0.32, 0.04, 0.02],
+      "material": { "preset": "wood", "color": "#c4a882" },
+      "position": [0, 0.82, -0.14],
+      "parent": "chair_root"
+    },
+    {
+      "name": "back_mid",
+      "type": "box",
+      "params": [0.28, 0.03, 0.015],
+      "material": { "preset": "wood", "color": "#c4a882" },
+      "position": [0, 0.68, -0.14],
+      "parent": "chair_root"
+    },
+    {
+      "name": "stretcher_front",
+      "type": "cylinder",
+      "params": [0.012, 0.012, 0.26, 6],
+      "material": { "preset": "wood", "color": "#b09872" },
+      "position": [0, 0.15, 0.14],
+      "rotation": [0, 0, 90],
+      "parent": "chair_root"
+    },
+    {
+      "name": "stretcher_left",
+      "type": "cylinder",
+      "params": [0.012, 0.012, 0.24, 6],
+      "material": { "preset": "wood", "color": "#b09872" },
+      "position": [0.15, 0.15, 0],
+      "rotation": [90, 0, 0],
+      "parent": "chair_root"
+    },
+    {
+      "name": "stretcher_right",
+      "type": "cylinder",
+      "params": [0.012, 0.012, 0.24, 6],
+      "material": { "preset": "wood", "color": "#b09872" },
+      "position": [-0.15, 0.15, 0],
+      "rotation": [90, 0, 0],
+      "parent": "chair_root"
+    }
+  ]
+}

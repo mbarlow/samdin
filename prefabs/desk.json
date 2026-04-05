@@ -1,0 +1,165 @@
+{
+  "name": "desk",
+  "description": "Modern office desk with drawers and cable management",
+  "root": "desk_root",
+  "parts": [
+    {
+      "name": "desk_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "top",
+      "type": "roundedBox",
+      "params": [1.6, 0.04, 0.8, 0.01, 2],
+      "material": { "preset": "wood", "color": "#d4a574" },
+      "position": [0, 0.74, 0],
+      "parent": "desk_root"
+    },
+    {
+      "name": "frame_front",
+      "type": "box",
+      "params": [1.5, 0.06, 0.03],
+      "material": { "color": "#1a1a1a", "metalness": 0.5, "roughness": 0.5 },
+      "position": [0, 0.69, 0.37],
+      "parent": "desk_root"
+    },
+    {
+      "name": "frame_back",
+      "type": "box",
+      "params": [1.5, 0.06, 0.03],
+      "material": { "color": "#1a1a1a", "metalness": 0.5, "roughness": 0.5 },
+      "position": [0, 0.69, -0.37],
+      "parent": "desk_root"
+    },
+    {
+      "name": "leg_left",
+      "type": "box",
+      "params": [0.05, 0.66, 0.7],
+      "material": { "color": "#1a1a1a", "metalness": 0.5, "roughness": 0.5 },
+      "position": [-0.75, 0.33, 0],
+      "parent": "desk_root"
+    },
+    {
+      "name": "leg_right",
+      "type": "box",
+      "params": [0.05, 0.66, 0.7],
+      "material": { "color": "#1a1a1a", "metalness": 0.5, "roughness": 0.5 },
+      "position": [0.75, 0.33, 0],
+      "parent": "desk_root"
+    },
+    {
+      "name": "drawer_unit",
+      "type": "group",
+      "position": [0.5, 0, 0],
+      "parent": "desk_root"
+    },
+    {
+      "name": "drawer_frame",
+      "type": "box",
+      "params": [0.4, 0.5, 0.55],
+      "material": { "color": "#e8e8e8", "roughness": 0.8 },
+      "position": [0, 0.32, -0.1],
+      "parent": "drawer_unit"
+    },
+    {
+      "name": "drawer_1",
+      "type": "box",
+      "params": [0.36, 0.12, 0.02],
+      "material": { "color": "#f0f0f0", "roughness": 0.8 },
+      "position": [0, 0.5, 0.16],
+      "parent": "drawer_unit"
+    },
+    {
+      "name": "drawer_1_handle",
+      "type": "cylinder",
+      "params": [0.01, 0.01, 0.1, 6],
+      "material": { "preset": "chrome" },
+      "position": [0, 0.5, 0.18],
+      "rotation": [0, 0, 90],
+      "parent": "drawer_unit"
+    },
+    {
+      "name": "drawer_2",
+      "type": "box",
+      "params": [0.36, 0.12, 0.02],
+      "material": { "color": "#f0f0f0", "roughness": 0.8 },
+      "position": [0, 0.35, 0.16],
+      "parent": "drawer_unit"
+    },
+    {
+      "name": "drawer_2_handle",
+      "type": "cylinder",
+      "params": [0.01, 0.01, 0.1, 6],
+      "material": { "preset": "chrome" },
+      "position": [0, 0.35, 0.18],
+      "rotation": [0, 0, 90],
+      "parent": "drawer_unit"
+    },
+    {
+      "name": "drawer_3",
+      "type": "box",
+      "params": [0.36, 0.15, 0.02],
+      "material": { "color": "#f0f0f0", "roughness": 0.8 },
+      "position": [0, 0.15, 0.16],
+      "parent": "drawer_unit"
+    },
+    {
+      "name": "drawer_3_handle",
+      "type": "cylinder",
+      "params": [0.01, 0.01, 0.1, 6],
+      "material": { "preset": "chrome" },
+      "position": [0, 0.15, 0.18],
+      "rotation": [0, 0, 90],
+      "parent": "drawer_unit"
+    },
+    {
+      "name": "cable_tray",
+      "type": "box",
+      "params": [0.8, 0.05, 0.12],
+      "material": { "color": "#2a2a2a", "roughness": 0.8 },
+      "position": [-0.2, 0.64, -0.32],
+      "parent": "desk_root"
+    },
+    {
+      "name": "grommet",
+      "type": "cylinder",
+      "params": [0.03, 0.03, 0.05, 8],
+      "material": { "color": "#2a2a2a" },
+      "position": [0.6, 0.74, -0.25],
+      "parent": "desk_root"
+    },
+    {
+      "name": "foot_left_front",
+      "type": "cylinder",
+      "params": [0.02, 0.025, 0.02, 6],
+      "material": { "color": "#1a1a1a" },
+      "position": [-0.75, 0.01, 0.32],
+      "parent": "desk_root"
+    },
+    {
+      "name": "foot_left_back",
+      "type": "cylinder",
+      "params": [0.02, 0.025, 0.02, 6],
+      "material": { "color": "#1a1a1a" },
+      "position": [-0.75, 0.01, -0.32],
+      "parent": "desk_root"
+    },
+    {
+      "name": "foot_right_front",
+      "type": "cylinder",
+      "params": [0.02, 0.025, 0.02, 6],
+      "material": { "color": "#1a1a1a" },
+      "position": [0.75, 0.01, 0.32],
+      "parent": "desk_root"
+    },
+    {
+      "name": "foot_right_back",
+      "type": "cylinder",
+      "params": [0.02, 0.025, 0.02, 6],
+      "material": { "color": "#1a1a1a" },
+      "position": [0.75, 0.01, -0.32],
+      "parent": "desk_root"
+    }
+  ]
+}

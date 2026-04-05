@@ -1,0 +1,20 @@
+{
+  "name": "hedge-box",
+  "description": "Trimmed boxwood hedge section",
+  "root": "hedge_root",
+  "parts": [
+    {
+      "name": "hedge_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "hedge_body",
+      "type": "roundedBox",
+      "params": [1, 0.8, 0.4, 0.05, 2],
+      "material": { "preset": "foliage", "color": "#2a4a2a" },
+      "position": [0, 0.4, 0],
+      "parent": "hedge_root"
+    }
+  ]
+}

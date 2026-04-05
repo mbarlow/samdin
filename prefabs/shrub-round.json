@@ -1,0 +1,36 @@
+{
+  "name": "shrub-round",
+  "description": "Round decorative shrub/bush",
+  "root": "shrub_root",
+  "parts": [
+    {
+      "name": "shrub_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "shrub_main",
+      "type": "icosahedron",
+      "params": [0.4, 1],
+      "material": { "preset": "foliage", "color": "#3a5a3a" },
+      "position": [0, 0.35, 0],
+      "parent": "shrub_root"
+    },
+    {
+      "name": "shrub_accent_1",
+      "type": "icosahedron",
+      "params": [0.25, 1],
+      "material": { "preset": "foliage", "color": "#4a6a4a" },
+      "position": [0.25, 0.3, 0.15],
+      "parent": "shrub_root"
+    },
+    {
+      "name": "shrub_accent_2",
+      "type": "icosahedron",
+      "params": [0.2, 1],
+      "material": { "preset": "foliage", "color": "#3a5a3a" },
+      "position": [-0.2, 0.28, -0.1],
+      "parent": "shrub_root"
+    }
+  ]
+}

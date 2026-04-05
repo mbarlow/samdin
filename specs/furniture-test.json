@@ -1,0 +1,246 @@
+{
+  "name": "furniture-test",
+  "description": "Showcase of furniture prefab varieties",
+  "root": "scene_root",
+  "parts": [
+    {
+      "name": "scene_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "floor",
+      "type": "box",
+      "params": [20, 0.1, 16],
+      "material": { "preset": "wood", "color": "#b09070" },
+      "position": [0, -0.05, 0],
+      "parent": "scene_root"
+    },
+    {
+      "name": "wall_back",
+      "type": "box",
+      "params": [20, 4, 0.15],
+      "material": { "preset": "wall-paint", "color": "#e8e4dc" },
+      "position": [0, 2, -7.9],
+      "parent": "scene_root"
+    },
+    {
+      "name": "wall_left",
+      "type": "box",
+      "params": [0.15, 4, 16],
+      "material": { "preset": "wall-paint", "color": "#e0dcd4" },
+      "position": [-9.9, 2, 0],
+      "parent": "scene_root"
+    },
+
+    {
+      "name": "living_room",
+      "type": "group",
+      "position": [-5, 0, 0],
+      "parent": "scene_root"
+    },
+    {
+      "name": "rug",
+      "type": "box",
+      "params": [4, 0.02, 3],
+      "material": { "preset": "carpet", "color": "#8a7a6a" },
+      "position": [0, 0.01, 1],
+      "parent": "living_room"
+    },
+    {
+      "name": "sofa_1",
+      "type": "prefab",
+      "src": "sofa",
+      "position": [0, 0, -1.5],
+      "parent": "living_room"
+    },
+    {
+      "name": "armchair_1",
+      "type": "prefab",
+      "src": "armchair",
+      "position": [-2.2, 0, 1],
+      "rotation": [0, 45, 0],
+      "parent": "living_room"
+    },
+    {
+      "name": "armchair_2",
+      "type": "prefab",
+      "src": "armchair",
+      "position": [2.2, 0, 1],
+      "rotation": [0, -45, 0],
+      "parent": "living_room"
+    },
+    {
+      "name": "coffee_table_1",
+      "type": "prefab",
+      "src": "coffee-table",
+      "position": [0, 0, 1],
+      "parent": "living_room"
+    },
+    {
+      "name": "side_table_1",
+      "type": "prefab",
+      "src": "side-table",
+      "position": [-2.8, 0, -0.5],
+      "parent": "living_room"
+    },
+    {
+      "name": "table_lamp_1",
+      "type": "prefab",
+      "src": "table-lamp",
+      "position": [-2.8, 0.57, -0.5],
+      "parent": "living_room"
+    },
+    {
+      "name": "floor_lamp_1",
+      "type": "prefab",
+      "src": "floor-lamp",
+      "position": [2.8, 0, -0.5],
+      "parent": "living_room"
+    },
+    {
+      "name": "tv_stand_1",
+      "type": "prefab",
+      "src": "tv-stand",
+      "position": [0, 0, 3.5],
+      "rotation": [0, 180, 0],
+      "parent": "living_room"
+    },
+    {
+      "name": "bookshelf_1",
+      "type": "prefab",
+      "src": "bookshelf",
+      "position": [-3.5, 0, -4],
+      "parent": "living_room"
+    },
+
+    {
+      "name": "bedroom",
+      "type": "group",
+      "position": [5, 0, -2],
+      "parent": "scene_root"
+    },
+    {
+      "name": "bed_1",
+      "type": "prefab",
+      "src": "bed",
+      "position": [0, 0, -2],
+      "parent": "bedroom"
+    },
+    {
+      "name": "wardrobe_1",
+      "type": "prefab",
+      "src": "wardrobe",
+      "position": [3, 0, -2],
+      "rotation": [0, -90, 0],
+      "parent": "bedroom"
+    },
+    {
+      "name": "dresser_1",
+      "type": "prefab",
+      "src": "dresser",
+      "position": [0, 0, 2],
+      "rotation": [0, 180, 0],
+      "parent": "bedroom"
+    },
+
+    {
+      "name": "dining_area",
+      "type": "group",
+      "position": [5, 0, 4],
+      "parent": "scene_root"
+    },
+    {
+      "name": "dining_table_1",
+      "type": "prefab",
+      "src": "dining-table",
+      "position": [0, 0, 0],
+      "parent": "dining_area"
+    },
+
+    {
+      "name": "office_area",
+      "type": "group",
+      "position": [-5, 0, 5],
+      "parent": "scene_root"
+    },
+    {
+      "name": "desk_1",
+      "type": "prefab",
+      "src": "desk",
+      "position": [0, 0, 0],
+      "parent": "office_area"
+    },
+    {
+      "name": "office_chair_1",
+      "type": "prefab",
+      "src": "office-chair",
+      "position": [0, 0, 0.8],
+      "rotation": [0, 180, 0],
+      "parent": "office_area"
+    },
+
+    {
+      "name": "kitchen_area",
+      "type": "group",
+      "position": [0, 0, -5],
+      "parent": "scene_root"
+    },
+    {
+      "name": "kitchen_chair_1",
+      "type": "prefab",
+      "src": "kitchen-chair",
+      "position": [-1, 0, 0],
+      "parent": "kitchen_area"
+    },
+    {
+      "name": "kitchen_chair_2",
+      "type": "prefab",
+      "src": "kitchen-chair",
+      "position": [0, 0, 0],
+      "parent": "kitchen_area"
+    },
+    {
+      "name": "kitchen_chair_3",
+      "type": "prefab",
+      "src": "kitchen-chair",
+      "position": [1, 0, 0],
+      "parent": "kitchen_area"
+    },
+    {
+      "name": "side_table_2",
+      "type": "prefab",
+      "src": "side-table",
+      "position": [2.5, 0, 0],
+      "parent": "kitchen_area"
+    },
+
+    {
+      "name": "ceiling_light_1",
+      "type": "areaLight",
+      "params": [3, 2, 2, true],
+      "material": { "color": "#fff8f0" },
+      "position": [-5, 3.5, 0],
+      "rotation": [90, 0, 0],
+      "parent": "scene_root"
+    },
+    {
+      "name": "ceiling_light_2",
+      "type": "areaLight",
+      "params": [2, 2, 2, true],
+      "material": { "color": "#fff8f0" },
+      "position": [5, 3.5, -2],
+      "rotation": [90, 0, 0],
+      "parent": "scene_root"
+    },
+    {
+      "name": "ceiling_light_3",
+      "type": "areaLight",
+      "params": [2, 2, 1.5, true],
+      "material": { "color": "#fff8f0" },
+      "position": [5, 3.5, 4],
+      "rotation": [90, 0, 0],
+      "parent": "scene_root"
+    }
+  ]
+}

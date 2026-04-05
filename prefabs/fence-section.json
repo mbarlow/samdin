@@ -1,0 +1,132 @@
+{
+  "name": "fence-section",
+  "description": "Wooden picket fence section, 2m wide",
+  "root": "fence_root",
+  "parts": [
+    {
+      "name": "fence_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "post_left",
+      "type": "box",
+      "params": [0.08, 1.2, 0.08],
+      "material": { "preset": "fence-wood", "color": "#c4a97d" },
+      "position": [-1.0, 0.6, 0],
+      "parent": "fence_root"
+    },
+    {
+      "name": "post_right",
+      "type": "box",
+      "params": [0.08, 1.2, 0.08],
+      "material": { "preset": "fence-wood", "color": "#c4a97d" },
+      "position": [1.0, 0.6, 0],
+      "parent": "fence_root"
+    },
+    {
+      "name": "post_cap_l",
+      "type": "pyramid",
+      "params": [0.08, 0.06],
+      "material": { "preset": "fence-wood", "color": "#c4a97d" },
+      "position": [-1.0, 1.23, 0],
+      "parent": "fence_root"
+    },
+    {
+      "name": "post_cap_r",
+      "type": "pyramid",
+      "params": [0.08, 0.06],
+      "material": { "preset": "fence-wood", "color": "#c4a97d" },
+      "position": [1.0, 1.23, 0],
+      "parent": "fence_root"
+    },
+    {
+      "name": "rail_top",
+      "type": "box",
+      "params": [1.92, 0.06, 0.04],
+      "material": { "preset": "fence-wood", "color": "#b8a080" },
+      "position": [0, 0.95, 0],
+      "parent": "fence_root"
+    },
+    {
+      "name": "rail_bottom",
+      "type": "box",
+      "params": [1.92, 0.06, 0.04],
+      "material": { "preset": "fence-wood", "color": "#b8a080" },
+      "position": [0, 0.25, 0],
+      "parent": "fence_root"
+    },
+    {
+      "name": "picket_1",
+      "type": "box",
+      "params": [0.07, 0.85, 0.015],
+      "material": { "preset": "fence-wood", "color": "#d4c4a8" },
+      "position": [-0.8, 0.6, 0],
+      "parent": "fence_root"
+    },
+    {
+      "name": "picket_2",
+      "type": "box",
+      "params": [0.07, 0.85, 0.015],
+      "material": { "preset": "fence-wood", "color": "#d4c4a8" },
+      "position": [-0.6, 0.6, 0],
+      "parent": "fence_root"
+    },
+    {
+      "name": "picket_3",
+      "type": "box",
+      "params": [0.07, 0.85, 0.015],
+      "material": { "preset": "fence-wood", "color": "#d4c4a8" },
+      "position": [-0.4, 0.6, 0],
+      "parent": "fence_root"
+    },
+    {
+      "name": "picket_4",
+      "type": "box",
+      "params": [0.07, 0.85, 0.015],
+      "material": { "preset": "fence-wood", "color": "#d4c4a8" },
+      "position": [-0.2, 0.6, 0],
+      "parent": "fence_root"
+    },
+    {
+      "name": "picket_5",
+      "type": "box",
+      "params": [0.07, 0.85, 0.015],
+      "material": { "preset": "fence-wood", "color": "#d4c4a8" },
+      "position": [0.0, 0.6, 0],
+      "parent": "fence_root"
+    },
+    {
+      "name": "picket_6",
+      "type": "box",
+      "params": [0.07, 0.85, 0.015],
+      "material": { "preset": "fence-wood", "color": "#d4c4a8" },
+      "position": [0.2, 0.6, 0],
+      "parent": "fence_root"
+    },
+    {
+      "name": "picket_7",
+      "type": "box",
+      "params": [0.07, 0.85, 0.015],
+      "material": { "preset": "fence-wood", "color": "#d4c4a8" },
+      "position": [0.4, 0.6, 0],
+      "parent": "fence_root"
+    },
+    {
+      "name": "picket_8",
+      "type": "box",
+      "params": [0.07, 0.85, 0.015],
+      "material": { "preset": "fence-wood", "color": "#d4c4a8" },
+      "position": [0.6, 0.6, 0],
+      "parent": "fence_root"
+    },
+    {
+      "name": "picket_9",
+      "type": "box",
+      "params": [0.07, 0.85, 0.015],
+      "material": { "preset": "fence-wood", "color": "#d4c4a8" },
+      "position": [0.8, 0.6, 0],
+      "parent": "fence_root"
+    }
+  ]
+}

@@ -1,0 +1,303 @@
+{
+  "name": "staircase",
+  "description": "Straight staircase with railings and balusters",
+  "root": "stairs_root",
+  "parts": [
+    {
+      "name": "stairs_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "stringer_left",
+      "type": "box",
+      "params": [0.05, 0.25, 3.2],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [-0.5, 0.9, 0],
+      "rotation": [30, 0, 0],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "stringer_right",
+      "type": "box",
+      "params": [0.05, 0.25, 3.2],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [0.5, 0.9, 0],
+      "rotation": [30, 0, 0],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "tread_1",
+      "type": "box",
+      "params": [1.0, 0.03, 0.28],
+      "material": { "preset": "wood", "color": "#8b6914" },
+      "position": [0, 0.18, 1.25],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "tread_2",
+      "type": "box",
+      "params": [1.0, 0.03, 0.28],
+      "material": { "preset": "wood", "color": "#8b6914" },
+      "position": [0, 0.36, 1.0],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "tread_3",
+      "type": "box",
+      "params": [1.0, 0.03, 0.28],
+      "material": { "preset": "wood", "color": "#8b6914" },
+      "position": [0, 0.54, 0.75],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "tread_4",
+      "type": "box",
+      "params": [1.0, 0.03, 0.28],
+      "material": { "preset": "wood", "color": "#8b6914" },
+      "position": [0, 0.72, 0.5],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "tread_5",
+      "type": "box",
+      "params": [1.0, 0.03, 0.28],
+      "material": { "preset": "wood", "color": "#8b6914" },
+      "position": [0, 0.9, 0.25],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "tread_6",
+      "type": "box",
+      "params": [1.0, 0.03, 0.28],
+      "material": { "preset": "wood", "color": "#8b6914" },
+      "position": [0, 1.08, 0],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "tread_7",
+      "type": "box",
+      "params": [1.0, 0.03, 0.28],
+      "material": { "preset": "wood", "color": "#8b6914" },
+      "position": [0, 1.26, -0.25],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "tread_8",
+      "type": "box",
+      "params": [1.0, 0.03, 0.28],
+      "material": { "preset": "wood", "color": "#8b6914" },
+      "position": [0, 1.44, -0.5],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "tread_9",
+      "type": "box",
+      "params": [1.0, 0.03, 0.28],
+      "material": { "preset": "wood", "color": "#8b6914" },
+      "position": [0, 1.62, -0.75],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "tread_10",
+      "type": "box",
+      "params": [1.0, 0.03, 0.28],
+      "material": { "preset": "wood", "color": "#8b6914" },
+      "position": [0, 1.8, -1.0],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "riser_1",
+      "type": "box",
+      "params": [0.95, 0.18, 0.02],
+      "material": { "preset": "wood", "color": "#f5f5f5" },
+      "position": [0, 0.09, 1.38],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "riser_2",
+      "type": "box",
+      "params": [0.95, 0.18, 0.02],
+      "material": { "preset": "wood", "color": "#f5f5f5" },
+      "position": [0, 0.27, 1.13],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "riser_3",
+      "type": "box",
+      "params": [0.95, 0.18, 0.02],
+      "material": { "preset": "wood", "color": "#f5f5f5" },
+      "position": [0, 0.45, 0.88],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "riser_4",
+      "type": "box",
+      "params": [0.95, 0.18, 0.02],
+      "material": { "preset": "wood", "color": "#f5f5f5" },
+      "position": [0, 0.63, 0.63],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "riser_5",
+      "type": "box",
+      "params": [0.95, 0.18, 0.02],
+      "material": { "preset": "wood", "color": "#f5f5f5" },
+      "position": [0, 0.81, 0.38],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "riser_6",
+      "type": "box",
+      "params": [0.95, 0.18, 0.02],
+      "material": { "preset": "wood", "color": "#f5f5f5" },
+      "position": [0, 0.99, 0.13],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "riser_7",
+      "type": "box",
+      "params": [0.95, 0.18, 0.02],
+      "material": { "preset": "wood", "color": "#f5f5f5" },
+      "position": [0, 1.17, -0.12],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "riser_8",
+      "type": "box",
+      "params": [0.95, 0.18, 0.02],
+      "material": { "preset": "wood", "color": "#f5f5f5" },
+      "position": [0, 1.35, -0.37],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "riser_9",
+      "type": "box",
+      "params": [0.95, 0.18, 0.02],
+      "material": { "preset": "wood", "color": "#f5f5f5" },
+      "position": [0, 1.53, -0.62],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "riser_10",
+      "type": "box",
+      "params": [0.95, 0.18, 0.02],
+      "material": { "preset": "wood", "color": "#f5f5f5" },
+      "position": [0, 1.71, -0.87],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "newel_bottom",
+      "type": "box",
+      "params": [0.08, 1.0, 0.08],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [-0.52, 0.68, 1.35],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "newel_bottom_cap",
+      "type": "sphere",
+      "params": [0.06, 1],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [-0.52, 1.2, 1.35],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "newel_top",
+      "type": "box",
+      "params": [0.08, 1.0, 0.08],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [-0.52, 2.3, -1.1],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "newel_top_cap",
+      "type": "sphere",
+      "params": [0.06, 1],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [-0.52, 2.82, -1.1],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "handrail",
+      "type": "box",
+      "params": [0.06, 0.05, 3.0],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [-0.52, 1.85, 0.15],
+      "rotation": [30, 0, 0],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "baluster_1",
+      "type": "box",
+      "params": [0.025, 0.7, 0.025],
+      "material": { "preset": "wood", "color": "#f5f5f5" },
+      "position": [-0.52, 0.68, 1.1],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "baluster_2",
+      "type": "box",
+      "params": [0.025, 0.7, 0.025],
+      "material": { "preset": "wood", "color": "#f5f5f5" },
+      "position": [-0.52, 0.86, 0.85],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "baluster_3",
+      "type": "box",
+      "params": [0.025, 0.7, 0.025],
+      "material": { "preset": "wood", "color": "#f5f5f5" },
+      "position": [-0.52, 1.04, 0.6],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "baluster_4",
+      "type": "box",
+      "params": [0.025, 0.7, 0.025],
+      "material": { "preset": "wood", "color": "#f5f5f5" },
+      "position": [-0.52, 1.22, 0.35],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "baluster_5",
+      "type": "box",
+      "params": [0.025, 0.7, 0.025],
+      "material": { "preset": "wood", "color": "#f5f5f5" },
+      "position": [-0.52, 1.4, 0.1],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "baluster_6",
+      "type": "box",
+      "params": [0.025, 0.7, 0.025],
+      "material": { "preset": "wood", "color": "#f5f5f5" },
+      "position": [-0.52, 1.58, -0.15],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "baluster_7",
+      "type": "box",
+      "params": [0.025, 0.7, 0.025],
+      "material": { "preset": "wood", "color": "#f5f5f5" },
+      "position": [-0.52, 1.76, -0.4],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "baluster_8",
+      "type": "box",
+      "params": [0.025, 0.7, 0.025],
+      "material": { "preset": "wood", "color": "#f5f5f5" },
+      "position": [-0.52, 1.94, -0.65],
+      "parent": "stairs_root"
+    },
+    {
+      "name": "baluster_9",
+      "type": "box",
+      "params": [0.025, 0.7, 0.025],
+      "material": { "preset": "wood", "color": "#f5f5f5" },
+      "position": [-0.52, 2.12, -0.9],
+      "parent": "stairs_root"
+    }
+  ]
+}

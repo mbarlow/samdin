@@ -1,0 +1,52 @@
+{
+  "name": "lowpoly-tree",
+  "description": "Simple lowpoly deciduous tree",
+  "root": "tree_root",
+  "parts": [
+    {
+      "name": "tree_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "trunk",
+      "type": "cylinder",
+      "params": [0.15, 0.2, 1.5, 6],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [0, 0.75, 0],
+      "parent": "tree_root"
+    },
+    {
+      "name": "foliage_main",
+      "type": "icosahedron",
+      "params": [1.2, 1],
+      "material": { "preset": "foliage", "color": "#2d5a27" },
+      "position": [0, 2.5, 0],
+      "parent": "tree_root"
+    },
+    {
+      "name": "foliage_top",
+      "type": "icosahedron",
+      "params": [0.8, 1],
+      "material": { "preset": "foliage", "color": "#3a6830" },
+      "position": [0, 3.5, 0],
+      "parent": "tree_root"
+    },
+    {
+      "name": "foliage_side_1",
+      "type": "icosahedron",
+      "params": [0.7, 1],
+      "material": { "preset": "foliage", "color": "#285522" },
+      "position": [0.8, 2.2, 0.3],
+      "parent": "tree_root"
+    },
+    {
+      "name": "foliage_side_2",
+      "type": "icosahedron",
+      "params": [0.6, 1],
+      "material": { "preset": "foliage", "color": "#2a5825" },
+      "position": [-0.6, 2.4, -0.4],
+      "parent": "tree_root"
+    }
+  ]
+}

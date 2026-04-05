@@ -1,0 +1,245 @@
+{
+  "name": "bed",
+  "description": "Queen-size bed with headboard, pillows, and bedding",
+  "root": "bed_root",
+  "parts": [
+    {
+      "name": "bed_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "frame_base",
+      "type": "box",
+      "params": [1.6, 0.2, 2.1],
+      "material": { "preset": "wood", "color": "#4a3525" },
+      "position": [0, 0.15, 0],
+      "parent": "bed_root"
+    },
+    {
+      "name": "leg_1",
+      "type": "box",
+      "params": [0.08, 0.1, 0.08],
+      "material": { "preset": "wood", "color": "#3a2515" },
+      "position": [-0.72, 0.05, -0.98],
+      "parent": "bed_root"
+    },
+    {
+      "name": "leg_2",
+      "type": "box",
+      "params": [0.08, 0.1, 0.08],
+      "material": { "preset": "wood", "color": "#3a2515" },
+      "position": [0.72, 0.05, -0.98],
+      "parent": "bed_root"
+    },
+    {
+      "name": "leg_3",
+      "type": "box",
+      "params": [0.08, 0.1, 0.08],
+      "material": { "preset": "wood", "color": "#3a2515" },
+      "position": [-0.72, 0.05, 0.98],
+      "parent": "bed_root"
+    },
+    {
+      "name": "leg_4",
+      "type": "box",
+      "params": [0.08, 0.1, 0.08],
+      "material": { "preset": "wood", "color": "#3a2515" },
+      "position": [0.72, 0.05, 0.98],
+      "parent": "bed_root"
+    },
+    {
+      "name": "headboard",
+      "type": "roundedBox",
+      "params": [1.7, 0.9, 0.08, 0.03, 2],
+      "material": { "preset": "wood", "color": "#4a3525" },
+      "position": [0, 0.7, -1.0],
+      "parent": "bed_root"
+    },
+    {
+      "name": "headboard_panel",
+      "type": "roundedBox",
+      "params": [1.5, 0.6, 0.04, 0.02, 2],
+      "material": { "preset": "fabric", "color": "#6b7280" },
+      "position": [0, 0.75, -0.96],
+      "parent": "bed_root"
+    },
+    {
+      "name": "footboard",
+      "type": "roundedBox",
+      "params": [1.7, 0.35, 0.06, 0.02, 2],
+      "material": { "preset": "wood", "color": "#4a3525" },
+      "position": [0, 0.42, 1.0],
+      "parent": "bed_root"
+    },
+    {
+      "name": "mattress",
+      "type": "roundedBox",
+      "params": [1.5, 0.25, 2.0, 0.05, 2],
+      "material": { "color": "#f5f5f5", "roughness": 0.9 },
+      "position": [0, 0.38, 0],
+      "parent": "bed_root"
+    },
+    {
+      "name": "fitted_sheet",
+      "type": "roundedBox",
+      "params": [1.52, 0.02, 2.02, 0.01, 2],
+      "material": { "preset": "fabric", "color": "#e5e7eb" },
+      "position": [0, 0.51, 0],
+      "parent": "bed_root"
+    },
+    {
+      "name": "duvet",
+      "type": "roundedBox",
+      "params": [1.55, 0.15, 1.4, 0.05, 2],
+      "material": { "preset": "fabric", "color": "#dbeafe" },
+      "position": [0, 0.58, 0.25],
+      "parent": "bed_root"
+    },
+    {
+      "name": "duvet_fold",
+      "type": "roundedBox",
+      "params": [1.55, 0.08, 0.3, 0.03, 2],
+      "material": { "preset": "fabric", "color": "#bfdbfe" },
+      "position": [0, 0.62, -0.42],
+      "parent": "bed_root"
+    },
+    {
+      "name": "pillow_left",
+      "type": "roundedBox",
+      "params": [0.55, 0.15, 0.4, 0.06, 2],
+      "material": { "preset": "fabric", "color": "#f3f4f6" },
+      "position": [-0.4, 0.58, -0.72],
+      "rotation": [0, 0, 3],
+      "parent": "bed_root"
+    },
+    {
+      "name": "pillow_right",
+      "type": "roundedBox",
+      "params": [0.55, 0.15, 0.4, 0.06, 2],
+      "material": { "preset": "fabric", "color": "#f3f4f6" },
+      "position": [0.4, 0.58, -0.72],
+      "rotation": [0, 0, -3],
+      "parent": "bed_root"
+    },
+    {
+      "name": "throw_pillow",
+      "type": "roundedBox",
+      "params": [0.35, 0.35, 0.1, 0.05, 2],
+      "material": { "preset": "fabric", "color": "#93c5fd" },
+      "position": [0, 0.62, -0.55],
+      "rotation": [15, 0, 0],
+      "parent": "bed_root"
+    },
+    {
+      "name": "nightstand_left",
+      "type": "group",
+      "position": [-1.1, 0, -0.6],
+      "parent": "bed_root"
+    },
+    {
+      "name": "ns_l_body",
+      "type": "roundedBox",
+      "params": [0.45, 0.5, 0.4, 0.02, 2],
+      "material": { "preset": "wood", "color": "#4a3525" },
+      "position": [0, 0.25, 0],
+      "parent": "nightstand_left"
+    },
+    {
+      "name": "ns_l_drawer",
+      "type": "box",
+      "params": [0.38, 0.15, 0.02],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [0, 0.3, 0.19],
+      "parent": "nightstand_left"
+    },
+    {
+      "name": "ns_l_handle",
+      "type": "cylinder",
+      "params": [0.015, 0.015, 0.08, 6],
+      "material": { "preset": "chrome" },
+      "position": [0, 0.3, 0.21],
+      "rotation": [0, 0, 90],
+      "parent": "nightstand_left"
+    },
+    {
+      "name": "lamp_left",
+      "type": "group",
+      "position": [0, 0.5, 0],
+      "parent": "nightstand_left"
+    },
+    {
+      "name": "lamp_l_base",
+      "type": "cylinder",
+      "params": [0.08, 0.08, 0.02, 8],
+      "material": { "preset": "ceramic", "color": "#e5e7eb" },
+      "position": [0, 0.01, 0],
+      "parent": "lamp_left"
+    },
+    {
+      "name": "lamp_l_stem",
+      "type": "cylinder",
+      "params": [0.02, 0.025, 0.25, 6],
+      "material": { "preset": "ceramic", "color": "#e5e7eb" },
+      "position": [0, 0.14, 0],
+      "parent": "lamp_left"
+    },
+    {
+      "name": "lamp_l_shade",
+      "type": "cylinder",
+      "params": [0.06, 0.1, 0.15, 8],
+      "material": { "preset": "fabric", "color": "#fef3c7" },
+      "position": [0, 0.32, 0],
+      "parent": "lamp_left"
+    },
+    {
+      "name": "nightstand_right",
+      "type": "group",
+      "position": [1.1, 0, -0.6],
+      "parent": "bed_root"
+    },
+    {
+      "name": "ns_r_body",
+      "type": "roundedBox",
+      "params": [0.45, 0.5, 0.4, 0.02, 2],
+      "material": { "preset": "wood", "color": "#4a3525" },
+      "position": [0, 0.25, 0],
+      "parent": "nightstand_right"
+    },
+    {
+      "name": "ns_r_drawer",
+      "type": "box",
+      "params": [0.38, 0.15, 0.02],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [0, 0.3, 0.19],
+      "parent": "nightstand_right"
+    },
+    {
+      "name": "ns_r_handle",
+      "type": "cylinder",
+      "params": [0.015, 0.015, 0.08, 6],
+      "material": { "preset": "chrome" },
+      "position": [0, 0.3, 0.21],
+      "rotation": [0, 0, 90],
+      "parent": "nightstand_right"
+    },
+    {
+      "name": "book_nightstand",
+      "type": "box",
+      "params": [0.15, 0.03, 0.2],
+      "material": { "color": "#1e40af" },
+      "position": [1.1, 0.52, -0.55],
+      "rotation": [0, 8, 0],
+      "parent": "bed_root"
+    },
+    {
+      "name": "phone_nightstand",
+      "type": "roundedBox",
+      "params": [0.04, 0.08, 0.008, 0.003, 2],
+      "material": { "color": "#1f2937" },
+      "position": [1.18, 0.52, -0.68],
+      "rotation": [90, 0, 15],
+      "parent": "bed_root"
+    }
+  ]
+}

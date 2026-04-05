@@ -1,0 +1,81 @@
+{
+  "name": "traffic-light",
+  "description": "Traffic signal with three lights on pole",
+  "root": "signal_root",
+  "parts": [
+    {
+      "name": "signal_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "pole",
+      "type": "cylinder",
+      "params": [0.06, 0.06, 3.5, 8],
+      "material": { "preset": "steel", "color": "#555555" },
+      "position": [0, 1.75, 0],
+      "parent": "signal_root"
+    },
+    {
+      "name": "arm",
+      "type": "cylinder",
+      "params": [0.04, 0.04, 1.5, 8],
+      "material": { "preset": "steel", "color": "#555555" },
+      "position": [0.75, 3.8, 0],
+      "rotation": [0, 0, 90],
+      "parent": "signal_root"
+    },
+    {
+      "name": "housing",
+      "type": "roundedBox",
+      "params": [0.3, 0.9, 0.22, 0.03, 2],
+      "material": { "color": "#2a2a2a", "roughness": 0.8 },
+      "position": [1.5, 3.6, 0],
+      "parent": "signal_root"
+    },
+    {
+      "name": "visor_top",
+      "type": "box",
+      "params": [0.32, 0.04, 0.15],
+      "material": { "color": "#2a2a2a", "roughness": 0.8 },
+      "position": [1.5, 3.92, 0.16],
+      "rotation": [-20, 0, 0],
+      "parent": "signal_root"
+    },
+    {
+      "name": "light_red",
+      "type": "cylinder",
+      "params": [0.08, 0.08, 0.03, 10],
+      "material": { "preset": "glow", "color": "#ff0000", "emissiveIntensity": 2.0 },
+      "position": [1.5, 3.85, 0.12],
+      "rotation": [90, 0, 0],
+      "parent": "signal_root"
+    },
+    {
+      "name": "light_yellow",
+      "type": "cylinder",
+      "params": [0.08, 0.08, 0.03, 10],
+      "material": { "preset": "glow", "color": "#ffaa00", "emissiveIntensity": 0.3 },
+      "position": [1.5, 3.6, 0.12],
+      "rotation": [90, 0, 0],
+      "parent": "signal_root"
+    },
+    {
+      "name": "light_green",
+      "type": "cylinder",
+      "params": [0.08, 0.08, 0.03, 10],
+      "material": { "preset": "glow", "color": "#00cc00", "emissiveIntensity": 0.3 },
+      "position": [1.5, 3.35, 0.12],
+      "rotation": [90, 0, 0],
+      "parent": "signal_root"
+    },
+    {
+      "name": "base",
+      "type": "box",
+      "params": [0.4, 0.08, 0.4],
+      "material": { "preset": "concrete" },
+      "position": [0, 0.04, 0],
+      "parent": "signal_root"
+    }
+  ]
+}

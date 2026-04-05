@@ -1,0 +1,91 @@
+{
+  "name": "willow-tree",
+  "description": "Weeping willow with drooping branches",
+  "root": "willow_root",
+  "parts": [
+    {
+      "name": "willow_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "trunk",
+      "type": "cylinder",
+      "params": [0.2, 0.3, 2, 8],
+      "material": { "preset": "wood", "color": "#5a4a3a" },
+      "position": [0, 1, 0],
+      "parent": "willow_root"
+    },
+    {
+      "name": "trunk_split_1",
+      "type": "cylinder",
+      "params": [0.1, 0.15, 1, 6],
+      "material": { "preset": "wood", "color": "#5a4a3a" },
+      "position": [-0.2, 2.3, 0],
+      "rotation": [0, 0, -20],
+      "parent": "willow_root"
+    },
+    {
+      "name": "trunk_split_2",
+      "type": "cylinder",
+      "params": [0.08, 0.12, 0.8, 6],
+      "material": { "preset": "wood", "color": "#5a4a3a" },
+      "position": [0.15, 2.2, 0.1],
+      "rotation": [10, 0, 15],
+      "parent": "willow_root"
+    },
+    {
+      "name": "canopy_core",
+      "type": "sphere",
+      "params": [0.8, 1],
+      "material": { "preset": "foliage", "color": "#4a7a3a" },
+      "position": [0, 3, 0],
+      "parent": "willow_root"
+    },
+    {
+      "name": "droop_1",
+      "type": "cylinder",
+      "params": [0.3, 0.1, 2, 6],
+      "material": { "preset": "foliage", "color": "#5a8a4a" },
+      "position": [0.8, 2, 0],
+      "rotation": [0, 0, 20],
+      "parent": "willow_root"
+    },
+    {
+      "name": "droop_2",
+      "type": "cylinder",
+      "params": [0.35, 0.12, 2.2, 6],
+      "material": { "preset": "foliage", "color": "#4a7a3a" },
+      "position": [-0.7, 2.1, 0.3],
+      "rotation": [10, 0, -25],
+      "parent": "willow_root"
+    },
+    {
+      "name": "droop_3",
+      "type": "cylinder",
+      "params": [0.3, 0.1, 1.8, 6],
+      "material": { "preset": "foliage", "color": "#5a8a4a" },
+      "position": [0.3, 2, -0.7],
+      "rotation": [-20, 0, 15],
+      "parent": "willow_root"
+    },
+    {
+      "name": "droop_4",
+      "type": "cylinder",
+      "params": [0.28, 0.1, 1.9, 6],
+      "material": { "preset": "foliage", "color": "#4a7a3a" },
+      "position": [-0.3, 2.1, -0.6],
+      "rotation": [-15, 0, -18],
+      "parent": "willow_root"
+    },
+    {
+      "name": "droop_5",
+      "type": "cylinder",
+      "params": [0.32, 0.1, 2, 6],
+      "material": { "preset": "foliage", "color": "#5a8a4a" },
+      "position": [0.1, 2, 0.8],
+      "rotation": [25, 0, 5],
+      "parent": "willow_root"
+    }
+  ]
+}

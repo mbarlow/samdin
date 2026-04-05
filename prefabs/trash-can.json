@@ -1,0 +1,73 @@
+{
+  "name": "trash-can",
+  "description": "Public waste bin with domed lid",
+  "root": "trash_root",
+  "parts": [
+    {
+      "name": "trash_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "base",
+      "type": "cylinder",
+      "params": [0.25, 0.28, 0.05, 8],
+      "material": { "preset": "painted-metal", "color": "#2d5a27" },
+      "position": [0, 0.025, 0],
+      "parent": "trash_root"
+    },
+    {
+      "name": "body",
+      "type": "cylinder",
+      "params": [0.25, 0.22, 0.7, 8],
+      "material": { "preset": "painted-metal", "color": "#2d5a27" },
+      "position": [0, 0.4, 0],
+      "parent": "trash_root"
+    },
+    {
+      "name": "rim",
+      "type": "torus",
+      "params": [0.24, 0.025, 8, 12],
+      "material": { "preset": "painted-metal", "color": "#225522" },
+      "position": [0, 0.75, 0],
+      "rotation": [90, 0, 0],
+      "parent": "trash_root"
+    },
+    {
+      "name": "lid",
+      "type": "sphere",
+      "params": [0.26, 1],
+      "material": { "preset": "painted-metal", "color": "#2d5a27" },
+      "position": [0, 0.78, 0],
+      "scale": [1, 0.4, 1],
+      "parent": "trash_root"
+    },
+    {
+      "name": "opening",
+      "type": "cylinder",
+      "params": [0.12, 0.12, 0.08, 8],
+      "material": { "color": "#1a1a1a" },
+      "position": [0, 0.88, 0.08],
+      "rotation": [30, 0, 0],
+      "parent": "trash_root"
+    },
+    {
+      "name": "band_1",
+      "type": "torus",
+      "params": [0.255, 0.015, 8, 12],
+      "material": { "preset": "painted-metal", "color": "#225522" },
+      "position": [0, 0.25, 0],
+      "rotation": [90, 0, 0],
+      "parent": "trash_root"
+    },
+    {
+      "name": "band_2",
+      "type": "torus",
+      "params": [0.24, 0.015, 8, 12],
+      "material": { "preset": "painted-metal", "color": "#225522" },
+      "position": [0, 0.55, 0],
+      "rotation": [90, 0, 0],
+      "parent": "trash_root"
+    }
+  ]
+}

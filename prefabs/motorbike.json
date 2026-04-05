@@ -1,0 +1,378 @@
+{
+  "name": "motorbike",
+  "description": "Detailed motorbike/scooter",
+  "root": "moto_root",
+  "parts": [
+    {
+      "name": "moto_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "moto_body",
+      "type": "roundedBox",
+      "params": [0.3, 0.35, 1.0, 0.03, 2],
+      "material": { "preset": "painted-metal", "color": "#cc2222" },
+      "position": [0, 0.5, 0.05],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_body_front",
+      "type": "roundedBox",
+      "params": [0.25, 0.3, 0.3, 0.04, 2],
+      "material": { "preset": "painted-metal", "color": "#cc2222" },
+      "position": [0, 0.55, -0.45],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_tank",
+      "type": "roundedBox",
+      "params": [0.26, 0.18, 0.35, 0.04, 2],
+      "material": { "preset": "painted-metal", "color": "#cc2222" },
+      "position": [0, 0.68, -0.15],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_tank_cap",
+      "type": "cylinder",
+      "params": [0.03, 0.03, 0.02, 8],
+      "material": { "preset": "chrome" },
+      "position": [0, 0.78, -0.15],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_seat",
+      "type": "roundedBox",
+      "params": [0.24, 0.08, 0.45, 0.02, 2],
+      "material": { "preset": "leather", "color": "#1a1a1a" },
+      "position": [0, 0.73, 0.25],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_seat_back",
+      "type": "roundedBox",
+      "params": [0.2, 0.12, 0.06, 0.02, 2],
+      "material": { "preset": "leather", "color": "#1a1a1a" },
+      "position": [0, 0.78, 0.5],
+      "rotation": [-15, 0, 0],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_engine",
+      "type": "roundedBox",
+      "params": [0.22, 0.18, 0.3, 0.02, 2],
+      "material": { "preset": "steel" },
+      "position": [0, 0.32, 0.1],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_engine_fins",
+      "type": "box",
+      "params": [0.24, 0.02, 0.25],
+      "material": { "preset": "steel" },
+      "position": [0, 0.36, 0.1],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_engine_fins_2",
+      "type": "box",
+      "params": [0.24, 0.02, 0.25],
+      "material": { "preset": "steel" },
+      "position": [0, 0.30, 0.1],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_exhaust",
+      "type": "cylinder",
+      "params": [0.035, 0.025, 0.45, 8],
+      "material": { "preset": "chrome" },
+      "position": [0.16, 0.3, 0.35],
+      "rotation": [10, 0, 0],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_exhaust_tip",
+      "type": "cylinder",
+      "params": [0.04, 0.035, 0.08, 8],
+      "material": { "preset": "chrome" },
+      "position": [0.16, 0.26, 0.58],
+      "rotation": [10, 0, 0],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_fork_l",
+      "type": "cylinder",
+      "params": [0.02, 0.02, 0.45, 6],
+      "material": { "preset": "chrome" },
+      "position": [-0.08, 0.5, -0.5],
+      "rotation": [15, 0, 0],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_fork_r",
+      "type": "cylinder",
+      "params": [0.02, 0.02, 0.45, 6],
+      "material": { "preset": "chrome" },
+      "position": [0.08, 0.5, -0.5],
+      "rotation": [15, 0, 0],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_wheel_front",
+      "type": "cylinder",
+      "params": [0.24, 0.24, 0.06, 16],
+      "material": { "preset": "rubber" },
+      "position": [0, 0.24, -0.58],
+      "rotation": [0, 0, 90],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_hub_front",
+      "type": "cylinder",
+      "params": [0.08, 0.08, 0.07, 12],
+      "material": { "preset": "chrome" },
+      "position": [0, 0.24, -0.58],
+      "rotation": [0, 0, 90],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_wheel_rear",
+      "type": "cylinder",
+      "params": [0.24, 0.24, 0.08, 16],
+      "material": { "preset": "rubber" },
+      "position": [0, 0.24, 0.52],
+      "rotation": [0, 0, 90],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_hub_rear",
+      "type": "cylinder",
+      "params": [0.1, 0.1, 0.09, 12],
+      "material": { "preset": "chrome" },
+      "position": [0, 0.24, 0.52],
+      "rotation": [0, 0, 90],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_fender_front",
+      "type": "roundedBox",
+      "params": [0.12, 0.04, 0.35, 0.01, 2],
+      "material": { "preset": "painted-metal", "color": "#cc2222" },
+      "position": [0, 0.42, -0.58],
+      "rotation": [25, 0, 0],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_fender_rear",
+      "type": "roundedBox",
+      "params": [0.14, 0.03, 0.3, 0.01, 2],
+      "material": { "preset": "painted-metal", "color": "#cc2222" },
+      "position": [0, 0.42, 0.52],
+      "rotation": [-15, 0, 0],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_handlebar",
+      "type": "cylinder",
+      "params": [0.012, 0.012, 0.48, 6],
+      "material": { "preset": "chrome" },
+      "position": [0, 0.82, -0.42],
+      "rotation": [0, 0, 90],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_grip_l",
+      "type": "cylinder",
+      "params": [0.018, 0.018, 0.1, 8],
+      "material": { "preset": "rubber" },
+      "position": [-0.22, 0.82, -0.42],
+      "rotation": [0, 0, 90],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_grip_r",
+      "type": "cylinder",
+      "params": [0.018, 0.018, 0.1, 8],
+      "material": { "preset": "rubber" },
+      "position": [0.22, 0.82, -0.42],
+      "rotation": [0, 0, 90],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_mirror_l",
+      "type": "sphere",
+      "params": [0.035],
+      "material": { "preset": "chrome" },
+      "position": [-0.26, 0.88, -0.42],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_mirror_stem_l",
+      "type": "cylinder",
+      "params": [0.006, 0.006, 0.08, 4],
+      "material": { "preset": "chrome" },
+      "position": [-0.26, 0.84, -0.42],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_mirror_r",
+      "type": "sphere",
+      "params": [0.035],
+      "material": { "preset": "chrome" },
+      "position": [0.26, 0.88, -0.42],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_mirror_stem_r",
+      "type": "cylinder",
+      "params": [0.006, 0.006, 0.08, 4],
+      "material": { "preset": "chrome" },
+      "position": [0.26, 0.84, -0.42],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_dashboard",
+      "type": "roundedBox",
+      "params": [0.15, 0.08, 0.06, 0.01, 2],
+      "material": { "color": "#1a1a1a", "metalness": 0.3, "roughness": 0.7 },
+      "position": [0, 0.78, -0.38],
+      "rotation": [-30, 0, 0],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_speedometer",
+      "type": "cylinder",
+      "params": [0.04, 0.04, 0.01, 12],
+      "material": { "preset": "glow", "color": "#44ff88", "emissiveIntensity": 0.5 },
+      "position": [0, 0.79, -0.36],
+      "rotation": [-30, 0, 0],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_headlight",
+      "type": "cylinder",
+      "params": [0.07, 0.07, 0.04, 12],
+      "material": { "preset": "glow", "color": "#ffffcc", "emissiveIntensity": 2.0 },
+      "position": [0, 0.62, -0.6],
+      "rotation": [90, 0, 0],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_headlight_rim",
+      "type": "torus",
+      "params": [0.07, 0.01, 8, 16],
+      "material": { "preset": "chrome" },
+      "position": [0, 0.62, -0.62],
+      "rotation": [90, 0, 0],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_signal_fl",
+      "type": "sphere",
+      "params": [0.02],
+      "material": { "preset": "glow", "color": "#ffaa00", "emissiveIntensity": 1.5 },
+      "position": [-0.12, 0.58, -0.58],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_signal_fr",
+      "type": "sphere",
+      "params": [0.02],
+      "material": { "preset": "glow", "color": "#ffaa00", "emissiveIntensity": 1.5 },
+      "position": [0.12, 0.58, -0.58],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_taillight",
+      "type": "roundedBox",
+      "params": [0.1, 0.05, 0.02, 0.01, 2],
+      "material": { "preset": "glow", "color": "#ff2200", "emissiveIntensity": 2.0 },
+      "position": [0, 0.58, 0.66],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_signal_rl",
+      "type": "sphere",
+      "params": [0.018],
+      "material": { "preset": "glow", "color": "#ffaa00", "emissiveIntensity": 1.5 },
+      "position": [-0.1, 0.58, 0.64],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_signal_rr",
+      "type": "sphere",
+      "params": [0.018],
+      "material": { "preset": "glow", "color": "#ffaa00", "emissiveIntensity": 1.5 },
+      "position": [0.1, 0.58, 0.64],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_license",
+      "type": "box",
+      "params": [0.1, 0.06, 0.005],
+      "material": { "color": "#ffffff", "roughness": 0.9 },
+      "position": [0, 0.5, 0.68],
+      "rotation": [-10, 0, 0],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_footrest_l",
+      "type": "roundedBox",
+      "params": [0.04, 0.02, 0.12, 0.005, 2],
+      "material": { "preset": "rubber" },
+      "position": [-0.18, 0.28, 0.05],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_footrest_r",
+      "type": "roundedBox",
+      "params": [0.04, 0.02, 0.12, 0.005, 2],
+      "material": { "preset": "rubber" },
+      "position": [0.18, 0.28, 0.05],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_kickstand",
+      "type": "cylinder",
+      "params": [0.012, 0.012, 0.28, 4],
+      "material": { "preset": "steel" },
+      "position": [-0.12, 0.14, 0.2],
+      "rotation": [0, 0, 25],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_kickstand_foot",
+      "type": "box",
+      "params": [0.04, 0.01, 0.06],
+      "material": { "preset": "steel" },
+      "position": [-0.18, 0.01, 0.2],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_rear_rack",
+      "type": "box",
+      "params": [0.2, 0.015, 0.18],
+      "material": { "preset": "chrome" },
+      "position": [0, 0.78, 0.55],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_rack_rail_l",
+      "type": "cylinder",
+      "params": [0.008, 0.008, 0.2, 4],
+      "material": { "preset": "chrome" },
+      "position": [-0.1, 0.78, 0.55],
+      "rotation": [90, 0, 0],
+      "parent": "moto_root"
+    },
+    {
+      "name": "moto_rack_rail_r",
+      "type": "cylinder",
+      "params": [0.008, 0.008, 0.2, 4],
+      "material": { "preset": "chrome" },
+      "position": [0.1, 0.78, 0.55],
+      "rotation": [90, 0, 0],
+      "parent": "moto_root"
+    }
+  ]
+}

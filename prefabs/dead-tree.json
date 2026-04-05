@@ -1,0 +1,101 @@
+{
+  "name": "dead-tree",
+  "description": "Leafless dead tree with bare branches",
+  "root": "tree_root",
+  "parts": [
+    {
+      "name": "tree_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "trunk_base",
+      "type": "cylinder",
+      "params": [0.18, 0.25, 1.2, 8],
+      "material": { "color": "#5c4a3a", "roughness": 0.95 },
+      "position": [0, 0.6, 0],
+      "parent": "tree_root"
+    },
+    {
+      "name": "trunk_mid",
+      "type": "cylinder",
+      "params": [0.14, 0.18, 1.4, 7],
+      "material": { "color": "#5c4a3a", "roughness": 0.95 },
+      "position": [0, 1.9, 0],
+      "rotation": [0, 0, 3],
+      "parent": "tree_root"
+    },
+    {
+      "name": "trunk_upper",
+      "type": "cylinder",
+      "params": [0.06, 0.14, 1.2, 6],
+      "material": { "color": "#6b5b4a", "roughness": 0.95 },
+      "position": [0.05, 3.15, 0],
+      "rotation": [0, 0, -4],
+      "parent": "tree_root"
+    },
+    {
+      "name": "branch_main_l",
+      "type": "cable",
+      "params": [[[0, 2.4, 0], [-0.6, 3.2, 0.2], [-1.3, 3.8, 0.1]], 0.05, 12, 6, "normal"],
+      "material": { "color": "#5c4a3a", "roughness": 0.95 },
+      "parent": "tree_root"
+    },
+    {
+      "name": "branch_main_r",
+      "type": "cable",
+      "params": [[[0, 2.6, 0], [0.8, 3.4, -0.15], [1.4, 3.9, -0.3]], 0.045, 12, 6, "normal"],
+      "material": { "color": "#5c4a3a", "roughness": 0.95 },
+      "parent": "tree_root"
+    },
+    {
+      "name": "branch_fwd",
+      "type": "cable",
+      "params": [[[0, 3.0, 0], [0.2, 3.5, -0.7], [0.1, 3.9, -1.2]], 0.035, 10, 6, "normal"],
+      "material": { "color": "#6b5b4a", "roughness": 0.95 },
+      "parent": "tree_root"
+    },
+    {
+      "name": "branch_back",
+      "type": "cable",
+      "params": [[[0, 2.8, 0], [-0.3, 3.3, 0.6], [-0.5, 3.7, 1.1]], 0.035, 10, 6, "normal"],
+      "material": { "color": "#6b5b4a", "roughness": 0.95 },
+      "parent": "tree_root"
+    },
+    {
+      "name": "twig_l1",
+      "type": "cable",
+      "params": [[[-0.9, 3.5, 0.15], [-1.1, 4.0, 0.4], [-1.0, 4.3, 0.6]], 0.02, 8, 4, "normal"],
+      "material": { "color": "#6b5b4a", "roughness": 0.95 },
+      "parent": "tree_root"
+    },
+    {
+      "name": "twig_r1",
+      "type": "cable",
+      "params": [[[1.0, 3.6, -0.2], [1.3, 4.0, 0.0], [1.2, 4.4, 0.2]], 0.02, 8, 4, "normal"],
+      "material": { "color": "#6b5b4a", "roughness": 0.95 },
+      "parent": "tree_root"
+    },
+    {
+      "name": "twig_top",
+      "type": "cable",
+      "params": [[[0, 3.7, 0], [0.15, 4.1, -0.1], [0.3, 4.5, 0.0]], 0.018, 8, 4, "normal"],
+      "material": { "color": "#6b5b4a", "roughness": 0.95 },
+      "parent": "tree_root"
+    },
+    {
+      "name": "root_exposed_1",
+      "type": "cable",
+      "params": [[[0.1, 0.05, 0], [0.3, 0.02, 0.3], [0.5, 0.0, 0.5]], 0.04, 8, 5, "normal"],
+      "material": { "color": "#5c4a3a", "roughness": 0.95 },
+      "parent": "tree_root"
+    },
+    {
+      "name": "root_exposed_2",
+      "type": "cable",
+      "params": [[[-0.1, 0.05, 0], [-0.35, 0.02, -0.25], [-0.55, 0.0, -0.4]], 0.035, 8, 5, "normal"],
+      "material": { "color": "#5c4a3a", "roughness": 0.95 },
+      "parent": "tree_root"
+    }
+  ]
+}

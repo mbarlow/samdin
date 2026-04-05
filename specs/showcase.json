@@ -1,0 +1,676 @@
+{
+  "name": "showcase",
+  "description": "Feature showcase - demonstrating primitives, lathe, cables, lights, CSG, and prefabs",
+  "root": "scene_root",
+  "parts": [
+    {
+      "name": "scene_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+
+    {
+      "name": "ground",
+      "type": "box",
+      "params": [30, 0.1, 30],
+      "material": { "preset": "concrete", "color": "#5a5a5a" },
+      "position": [0, -0.05, 0],
+      "parent": "scene_root"
+    },
+
+    {
+      "name": "plaza_tiles",
+      "type": "box",
+      "params": [12, 0.02, 12],
+      "material": { "preset": "tile", "color": "#c4b8a8" },
+      "position": [0, 0.01, 0],
+      "parent": "scene_root"
+    },
+
+    {
+      "name": "workshop_building",
+      "type": "group",
+      "position": [-8, 0, -8],
+      "parent": "scene_root"
+    },
+    {
+      "name": "workshop_walls",
+      "type": "hollowBox",
+      "params": [8, 4, 6, 0.2],
+      "material": { "preset": "cinder-block" },
+      "position": [0, 2, 0],
+      "parent": "workshop_building"
+    },
+    {
+      "name": "workshop_door",
+      "type": "prefab",
+      "src": "door",
+      "position": [4.1, 0, 0],
+      "rotation": [0, -90, 0],
+      "parent": "workshop_building"
+    },
+    {
+      "name": "workshop_window",
+      "type": "prefab",
+      "src": "window",
+      "position": [0, 1.5, 3.1],
+      "rotation": [0, 0, 0],
+      "parent": "workshop_building"
+    },
+    {
+      "name": "workshop_roof",
+      "type": "box",
+      "params": [8.4, 0.15, 6.4],
+      "material": { "preset": "rusted-metal", "color": "#6b5a4a" },
+      "position": [0, 4.1, 0],
+      "parent": "workshop_building"
+    },
+
+    {
+      "name": "workbench",
+      "type": "group",
+      "position": [-8, 0, -6],
+      "parent": "scene_root"
+    },
+    {
+      "name": "workbench_top",
+      "type": "box",
+      "params": [2.5, 0.08, 0.8],
+      "material": { "preset": "wood", "color": "#8b7355" },
+      "position": [0, 0.9, 0],
+      "parent": "workbench"
+    },
+    {
+      "name": "workbench_frame",
+      "type": "frame",
+      "params": [2.4, 0.85, 0.05, 0.7],
+      "material": { "preset": "steel" },
+      "position": [0, 0.425, 0],
+      "rotation": [90, 0, 0],
+      "parent": "workbench"
+    },
+
+    {
+      "name": "lathe_display",
+      "type": "group",
+      "position": [-8, 0.94, -6],
+      "parent": "scene_root"
+    },
+    {
+      "name": "vase_1",
+      "comment": "Lathe: Classic amphora vase",
+      "type": "lathe",
+      "params": [
+        [[0.04, 0], [0.06, 0.01], [0.05, 0.03], [0.03, 0.08], [0.025, 0.15], [0.04, 0.22], [0.06, 0.28], [0.055, 0.3], [0.04, 0.31]],
+        12
+      ],
+      "material": { "preset": "ceramic", "color": "#d4a574" },
+      "position": [-0.8, 0, 0],
+      "parent": "lathe_display"
+    },
+    {
+      "name": "goblet",
+      "comment": "Lathe: Golden goblet",
+      "type": "lathe",
+      "params": [
+        [[0.03, 0], [0.035, 0.005], [0.015, 0.01], [0.01, 0.06], [0.015, 0.065], [0.01, 0.07], [0.025, 0.1], [0.045, 0.18], [0.04, 0.19]],
+        8
+      ],
+      "material": { "preset": "gold" },
+      "position": [-0.4, 0, 0],
+      "parent": "lathe_display"
+    },
+    {
+      "name": "bottle",
+      "comment": "Lathe: Glass bottle",
+      "type": "lathe",
+      "params": [
+        [[0.035, 0], [0.035, 0.005], [0.03, 0.01], [0.03, 0.15], [0.025, 0.17], [0.012, 0.2], [0.01, 0.28], [0.012, 0.29], [0.01, 0.3]],
+        10
+      ],
+      "material": { "preset": "glass", "color": "#225522" },
+      "position": [0, 0, 0],
+      "parent": "lathe_display"
+    },
+    {
+      "name": "candlestick",
+      "comment": "Lathe: Brass candlestick",
+      "type": "lathe",
+      "params": [
+        [[0.025, 0], [0.03, 0.005], [0.015, 0.01], [0.008, 0.04], [0.012, 0.045], [0.008, 0.05], [0.008, 0.12], [0.015, 0.125], [0.012, 0.14], [0.012, 0.16]],
+        6
+      ],
+      "material": { "preset": "brass" },
+      "position": [0.4, 0, 0],
+      "parent": "lathe_display"
+    },
+    {
+      "name": "bowl",
+      "comment": "Lathe: Wooden bowl",
+      "type": "lathe",
+      "params": [
+        [[0.01, 0], [0.05, 0.02], [0.07, 0.05], [0.065, 0.06]],
+        12
+      ],
+      "material": { "preset": "wood", "color": "#9b7b5b" },
+      "position": [0.8, 0, 0],
+      "parent": "lathe_display"
+    },
+
+    {
+      "name": "power_infrastructure",
+      "type": "group",
+      "position": [0, 0, -12],
+      "parent": "scene_root"
+    },
+    {
+      "name": "power_pole_1",
+      "type": "cylinder",
+      "params": [0.1, 0.1, 6, 8],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [-6, 3, 0],
+      "parent": "power_infrastructure"
+    },
+    {
+      "name": "power_pole_2",
+      "type": "cylinder",
+      "params": [0.1, 0.1, 6, 8],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [0, 3, 0],
+      "parent": "power_infrastructure"
+    },
+    {
+      "name": "power_pole_3",
+      "type": "cylinder",
+      "params": [0.1, 0.1, 6, 8],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [6, 3, 0],
+      "parent": "power_infrastructure"
+    },
+    {
+      "name": "crossbar_1",
+      "type": "box",
+      "params": [1.5, 0.08, 0.08],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [-6, 5.8, 0],
+      "parent": "power_infrastructure"
+    },
+    {
+      "name": "crossbar_2",
+      "type": "box",
+      "params": [1.5, 0.08, 0.08],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [0, 5.8, 0],
+      "parent": "power_infrastructure"
+    },
+    {
+      "name": "crossbar_3",
+      "type": "box",
+      "params": [1.5, 0.08, 0.08],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [6, 5.8, 0],
+      "parent": "power_infrastructure"
+    },
+    {
+      "name": "power_line_1",
+      "comment": "Catenary: Power line with sag",
+      "type": "catenary",
+      "params": [[-6, 5.6, 0], [0, 5.6, 0], 0.12, 0.02, 32, 6],
+      "material": { "color": "#1a1a1a" },
+      "parent": "power_infrastructure"
+    },
+    {
+      "name": "power_line_2",
+      "comment": "Catenary: Power line with sag",
+      "type": "catenary",
+      "params": [[0, 5.6, 0], [6, 5.6, 0], 0.12, 0.02, 32, 6],
+      "material": { "color": "#1a1a1a" },
+      "parent": "power_infrastructure"
+    },
+    {
+      "name": "power_line_3",
+      "comment": "Catenary: Secondary line with more sag",
+      "type": "catenary",
+      "params": [[-6, 5.2, 0.3], [6, 5.2, 0.3], 0.18, 0.015, 48, 6],
+      "material": { "color": "#2a2a2a" },
+      "parent": "power_infrastructure"
+    },
+
+    {
+      "name": "pipe_system",
+      "type": "group",
+      "position": [-12, 0, 0],
+      "parent": "scene_root"
+    },
+    {
+      "name": "pipe_main",
+      "comment": "ExtrudePath: Industrial pipe with bends",
+      "type": "extrudePath",
+      "params": [
+        "circle", [0.08],
+        [[0, 0.5, 2], [0, 0.5, 0], [0, 2, -1], [0, 3.5, -1], [0, 4, -2], [0, 4, -4]],
+        48, false
+      ],
+      "material": { "preset": "chrome" },
+      "parent": "pipe_system"
+    },
+    {
+      "name": "pipe_flange_1",
+      "comment": "CSG: Pipe flange",
+      "type": "pipeFlange",
+      "params": [0.08, 0.18, 0.03, 0.1, 6],
+      "material": { "preset": "steel" },
+      "position": [0, 0.5, 2],
+      "rotation": [90, 0, 0],
+      "parent": "pipe_system"
+    },
+    {
+      "name": "pipe_flange_2",
+      "type": "pipeFlange",
+      "params": [0.08, 0.18, 0.03, 0.1, 6],
+      "material": { "preset": "steel" },
+      "position": [0, 4, -4],
+      "rotation": [90, 0, 0],
+      "parent": "pipe_system"
+    },
+    {
+      "name": "valve_wheel",
+      "comment": "CSG: Gear as valve wheel",
+      "type": "gear",
+      "params": [0.12, 8, 0.02, 0.03],
+      "material": { "preset": "rusted-metal", "color": "#aa4444" },
+      "position": [0.15, 2, -1],
+      "rotation": [0, 0, 90],
+      "parent": "pipe_system"
+    },
+
+    {
+      "name": "fountain",
+      "type": "group",
+      "position": [0, 0, 0],
+      "parent": "scene_root"
+    },
+    {
+      "name": "fountain_base",
+      "type": "cylinder",
+      "params": [2, 2.2, 0.3, 12],
+      "material": { "preset": "concrete", "color": "#9a9a9a" },
+      "position": [0, 0.15, 0],
+      "parent": "fountain"
+    },
+    {
+      "name": "fountain_pool",
+      "type": "hollowCylinder",
+      "params": [1.8, 1.5, 0.4, 12],
+      "material": { "preset": "concrete", "color": "#8a8a8a" },
+      "position": [0, 0.5, 0],
+      "parent": "fountain"
+    },
+    {
+      "name": "fountain_water",
+      "type": "cylinder",
+      "params": [1.48, 1.48, 0.05, 12],
+      "material": { "preset": "water" },
+      "position": [0, 0.55, 0],
+      "parent": "fountain"
+    },
+    {
+      "name": "fountain_pillar",
+      "comment": "Lathe: Decorative pillar",
+      "type": "lathe",
+      "params": [
+        [[0.15, 0], [0.18, 0.02], [0.12, 0.05], [0.08, 0.2], [0.06, 0.5], [0.08, 0.8], [0.1, 0.85], [0.06, 0.9], [0.08, 1.0], [0.15, 1.05], [0.12, 1.1]],
+        12
+      ],
+      "material": { "preset": "concrete", "color": "#a0a0a0" },
+      "position": [0, 0.3, 0],
+      "parent": "fountain"
+    },
+    {
+      "name": "fountain_top_bowl",
+      "comment": "Lathe: Top water bowl",
+      "type": "lathe",
+      "params": [
+        [[0.02, 0], [0.25, 0.08], [0.28, 0.12], [0.26, 0.14]],
+        12
+      ],
+      "material": { "preset": "concrete", "color": "#909090" },
+      "position": [0, 1.4, 0],
+      "parent": "fountain"
+    },
+
+    {
+      "name": "street_scene",
+      "type": "group",
+      "position": [8, 0, 0],
+      "parent": "scene_root"
+    },
+    {
+      "name": "street_lamp_1",
+      "type": "prefab",
+      "src": "street-lamp",
+      "position": [0, 0, -4],
+      "parent": "street_scene"
+    },
+    {
+      "name": "street_lamp_2",
+      "type": "prefab",
+      "src": "street-lamp",
+      "position": [0, 0, 4],
+      "parent": "street_scene"
+    },
+    {
+      "name": "park_bench_1",
+      "type": "prefab",
+      "src": "park-bench",
+      "position": [1, 0, -2],
+      "rotation": [0, -90, 0],
+      "parent": "street_scene"
+    },
+    {
+      "name": "park_bench_2",
+      "type": "prefab",
+      "src": "park-bench",
+      "position": [1, 0, 2],
+      "rotation": [0, -90, 0],
+      "parent": "street_scene"
+    },
+    {
+      "name": "trash_can_1",
+      "type": "prefab",
+      "src": "trash-can",
+      "position": [-1, 0, 0],
+      "parent": "street_scene"
+    },
+    {
+      "name": "fire_hydrant_1",
+      "type": "prefab",
+      "src": "fire-hydrant",
+      "position": [-1.5, 0, 3],
+      "parent": "street_scene"
+    },
+
+    {
+      "name": "vehicle_display",
+      "type": "group",
+      "position": [0, 0, 10],
+      "parent": "scene_root"
+    },
+    {
+      "name": "sedan_1",
+      "type": "prefab",
+      "src": "sedan",
+      "position": [-4, 0, 0],
+      "rotation": [0, 15, 0],
+      "parent": "vehicle_display"
+    },
+    {
+      "name": "pickup_1",
+      "type": "prefab",
+      "src": "pickup-truck",
+      "position": [0, 0, 0],
+      "rotation": [0, -10, 0],
+      "parent": "vehicle_display"
+    },
+    {
+      "name": "motorbike_1",
+      "type": "prefab",
+      "src": "motorbike",
+      "position": [4, 0, -1],
+      "rotation": [0, 45, 0],
+      "parent": "vehicle_display"
+    },
+
+    {
+      "name": "lighting_demo",
+      "type": "group",
+      "position": [10, 0, -8],
+      "parent": "scene_root"
+    },
+    {
+      "name": "light_platform",
+      "type": "cylinder",
+      "params": [2.5, 2.5, 0.1, 12],
+      "material": { "preset": "concrete", "color": "#4a4a4a" },
+      "position": [0, 0.05, 0],
+      "parent": "lighting_demo"
+    },
+    {
+      "name": "display_sphere",
+      "type": "sphere",
+      "params": [0.4, 2],
+      "material": { "color": "#ffffff", "metalness": 0.9, "roughness": 0.1 },
+      "position": [0, 0.7, 0],
+      "parent": "lighting_demo"
+    },
+    {
+      "name": "warm_point_light",
+      "comment": "PointLight: Warm ambient",
+      "type": "pointLight",
+      "params": [2, 8, 2, true, 0.06],
+      "material": { "color": "#ffaa44" },
+      "position": [-1.5, 1.5, 1],
+      "parent": "lighting_demo"
+    },
+    {
+      "name": "cool_point_light",
+      "comment": "PointLight: Cool accent",
+      "type": "pointLight",
+      "params": [1.5, 6, 2, true, 0.05],
+      "material": { "color": "#44aaff" },
+      "position": [1.5, 1.5, 1],
+      "parent": "lighting_demo"
+    },
+    {
+      "name": "spot_light_1",
+      "comment": "SpotLight: Dramatic downlight",
+      "type": "spotLight",
+      "params": [3, 5, 20, 0.3, true],
+      "material": { "color": "#ffffff" },
+      "position": [0, 3, 0],
+      "rotation": [180, 0, 0],
+      "parent": "lighting_demo"
+    },
+    {
+      "name": "area_light_panel",
+      "comment": "AreaLight: Soft fill",
+      "type": "areaLight",
+      "params": [1.2, 0.6, 2, true],
+      "material": { "color": "#ffffee" },
+      "position": [0, 2, -2],
+      "rotation": [20, 0, 0],
+      "parent": "lighting_demo"
+    },
+
+    {
+      "name": "structural_elements",
+      "type": "group",
+      "position": [-12, 0, -10],
+      "parent": "scene_root"
+    },
+    {
+      "name": "ibeam_1",
+      "comment": "CSG: I-beam structural",
+      "type": "ibeam",
+      "params": [0.2, 0.3, 3, 0.025, 0.02],
+      "material": { "preset": "steel" },
+      "position": [0, 1.5, 0],
+      "parent": "structural_elements"
+    },
+    {
+      "name": "lbeam_1",
+      "comment": "CSG: L-beam angle",
+      "type": "lbeam",
+      "params": [0.15, 0.15, 1.5, 0.02],
+      "material": { "preset": "steel" },
+      "position": [0.8, 0.75, 0],
+      "parent": "structural_elements"
+    },
+    {
+      "name": "channel_1",
+      "comment": "CSG: C-channel",
+      "type": "channel",
+      "params": [0.15, 0.2, 2, 0.02],
+      "material": { "preset": "steel" },
+      "position": [-0.8, 1, 0],
+      "rotation": [0, 0, 90],
+      "parent": "structural_elements"
+    },
+    {
+      "name": "bracket_1",
+      "comment": "CSG: Mounting bracket",
+      "type": "bracket",
+      "params": [0.15, 0.15, 0.1, 0.015, 0.02],
+      "material": { "preset": "steel" },
+      "position": [0, 3.2, 0.2],
+      "parent": "structural_elements"
+    },
+
+    {
+      "name": "cable_art",
+      "type": "group",
+      "position": [0, 0, -6],
+      "parent": "scene_root"
+    },
+    {
+      "name": "cable_pole_left",
+      "type": "cylinder",
+      "params": [0.05, 0.05, 3, 8],
+      "material": { "preset": "painted-metal", "color": "#2a2a2a" },
+      "position": [-3, 1.5, 0],
+      "parent": "cable_art"
+    },
+    {
+      "name": "cable_pole_right",
+      "type": "cylinder",
+      "params": [0.05, 0.05, 3, 8],
+      "material": { "preset": "painted-metal", "color": "#2a2a2a" },
+      "position": [3, 1.5, 0],
+      "parent": "cable_art"
+    },
+    {
+      "name": "decorative_cable_1",
+      "comment": "Cable: Decorative string with bulbs",
+      "type": "catenary",
+      "params": [[-3, 2.8, 0], [3, 2.8, 0], 0.25, 0.01, 32, 6],
+      "material": { "color": "#1a1a1a" },
+      "parent": "cable_art"
+    },
+    {
+      "name": "decorative_cable_2",
+      "type": "catenary",
+      "params": [[-3, 2.5, 0.5], [3, 2.5, 0.5], 0.3, 0.01, 32, 6],
+      "material": { "color": "#1a1a1a" },
+      "parent": "cable_art"
+    },
+    {
+      "name": "decorative_cable_3",
+      "type": "catenary",
+      "params": [[-3, 2.2, -0.5], [3, 2.2, -0.5], 0.35, 0.01, 32, 6],
+      "material": { "color": "#1a1a1a" },
+      "parent": "cable_art"
+    },
+    {
+      "name": "string_light_1",
+      "type": "pointLight",
+      "params": [0.5, 3, 2, true, 0.03],
+      "material": { "color": "#ffcc66" },
+      "position": [-2, 2.4, 0],
+      "parent": "cable_art"
+    },
+    {
+      "name": "string_light_2",
+      "type": "pointLight",
+      "params": [0.5, 3, 2, true, 0.03],
+      "material": { "color": "#ffcc66" },
+      "position": [-1, 2.15, 0],
+      "parent": "cable_art"
+    },
+    {
+      "name": "string_light_3",
+      "type": "pointLight",
+      "params": [0.5, 3, 2, true, 0.03],
+      "material": { "color": "#ffcc66" },
+      "position": [0, 2.05, 0],
+      "parent": "cable_art"
+    },
+    {
+      "name": "string_light_4",
+      "type": "pointLight",
+      "params": [0.5, 3, 2, true, 0.03],
+      "material": { "color": "#ffcc66" },
+      "position": [1, 2.15, 0],
+      "parent": "cable_art"
+    },
+    {
+      "name": "string_light_5",
+      "type": "pointLight",
+      "params": [0.5, 3, 2, true, 0.03],
+      "material": { "color": "#ffcc66" },
+      "position": [2, 2.4, 0],
+      "parent": "cable_art"
+    },
+
+    {
+      "name": "trees",
+      "type": "group",
+      "position": [0, 0, 0],
+      "parent": "scene_root"
+    },
+    {
+      "name": "tree_1",
+      "type": "prefab",
+      "src": "lowpoly-tree",
+      "position": [-5, 0, 5],
+      "scale": [1.2, 1.2, 1.2],
+      "parent": "trees"
+    },
+    {
+      "name": "tree_2",
+      "type": "prefab",
+      "src": "lowpoly-tree",
+      "position": [5, 0, -5],
+      "scale": [0.9, 0.9, 0.9],
+      "parent": "trees"
+    },
+    {
+      "name": "tree_3",
+      "type": "prefab",
+      "src": "lowpoly-tree",
+      "position": [12, 0, 5],
+      "scale": [1.5, 1.5, 1.5],
+      "parent": "trees"
+    },
+
+    {
+      "name": "people",
+      "type": "group",
+      "position": [0, 0, 0],
+      "parent": "scene_root"
+    },
+    {
+      "name": "person_1",
+      "type": "prefab",
+      "src": "human-figure",
+      "position": [3, 0, 2],
+      "rotation": [0, -30, 0],
+      "parent": "people"
+    },
+    {
+      "name": "person_2",
+      "type": "prefab",
+      "src": "human-figure",
+      "position": [-2, 0, 3],
+      "rotation": [0, 120, 0],
+      "parent": "people"
+    },
+    {
+      "name": "person_3",
+      "type": "prefab",
+      "src": "human-figure",
+      "position": [9, 0, -1],
+      "rotation": [0, -90, 0],
+      "parent": "people"
+    }
+  ]
+}

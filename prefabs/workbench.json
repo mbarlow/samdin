@@ -1,0 +1,198 @@
+{
+  "name": "workbench",
+  "description": "Showcase: Industrial workbench with pegboard, tools, and task lamp",
+  "root": "bench_root",
+  "parts": [
+    { "name": "bench_root", "type": "group", "position": [0, 0, 0] },
+    {
+      "name": "frame_group", "type": "group", "parent": "bench_root"
+    },
+    {
+      "name": "top",
+      "type": "roundedBox", "params": [1.8, 0.06, 0.7, 0.01, 2],
+      "material": { "preset": "wood", "color": "#8b6b4a", "clearcoat": 0.2, "clearcoatRoughness": 0.4, "breakup": { "noise": { "amount": 0.12, "scale": 2.0, "color": "#a07858" }, "grime": { "amount": 0.15, "axis": "y", "color": "#2a2015" }, "edgeWear": { "amount": 0.08, "color": "#b09070" }, "roughnessVariation": 0.06 } },
+      "position": [0, 0.88, 0], "parent": "frame_group"
+    },
+    {
+      "name": "leg_fl", "type": "box", "params": [0.06, 0.85, 0.06],
+      "material": { "preset": "steel", "color": "#666666", "breakup": { "noise": { "amount": 0.06, "scale": 4.0, "color": "#777777" }, "roughnessVariation": 0.04 } },
+      "position": [-0.82, 0.425, 0.28], "parent": "frame_group"
+    },
+    {
+      "name": "leg_fr", "type": "box", "params": [0.06, 0.85, 0.06],
+      "material": { "preset": "steel", "color": "#666666", "breakup": { "noise": { "amount": 0.06, "scale": 4.0, "color": "#777777" }, "roughnessVariation": 0.04 } },
+      "position": [0.82, 0.425, 0.28], "parent": "frame_group"
+    },
+    {
+      "name": "leg_bl", "type": "box", "params": [0.06, 0.85, 0.06],
+      "material": { "preset": "steel", "color": "#666666", "breakup": { "noise": { "amount": 0.06, "scale": 4.0, "color": "#777777" }, "roughnessVariation": 0.04 } },
+      "position": [-0.82, 0.425, -0.28], "parent": "frame_group"
+    },
+    {
+      "name": "leg_br", "type": "box", "params": [0.06, 0.85, 0.06],
+      "material": { "preset": "steel", "color": "#666666", "breakup": { "noise": { "amount": 0.06, "scale": 4.0, "color": "#777777" }, "roughnessVariation": 0.04 } },
+      "position": [0.82, 0.425, -0.28], "parent": "frame_group"
+    },
+    {
+      "name": "stretcher_front", "type": "box", "params": [1.58, 0.04, 0.04],
+      "material": { "preset": "steel", "color": "#555555" },
+      "position": [0, 0.15, 0.28], "parent": "frame_group"
+    },
+    {
+      "name": "stretcher_back", "type": "box", "params": [1.58, 0.04, 0.04],
+      "material": { "preset": "steel", "color": "#555555" },
+      "position": [0, 0.15, -0.28], "parent": "frame_group"
+    },
+    {
+      "name": "shelf", "type": "box", "params": [1.58, 0.02, 0.5],
+      "material": { "preset": "wood", "color": "#7a5b3a", "breakup": { "noise": { "amount": 0.1, "scale": 2.5, "color": "#8a6b4a" }, "roughnessVariation": 0.05 } },
+      "position": [0, 0.18, 0], "parent": "frame_group"
+    },
+    {
+      "name": "pegboard",
+      "type": "box", "params": [1.6, 0.8, 0.02],
+      "material": { "color": "#c8b898", "roughness": 0.85, "breakup": { "noise": { "amount": 0.08, "scale": 3.0, "color": "#d8c8a8" }, "roughnessVariation": 0.04 } },
+      "position": [0, 1.35, -0.34], "parent": "bench_root"
+    },
+    {
+      "name": "pegboard_frame_top", "type": "box", "params": [1.64, 0.03, 0.03],
+      "material": { "preset": "wood", "color": "#6a4b2a" },
+      "position": [0, 1.77, -0.34], "parent": "bench_root"
+    },
+    {
+      "name": "pegboard_frame_bottom", "type": "box", "params": [1.64, 0.03, 0.03],
+      "material": { "preset": "wood", "color": "#6a4b2a" },
+      "position": [0, 0.93, -0.34], "parent": "bench_root"
+    },
+    {
+      "name": "vise_base", "type": "box", "params": [0.12, 0.06, 0.08],
+      "material": { "preset": "steel", "color": "#555555", "breakup": { "noise": { "amount": 0.08, "scale": 3.0, "color": "#666666" }, "roughnessVariation": 0.05 } },
+      "position": [-0.7, 0.94, 0.22], "parent": "bench_root"
+    },
+    {
+      "name": "vise_jaw_fixed", "type": "box", "params": [0.1, 0.1, 0.03],
+      "material": { "preset": "steel", "color": "#4a4a4a" },
+      "position": [-0.7, 1.02, 0.24], "parent": "bench_root"
+    },
+    {
+      "name": "vise_jaw_slide", "type": "box", "params": [0.1, 0.1, 0.03],
+      "material": { "preset": "steel", "color": "#4a4a4a" },
+      "position": [-0.7, 1.02, 0.3], "parent": "bench_root"
+    },
+    {
+      "name": "vise_screw", "type": "cylinder", "params": [0.012, 0.012, 0.08, 6],
+      "material": { "preset": "chrome" },
+      "position": [-0.7, 1.02, 0.34], "rotation": [90, 0, 0], "parent": "bench_root"
+    },
+    {
+      "name": "vise_handle", "type": "cylinder", "params": [0.006, 0.006, 0.06, 6],
+      "material": { "preset": "chrome" },
+      "position": [-0.7, 1.02, 0.38], "rotation": [0, 0, 90], "parent": "bench_root"
+    },
+    {
+      "name": "hammer_head", "type": "box", "params": [0.04, 0.04, 0.1],
+      "material": { "preset": "steel", "color": "#5a5a5a", "breakup": { "noise": { "amount": 0.1, "scale": 4.0, "color": "#6a6a6a" }, "roughnessVariation": 0.05 } },
+      "position": [0.2, 0.935, 0.1], "rotation": [0, 25, 0], "parent": "bench_root"
+    },
+    {
+      "name": "hammer_handle", "type": "cylinder", "params": [0.012, 0.012, 0.22, 6],
+      "material": { "preset": "wood", "color": "#c4a97d" },
+      "position": [0.2, 0.925, -0.02], "rotation": [90, 25, 0], "parent": "bench_root"
+    },
+    {
+      "name": "screwdriver_shaft", "type": "cylinder", "params": [0.008, 0.008, 0.14, 6],
+      "material": { "preset": "chrome" },
+      "position": [0.4, 0.925, 0.05], "rotation": [90, 0, 8], "parent": "bench_root"
+    },
+    {
+      "name": "screwdriver_handle", "type": "capsule", "params": [0.015, 0.05, 3, 6],
+      "material": { "color": "#cc3333", "roughness": 0.7, "breakup": { "noise": { "amount": 0.06, "scale": 4.0, "color": "#dd4444" }, "roughnessVariation": 0.03 } },
+      "position": [0.4, 0.925, -0.06], "rotation": [90, 0, 8], "parent": "bench_root"
+    },
+    {
+      "name": "lamp_base", "type": "cylinder", "params": [0.04, 0.04, 0.02, 8],
+      "material": { "preset": "steel", "color": "#444444" },
+      "position": [0.7, 0.92, -0.15], "parent": "bench_root"
+    },
+    {
+      "name": "lamp_arm_lower", "type": "cylinder", "params": [0.012, 0.012, 0.35, 6],
+      "material": { "preset": "steel", "color": "#444444" },
+      "position": [0.7, 1.1, -0.15], "rotation": [15, 0, 0], "parent": "bench_root"
+    },
+    {
+      "name": "lamp_joint", "type": "sphere", "params": [0.015, 0],
+      "material": { "preset": "steel", "color": "#555555" },
+      "position": [0.7, 1.27, -0.06], "parent": "bench_root"
+    },
+    {
+      "name": "lamp_arm_upper", "type": "cylinder", "params": [0.01, 0.01, 0.25, 6],
+      "material": { "preset": "steel", "color": "#444444" },
+      "position": [0.7, 1.38, 0.02], "rotation": [-20, 0, 0], "parent": "bench_root"
+    },
+    {
+      "name": "lamp_shade", "type": "cone", "params": [0.1, 0.07, 8],
+      "material": { "preset": "painted-metal", "color": "#2a6a2a", "breakup": { "noise": { "amount": 0.06, "scale": 3.0, "color": "#3a7a3a" }, "roughnessVariation": 0.04 } },
+      "position": [0.7, 1.48, 0.08], "parent": "bench_root"
+    },
+    {
+      "name": "lamp_bulb", "type": "sphere", "params": [0.025, 1],
+      "material": { "preset": "glow", "color": "#ffffcc", "emissiveIntensity": 2.0 },
+      "position": [0.7, 1.46, 0.08], "parent": "bench_root"
+    },
+    {
+      "name": "lamp_light",
+      "type": "pointLight", "params": [1.0, 2.5, 2, 0],
+      "material": { "color": "#ffffcc" },
+      "position": [0.7, 1.44, 0.08], "parent": "bench_root"
+    },
+    {
+      "name": "hook_1", "type": "cylinder", "params": [0.006, 0.006, 0.03, 4],
+      "material": { "preset": "chrome" },
+      "position": [-0.5, 1.5, -0.32], "rotation": [90, 0, 0], "parent": "bench_root"
+    },
+    {
+      "name": "hook_2", "type": "cylinder", "params": [0.006, 0.006, 0.03, 4],
+      "material": { "preset": "chrome" },
+      "position": [-0.2, 1.5, -0.32], "rotation": [90, 0, 0], "parent": "bench_root"
+    },
+    {
+      "name": "hook_3", "type": "cylinder", "params": [0.006, 0.006, 0.03, 4],
+      "material": { "preset": "chrome" },
+      "position": [0.1, 1.5, -0.32], "rotation": [90, 0, 0], "parent": "bench_root"
+    },
+    {
+      "name": "wrench_on_hook", "type": "box", "params": [0.015, 0.12, 0.005],
+      "material": { "preset": "chrome" },
+      "position": [-0.5, 1.38, -0.33], "parent": "bench_root"
+    },
+    {
+      "name": "pliers_body", "type": "box", "params": [0.02, 0.06, 0.005],
+      "material": { "preset": "steel", "color": "#555555" },
+      "position": [-0.2, 1.42, -0.33], "parent": "bench_root"
+    },
+    {
+      "name": "pliers_handle_l", "type": "box", "params": [0.006, 0.06, 0.005],
+      "material": { "color": "#cc3333", "roughness": 0.7 },
+      "position": [-0.207, 1.33, -0.33], "parent": "bench_root"
+    },
+    {
+      "name": "pliers_handle_r", "type": "box", "params": [0.006, 0.06, 0.005],
+      "material": { "color": "#cc3333", "roughness": 0.7 },
+      "position": [-0.193, 1.33, -0.33], "parent": "bench_root"
+    }
+  ],
+  "scene": {
+    "quality": "high",
+    "background": { "type": "gradient", "color": "#1a1a20", "color2": "#08080a" },
+    "lighting": { "preset": "industrialRuin", "environment": "studio", "envMapIntensity": 0.8, "shadowQuality": "high" },
+    "ground": { "reflective": true },
+    "exposure": 1.0,
+    "postfx": {
+      "ssao": { "enabled": true, "kernelRadius": 8 },
+      "bloom": { "enabled": true, "strength": 0.5, "radius": 0.35, "threshold": 0.75 },
+      "colorGrade": { "enabled": true, "saturation": 0.9, "contrast": 1.05 },
+      "vignette": { "enabled": true, "intensity": 0.3 },
+      "fxaa": true
+    }
+  }
+}

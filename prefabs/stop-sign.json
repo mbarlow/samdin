@@ -1,0 +1,54 @@
+{
+  "name": "stop-sign",
+  "description": "Octagonal stop sign on metal pole",
+  "root": "sign_root",
+  "parts": [
+    {
+      "name": "sign_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "pole",
+      "type": "cylinder",
+      "params": [0.04, 0.04, 2.5, 8],
+      "material": { "preset": "steel", "color": "#888888" },
+      "position": [0, 1.25, 0],
+      "parent": "sign_root"
+    },
+    {
+      "name": "sign_face",
+      "type": "prism",
+      "params": [0.35, 0.02, 8],
+      "material": { "color": "#cc0000", "roughness": 0.5 },
+      "position": [0, 2.7, 0],
+      "rotation": [90, 22.5, 0],
+      "parent": "sign_root"
+    },
+    {
+      "name": "sign_text_area",
+      "type": "prism",
+      "params": [0.28, 0.005, 8],
+      "material": { "color": "#ffffff", "roughness": 0.5 },
+      "position": [0, 2.7, 0.013],
+      "rotation": [90, 22.5, 0],
+      "parent": "sign_root"
+    },
+    {
+      "name": "bracket",
+      "type": "box",
+      "params": [0.06, 0.12, 0.04],
+      "material": { "preset": "steel", "color": "#888888" },
+      "position": [0, 2.48, 0],
+      "parent": "sign_root"
+    },
+    {
+      "name": "base_plate",
+      "type": "box",
+      "params": [0.3, 0.04, 0.3],
+      "material": { "preset": "concrete" },
+      "position": [0, 0.02, 0],
+      "parent": "sign_root"
+    }
+  ]
+}

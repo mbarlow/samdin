@@ -1,0 +1,293 @@
+{
+  "name": "motorcycle-street",
+  "description": "First-person motorcycle POV on a city street with buildings on both sides, road with lane markings, distant car, motorcycle handlebars in foreground, street lamps, foggy atmosphere",
+  "root": "scene",
+  "parts": [
+    {
+      "name": "scene",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+
+    {
+      "name": "road",
+      "type": "box",
+      "params": [8, 0.15, 40],
+      "material": { "preset": "asphalt", "color": "#1a1a1a" },
+      "position": [0, -0.075, 0],
+      "parent": "scene"
+    },
+    {
+      "name": "sidewalk_left",
+      "type": "box",
+      "params": [3, 0.25, 40],
+      "material": { "preset": "concrete", "color": "#2a2828" },
+      "position": [-5.5, -0.025, 0],
+      "parent": "scene"
+    },
+    {
+      "name": "sidewalk_right",
+      "type": "box",
+      "params": [3, 0.25, 40],
+      "material": { "preset": "concrete", "color": "#2a2828" },
+      "position": [5.5, -0.025, 0],
+      "parent": "scene"
+    },
+    {
+      "name": "curb_left",
+      "type": "box",
+      "params": [0.15, 0.15, 40],
+      "material": { "preset": "concrete", "color": "#333030" },
+      "position": [-4, 0.075, 0],
+      "parent": "scene"
+    },
+    {
+      "name": "curb_right",
+      "type": "box",
+      "params": [0.15, 0.15, 40],
+      "material": { "preset": "concrete", "color": "#333030" },
+      "position": [4, 0.075, 0],
+      "parent": "scene"
+    },
+
+    {
+      "name": "lane_center",
+      "type": "box",
+      "params": [0.1, 0.01, 2],
+      "material": { "preset": "glow", "color": "#888866", "emissiveIntensity": 0.5 },
+      "position": [0, 0.01, -5],
+      "parent": "scene"
+    },
+    {
+      "name": "lane_center_2",
+      "type": "box",
+      "params": [0.1, 0.01, 2],
+      "material": { "preset": "glow", "color": "#888866", "emissiveIntensity": 0.5 },
+      "position": [0, 0.01, -9],
+      "parent": "scene"
+    },
+    {
+      "name": "lane_center_3",
+      "type": "box",
+      "params": [0.1, 0.01, 2],
+      "material": { "preset": "glow", "color": "#888866", "emissiveIntensity": 0.5 },
+      "position": [0, 0.01, -13],
+      "parent": "scene"
+    },
+    {
+      "name": "lane_center_4",
+      "type": "box",
+      "params": [0.1, 0.01, 2],
+      "material": { "preset": "glow", "color": "#888866", "emissiveIntensity": 0.5 },
+      "position": [0, 0.01, -17],
+      "parent": "scene"
+    },
+
+    {
+      "name": "buildings_left",
+      "type": "group",
+      "position": [-8.5, 0, 0],
+      "parent": "scene"
+    },
+    {
+      "name": "bldg_l1",
+      "type": "box",
+      "params": [4, 10, 8],
+      "material": { "color": "#1e1c1a", "roughness": 0.85, "metalness": 0.15 },
+      "position": [0, 5, 5],
+      "parent": "buildings_left"
+    },
+    {
+      "name": "bldg_l1_win1",
+      "type": "box",
+      "params": [0.02, 1.0, 0.6],
+      "material": { "preset": "glow", "color": "#ccbb88", "emissiveIntensity": 1 },
+      "position": [2.01, 4, 3],
+      "parent": "buildings_left"
+    },
+    {
+      "name": "bldg_l1_win2",
+      "type": "box",
+      "params": [0.02, 1.0, 0.6],
+      "material": { "preset": "glow", "color": "#bbaa77", "emissiveIntensity": 0.8 },
+      "position": [2.01, 6, 5],
+      "parent": "buildings_left"
+    },
+    {
+      "name": "bldg_l1_win3",
+      "type": "box",
+      "params": [0.02, 1.0, 0.6],
+      "material": { "preset": "glow", "color": "#ddcc99", "emissiveIntensity": 1.2 },
+      "position": [2.01, 7.5, 7],
+      "parent": "buildings_left"
+    },
+    {
+      "name": "bldg_l2",
+      "type": "box",
+      "params": [4, 14, 8],
+      "material": { "color": "#201e1c", "roughness": 0.85, "metalness": 0.15 },
+      "position": [0, 7, -5],
+      "parent": "buildings_left"
+    },
+    {
+      "name": "bldg_l2_win1",
+      "type": "box",
+      "params": [0.02, 1.0, 0.6],
+      "material": { "preset": "glow", "color": "#aabb99", "emissiveIntensity": 0.8 },
+      "position": [2.01, 5, -3],
+      "parent": "buildings_left"
+    },
+    {
+      "name": "bldg_l2_win2",
+      "type": "box",
+      "params": [0.02, 1.0, 0.6],
+      "material": { "preset": "glow", "color": "#ccbb88", "emissiveIntensity": 1 },
+      "position": [2.01, 8, -6],
+      "parent": "buildings_left"
+    },
+    {
+      "name": "bldg_l3",
+      "type": "box",
+      "params": [4, 8, 8],
+      "material": { "color": "#1c1a18", "roughness": 0.85, "metalness": 0.15 },
+      "position": [0, 4, -15],
+      "parent": "buildings_left"
+    },
+
+    {
+      "name": "buildings_right",
+      "type": "group",
+      "position": [8.5, 0, 0],
+      "parent": "scene"
+    },
+    {
+      "name": "bldg_r1",
+      "type": "box",
+      "params": [4, 12, 8],
+      "material": { "color": "#1e1c1a", "roughness": 0.85, "metalness": 0.15 },
+      "position": [0, 6, 3],
+      "parent": "buildings_right"
+    },
+    {
+      "name": "bldg_r1_win1",
+      "type": "box",
+      "params": [0.02, 1.0, 0.6],
+      "material": { "preset": "glow", "color": "#bbaa88", "emissiveIntensity": 0.8 },
+      "position": [-2.01, 5, 2],
+      "parent": "buildings_right"
+    },
+    {
+      "name": "bldg_r1_win2",
+      "type": "box",
+      "params": [0.02, 1.0, 0.6],
+      "material": { "preset": "glow", "color": "#ddcc99", "emissiveIntensity": 1 },
+      "position": [-2.01, 8, 4],
+      "parent": "buildings_right"
+    },
+    {
+      "name": "bldg_r2",
+      "type": "box",
+      "params": [4, 9, 8],
+      "material": { "color": "#201e1c", "roughness": 0.85, "metalness": 0.15 },
+      "position": [0, 4.5, -7],
+      "parent": "buildings_right"
+    },
+    {
+      "name": "bldg_r2_win1",
+      "type": "box",
+      "params": [0.02, 1.0, 0.6],
+      "material": { "preset": "glow", "color": "#ccbb88", "emissiveIntensity": 0.8 },
+      "position": [-2.01, 4, -5],
+      "parent": "buildings_right"
+    },
+    {
+      "name": "bldg_r3",
+      "type": "box",
+      "params": [4, 16, 8],
+      "material": { "color": "#1c1a18", "roughness": 0.85, "metalness": 0.15 },
+      "position": [0, 8, -17],
+      "parent": "buildings_right"
+    },
+
+    {
+      "name": "handlebars",
+      "type": "prefab",
+      "src": "bike-handlebars",
+      "position": [0, 1.0, 8],
+      "rotation": [0, 180, 0],
+      "scale": [1, 1, 1],
+      "parent": "scene",
+      "comment": "Motorcycle handlebars in foreground — first-person POV"
+    },
+
+    {
+      "name": "distant_car",
+      "type": "prefab",
+      "src": "sedan",
+      "position": [2, 0, -12],
+      "scale": [0.8, 0.8, 0.8],
+      "parent": "scene",
+      "comment": "Distant car ahead on road"
+    },
+
+    {
+      "name": "street_lamp_l1",
+      "type": "prefab",
+      "src": "street-lamp",
+      "position": [-4.5, 0, 2],
+      "parent": "scene"
+    },
+    {
+      "name": "street_lamp_r1",
+      "type": "prefab",
+      "src": "street-lamp",
+      "position": [4.5, 0, -6],
+      "parent": "scene"
+    },
+    {
+      "name": "street_lamp_l2",
+      "type": "prefab",
+      "src": "street-lamp",
+      "position": [-4.5, 0, -14],
+      "parent": "scene"
+    },
+
+    {
+      "name": "fog_1",
+      "type": "sphere",
+      "params": [1, 1],
+      "material": { "preset": "glow", "color": "#333333", "emissiveIntensity": 0.15 },
+      "position": [0, 1, -8],
+      "scale": [6, 1.5, 4],
+      "parent": "scene",
+      "comment": "Fog patch"
+    },
+    {
+      "name": "fog_2",
+      "type": "sphere",
+      "params": [1, 1],
+      "material": { "preset": "glow", "color": "#2a2a2a", "emissiveIntensity": 0.1 },
+      "position": [2, 0.8, -16],
+      "scale": [5, 1, 5],
+      "parent": "scene"
+    },
+
+    {
+      "name": "ambient_fill",
+      "type": "pointLight",
+      "params": [0.3, 25, 2, false],
+      "material": { "color": "#445566" },
+      "position": [0, 8, 0],
+      "parent": "scene"
+    },
+    {
+      "name": "overhead_moon",
+      "type": "pointLight",
+      "params": [0.5, 30, 2, false],
+      "material": { "color": "#667788" },
+      "position": [5, 15, -10],
+      "parent": "scene",
+      "comment": "Moonlight from above"
+    }
+  ]
+}

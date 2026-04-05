@@ -1,0 +1,172 @@
+{
+  "name": "human-figure",
+  "description": "Simple lowpoly standing human figure",
+  "root": "figure_root",
+  "parts": [
+    {
+      "name": "figure_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "hips",
+      "type": "roundedBox",
+      "params": [0.3, 0.15, 0.18, 0.03, 2],
+      "material": { "preset": "fabric", "color": "#1e3a5f" },
+      "position": [0, 0.95, 0],
+      "parent": "figure_root"
+    },
+    {
+      "name": "torso",
+      "type": "roundedBox",
+      "params": [0.35, 0.4, 0.2, 0.04, 2],
+      "material": { "preset": "fabric", "color": "#dc2626" },
+      "position": [0, 1.28, 0],
+      "parent": "figure_root"
+    },
+    {
+      "name": "chest",
+      "type": "roundedBox",
+      "params": [0.38, 0.2, 0.22, 0.04, 2],
+      "material": { "preset": "fabric", "color": "#dc2626" },
+      "position": [0, 1.52, 0],
+      "parent": "figure_root"
+    },
+    {
+      "name": "neck",
+      "type": "cylinder",
+      "params": [0.06, 0.06, 0.1, 6],
+      "material": { "color": "#e8c4a0", "roughness": 0.9 },
+      "position": [0, 1.67, 0],
+      "parent": "figure_root"
+    },
+    {
+      "name": "head",
+      "type": "roundedBox",
+      "params": [0.18, 0.22, 0.2, 0.05, 2],
+      "material": { "color": "#e8c4a0", "roughness": 0.9 },
+      "position": [0, 1.85, 0],
+      "parent": "figure_root"
+    },
+    {
+      "name": "hair",
+      "type": "roundedBox",
+      "params": [0.19, 0.12, 0.21, 0.03, 2],
+      "material": { "color": "#3d2314", "roughness": 0.95 },
+      "position": [0, 1.95, -0.01],
+      "parent": "figure_root"
+    },
+    {
+      "name": "shoulder_left",
+      "type": "sphere",
+      "params": [0.06, 1],
+      "material": { "preset": "fabric", "color": "#dc2626" },
+      "position": [-0.22, 1.55, 0],
+      "parent": "figure_root"
+    },
+    {
+      "name": "shoulder_right",
+      "type": "sphere",
+      "params": [0.06, 1],
+      "material": { "preset": "fabric", "color": "#dc2626" },
+      "position": [0.22, 1.55, 0],
+      "parent": "figure_root"
+    },
+    {
+      "name": "upper_arm_left",
+      "type": "capsule",
+      "params": [0.045, 0.2, 4, 6],
+      "material": { "preset": "fabric", "color": "#dc2626" },
+      "position": [-0.26, 1.38, 0],
+      "parent": "figure_root"
+    },
+    {
+      "name": "upper_arm_right",
+      "type": "capsule",
+      "params": [0.045, 0.2, 4, 6],
+      "material": { "preset": "fabric", "color": "#dc2626" },
+      "position": [0.26, 1.38, 0],
+      "parent": "figure_root"
+    },
+    {
+      "name": "lower_arm_left",
+      "type": "capsule",
+      "params": [0.04, 0.18, 4, 6],
+      "material": { "color": "#e8c4a0", "roughness": 0.9 },
+      "position": [-0.26, 1.12, 0],
+      "parent": "figure_root"
+    },
+    {
+      "name": "lower_arm_right",
+      "type": "capsule",
+      "params": [0.04, 0.18, 4, 6],
+      "material": { "color": "#e8c4a0", "roughness": 0.9 },
+      "position": [0.26, 1.12, 0],
+      "parent": "figure_root"
+    },
+    {
+      "name": "hand_left",
+      "type": "roundedBox",
+      "params": [0.06, 0.1, 0.03, 0.015, 2],
+      "material": { "color": "#e8c4a0", "roughness": 0.9 },
+      "position": [-0.26, 0.95, 0],
+      "parent": "figure_root"
+    },
+    {
+      "name": "hand_right",
+      "type": "roundedBox",
+      "params": [0.06, 0.1, 0.03, 0.015, 2],
+      "material": { "color": "#e8c4a0", "roughness": 0.9 },
+      "position": [0.26, 0.95, 0],
+      "parent": "figure_root"
+    },
+    {
+      "name": "upper_leg_left",
+      "type": "capsule",
+      "params": [0.06, 0.32, 4, 6],
+      "material": { "preset": "fabric", "color": "#1e3a5f" },
+      "position": [-0.1, 0.68, 0],
+      "parent": "figure_root"
+    },
+    {
+      "name": "upper_leg_right",
+      "type": "capsule",
+      "params": [0.06, 0.32, 4, 6],
+      "material": { "preset": "fabric", "color": "#1e3a5f" },
+      "position": [0.1, 0.68, 0],
+      "parent": "figure_root"
+    },
+    {
+      "name": "lower_leg_left",
+      "type": "capsule",
+      "params": [0.05, 0.3, 4, 6],
+      "material": { "preset": "fabric", "color": "#1e3a5f" },
+      "position": [-0.1, 0.32, 0],
+      "parent": "figure_root"
+    },
+    {
+      "name": "lower_leg_right",
+      "type": "capsule",
+      "params": [0.05, 0.3, 4, 6],
+      "material": { "preset": "fabric", "color": "#1e3a5f" },
+      "position": [0.1, 0.32, 0],
+      "parent": "figure_root"
+    },
+    {
+      "name": "foot_left",
+      "type": "roundedBox",
+      "params": [0.08, 0.06, 0.15, 0.02, 2],
+      "material": { "color": "#2a2a2a", "roughness": 0.85 },
+      "position": [-0.1, 0.03, 0.03],
+      "parent": "figure_root"
+    },
+    {
+      "name": "foot_right",
+      "type": "roundedBox",
+      "params": [0.08, 0.06, 0.15, 0.02, 2],
+      "material": { "color": "#2a2a2a", "roughness": 0.85 },
+      "position": [0.1, 0.03, 0.03],
+      "parent": "figure_root"
+    }
+  ]
+}

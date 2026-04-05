@@ -1,0 +1,146 @@
+{
+  "name": "sofa",
+  "description": "Three-seat modern sofa with cushions",
+  "root": "sofa_root",
+  "parts": [
+    {
+      "name": "sofa_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "base",
+      "type": "roundedBox",
+      "params": [2.2, 0.15, 0.9, 0.04, 2],
+      "material": { "preset": "fabric", "color": "#4a5568" },
+      "position": [0, 0.15, 0],
+      "parent": "sofa_root"
+    },
+    {
+      "name": "leg_fl",
+      "type": "cylinder",
+      "params": [0.03, 0.03, 0.08, 6],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [-0.95, 0.04, 0.35],
+      "parent": "sofa_root"
+    },
+    {
+      "name": "leg_fr",
+      "type": "cylinder",
+      "params": [0.03, 0.03, 0.08, 6],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [0.95, 0.04, 0.35],
+      "parent": "sofa_root"
+    },
+    {
+      "name": "leg_bl",
+      "type": "cylinder",
+      "params": [0.03, 0.03, 0.08, 6],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [-0.95, 0.04, -0.35],
+      "parent": "sofa_root"
+    },
+    {
+      "name": "leg_br",
+      "type": "cylinder",
+      "params": [0.03, 0.03, 0.08, 6],
+      "material": { "preset": "wood", "color": "#5a4030" },
+      "position": [0.95, 0.04, -0.35],
+      "parent": "sofa_root"
+    },
+    {
+      "name": "seat_cushion_l",
+      "type": "roundedBox",
+      "params": [0.65, 0.15, 0.7, 0.04, 2],
+      "material": { "preset": "fabric", "color": "#4a5568" },
+      "position": [-0.7, 0.3, 0.05],
+      "parent": "sofa_root"
+    },
+    {
+      "name": "seat_cushion_m",
+      "type": "roundedBox",
+      "params": [0.65, 0.15, 0.7, 0.04, 2],
+      "material": { "preset": "fabric", "color": "#4a5568" },
+      "position": [0, 0.3, 0.05],
+      "parent": "sofa_root"
+    },
+    {
+      "name": "seat_cushion_r",
+      "type": "roundedBox",
+      "params": [0.65, 0.15, 0.7, 0.04, 2],
+      "material": { "preset": "fabric", "color": "#4a5568" },
+      "position": [0.7, 0.3, 0.05],
+      "parent": "sofa_root"
+    },
+    {
+      "name": "backrest",
+      "type": "roundedBox",
+      "params": [2.1, 0.55, 0.18, 0.05, 2],
+      "material": { "preset": "fabric", "color": "#4a5568" },
+      "position": [0, 0.62, -0.35],
+      "rotation": [-5, 0, 0],
+      "parent": "sofa_root"
+    },
+    {
+      "name": "back_cushion_l",
+      "type": "roundedBox",
+      "params": [0.6, 0.4, 0.12, 0.04, 2],
+      "material": { "preset": "fabric", "color": "#5a6578" },
+      "position": [-0.7, 0.6, -0.25],
+      "rotation": [-10, 0, 0],
+      "parent": "sofa_root"
+    },
+    {
+      "name": "back_cushion_m",
+      "type": "roundedBox",
+      "params": [0.6, 0.4, 0.12, 0.04, 2],
+      "material": { "preset": "fabric", "color": "#5a6578" },
+      "position": [0, 0.6, -0.25],
+      "rotation": [-10, 0, 0],
+      "parent": "sofa_root"
+    },
+    {
+      "name": "back_cushion_r",
+      "type": "roundedBox",
+      "params": [0.6, 0.4, 0.12, 0.04, 2],
+      "material": { "preset": "fabric", "color": "#5a6578" },
+      "position": [0.7, 0.6, -0.25],
+      "rotation": [-10, 0, 0],
+      "parent": "sofa_root"
+    },
+    {
+      "name": "armrest_l",
+      "type": "roundedBox",
+      "params": [0.12, 0.35, 0.85, 0.04, 2],
+      "material": { "preset": "fabric", "color": "#4a5568" },
+      "position": [-1.05, 0.42, 0],
+      "parent": "sofa_root"
+    },
+    {
+      "name": "armrest_r",
+      "type": "roundedBox",
+      "params": [0.12, 0.35, 0.85, 0.04, 2],
+      "material": { "preset": "fabric", "color": "#4a5568" },
+      "position": [1.05, 0.42, 0],
+      "parent": "sofa_root"
+    },
+    {
+      "name": "throw_pillow_1",
+      "type": "roundedBox",
+      "params": [0.35, 0.35, 0.1, 0.05, 2],
+      "material": { "preset": "fabric", "color": "#d97706" },
+      "position": [-0.85, 0.55, 0.1],
+      "rotation": [0, 15, 10],
+      "parent": "sofa_root"
+    },
+    {
+      "name": "throw_pillow_2",
+      "type": "roundedBox",
+      "params": [0.3, 0.3, 0.1, 0.05, 2],
+      "material": { "preset": "fabric", "color": "#0891b2" },
+      "position": [0.9, 0.52, 0.15],
+      "rotation": [0, -20, -8],
+      "parent": "sofa_root"
+    }
+  ]
+}

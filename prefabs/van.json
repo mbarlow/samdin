@@ -1,0 +1,398 @@
+{
+  "name": "van",
+  "description": "Cargo/delivery van",
+  "root": "van_root",
+  "parts": [
+    {
+      "name": "van_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "cargo_box",
+      "type": "box",
+      "params": [2.2, 1.2, 1.1],
+      "material": {
+        "preset": "painted-metal",
+        "color": "#e8e8e8",
+        "clearcoat": 0.7,
+        "clearcoatRoughness": 0.1,
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#f0f0f0" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [-0.3, 0.9, 0],
+      "parent": "van_root"
+    },
+    {
+      "name": "cabin",
+      "type": "box",
+      "params": [0.9, 0.8, 1.05],
+      "material": {
+        "preset": "painted-metal",
+        "color": "#e8e8e8",
+        "clearcoat": 0.7,
+        "clearcoatRoughness": 0.1,
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#f0f0f0" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [1.1, 0.75, 0],
+      "parent": "van_root"
+    },
+    {
+      "name": "hood",
+      "type": "box",
+      "params": [0.4, 0.3, 1],
+      "material": {
+        "preset": "painted-metal",
+        "color": "#e8e8e8",
+        "clearcoat": 0.7,
+        "clearcoatRoughness": 0.1,
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#f0f0f0" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [1.5, 0.45, 0],
+      "parent": "van_root"
+    },
+    {
+      "name": "windshield",
+      "type": "box",
+      "params": [0.02, 0.5, 0.95],
+      "material": { "preset": "glass" },
+      "position": [1.5, 0.95, 0],
+      "rotation": [0, 0, 18],
+      "parent": "van_root"
+    },
+    {
+      "name": "side_window_l",
+      "type": "box",
+      "params": [0.35, 0.35, 0.02],
+      "material": { "preset": "glass" },
+      "position": [1.1, 0.92, 0.53],
+      "parent": "van_root"
+    },
+    {
+      "name": "side_window_r",
+      "type": "box",
+      "params": [0.35, 0.35, 0.02],
+      "material": { "preset": "glass" },
+      "position": [1.1, 0.92, -0.53],
+      "parent": "van_root"
+    },
+    {
+      "name": "front_bumper",
+      "type": "box",
+      "params": [0.08, 0.15, 1.0],
+      "material": {
+        "preset": "chrome",
+        "breakup": {
+          "noise": { "amount": 0.03, "scale": 4.0, "color": "#dddddd" },
+          "roughnessVariation": 0.02
+        }
+      },
+      "position": [1.72, 0.38, 0],
+      "parent": "van_root"
+    },
+    {
+      "name": "rear_bumper",
+      "type": "box",
+      "params": [0.06, 0.12, 1.0],
+      "material": {
+        "preset": "chrome",
+        "breakup": {
+          "noise": { "amount": 0.03, "scale": 4.0, "color": "#dddddd" },
+          "roughnessVariation": 0.02
+        }
+      },
+      "position": [-1.43, 0.38, 0],
+      "parent": "van_root"
+    },
+    {
+      "name": "headlight_l",
+      "type": "box",
+      "params": [0.05, 0.1, 0.15],
+      "material": { "preset": "glow", "color": "#ffffff", "emissiveIntensity": 1.2 },
+      "position": [1.68, 0.5, 0.35],
+      "parent": "van_root"
+    },
+    {
+      "name": "headlight_r",
+      "type": "box",
+      "params": [0.05, 0.1, 0.15],
+      "material": { "preset": "glow", "color": "#ffffff", "emissiveIntensity": 1.2 },
+      "position": [1.68, 0.5, -0.35],
+      "parent": "van_root"
+    },
+    {
+      "name": "headlight_housing_l",
+      "type": "box",
+      "params": [0.06, 0.12, 0.17],
+      "material": { "preset": "chrome" },
+      "position": [1.67, 0.5, 0.35],
+      "parent": "van_root"
+    },
+    {
+      "name": "headlight_housing_r",
+      "type": "box",
+      "params": [0.06, 0.12, 0.17],
+      "material": { "preset": "chrome" },
+      "position": [1.67, 0.5, -0.35],
+      "parent": "van_root"
+    },
+    {
+      "name": "taillight_l",
+      "type": "box",
+      "params": [0.03, 0.15, 0.1],
+      "material": { "preset": "glow", "color": "#ff0000", "emissiveIntensity": 0.9 },
+      "position": [-1.42, 0.6, 0.48],
+      "parent": "van_root"
+    },
+    {
+      "name": "taillight_r",
+      "type": "box",
+      "params": [0.03, 0.15, 0.1],
+      "material": { "preset": "glow", "color": "#ff0000", "emissiveIntensity": 0.9 },
+      "position": [-1.42, 0.6, -0.48],
+      "parent": "van_root"
+    },
+    {
+      "name": "rear_door_l",
+      "type": "box",
+      "params": [0.02, 1, 0.5],
+      "material": {
+        "preset": "painted-metal",
+        "color": "#d8d8d8",
+        "clearcoat": 0.7,
+        "clearcoatRoughness": 0.1,
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#e2e2e2" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [-1.39, 0.85, 0.27],
+      "parent": "van_root"
+    },
+    {
+      "name": "rear_door_r",
+      "type": "box",
+      "params": [0.02, 1, 0.5],
+      "material": {
+        "preset": "painted-metal",
+        "color": "#d8d8d8",
+        "clearcoat": 0.7,
+        "clearcoatRoughness": 0.1,
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#e2e2e2" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [-1.39, 0.85, -0.27],
+      "parent": "van_root"
+    },
+    {
+      "name": "rear_door_handle_l",
+      "type": "box",
+      "params": [0.02, 0.04, 0.1],
+      "material": { "preset": "chrome" },
+      "position": [-1.41, 0.9, 0.15],
+      "parent": "van_root"
+    },
+    {
+      "name": "rear_door_handle_r",
+      "type": "box",
+      "params": [0.02, 0.04, 0.1],
+      "material": { "preset": "chrome" },
+      "position": [-1.41, 0.9, -0.15],
+      "parent": "van_root"
+    },
+    {
+      "name": "rear_door_hinge_tl",
+      "type": "box",
+      "params": [0.03, 0.06, 0.03],
+      "material": { "preset": "steel" },
+      "position": [-1.4, 1.25, 0.5],
+      "parent": "van_root"
+    },
+    {
+      "name": "rear_door_hinge_bl",
+      "type": "box",
+      "params": [0.03, 0.06, 0.03],
+      "material": { "preset": "steel" },
+      "position": [-1.4, 0.5, 0.5],
+      "parent": "van_root"
+    },
+    {
+      "name": "rear_door_hinge_tr",
+      "type": "box",
+      "params": [0.03, 0.06, 0.03],
+      "material": { "preset": "steel" },
+      "position": [-1.4, 1.25, -0.5],
+      "parent": "van_root"
+    },
+    {
+      "name": "rear_door_hinge_br",
+      "type": "box",
+      "params": [0.03, 0.06, 0.03],
+      "material": { "preset": "steel" },
+      "position": [-1.4, 0.5, -0.5],
+      "parent": "van_root"
+    },
+    {
+      "name": "step_l",
+      "type": "box",
+      "params": [1.6, 0.04, 0.12],
+      "material": {
+        "preset": "steel",
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#555555" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [0.1, 0.3, 0.6],
+      "parent": "van_root"
+    },
+    {
+      "name": "step_r",
+      "type": "box",
+      "params": [1.6, 0.04, 0.12],
+      "material": {
+        "preset": "steel",
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#555555" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [0.1, 0.3, -0.6],
+      "parent": "van_root"
+    },
+    {
+      "name": "wheel_fl",
+      "type": "cylinder",
+      "params": [0.2, 0.2, 0.12, 12],
+      "material": {
+        "preset": "rubber",
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#2a2a2a" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [1.1, 0.2, 0.55],
+      "rotation": [90, 0, 0],
+      "parent": "van_root"
+    },
+    {
+      "name": "wheel_fr",
+      "type": "cylinder",
+      "params": [0.2, 0.2, 0.12, 12],
+      "material": {
+        "preset": "rubber",
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#2a2a2a" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [1.1, 0.2, -0.55],
+      "rotation": [90, 0, 0],
+      "parent": "van_root"
+    },
+    {
+      "name": "wheel_rl",
+      "type": "cylinder",
+      "params": [0.2, 0.2, 0.12, 12],
+      "material": {
+        "preset": "rubber",
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#2a2a2a" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [-0.9, 0.2, 0.55],
+      "rotation": [90, 0, 0],
+      "parent": "van_root"
+    },
+    {
+      "name": "wheel_rr",
+      "type": "cylinder",
+      "params": [0.2, 0.2, 0.12, 12],
+      "material": {
+        "preset": "rubber",
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#2a2a2a" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [-0.9, 0.2, -0.55],
+      "rotation": [90, 0, 0],
+      "parent": "van_root"
+    },
+    {
+      "name": "rim_fl",
+      "type": "cylinder",
+      "params": [0.1, 0.1, 0.13, 6],
+      "material": { "preset": "chrome" },
+      "position": [1.1, 0.2, 0.55],
+      "rotation": [90, 0, 0],
+      "parent": "van_root"
+    },
+    {
+      "name": "rim_fr",
+      "type": "cylinder",
+      "params": [0.1, 0.1, 0.13, 6],
+      "material": { "preset": "chrome" },
+      "position": [1.1, 0.2, -0.55],
+      "rotation": [90, 0, 0],
+      "parent": "van_root"
+    },
+    {
+      "name": "rim_rl",
+      "type": "cylinder",
+      "params": [0.1, 0.1, 0.13, 6],
+      "material": { "preset": "chrome" },
+      "position": [-0.9, 0.2, 0.55],
+      "rotation": [90, 0, 0],
+      "parent": "van_root"
+    },
+    {
+      "name": "rim_rr",
+      "type": "cylinder",
+      "params": [0.1, 0.1, 0.13, 6],
+      "material": { "preset": "chrome" },
+      "position": [-0.9, 0.2, -0.55],
+      "rotation": [90, 0, 0],
+      "parent": "van_root"
+    },
+    {
+      "name": "side_mirror_l",
+      "type": "box",
+      "params": [0.08, 0.1, 0.06],
+      "material": {
+        "color": "#1a1a1a",
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#282828" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [1.3, 0.95, 0.58],
+      "parent": "van_root"
+    },
+    {
+      "name": "side_mirror_r",
+      "type": "box",
+      "params": [0.08, 0.1, 0.06],
+      "material": {
+        "color": "#1a1a1a",
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#282828" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [1.3, 0.95, -0.58],
+      "parent": "van_root"
+    }
+  ]
+}

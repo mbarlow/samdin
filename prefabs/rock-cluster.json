@@ -1,0 +1,89 @@
+{
+  "name": "rock-cluster",
+  "description": "Cluster of smaller rocks grouped together",
+  "root": "cluster_root",
+  "parts": [
+    {
+      "name": "cluster_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "rock_a",
+      "type": "dodecahedron",
+      "params": [0.35],
+      "material": { "color": "#7a7268", "roughness": 0.95 },
+      "position": [0, 0.22, 0],
+      "scale": [1.1, 0.8, 1.0],
+      "parent": "cluster_root"
+    },
+    {
+      "name": "rock_b",
+      "type": "icosahedron",
+      "params": [0.28, 0],
+      "material": { "color": "#6a6258", "roughness": 0.95 },
+      "position": [0.45, 0.18, 0.1],
+      "scale": [1.0, 0.75, 0.9],
+      "parent": "cluster_root"
+    },
+    {
+      "name": "rock_c",
+      "type": "dodecahedron",
+      "params": [0.25],
+      "material": { "color": "#8a8278", "roughness": 0.95 },
+      "position": [-0.35, 0.16, 0.25],
+      "scale": [0.9, 0.7, 1.1],
+      "parent": "cluster_root"
+    },
+    {
+      "name": "rock_d",
+      "type": "icosahedron",
+      "params": [0.2, 0],
+      "material": { "color": "#706860", "roughness": 0.95 },
+      "position": [0.15, 0.13, -0.4],
+      "scale": [1.0, 0.8, 0.85],
+      "parent": "cluster_root"
+    },
+    {
+      "name": "rock_e",
+      "type": "dodecahedron",
+      "params": [0.22],
+      "material": { "color": "#7a7068", "roughness": 0.95 },
+      "position": [-0.15, 0.14, -0.3],
+      "scale": [0.85, 0.7, 1.0],
+      "parent": "cluster_root"
+    },
+    {
+      "name": "pebble_1",
+      "type": "dodecahedron",
+      "params": [0.08],
+      "material": { "color": "#8a8278", "roughness": 0.95 },
+      "position": [0.6, 0.04, -0.2],
+      "parent": "cluster_root"
+    },
+    {
+      "name": "pebble_2",
+      "type": "dodecahedron",
+      "params": [0.06],
+      "material": { "color": "#6a6258", "roughness": 0.95 },
+      "position": [-0.5, 0.03, -0.1],
+      "parent": "cluster_root"
+    },
+    {
+      "name": "pebble_3",
+      "type": "dodecahedron",
+      "params": [0.07],
+      "material": { "color": "#7a7268", "roughness": 0.95 },
+      "position": [0.3, 0.035, 0.45],
+      "parent": "cluster_root"
+    },
+    {
+      "name": "pebble_4",
+      "type": "icosahedron",
+      "params": [0.05, 0],
+      "material": { "color": "#706860", "roughness": 0.95 },
+      "position": [-0.55, 0.025, 0.4],
+      "parent": "cluster_root"
+    }
+  ]
+}

@@ -1,0 +1,340 @@
+{
+  "name": "truck-semi",
+  "description": "Semi truck with attached trailer",
+  "root": "truck_root",
+  "parts": [
+    {
+      "name": "truck_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "cab_body",
+      "type": "roundedBox",
+      "params": [2.4, 1.4, 2.0, 0.08, 2],
+      "material": { "preset": "painted-metal", "color": "#b91c1c" },
+      "position": [0, 1.5, -4.2],
+      "parent": "truck_root"
+    },
+    {
+      "name": "cab_roof",
+      "type": "roundedBox",
+      "params": [2.3, 0.15, 1.8, 0.05, 2],
+      "material": { "preset": "painted-metal", "color": "#b91c1c" },
+      "position": [0, 2.28, -4.2],
+      "parent": "truck_root"
+    },
+    {
+      "name": "cab_deflector",
+      "type": "box",
+      "params": [2.2, 0.8, 0.08],
+      "material": { "preset": "painted-metal", "color": "#b91c1c" },
+      "position": [0, 2.7, -4.0],
+      "rotation": [-15, 0, 0],
+      "parent": "truck_root"
+    },
+    {
+      "name": "hood",
+      "type": "roundedBox",
+      "params": [2.2, 0.6, 1.5, 0.06, 2],
+      "material": { "preset": "painted-metal", "color": "#b91c1c" },
+      "position": [0, 1.1, -5.9],
+      "parent": "truck_root"
+    },
+    {
+      "name": "bumper_front",
+      "type": "roundedBox",
+      "params": [2.5, 0.25, 0.2, 0.04, 2],
+      "material": { "preset": "chrome" },
+      "position": [0, 0.6, -6.7],
+      "parent": "truck_root"
+    },
+    {
+      "name": "grille",
+      "type": "box",
+      "params": [1.6, 0.5, 0.05],
+      "material": { "preset": "chrome" },
+      "position": [0, 0.95, -6.65],
+      "parent": "truck_root"
+    },
+    {
+      "name": "windshield",
+      "type": "box",
+      "params": [2.0, 0.9, 0.04],
+      "material": { "preset": "glass-tinted" },
+      "position": [0, 1.9, -5.15],
+      "rotation": [-8, 0, 0],
+      "parent": "truck_root"
+    },
+    {
+      "name": "window_left",
+      "type": "box",
+      "params": [0.04, 0.6, 1.0],
+      "material": { "preset": "glass-tinted" },
+      "position": [-1.18, 1.8, -4.2],
+      "parent": "truck_root"
+    },
+    {
+      "name": "window_right",
+      "type": "box",
+      "params": [0.04, 0.6, 1.0],
+      "material": { "preset": "glass-tinted" },
+      "position": [1.18, 1.8, -4.2],
+      "parent": "truck_root"
+    },
+    {
+      "name": "headlight_l",
+      "type": "cylinder",
+      "params": [0.15, 0.15, 0.06, 8],
+      "material": { "preset": "glow", "color": "#ffffcc", "emissiveIntensity": 1.5 },
+      "position": [-0.8, 1.0, -6.68],
+      "rotation": [90, 0, 0],
+      "parent": "truck_root"
+    },
+    {
+      "name": "headlight_r",
+      "type": "cylinder",
+      "params": [0.15, 0.15, 0.06, 8],
+      "material": { "preset": "glow", "color": "#ffffcc", "emissiveIntensity": 1.5 },
+      "position": [0.8, 1.0, -6.68],
+      "rotation": [90, 0, 0],
+      "parent": "truck_root"
+    },
+    {
+      "name": "exhaust_l",
+      "type": "cylinder",
+      "params": [0.08, 0.08, 2.2, 8],
+      "material": { "preset": "chrome" },
+      "position": [-1.15, 2.0, -3.5],
+      "parent": "truck_root"
+    },
+    {
+      "name": "exhaust_r",
+      "type": "cylinder",
+      "params": [0.08, 0.08, 2.2, 8],
+      "material": { "preset": "chrome" },
+      "position": [1.15, 2.0, -3.5],
+      "parent": "truck_root"
+    },
+    {
+      "name": "fuel_tank_l",
+      "type": "cylinder",
+      "params": [0.3, 0.3, 1.2, 10],
+      "material": { "preset": "steel" },
+      "position": [-1.15, 0.65, -4.2],
+      "rotation": [90, 0, 0],
+      "parent": "truck_root"
+    },
+    {
+      "name": "fuel_tank_r",
+      "type": "cylinder",
+      "params": [0.3, 0.3, 1.2, 10],
+      "material": { "preset": "steel" },
+      "position": [1.15, 0.65, -4.2],
+      "rotation": [90, 0, 0],
+      "parent": "truck_root"
+    },
+    {
+      "name": "step_l",
+      "type": "box",
+      "params": [0.3, 0.06, 0.5],
+      "material": { "preset": "steel" },
+      "position": [-1.2, 0.5, -4.5],
+      "parent": "truck_root"
+    },
+    {
+      "name": "step_r",
+      "type": "box",
+      "params": [0.3, 0.06, 0.5],
+      "material": { "preset": "steel" },
+      "position": [1.2, 0.5, -4.5],
+      "parent": "truck_root"
+    },
+    {
+      "name": "mirror_l",
+      "type": "box",
+      "params": [0.04, 0.2, 0.15],
+      "material": { "preset": "chrome" },
+      "position": [-1.35, 2.1, -5.0],
+      "parent": "truck_root"
+    },
+    {
+      "name": "mirror_r",
+      "type": "box",
+      "params": [0.04, 0.2, 0.15],
+      "material": { "preset": "chrome" },
+      "position": [1.35, 2.1, -5.0],
+      "parent": "truck_root"
+    },
+    {
+      "name": "trailer_body",
+      "type": "box",
+      "params": [2.5, 2.8, 10.0],
+      "material": { "preset": "painted-metal", "color": "#e5e7eb" },
+      "position": [0, 2.2, 2.0],
+      "parent": "truck_root"
+    },
+    {
+      "name": "trailer_underframe",
+      "type": "box",
+      "params": [2.4, 0.15, 10.0],
+      "material": { "preset": "steel" },
+      "position": [0, 0.7, 2.0],
+      "parent": "truck_root"
+    },
+    {
+      "name": "trailer_door_l",
+      "type": "box",
+      "params": [1.2, 2.6, 0.06],
+      "material": { "preset": "steel", "color": "#d1d5db" },
+      "position": [-0.6, 2.2, 7.0],
+      "parent": "truck_root"
+    },
+    {
+      "name": "trailer_door_r",
+      "type": "box",
+      "params": [1.2, 2.6, 0.06],
+      "material": { "preset": "steel", "color": "#d1d5db" },
+      "position": [0.6, 2.2, 7.0],
+      "parent": "truck_root"
+    },
+    {
+      "name": "trailer_door_handle_l",
+      "type": "cylinder",
+      "params": [0.02, 0.02, 0.5, 6],
+      "material": { "preset": "steel" },
+      "position": [-0.05, 2.2, 7.05],
+      "parent": "truck_root"
+    },
+    {
+      "name": "trailer_door_handle_r",
+      "type": "cylinder",
+      "params": [0.02, 0.02, 0.5, 6],
+      "material": { "preset": "steel" },
+      "position": [0.05, 2.2, 7.05],
+      "parent": "truck_root"
+    },
+    {
+      "name": "taillight_l",
+      "type": "box",
+      "params": [0.2, 0.15, 0.03],
+      "material": { "preset": "glow", "color": "#ff2200", "emissiveIntensity": 1.5 },
+      "position": [-1.1, 1.2, 7.02],
+      "parent": "truck_root"
+    },
+    {
+      "name": "taillight_r",
+      "type": "box",
+      "params": [0.2, 0.15, 0.03],
+      "material": { "preset": "glow", "color": "#ff2200", "emissiveIntensity": 1.5 },
+      "position": [1.1, 1.2, 7.02],
+      "parent": "truck_root"
+    },
+    {
+      "name": "mudguard_l",
+      "type": "box",
+      "params": [0.08, 0.5, 1.0],
+      "material": { "color": "#1a1a1a", "roughness": 0.9 },
+      "position": [-1.2, 0.65, 4.5],
+      "parent": "truck_root"
+    },
+    {
+      "name": "mudguard_r",
+      "type": "box",
+      "params": [0.08, 0.5, 1.0],
+      "material": { "color": "#1a1a1a", "roughness": 0.9 },
+      "position": [1.2, 0.65, 4.5],
+      "parent": "truck_root"
+    },
+    {
+      "name": "wheel_cab_fl",
+      "type": "cylinder",
+      "params": [0.45, 0.45, 0.28, 14],
+      "material": { "preset": "rubber" },
+      "position": [-1.1, 0.45, -5.8],
+      "rotation": [0, 0, 90],
+      "parent": "truck_root"
+    },
+    {
+      "name": "wheel_cab_fr",
+      "type": "cylinder",
+      "params": [0.45, 0.45, 0.28, 14],
+      "material": { "preset": "rubber" },
+      "position": [1.1, 0.45, -5.8],
+      "rotation": [0, 0, 90],
+      "parent": "truck_root"
+    },
+    {
+      "name": "wheel_cab_rl",
+      "type": "cylinder",
+      "params": [0.45, 0.45, 0.28, 14],
+      "material": { "preset": "rubber" },
+      "position": [-1.1, 0.45, -3.2],
+      "rotation": [0, 0, 90],
+      "parent": "truck_root"
+    },
+    {
+      "name": "wheel_cab_rr",
+      "type": "cylinder",
+      "params": [0.45, 0.45, 0.28, 14],
+      "material": { "preset": "rubber" },
+      "position": [1.1, 0.45, -3.2],
+      "rotation": [0, 0, 90],
+      "parent": "truck_root"
+    },
+    {
+      "name": "wheel_trailer_1l",
+      "type": "cylinder",
+      "params": [0.45, 0.45, 0.28, 14],
+      "material": { "preset": "rubber" },
+      "position": [-1.1, 0.45, 4.0],
+      "rotation": [0, 0, 90],
+      "parent": "truck_root"
+    },
+    {
+      "name": "wheel_trailer_1r",
+      "type": "cylinder",
+      "params": [0.45, 0.45, 0.28, 14],
+      "material": { "preset": "rubber" },
+      "position": [1.1, 0.45, 4.0],
+      "rotation": [0, 0, 90],
+      "parent": "truck_root"
+    },
+    {
+      "name": "wheel_trailer_2l",
+      "type": "cylinder",
+      "params": [0.45, 0.45, 0.28, 14],
+      "material": { "preset": "rubber" },
+      "position": [-1.1, 0.45, 5.0],
+      "rotation": [0, 0, 90],
+      "parent": "truck_root"
+    },
+    {
+      "name": "wheel_trailer_2r",
+      "type": "cylinder",
+      "params": [0.45, 0.45, 0.28, 14],
+      "material": { "preset": "rubber" },
+      "position": [1.1, 0.45, 5.0],
+      "rotation": [0, 0, 90],
+      "parent": "truck_root"
+    },
+    {
+      "name": "hubcap_cfl",
+      "type": "cylinder",
+      "params": [0.22, 0.22, 0.06, 8],
+      "material": { "preset": "chrome" },
+      "position": [-1.2, 0.45, -5.8],
+      "rotation": [0, 0, 90],
+      "parent": "truck_root"
+    },
+    {
+      "name": "hubcap_cfr",
+      "type": "cylinder",
+      "params": [0.22, 0.22, 0.06, 8],
+      "material": { "preset": "chrome" },
+      "position": [1.2, 0.45, -5.8],
+      "rotation": [0, 0, 90],
+      "parent": "truck_root"
+    }
+  ]
+}

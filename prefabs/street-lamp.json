@@ -1,0 +1,53 @@
+{
+  "name": "street-lamp",
+  "description": "Urban street lamp with single arm",
+  "root": "lamp_root",
+  "parts": [
+    {
+      "name": "lamp_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "lamp_base",
+      "type": "cylinder",
+      "params": [0.15, 0.12, 0.1, 8],
+      "material": { "preset": "painted-metal", "color": "#404040" },
+      "position": [0, 0.05, 0],
+      "parent": "lamp_root"
+    },
+    {
+      "name": "lamp_pole",
+      "type": "cylinder",
+      "params": [0.08, 0.06, 4.5, 8],
+      "material": { "preset": "painted-metal", "color": "#404040" },
+      "position": [0, 2.35, 0],
+      "parent": "lamp_root"
+    },
+    {
+      "name": "lamp_arm",
+      "type": "cylinder",
+      "params": [0.04, 0.04, 1.5, 6],
+      "material": { "preset": "painted-metal", "color": "#404040" },
+      "position": [0.6, 4.4, 0],
+      "rotation": [0, 0, 70],
+      "parent": "lamp_root"
+    },
+    {
+      "name": "lamp_housing",
+      "type": "roundedBox",
+      "params": [0.4, 0.15, 0.25, 0.02, 2],
+      "material": { "preset": "painted-metal", "color": "#303030" },
+      "position": [1.1, 4.2, 0],
+      "parent": "lamp_root"
+    },
+    {
+      "name": "lamp_light",
+      "type": "roundedBox",
+      "params": [0.35, 0.05, 0.2, 0.01, 2],
+      "material": { "preset": "glow", "color": "#ffcc66", "emissiveIntensity": 4.0 },
+      "position": [1.1, 4.1, 0],
+      "parent": "lamp_root"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "name": "hazard-gate",
+  "root": "gate_root",
+  "parts": [
+    { "name": "gate_root", "type": "group", "position": [0, 0, 0] },
+    {
+      "name": "post_left",
+      "type": "box",
+      "params": [0.4, 3.8, 0.4],
+      "options": { "pivot": "bottom" },
+      "material": {
+        "preset": "painted-metal",
+        "color": "#5e564c",
+        "breakup": {
+          "noise": { "amount": 0.12, "scale": 2.1, "color": "#756b60" },
+          "grime": { "amount": 0.22, "axis": "y", "color": "#171310" }
+        }
+      },
+      "position": [-1.5, 0, 0],
+      "parent": "gate_root"
+    },
+    {
+      "name": "post_right",
+      "type": "box",
+      "params": [0.4, 3.8, 0.4],
+      "options": { "pivot": "bottom" },
+      "material": { "preset": "painted-metal", "color": "#5e564c" },
+      "position": [1.5, 0, 0],
+      "parent": "gate_root"
+    },
+    {
+      "name": "lintel",
+      "type": "box",
+      "params": [3.4, 0.42, 0.42],
+      "material": { "preset": "steel", "color": "#4a453e" },
+      "position": [0, 3.58, 0],
+      "parent": "gate_root"
+    },
+    {
+      "name": "gate_panel",
+      "type": "box",
+      "params": [2.6, 2.4, 0.14],
+      "material": {
+        "preset": "painted-metal",
+        "color": "#43403b",
+        "emissiveStrips": [
+          { "face": "front", "axis": "y", "count": 3, "spacing": 0.65, "width": 0.08, "length": 1.7, "color": "#ff5f36", "intensity": 1.35 }
+        ]
+      },
+      "position": [0, 1.6, 0],
+      "parent": "gate_root"
+    },
+    {
+      "name": "sensor_left",
+      "type": "sphere",
+      "params": [0.08, 0],
+      "material": { "preset": "glow", "color": "#ff5d34", "emissiveIntensity": 1.9 },
+      "position": [-1.18, 3.1, 0.24],
+      "parent": "gate_root"
+    },
+    {
+      "name": "sensor_right",
+      "type": "sphere",
+      "params": [0.08, 0],
+      "material": { "preset": "glow", "color": "#ff5d34", "emissiveIntensity": 1.9 },
+      "position": [1.18, 3.1, 0.24],
+      "parent": "gate_root"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "name": "floor-lamp",
+  "description": "Modern floor standing lamp",
+  "root": "lamp_root",
+  "parts": [
+    {
+      "name": "lamp_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "base",
+      "type": "cylinder",
+      "params": [0.2, 0.22, 0.03, 12],
+      "material": { "preset": "steel" },
+      "position": [0, 0.015, 0],
+      "parent": "lamp_root"
+    },
+    {
+      "name": "stem",
+      "type": "cylinder",
+      "params": [0.02, 0.02, 1.5, 8],
+      "material": { "preset": "steel" },
+      "position": [0, 0.78, 0],
+      "parent": "lamp_root"
+    },
+    {
+      "name": "shade",
+      "type": "lathe",
+      "params": [
+        [[0.03, 0], [0.2, 0.2], [0.22, 0.22], [0.2, 0.24]],
+        12
+      ],
+      "material": { "preset": "fabric", "color": "#e8e0d0" },
+      "position": [0, 1.53, 0],
+      "parent": "lamp_root"
+    },
+    {
+      "name": "light",
+      "type": "pointLight",
+      "params": [1.5, 5, 2, true, 0.04],
+      "material": { "color": "#fff5e0" },
+      "position": [0, 1.65, 0],
+      "parent": "lamp_root"
+    }
+  ]
+}

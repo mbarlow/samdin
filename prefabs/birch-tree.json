@@ -1,0 +1,89 @@
+{
+  "name": "birch-tree",
+  "description": "Slender birch tree with white bark and delicate canopy",
+  "root": "birch_root",
+  "parts": [
+    {
+      "name": "birch_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "trunk",
+      "type": "cylinder",
+      "params": [0.08, 0.12, 3, 8],
+      "material": { "color": "#e8e0d0", "roughness": 0.7 },
+      "position": [0, 1.5, 0],
+      "parent": "birch_root"
+    },
+    {
+      "name": "bark_mark_1",
+      "type": "box",
+      "params": [0.09, 0.03, 0.02],
+      "material": { "color": "#2a2a2a" },
+      "position": [0, 0.8, 0.08],
+      "parent": "birch_root"
+    },
+    {
+      "name": "bark_mark_2",
+      "type": "box",
+      "params": [0.07, 0.025, 0.02],
+      "material": { "color": "#2a2a2a" },
+      "position": [0.06, 1.4, 0.05],
+      "rotation": [0, 30, 0],
+      "parent": "birch_root"
+    },
+    {
+      "name": "bark_mark_3",
+      "type": "box",
+      "params": [0.08, 0.03, 0.02],
+      "material": { "color": "#2a2a2a" },
+      "position": [-0.05, 2.1, 0.06],
+      "rotation": [0, -20, 0],
+      "parent": "birch_root"
+    },
+    {
+      "name": "branch_1",
+      "type": "cylinder",
+      "params": [0.025, 0.015, 0.6, 6],
+      "material": { "color": "#d0c8b8", "roughness": 0.7 },
+      "position": [-0.25, 2.5, 0],
+      "rotation": [0, 0, -50],
+      "parent": "birch_root"
+    },
+    {
+      "name": "branch_2",
+      "type": "cylinder",
+      "params": [0.02, 0.012, 0.5, 6],
+      "material": { "color": "#d0c8b8", "roughness": 0.7 },
+      "position": [0.2, 2.3, 0.15],
+      "rotation": [20, 0, 45],
+      "parent": "birch_root"
+    },
+    {
+      "name": "canopy_main",
+      "type": "icosahedron",
+      "params": [0.7, 1],
+      "material": { "preset": "foliage", "color": "#4a8a4a" },
+      "position": [0, 3.3, 0],
+      "scale": [1, 1.2, 1],
+      "parent": "birch_root"
+    },
+    {
+      "name": "canopy_side_1",
+      "type": "icosahedron",
+      "params": [0.4, 1],
+      "material": { "preset": "foliage", "color": "#5a9a5a" },
+      "position": [-0.5, 3, 0],
+      "parent": "birch_root"
+    },
+    {
+      "name": "canopy_side_2",
+      "type": "icosahedron",
+      "params": [0.35, 1],
+      "material": { "preset": "foliage", "color": "#4a8a4a" },
+      "position": [0.4, 2.9, 0.2],
+      "parent": "birch_root"
+    }
+  ]
+}
