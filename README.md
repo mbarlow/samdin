@@ -8,9 +8,12 @@ Latest changes are summarized in [RELEASE_NOTES.md](RELEASE_NOTES.md).
 
 ## Quick Start
 
-1. Open `index.html` in a browser
-2. Load a spec from the `specs/` folder or paste JSON into the editor
-3. Use the viewer controls to orbit, pan, and zoom
+1. Start the dev server: `make dev PORT=8888` (omit `PORT=` to use the default `7777`)
+2. Open `http://localhost:8888` in a browser
+3. Load a spec from the `specs/` folder or paste JSON into the editor
+4. Use the viewer controls to orbit, pan, and zoom
+
+See `make help` for other targets (`serve`, `smoke`).
 
 ## Scene Specification Format
 
@@ -391,7 +394,7 @@ Reusable model components. Use `"type": "prefab"` with `"src": "prefab-name"`:
 | `window` | Double-hung window |
 | `staircase` | Stairs with railings |
 
-#### Street & Outdoor (6)
+#### Street & Outdoor (5)
 | Prefab | Description |
 |--------|-------------|
 | `street-lamp` | Street light pole |
@@ -399,7 +402,6 @@ Reusable model components. Use `"type": "prefab"` with `"src": "prefab-name"`:
 | `trash-can` | Public waste bin |
 | `fire-hydrant` | Red fire hydrant |
 | `shopping-cart` | Metal shopping cart |
-| `bike-handlebars` | First-person bike view |
 
 #### Figures & Structures (4)
 | Prefab | Description |
@@ -478,29 +480,24 @@ Random distribution:
 ## Example Scenes
 
 ### Primitive Tests
-- `specs/primitives-test.json` - All basic primitives
 - `specs/lathe-test.json` - Lathe examples (vases, glasses, goblets)
 - `specs/cables-test.json` - Cables, catenaries, and pipes
 - `specs/lights-test.json` - Light primitive examples
 
 ### Prefab Tests
-- `specs/trees-test.json` - All tree and bush varieties
 - `specs/furniture-test.json` - Furniture in room layouts
 - `specs/vehicles-test.json` - All vehicle types
 
 ### Showcase Scenes
 - `specs/showcase.json` - Combined feature showcase
-- `specs/brutalist-complex.json` - Brutalist architecture with pipes, cables, lights
-- `specs/bike-path.json` - Lowpoly first-person bike scene
+- `specs/clinic.json` - Clinic interior scene
+- `specs/motorcycle-street.json` - Motorcycle on a street scene
 - `prefabs/prefab-test.json` - Street scene with prefabs
-- `specs/industrial-ruin-foundry.json` - Scene settings + local modules + industrial prefabs
-- `specs/ruined-civic-plaza.json` - Civic ruin composition with machine intrusion accents
-- `specs/nier-automata-boss-arena-remastered.json` - Boss-arena benchmark using the upgraded workflow
 
 ## Validation & Inspection
 
-- Validate specs from the CLI: `node cli/validate-spec.cjs specs/nier-automata-boss-arena-remastered.json`
-- Inspect a spec with screenshots + review template: `node cli/inspect-model.js specs/nier-automata-boss-arena-remastered.json /tmp/nier-inspect`
+- Validate specs from the CLI: `node cli/validate-spec.cjs specs/showcase.json`
+- Inspect a spec with screenshots + review template: `node cli/inspect-model.js specs/showcase.json /tmp/showcase-inspect`
 - Inspection now also captures the spec-defined first camera as `*-specCamera.png` before running the preset sweep.
 
 ## Keyboard Shortcuts
