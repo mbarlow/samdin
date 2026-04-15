@@ -18,6 +18,11 @@
 - Spec: `specs/quality-bar-field-radio.json`
 - Intent: hard-surface quality bar for a compact hero prop with layered fascia, readable material groups, clean product-shot framing, and believable silhouette.
 
+## Acceptance
+
+- Status: accepted on 2026-04-14 as the current quality anchor.
+- Decision: future rebuilds should match or exceed the radio's silhouette clarity, material separation, and spec-camera presentation before they are considered done.
+
 ## What changed in the rebuild
 
 - Reduced stage footprint so the model, not the plinth, drives framing.
@@ -39,3 +44,9 @@
 1. Accept or reject the radio as the quality bar.
 2. If accepted, derive the next prop or vehicle from the same review discipline: silhouette, staged render, then detail.
 3. If rejected, keep iterating this single anchor until the render quality is unambiguous.
+
+## Active next order
+
+1. Vehicle
+2. Character
+3. Environment
