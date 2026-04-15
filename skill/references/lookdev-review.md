@@ -38,6 +38,93 @@ Use this file when the task is about presentation quality, camera framing, or di
 - Environment feels empty: no foreground anchors, no repeated module rhythm, or no secondary props
 - Industrial scene feels fake: no scale cues, no grime logic, and no separation between structural and functional parts
 
+## Hero-Shot Scene Recipes
+
+Paste into `scene` as a starting point and tune from there. All three assume `quality: "high"`.
+
+**Product shot** — clean studio, clear silhouette, controlled reflections:
+
+```json
+{
+  "quality": "high",
+  "background": { "type": "gradient", "color": "#2a2a32", "color2": "#0a0a0e" },
+  "lighting": { "preset": "showcase", "environment": "studio", "envMapIntensity": 1.1, "shadowQuality": "high" },
+  "ground": { "reflective": true },
+  "exposure": 1.05,
+  "toneMapping": "ACESFilmic",
+  "postfx": {
+    "ssao": { "enabled": true, "kernelRadius": 8, "minDistance": 0.003, "maxDistance": 0.12 },
+    "bloom": { "enabled": true, "strength": 0.25, "radius": 0.3, "threshold": 0.92 },
+    "colorGrade": { "enabled": true, "saturation": 1.0, "contrast": 1.06 },
+    "fxaa": true
+  }
+}
+```
+
+**Cinematic** — moody, dramatic, high contrast:
+
+```json
+{
+  "quality": "high",
+  "background": { "type": "gradient", "color": "#1a1520", "color2": "#000000" },
+  "lighting": { "preset": "dramatic", "environment": "night", "shadowQuality": "high" },
+  "exposure": 0.9,
+  "toneMapping": "ACESFilmic",
+  "postfx": {
+    "ssao": { "enabled": true },
+    "bloom": { "enabled": true, "strength": 0.8, "threshold": 0.7 },
+    "vignette": { "enabled": true, "intensity": 0.6 },
+    "chromatic": { "enabled": true, "amount": 0.003 },
+    "grain": { "enabled": true, "intensity": 0.08 },
+    "colorGrade": { "enabled": true, "saturation": 0.85, "contrast": 1.1 },
+    "fxaa": true
+  }
+}
+```
+
+**Architectural** — clean, bright, readable:
+
+```json
+{
+  "quality": "high",
+  "lighting": { "preset": "overcast", "environment": "outdoor", "envMapIntensity": 0.8, "shadowQuality": "high" },
+  "exposure": 1.1,
+  "toneMapping": "ACESFilmic",
+  "postfx": {
+    "ssao": { "enabled": true, "kernelRadius": 12 },
+    "bloom": { "enabled": true, "strength": 0.2, "threshold": 0.95 },
+    "fxaa": true
+  }
+}
+```
+
+Avoid DOF on product shots unless the aperture is very tight (`0.0003`) and `focus` is matched to camera distance; a mismatched DOF is what makes hero renders look blurry.
+
+## First-Person Polaroid Capture
+
+The runtime has a built-in photography mode that is separate from the preset sweep in `inspect-model.js`. Use it when the request calls for hand-framed shots (hero renders, README art, marketing captures) rather than programmatic coverage.
+
+Workflow:
+
+1. Switch the viewer into first-person mode and click into the scene to engage pointer-lock. Move with WASD plus mouse look.
+2. Hold right mouse button to raise the viewfinder overlay. The viewfinder crops the final image to its bounds.
+3. Scroll to resize the viewfinder (10 to 90 percent of viewport). Press `F` to toggle flash.
+4. Release right mouse button to capture. The shot is cropped, stamped with a caption, appended to the polaroid strip, and copied to the clipboard.
+5. Click `Export` on the polaroid strip to download the full roll as PNGs.
+
+When to choose polaroid over `inspect-model.js`:
+
+- You need a specific focal point or framing the preset cameras do not cover.
+- The asset has interior spaces that only read from first-person.
+- You want the "walked up and took a photo" look for marketing or README art.
+- You want multiple angles on a single run with caption metadata baked in.
+
+When to choose `inspect-model.js`:
+
+- You need reproducible preset coverage for diagnosis or comparison.
+- You want wireframe and design-grid variants for review.
+- The task is automation (CI, batch renders, regression checks).
+
 ## Finish Checklist
 
 - silhouette reads from front, side, and three-quarter views
