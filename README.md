@@ -4,9 +4,15 @@
 
 ![Samdin — Clinic spec loaded in the viewer](clinic.png)
 
+![Samdin — Commodore 64 breadbin recreation, hero render](c64.png)
+
+![Samdin — Commodore 64 under inspection with first-person polaroid captures in the lower-left strip](c64-2.png)
+
+*A faithful recreation of the 1982 Commodore 64 breadbin — CSG-carved wedge chassis, recessed keyboard well, stepped doubleshot keycaps, and the unmistakable rainbow badge — built entirely from a single declarative JSON spec. Every angle captured above came out of Samdin's in-browser first-person polaroid feature: step into the scene with WASD, line up the viewfinder, and the shot drops onto the polaroid strip for export.*
+
 A JSON-based 3D scene builder using Three.js. Create complex 3D scenes by composing primitives, prefabs, modules, nested CSG parts, and scene-level render settings through declarative JSON specifications.
 
-Latest changes are summarized in [RELEASE_NOTES.md](RELEASE_NOTES.md).
+Latest changes are summarized in [docs/RELEASE_NOTES.md](docs/RELEASE_NOTES.md).
 
 ## Quick Start
 
