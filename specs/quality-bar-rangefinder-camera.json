@@ -37,8 +37,8 @@
         {
           "name": "pip",
           "type": "box",
-          "params": [0.004, 0.018, 0.002],
-          "material": { "color": "#0a0a0a", "roughness": 0.9, "metalness": 0.1 },
+          "params": [0.008, 0.028, 0.003],
+          "material": { "color": "#050505", "roughness": 0.92, "metalness": 0.05 },
           "position": [0, 0, 0],
           "parent": "pip_root"
         }
@@ -804,7 +804,6 @@
       "params": [0.166, 0.005, 8, 32],
       "material": { "color": "#0a0908", "roughness": 0.7 },
       "position": [0.05, 0.31, 0.323],
-      "rotation": [0, 90, 0],
       "parent": "camera_root"
     },
     {
@@ -813,7 +812,6 @@
       "params": [0.166, 0.005, 8, 32],
       "material": { "color": "#0a0908", "roughness": 0.7 },
       "position": [0.05, 0.31, 0.367],
-      "rotation": [0, 90, 0],
       "parent": "camera_root"
     },
     {
@@ -873,7 +871,6 @@
       "params": [0.152, 0.0035, 6, 36],
       "material": { "color": "#080807", "roughness": 0.85 },
       "position": [0.05, 0.31, 0.4185],
-      "rotation": [0, 90, 0],
       "parent": "camera_root"
     },
 
@@ -893,33 +890,32 @@
       "params": [0.13, 2],
       "material": {
         "preset": "glass",
-        "color": "#1a2240",
+        "color": "#1a1c24",
         "transmission": 0.92,
         "ior": 1.52,
         "roughness": 0.02,
         "metalness": 0.0,
-        "envMapIntensity": 2.2,
+        "envMapIntensity": 2.4,
         "clearcoat": 1.0,
-        "clearcoatRoughness": 0.05
+        "clearcoatRoughness": 0.04
       },
-      "position": [0.05, 0.31, 0.43],
+      "position": [0.05, 0.31, 0.428],
       "scale": [1.0, 1.0, 0.32],
       "parent": "camera_root"
     },
     {
       "name": "lens_coating_tint",
       "type": "cylinder",
-      "params": [0.124, 0.124, 0.001, 36],
+      "params": [0.124, 0.124, 0.0015, 36],
       "material": {
-        "color": "#3a3258",
-        "roughness": 0.04,
-        "metalness": 0.6,
-        "transmission": 0.4,
+        "color": "#3a2e2a",
+        "roughness": 0.06,
+        "metalness": 0.5,
         "envMapIntensity": 2.0,
-        "emissive": "#1a1838",
-        "emissiveIntensity": 0.08
+        "emissive": "#1a0e08",
+        "emissiveIntensity": 0.18
       },
-      "position": [0.05, 0.31, 0.443],
+      "position": [0.05, 0.31, 0.4435],
       "rotation": [90, 0, 0],
       "parent": "camera_root"
     },
@@ -944,14 +940,91 @@
 
     {
       "name": "lens_engraving_strip",
-      "type": "ring",
-      "params": [0.165, 0.169, 36],
+      "type": "cylinder",
+      "params": [0.169, 0.169, 0.012, 36],
       "material": { "color": "#cabe98", "roughness": 0.55, "metalness": 0.25 },
-      "position": [0.05, 0.31, 0.395],
-      "rotation": [0, 90, 0],
+      "position": [0.05, 0.31, 0.31],
+      "rotation": [90, 0, 0],
       "parent": "camera_root"
     },
 
+    {
+      "name": "eyepiece_bezel",
+      "type": "roundedBox",
+      "params": [0.13, 0.095, 0.012, 0.012, 2],
+      "material": { "color": "#16120e", "roughness": 0.55, "metalness": 0.55 },
+      "position": [-0.45, 0.51, -0.171],
+      "parent": "camera_root"
+    },
+    {
+      "name": "eyepiece_recess",
+      "type": "box",
+      "params": [0.105, 0.07, 0.01],
+      "material": { "color": "#0a0a0c", "roughness": 0.85 },
+      "position": [-0.45, 0.51, -0.169],
+      "parent": "camera_root"
+    },
+    {
+      "name": "eyepiece_glass",
+      "type": "box",
+      "params": [0.095, 0.06, 0.005],
+      "material": {
+        "preset": "glass",
+        "color": "#3a4a52",
+        "transmission": 0.42,
+        "ior": 1.5,
+        "roughness": 0.06,
+        "envMapIntensity": 1.8,
+        "clearcoat": 0.8,
+        "clearcoatRoughness": 0.1
+      },
+      "position": [-0.45, 0.51, -0.176],
+      "parent": "camera_root"
+    },
+    {
+      "name": "eyepiece_diopter_screw",
+      "type": "cylinder",
+      "params": [0.012, 0.012, 0.005, 12],
+      "material": { "color": "#a07a3a", "roughness": 0.5, "metalness": 0.85 },
+      "position": [-0.36, 0.55, -0.171],
+      "rotation": [90, 0, 0],
+      "parent": "camera_root"
+    },
+    {
+      "name": "back_lcd_window",
+      "type": "box",
+      "params": [0.16, 0.04, 0.006],
+      "material": {
+        "preset": "glass",
+        "color": "#1a1814",
+        "transmission": 0.55,
+        "roughness": 0.1,
+        "ior": 1.5
+      },
+      "position": [0.32, 0.55, -0.171],
+      "parent": "camera_root"
+    },
+    {
+      "name": "back_lcd_bezel",
+      "type": "roundedBox",
+      "params": [0.18, 0.055, 0.005, 0.006, 1],
+      "material": { "color": "#16120e", "roughness": 0.6, "metalness": 0.5 },
+      "position": [0.32, 0.55, -0.169],
+      "parent": "camera_root"
+    },
+    {
+      "name": "back_thumb_rest",
+      "type": "roundedBox",
+      "params": [0.16, 0.16, 0.012, 0.018, 2],
+      "material": {
+        "preset": "leather",
+        "color": "#0e0c0a",
+        "roughness": 0.85,
+        "breakup": { "noise": { "amount": 0.08, "scale": 9.0, "color": "#16120e" }, "roughnessVariation": 0.1 }
+      },
+      "position": [0.45, 0.36, -0.172],
+      "parent": "camera_root"
+    },
     {
       "name": "back_door_seam_top",
       "type": "box",
