@@ -1,0 +1,633 @@
+{
+  "name": "commodore-64",
+  "description": "Faithful Commodore 64 breadbin (1982) — CSG wedge chassis with sloped top, recessed keyboard well, brown main keys with cream legends, tan function keys, rainbow badge top-left, red power LED.",
+  "root": "scene_root",
+  "scene": {
+    "quality": "high",
+    "background": { "type": "gradient", "color": "#2a2a30", "color2": "#08080c" },
+    "lighting": {
+      "preset": "showcase",
+      "environment": "studio",
+      "envMapIntensity": 1.15,
+      "shadowQuality": "high",
+      "intensity": 1.1
+    },
+    "ground": { "reflective": true },
+    "exposure": 1.05,
+    "toneMapping": "ACESFilmic",
+    "camera": {
+      "preset": "threeQuarter",
+      "distanceMultiplier": 0.5,
+      "positionOffset": [0.1, 0.2, 0.3],
+      "targetOffset": [0, 0.1, 0]
+    },
+    "postfx": {
+      "ssao": { "enabled": true, "kernelRadius": 6, "minDistance": 0.003, "maxDistance": 0.1 },
+      "bloom": { "enabled": true, "strength": 0.2, "radius": 0.3, "threshold": 0.95 },
+      "colorGrade": { "enabled": true, "saturation": 1.0, "brightness": 1.02, "contrast": 1.06 },
+      "fxaa": true
+    }
+  },
+  "modules": {
+    "main-key": {
+      "root": "key_root",
+      "parts": [
+        { "name": "key_root", "type": "group" },
+        {
+          "name": "cap_base",
+          "type": "roundedBox",
+          "params": [0.14, 0.05, 0.14, 0.012, 2],
+          "material": {
+            "color": "#2a1a10",
+            "roughness": 0.65,
+            "metalness": 0.03,
+            "breakup": { "noise": { "amount": 0.03, "scale": 5.0, "color": "#1a0f06" }, "roughnessVariation": 0.04 }
+          },
+          "position": [0, 0.025, 0],
+          "parent": "key_root",
+          "castShadow": true
+        },
+        {
+          "name": "cap_top",
+          "type": "roundedBox",
+          "params": [0.13, 0.035, 0.13, 0.01, 2],
+          "material": {
+            "color": "#4a3224",
+            "roughness": 0.5,
+            "metalness": 0.05,
+            "clearcoat": 0.3,
+            "clearcoatRoughness": 0.3,
+            "breakup": { "noise": { "amount": 0.04, "scale": 6.0, "color": "#3a2618" }, "roughnessVariation": 0.04 }
+          },
+          "position": [0, 0.067, 0],
+          "parent": "key_root",
+          "castShadow": true
+        },
+        {
+          "name": "legend",
+          "type": "box",
+          "params": [0.075, 0.003, 0.045],
+          "material": { "color": "#f0e4c8", "roughness": 0.55, "metalness": 0.02, "emissive": "#806c48", "emissiveIntensity": 0.25 },
+          "position": [0, 0.086, 0.012],
+          "parent": "key_root"
+        }
+      ]
+    },
+    "fn-key": {
+      "root": "fn_root",
+      "parts": [
+        { "name": "fn_root", "type": "group" },
+        {
+          "name": "fn_base",
+          "type": "roundedBox",
+          "params": [0.21, 0.05, 0.14, 0.014, 2],
+          "material": {
+            "color": "#b8a988",
+            "roughness": 0.7,
+            "metalness": 0.03,
+            "breakup": { "noise": { "amount": 0.04, "scale": 4.0, "color": "#9c9070" }, "roughnessVariation": 0.04 }
+          },
+          "position": [0, 0.025, 0],
+          "parent": "fn_root",
+          "castShadow": true
+        },
+        {
+          "name": "fn_top",
+          "type": "roundedBox",
+          "params": [0.20, 0.035, 0.13, 0.012, 2],
+          "material": {
+            "color": "#d8cca8",
+            "roughness": 0.55,
+            "metalness": 0.04,
+            "clearcoat": 0.25,
+            "clearcoatRoughness": 0.35,
+            "breakup": { "noise": { "amount": 0.04, "scale": 4.5, "color": "#c2b594" }, "roughnessVariation": 0.04 }
+          },
+          "position": [0, 0.067, 0],
+          "parent": "fn_root",
+          "castShadow": true
+        },
+        {
+          "name": "fn_legend",
+          "type": "box",
+          "params": [0.14, 0.003, 0.045],
+          "material": { "color": "#2a1f14", "roughness": 0.65, "metalness": 0.05 },
+          "position": [0, 0.086, 0.012],
+          "parent": "fn_root"
+        }
+      ]
+    }
+  },
+  "parts": [
+    { "name": "scene_root", "type": "group", "position": [0, 0, 0] },
+
+    { "name": "c64", "type": "group", "position": [0, 0.06, 0], "parent": "scene_root" },
+
+    {
+      "name": "chassis",
+      "type": "csg",
+      "output": "final",
+      "shapes": {
+        "body": {
+          "type": "box",
+          "size": [4.0, 0.75, 2.1],
+          "position": [0, 0.375, 0]
+        },
+        "slope_cutter": {
+          "type": "box",
+          "size": [4.6, 0.8, 2.8],
+          "position": [0, 1.05, 0],
+          "rotation": [5.44, 0, 0]
+        },
+        "keyboard_well": {
+          "type": "box",
+          "size": [3.02, 0.12, 1.42],
+          "position": [-0.14, 0.65, 0.05],
+          "rotation": [5.44, 0, 0]
+        },
+        "cartridge_slot": {
+          "type": "box",
+          "size": [1.1, 0.18, 0.1],
+          "position": [0.9, 0.56, -1.05]
+        },
+        "power_switch_slot": {
+          "type": "box",
+          "size": [0.18, 0.1, 0.1],
+          "position": [-1.7, 0.5, -1.05]
+        },
+        "video_din_slot": {
+          "type": "cylinder",
+          "radius": 0.08,
+          "height": 0.14,
+          "segments": 24,
+          "position": [0.15, 0.3, -1.05],
+          "rotation": [90, 0, 0]
+        },
+        "rf_slot": {
+          "type": "cylinder",
+          "radius": 0.06,
+          "height": 0.14,
+          "segments": 20,
+          "position": [-0.1, 0.3, -1.05],
+          "rotation": [90, 0, 0]
+        },
+        "joystick_1_slot": {
+          "type": "box",
+          "size": [0.1, 0.14, 0.2],
+          "position": [2.0, 0.3, 0.2]
+        },
+        "joystick_2_slot": {
+          "type": "box",
+          "size": [0.1, 0.14, 0.2],
+          "position": [2.0, 0.3, -0.15]
+        }
+      },
+      "operations": [
+        { "op": "subtract", "a": "body", "b": "slope_cutter", "result": "sloped" },
+        { "op": "subtract", "a": "sloped", "b": "keyboard_well", "result": "welled" },
+        { "op": "subtract", "a": "welled", "b": "cartridge_slot", "result": "cart_cut" },
+        { "op": "subtract", "a": "cart_cut", "b": "power_switch_slot", "result": "sw_cut" },
+        { "op": "subtract", "a": "sw_cut", "b": "video_din_slot", "result": "din_cut" },
+        { "op": "subtract", "a": "din_cut", "b": "rf_slot", "result": "rf_cut" },
+        { "op": "subtract", "a": "rf_cut", "b": "joystick_1_slot", "result": "j1_cut" },
+        { "op": "subtract", "a": "j1_cut", "b": "joystick_2_slot", "result": "final" }
+      ],
+      "material": {
+        "color": "#c9bc9e",
+        "roughness": 0.62,
+        "metalness": 0.02,
+        "clearcoat": 0.25,
+        "clearcoatRoughness": 0.45,
+        "breakup": {
+          "noise": { "amount": 0.035, "scale": 2.8, "color": "#b8ab8a" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "parent": "c64",
+      "castShadow": true,
+      "receiveShadow": true
+    },
+
+    {
+      "name": "well_floor",
+      "type": "box",
+      "params": [2.98, 0.012, 1.38],
+      "material": {
+        "color": "#221c16",
+        "roughness": 0.85,
+        "metalness": 0.08,
+        "breakup": { "noise": { "amount": 0.06, "scale": 4.0, "color": "#100c08" }, "roughnessVariation": 0.08 }
+      },
+      "position": [-0.14, 0.608, 0.05],
+      "rotation": [5.44, 0, 0],
+      "parent": "c64"
+    },
+
+    {
+      "name": "keyboard_assembly",
+      "type": "group",
+      "position": [-0.22, 0.616, 0.05],
+      "rotation": [5.44, 0, 0],
+      "parent": "c64"
+    },
+
+    {
+      "name": "row1_left",
+      "type": "module",
+      "src": "main-key",
+      "position": [-1.28, 0, -0.52],
+      "parent": "keyboard_assembly",
+      "modifiers": { "array": { "count": 14, "offset": [0.172, 0, 0] } }
+    },
+    {
+      "name": "row1_home",
+      "type": "module",
+      "src": "main-key",
+      "position": [1.14, 0, -0.52],
+      "parent": "keyboard_assembly"
+    },
+    {
+      "name": "row1_del",
+      "type": "module",
+      "src": "main-key",
+      "position": [1.312, 0, -0.52],
+      "parent": "keyboard_assembly"
+    },
+
+    {
+      "name": "row2",
+      "type": "module",
+      "src": "main-key",
+      "position": [-1.19, 0, -0.344],
+      "parent": "keyboard_assembly",
+      "modifiers": { "array": { "count": 15, "offset": [0.172, 0, 0] } }
+    },
+
+    {
+      "name": "row3",
+      "type": "module",
+      "src": "main-key",
+      "position": [-1.15, 0, -0.168],
+      "parent": "keyboard_assembly",
+      "modifiers": { "array": { "count": 14, "offset": [0.172, 0, 0] } }
+    },
+    {
+      "name": "return_key_cap",
+      "type": "roundedBox",
+      "params": [0.29, 0.07, 0.15, 0.015, 2],
+      "material": {
+        "color": "#3d2a1f",
+        "roughness": 0.58,
+        "metalness": 0.04,
+        "clearcoat": 0.2,
+        "clearcoatRoughness": 0.35,
+        "breakup": { "noise": { "amount": 0.04, "scale": 5.0, "color": "#2c1d14" }, "roughnessVariation": 0.04 }
+      },
+      "position": [1.384, 0.035, -0.168],
+      "parent": "keyboard_assembly",
+      "castShadow": true
+    },
+    {
+      "name": "return_legend",
+      "type": "box",
+      "params": [0.16, 0.006, 0.04],
+      "material": { "color": "#e0d4b8", "roughness": 0.6, "metalness": 0.02 },
+      "position": [1.384, 0.073, -0.15],
+      "parent": "keyboard_assembly"
+    },
+
+    {
+      "name": "row4",
+      "type": "module",
+      "src": "main-key",
+      "position": [-1.19, 0, 0.008],
+      "parent": "keyboard_assembly",
+      "modifiers": { "array": { "count": 15, "offset": [0.172, 0, 0] } }
+    },
+
+    {
+      "name": "shift_left_cap",
+      "type": "roundedBox",
+      "params": [0.28, 0.07, 0.15, 0.015, 2],
+      "material": {
+        "color": "#3d2a1f",
+        "roughness": 0.58,
+        "metalness": 0.04,
+        "clearcoat": 0.2,
+        "clearcoatRoughness": 0.35,
+        "breakup": { "noise": { "amount": 0.04, "scale": 5.0, "color": "#2c1d14" }, "roughnessVariation": 0.04 }
+      },
+      "position": [-1.12, 0.035, 0.184],
+      "parent": "keyboard_assembly",
+      "castShadow": true
+    },
+    {
+      "name": "shift_left_legend",
+      "type": "box",
+      "params": [0.14, 0.006, 0.035],
+      "material": { "color": "#e0d4b8", "roughness": 0.6, "metalness": 0.02 },
+      "position": [-1.12, 0.073, 0.19],
+      "parent": "keyboard_assembly"
+    },
+
+    {
+      "name": "row5_center",
+      "type": "module",
+      "src": "main-key",
+      "position": [-0.88, 0, 0.184],
+      "parent": "keyboard_assembly",
+      "modifiers": { "array": { "count": 11, "offset": [0.172, 0, 0] } }
+    },
+
+    {
+      "name": "shift_right_cap",
+      "type": "roundedBox",
+      "params": [0.28, 0.07, 0.15, 0.015, 2],
+      "material": {
+        "color": "#3d2a1f",
+        "roughness": 0.58,
+        "metalness": 0.04,
+        "clearcoat": 0.2,
+        "clearcoatRoughness": 0.35,
+        "breakup": { "noise": { "amount": 0.04, "scale": 5.0, "color": "#2c1d14" }, "roughnessVariation": 0.04 }
+      },
+      "position": [1.15, 0.035, 0.184],
+      "parent": "keyboard_assembly",
+      "castShadow": true
+    },
+    {
+      "name": "shift_right_legend",
+      "type": "box",
+      "params": [0.14, 0.006, 0.035],
+      "material": { "color": "#e0d4b8", "roughness": 0.6, "metalness": 0.02 },
+      "position": [1.15, 0.073, 0.19],
+      "parent": "keyboard_assembly"
+    },
+
+    {
+      "name": "cursor_keys",
+      "type": "module",
+      "src": "main-key",
+      "position": [1.39, 0, 0.184],
+      "parent": "keyboard_assembly",
+      "modifiers": { "array": { "count": 2, "offset": [0.172, 0, 0] } }
+    },
+
+    {
+      "name": "spacebar_cap",
+      "type": "roundedBox",
+      "params": [1.9, 0.07, 0.15, 0.015, 2],
+      "material": {
+        "color": "#3d2a1f",
+        "roughness": 0.58,
+        "metalness": 0.04,
+        "clearcoat": 0.2,
+        "clearcoatRoughness": 0.35,
+        "breakup": { "noise": { "amount": 0.04, "scale": 5.0, "color": "#2c1d14" }, "roughnessVariation": 0.04 }
+      },
+      "position": [-0.05, 0.035, 0.37],
+      "parent": "keyboard_assembly",
+      "castShadow": true
+    },
+
+    {
+      "name": "fn_f1",
+      "type": "module",
+      "src": "fn-key",
+      "position": [1.73, 0, -0.52],
+      "parent": "keyboard_assembly"
+    },
+    {
+      "name": "fn_f3",
+      "type": "module",
+      "src": "fn-key",
+      "position": [1.73, 0, -0.344],
+      "parent": "keyboard_assembly"
+    },
+    {
+      "name": "fn_f5",
+      "type": "module",
+      "src": "fn-key",
+      "position": [1.73, 0, -0.168],
+      "parent": "keyboard_assembly"
+    },
+    {
+      "name": "fn_f7",
+      "type": "module",
+      "src": "fn-key",
+      "position": [1.73, 0, 0.008],
+      "parent": "keyboard_assembly"
+    },
+
+    {
+      "name": "badge_assembly",
+      "type": "group",
+      "position": [-1.4, 0.725, -0.78],
+      "rotation": [5.44, 0, 0],
+      "parent": "c64"
+    },
+    {
+      "name": "badge_plate",
+      "type": "roundedBox",
+      "params": [0.78, 0.022, 0.22, 0.012, 1],
+      "material": { "color": "#b5a988", "roughness": 0.42, "metalness": 0.2, "clearcoat": 0.4, "clearcoatRoughness": 0.25 },
+      "position": [0, 0.011, 0],
+      "parent": "badge_assembly"
+    },
+    {
+      "name": "rainbow_brown",
+      "type": "box",
+      "params": [0.22, 0.008, 0.028],
+      "material": { "color": "#7a3e1a", "roughness": 0.38, "metalness": 0.12, "emissive": "#3a1a08", "emissiveIntensity": 0.35 },
+      "position": [-0.26, 0.026, -0.078],
+      "parent": "badge_assembly"
+    },
+    {
+      "name": "rainbow_red",
+      "type": "box",
+      "params": [0.22, 0.008, 0.028],
+      "material": { "color": "#d8361e", "roughness": 0.38, "metalness": 0.12, "emissive": "#5a0e06", "emissiveIntensity": 0.45 },
+      "position": [-0.26, 0.026, -0.05],
+      "parent": "badge_assembly"
+    },
+    {
+      "name": "rainbow_orange",
+      "type": "box",
+      "params": [0.22, 0.008, 0.028],
+      "material": { "color": "#ea8c22", "roughness": 0.38, "metalness": 0.12, "emissive": "#4a2408", "emissiveIntensity": 0.45 },
+      "position": [-0.26, 0.026, -0.022],
+      "parent": "badge_assembly"
+    },
+    {
+      "name": "rainbow_yellow",
+      "type": "box",
+      "params": [0.22, 0.008, 0.028],
+      "material": { "color": "#edc838", "roughness": 0.38, "metalness": 0.12, "emissive": "#4a3a08", "emissiveIntensity": 0.45 },
+      "position": [-0.26, 0.026, 0.006],
+      "parent": "badge_assembly"
+    },
+    {
+      "name": "rainbow_green",
+      "type": "box",
+      "params": [0.22, 0.008, 0.028],
+      "material": { "color": "#3e9a3a", "roughness": 0.38, "metalness": 0.12, "emissive": "#0a3212", "emissiveIntensity": 0.45 },
+      "position": [-0.26, 0.026, 0.034],
+      "parent": "badge_assembly"
+    },
+    {
+      "name": "rainbow_blue",
+      "type": "box",
+      "params": [0.22, 0.008, 0.028],
+      "material": { "color": "#3468b0", "roughness": 0.38, "metalness": 0.12, "emissive": "#0a1a30", "emissiveIntensity": 0.45 },
+      "position": [-0.26, 0.026, 0.062],
+      "parent": "badge_assembly"
+    },
+    {
+      "name": "commodore_text",
+      "type": "box",
+      "params": [0.42, 0.01, 0.07],
+      "material": { "color": "#0f0c0a", "roughness": 0.55, "metalness": 0.2 },
+      "position": [0.12, 0.028, 0],
+      "parent": "badge_assembly"
+    },
+    {
+      "name": "c_logo_ring",
+      "type": "torus",
+      "params": [0.045, 0.012, 12, 24],
+      "material": { "color": "#0f0c0a", "roughness": 0.55, "metalness": 0.2 },
+      "position": [-0.08, 0.028, 0],
+      "rotation": [90, 0, 0],
+      "parent": "badge_assembly"
+    },
+    {
+      "name": "c_logo_gap",
+      "type": "box",
+      "params": [0.04, 0.03, 0.025],
+      "material": { "color": "#b5a988", "roughness": 0.42, "metalness": 0.2 },
+      "position": [-0.055, 0.028, 0],
+      "parent": "badge_assembly"
+    },
+
+    {
+      "name": "c64_text_plate",
+      "type": "box",
+      "params": [0.35, 0.01, 0.06],
+      "material": { "color": "#14100c", "roughness": 0.6, "metalness": 0.15 },
+      "position": [1.3, 0.725, -0.78],
+      "rotation": [5.44, 0, 0],
+      "parent": "c64"
+    },
+
+    {
+      "name": "power_led_bezel",
+      "type": "cylinder",
+      "params": [0.04, 0.04, 0.012, 20],
+      "material": { "color": "#1a1614", "roughness": 0.55, "metalness": 0.25 },
+      "position": [1.82, 0.72, -0.78],
+      "rotation": [5.44, 0, 0],
+      "parent": "c64"
+    },
+    {
+      "name": "power_led",
+      "type": "sphere",
+      "params": [0.025, 1],
+      "material": { "preset": "glow", "color": "#ff2418", "emissive": "#ff2418", "emissiveIntensity": 3.2 },
+      "position": [1.82, 0.732, -0.78],
+      "rotation": [5.44, 0, 0],
+      "parent": "c64"
+    },
+
+    {
+      "name": "cart_port_bg",
+      "type": "box",
+      "params": [1.0, 0.12, 0.04],
+      "material": { "color": "#181410", "roughness": 0.75, "metalness": 0.15 },
+      "position": [0.9, 0.56, -1.03],
+      "parent": "c64"
+    },
+    {
+      "name": "cart_pins",
+      "type": "box",
+      "params": [0.92, 0.02, 0.02],
+      "material": { "color": "#c9a052", "roughness": 0.3, "metalness": 0.8 },
+      "position": [0.9, 0.55, -1.015],
+      "parent": "c64"
+    },
+    {
+      "name": "video_din",
+      "type": "cylinder",
+      "params": [0.07, 0.07, 0.04, 20],
+      "material": { "color": "#1a1612", "roughness": 0.7, "metalness": 0.35 },
+      "position": [0.15, 0.3, -1.05],
+      "rotation": [90, 0, 0],
+      "parent": "c64"
+    },
+    {
+      "name": "rf_port",
+      "type": "cylinder",
+      "params": [0.05, 0.05, 0.04, 18],
+      "material": { "color": "#1a1612", "roughness": 0.7, "metalness": 0.35 },
+      "position": [-0.1, 0.3, -1.05],
+      "rotation": [90, 0, 0],
+      "parent": "c64"
+    },
+    {
+      "name": "power_switch_rocker",
+      "type": "roundedBox",
+      "params": [0.14, 0.07, 0.06, 0.01, 1],
+      "material": { "color": "#2a241c", "roughness": 0.55, "metalness": 0.1 },
+      "position": [-1.7, 0.49, -1.02],
+      "parent": "c64"
+    },
+
+    {
+      "name": "joystick_port_1_inner",
+      "type": "box",
+      "params": [0.05, 0.1, 0.16],
+      "material": { "color": "#14110e", "roughness": 0.75, "metalness": 0.2 },
+      "position": [2.005, 0.3, 0.2],
+      "parent": "c64"
+    },
+    {
+      "name": "joystick_port_2_inner",
+      "type": "box",
+      "params": [0.05, 0.1, 0.16],
+      "material": { "color": "#14110e", "roughness": 0.75, "metalness": 0.2 },
+      "position": [2.005, 0.3, -0.15],
+      "parent": "c64"
+    },
+
+    {
+      "name": "foot_fl",
+      "type": "cylinder",
+      "params": [0.08, 0.08, 0.06, 18],
+      "material": { "preset": "rubber", "color": "#181410" },
+      "position": [-1.82, -0.03, 0.9],
+      "parent": "c64"
+    },
+    {
+      "name": "foot_fr",
+      "type": "cylinder",
+      "params": [0.08, 0.08, 0.06, 18],
+      "material": { "preset": "rubber", "color": "#181410" },
+      "position": [1.82, -0.03, 0.9],
+      "parent": "c64"
+    },
+    {
+      "name": "foot_bl",
+      "type": "cylinder",
+      "params": [0.08, 0.08, 0.06, 18],
+      "material": { "preset": "rubber", "color": "#181410" },
+      "position": [-1.82, -0.03, -0.9],
+      "parent": "c64"
+    },
+    {
+      "name": "foot_br",
+      "type": "cylinder",
+      "params": [0.08, 0.08, 0.06, 18],
+      "material": { "preset": "rubber", "color": "#181410" },
+      "position": [1.82, -0.03, -0.9],
+      "parent": "c64"
+    }
+  ]
+}
