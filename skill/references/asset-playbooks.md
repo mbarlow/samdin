@@ -55,6 +55,70 @@ Use these as practical defaults unless the user specifies otherwise:
 - Species should differ in branching bias, canopy spread, and trunk character.
 - If a tree reads like a lollipop or inverted brace, the branch hierarchy is wrong.
 
+## Embedded CSG Recipes
+
+Use these when composite primitives start fighting the silhouette. Embedded CSG parts live inside parts-based specs, support material and breakup on the final output, and accept `position` plus `rotation` on every shape in the `shapes` map.
+
+### Sloped Wedge Chassis
+
+For cases that slope from a taller back to a shorter front (C64 breadbin, retro console lids, tapered kiosk bodies): start with a rectangular body, then subtract a rotated box whose bottom plane defines the target slope.
+
+```json
+{
+  "name": "chassis",
+  "type": "csg",
+  "output": "final",
+  "shapes": {
+    "body": { "type": "box", "size": [4.0, 0.75, 2.1], "position": [0, 0.375, 0] },
+    "slope_cutter": {
+      "type": "box",
+      "size": [4.6, 0.8, 2.8],
+      "position": [0, 1.05, 0],
+      "rotation": [5.44, 0, 0]
+    }
+  },
+  "operations": [
+    { "op": "subtract", "a": "body", "b": "slope_cutter", "result": "final" }
+  ],
+  "material": { "color": "#c9bc9e", "roughness": 0.62 }
+}
+```
+
+Sizing rules:
+
+- Slope angle: `atan((back_height - front_height) / depth)`. A `0.20` drop over `2.1` depth is `~5.44` degrees.
+- Position the cutter so its rotated bottom plane passes through `(z = -half_depth, y = back_height)` and `(z = +half_depth, y = front_height)`. The cutter's center goes at `y = (back_height + front_height) / 2 + cutter_height / 2`.
+- Cutter footprint should exceed the body by `0.5` to `1.0` in each axis so the cut goes fully through at the edges.
+
+**Rotation sign trap.** Three.js rotates around X with `y_new = y*cos - z*sin`. A **positive** X rotation drops `+z` (front) downward, which is what you want for a back-taller-than-front wedge. A negative rotation tilts the *back* down instead and the whole slope reads inverted. If the wedge comes out backwards, flip the sign before touching anything else.
+
+### Recessed Sub-Feature On A Sloped Surface
+
+For a keyboard well, instrument cluster, or any inset feature on the sloped top: add a second subtract whose cutter shares the same rotation as the slope. Put its center at the sloped surface so roughly half of it dips into the body.
+
+```json
+"keyboard_well": {
+  "type": "box",
+  "size": [3.02, 0.12, 1.42],
+  "position": [-0.14, 0.65, 0.05],
+  "rotation": [5.44, 0, 0]
+}
+```
+
+Then overlay a thin dark plate in the recess, *also rotated to match the slope*, to sell the two-material read. Any child parts that sit on the recessed surface (keys, dials, screens) should go into a group that shares the same rotation, so their local frame is the surface itself.
+
+### Port And Connector Cutouts
+
+Back-panel cutouts read better as CSG subtracts than as dark decals floating on a solid face: the interior geometry gets real depth and real shadow.
+
+```json
+"cartridge_slot": { "type": "box", "size": [1.1, 0.18, 0.1], "position": [0.9, 0.56, -1.05] },
+"video_din": { "type": "cylinder", "radius": 0.08, "height": 0.14, "segments": 24,
+  "position": [0.15, 0.3, -1.05], "rotation": [90, 0, 0] }
+```
+
+Position cutters so their axis pokes through the back face (`z = -body_depth / 2`). Inset thin detail plates (pins, bezels, rocker switches) inside the hole to fill the cavity.
+
 ## Industrial And Mechanical Sets
 
 - Use strong primary load-bearing forms first: beams, frames, platforms, racks, walls, or housings.
