@@ -1,0 +1,749 @@
+{
+  "name": "quality-bar-courier-pickup",
+  "description": "Hero vehicle quality anchor. Compact courier pickup with a two-tone utility body, open cargo bed, readable cabin interior, chrome lighting trim, and a controlled product-shot stage.",
+  "root": "scene_root",
+  "scene": {
+    "quality": "high",
+    "background": { "type": "gradient", "color": "#b7ae9c", "color2": "#21262d" },
+    "lighting": {
+      "preset": "showcase",
+      "environment": "studio",
+      "envMapIntensity": 1.2,
+      "shadowQuality": "high",
+      "intensity": 1.1
+    },
+    "ground": { "reflective": false },
+    "exposure": 1.08,
+    "toneMapping": "ACESFilmic",
+    "camera": {
+      "preset": "threeQuarter",
+      "distanceMultiplier": 0.46,
+      "positionOffset": [0.14, 0.04, 0.16],
+      "targetOffset": [0, 0.95, 0]
+    },
+    "postfx": {
+      "ssao": { "enabled": true, "kernelRadius": 9, "minDistance": 0.004, "maxDistance": 0.18 },
+      "bloom": { "enabled": true, "strength": 0.12, "radius": 0.24, "threshold": 0.94 },
+      "vignette": { "enabled": true, "intensity": 0.1, "softness": 0.6 },
+      "colorGrade": { "enabled": true, "saturation": 0.96, "brightness": 1.03, "contrast": 1.06 },
+      "fxaa": true
+    }
+  },
+  "modules": {
+    "wheel-utility": {
+      "root": "wheel_root",
+      "parts": [
+        { "name": "wheel_root", "type": "group" },
+        {
+          "name": "tire",
+          "type": "cylinder",
+          "params": [0.42, 0.42, 0.3, 20],
+          "material": {
+            "preset": "rubber",
+            "color": "#262b30",
+            "breakup": {
+              "noise": { "amount": 0.05, "scale": 5.0, "color": "#23272b" },
+              "roughnessVariation": 0.05
+            }
+          },
+          "parent": "wheel_root"
+        },
+        {
+          "name": "rim_outer",
+          "type": "cylinder",
+          "params": [0.29, 0.29, 0.18, 16],
+          "material": {
+            "preset": "steel",
+            "color": "#969b9f",
+            "breakup": {
+              "noise": { "amount": 0.03, "scale": 6.0, "color": "#b5b9bc" },
+              "roughnessVariation": 0.03
+            }
+          },
+          "parent": "wheel_root"
+        },
+        {
+          "name": "rim_face_outer",
+          "type": "cylinder",
+          "params": [0.33, 0.33, 0.024, 16],
+          "material": { "preset": "chrome" },
+          "position": [0, 0.085, 0],
+          "parent": "wheel_root"
+        },
+        {
+          "name": "rim_face_inner",
+          "type": "cylinder",
+          "params": [0.33, 0.33, 0.024, 16],
+          "material": { "preset": "chrome" },
+          "position": [0, -0.085, 0],
+          "parent": "wheel_root"
+        },
+        {
+          "name": "hub_cap",
+          "type": "cylinder",
+          "params": [0.12, 0.12, 0.19, 10],
+          "material": { "preset": "chrome" },
+          "parent": "wheel_root"
+        },
+        {
+          "name": "lug_ring",
+          "type": "cylinder",
+          "params": [0.05, 0.05, 0.2, 8],
+          "material": { "preset": "steel", "color": "#545a60" },
+          "parent": "wheel_root"
+        }
+      ]
+    }
+  },
+  "parts": [
+    { "name": "scene_root", "type": "group", "position": [0, 0, 0] },
+
+    {
+      "name": "front_fill",
+      "type": "pointLight",
+      "params": [0.42, 6.5, 1.5, false],
+      "material": { "color": "#fff0d1" },
+      "position": [2.2, 2.3, 2.0],
+      "castShadow": false,
+      "parent": "scene_root"
+    },
+    {
+      "name": "side_fill",
+      "type": "pointLight",
+      "params": [0.28, 5.8, 1.4, false],
+      "material": { "color": "#dbe5f2" },
+      "position": [-2.2, 1.9, 1.2],
+      "castShadow": false,
+      "parent": "scene_root"
+    },
+
+    {
+      "name": "display_base",
+      "type": "roundedBox",
+      "params": [3.8, 0.06, 1.9, 0.05, 3],
+      "material": {
+        "preset": "concrete",
+        "color": "#b7ab97",
+        "breakup": {
+          "noise": { "amount": 0.07, "scale": 2.2, "color": "#c6baa5" },
+          "roughnessVariation": 0.05
+        }
+      },
+      "position": [0, 0.03, 0],
+      "receiveShadow": true,
+      "parent": "scene_root"
+    },
+
+    {
+      "name": "pickup_root",
+      "type": "group",
+      "position": [0, 0.06, 0],
+      "rotation": [0, 168, 0],
+      "parent": "scene_root"
+    },
+
+    {
+      "name": "frame",
+      "type": "box",
+      "params": [1.55, 0.16, 4.3],
+      "material": { "preset": "matte", "color": "#1c2024" },
+      "position": [0, 0.46, -0.02],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "front_valance",
+      "type": "roundedBox",
+      "params": [1.78, 0.22, 0.38, 0.04, 2],
+      "material": { "preset": "painted-metal", "color": "#708077" },
+      "position": [0, 0.67, -2.36],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "rocker_panel",
+      "type": "box",
+      "params": [1.76, 0.18, 3.78],
+      "material": { "preset": "steel", "color": "#34393f" },
+      "position": [0, 0.66, -0.08],
+      "parent": "pickup_root"
+    },
+
+    {
+      "name": "cab_lower",
+      "type": "roundedBox",
+      "params": [1.82, 0.62, 1.58, 0.07, 4],
+      "material": {
+        "preset": "painted-metal",
+        "color": "#8b9e93",
+        "clearcoat": 0.7,
+        "clearcoatRoughness": 0.2,
+        "breakup": {
+          "noise": { "amount": 0.05, "scale": 4.0, "color": "#a0b1a7" },
+          "edgeWear": { "amount": 0.04, "color": "#c0c9c2" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [0, 1.02, -0.86],
+      "castShadow": true,
+      "receiveShadow": true,
+      "parent": "pickup_root"
+    },
+    {
+      "name": "roof_shell",
+      "type": "roundedBox",
+      "params": [1.66, 0.22, 1.12, 0.06, 4],
+      "material": {
+        "preset": "painted-metal",
+        "color": "#d1c6b2",
+        "clearcoat": 0.55,
+        "clearcoatRoughness": 0.26,
+        "breakup": {
+          "noise": { "amount": 0.04, "scale": 3.5, "color": "#e0d5c1" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [0, 1.44, -0.72],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "hood",
+      "type": "roundedBox",
+      "params": [1.72, 0.28, 1.16, 0.06, 4],
+      "material": {
+        "preset": "painted-metal",
+        "color": "#88998f",
+        "clearcoat": 0.65,
+        "clearcoatRoughness": 0.2,
+        "breakup": {
+          "noise": { "amount": 0.04, "scale": 4.0, "color": "#9eafa5" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [0, 0.95, -1.93],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "hood_crown",
+      "type": "wedge",
+      "params": [1.18, 0.08, 0.56],
+      "material": { "preset": "painted-metal", "color": "#74867b" },
+      "position": [0, 1.06, -1.97],
+      "rotation": [180, 0, 0],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "bed_floor",
+      "type": "box",
+      "params": [1.56, 0.08, 1.88],
+      "material": {
+        "preset": "matte",
+        "color": "#1c2125",
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 3.0, "color": "#2b3136" },
+          "roughnessVariation": 0.05
+        }
+      },
+      "position": [0, 0.82, 1.0],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "bed_left",
+      "type": "roundedBox",
+      "params": [0.08, 0.44, 1.86, 0.025, 2],
+      "material": {
+        "preset": "painted-metal",
+        "color": "#85978c",
+        "breakup": {
+          "noise": { "amount": 0.04, "scale": 4.0, "color": "#9aa99f" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [-0.82, 1.02, 1.0],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "bed_right",
+      "type": "roundedBox",
+      "params": [0.08, 0.44, 1.86, 0.025, 2],
+      "material": {
+        "preset": "painted-metal",
+        "color": "#85978c",
+        "breakup": {
+          "noise": { "amount": 0.04, "scale": 4.0, "color": "#9aa99f" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [0.82, 1.02, 1.0],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "bed_front_wall",
+      "type": "box",
+      "params": [1.54, 0.4, 0.06],
+      "material": { "preset": "painted-metal", "color": "#809187" },
+      "position": [0, 1.0, 0.03],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "tailgate",
+      "type": "roundedBox",
+      "params": [1.52, 0.4, 0.06, 0.02, 2],
+      "material": { "preset": "painted-metal", "color": "#809187" },
+      "position": [0, 0.99, 1.97],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "tailgate_cap",
+      "type": "box",
+      "params": [1.46, 0.03, 0.025],
+      "material": { "preset": "steel", "color": "#8b8f93" },
+      "position": [0, 1.2, 1.99],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "bed_rail_l",
+      "type": "box",
+      "params": [0.03, 0.03, 1.84],
+      "material": { "preset": "steel", "color": "#90959a" },
+      "position": [-0.78, 1.24, 1.0],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "bed_rail_r",
+      "type": "box",
+      "params": [0.03, 0.03, 1.84],
+      "material": { "preset": "steel", "color": "#90959a" },
+      "position": [0.78, 1.24, 1.0],
+      "parent": "pickup_root"
+    },
+
+    {
+      "name": "grille_surround",
+      "type": "roundedBox",
+      "params": [1.54, 0.38, 0.06, 0.03, 2],
+      "material": { "preset": "steel", "color": "#a39a89" },
+      "position": [0, 0.88, -2.62],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "grille_backing",
+      "type": "box",
+      "params": [1.38, 0.24, 0.03],
+      "material": { "preset": "matte", "color": "#171b1f" },
+      "position": [0, 0.88, -2.65],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "grille_slat",
+      "type": "box",
+      "params": [1.14, 0.02, 0.004],
+      "material": { "preset": "steel", "color": "#d8d2c3" },
+      "position": [0, 0.96, -2.667],
+      "modifiers": { "array": { "count": 4, "offset": [0, -0.055, 0] } },
+      "castShadow": false,
+      "receiveShadow": false,
+      "parent": "pickup_root"
+    },
+    {
+      "name": "headlight_bezel_l",
+      "type": "roundedBox",
+      "params": [0.28, 0.14, 0.05, 0.02, 2],
+      "material": { "preset": "steel", "color": "#c1b7a2" },
+      "position": [-0.59, 0.91, -2.66],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "headlight_bezel_r",
+      "type": "roundedBox",
+      "params": [0.28, 0.14, 0.05, 0.02, 2],
+      "material": { "preset": "steel", "color": "#c1b7a2" },
+      "position": [0.59, 0.91, -2.66],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "headlight_l",
+      "type": "box",
+      "params": [0.19, 0.08, 0.02],
+      "material": { "preset": "glow", "color": "#fff1c8", "emissiveIntensity": 0.8 },
+      "position": [-0.59, 0.91, -2.69],
+      "castShadow": false,
+      "receiveShadow": false,
+      "parent": "pickup_root"
+    },
+    {
+      "name": "headlight_r",
+      "type": "box",
+      "params": [0.19, 0.08, 0.02],
+      "material": { "preset": "glow", "color": "#fff1c8", "emissiveIntensity": 0.8 },
+      "position": [0.59, 0.91, -2.69],
+      "castShadow": false,
+      "receiveShadow": false,
+      "parent": "pickup_root"
+    },
+    {
+      "name": "marker_l",
+      "type": "box",
+      "params": [0.05, 0.08, 0.018],
+      "material": { "preset": "glow", "color": "#ff9a3d", "emissiveIntensity": 0.7 },
+      "position": [-0.84, 0.9, -2.67],
+      "castShadow": false,
+      "receiveShadow": false,
+      "parent": "pickup_root"
+    },
+    {
+      "name": "marker_r",
+      "type": "box",
+      "params": [0.05, 0.08, 0.018],
+      "material": { "preset": "glow", "color": "#ff9a3d", "emissiveIntensity": 0.7 },
+      "position": [0.84, 0.9, -2.67],
+      "castShadow": false,
+      "receiveShadow": false,
+      "parent": "pickup_root"
+    },
+    {
+      "name": "bumper_front",
+      "type": "roundedBox",
+      "params": [1.82, 0.16, 0.16, 0.03, 2],
+      "material": { "preset": "chrome" },
+      "position": [0, 0.58, -2.72],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "bumper_rear",
+      "type": "roundedBox",
+      "params": [1.8, 0.14, 0.15, 0.03, 2],
+      "material": { "preset": "chrome" },
+      "position": [0, 0.57, 2.05],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "plate_front",
+      "type": "box",
+      "params": [0.34, 0.08, 0.01],
+      "material": { "preset": "chrome" },
+      "position": [0, 0.56, -2.79],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "plate_rear",
+      "type": "box",
+      "params": [0.34, 0.08, 0.01],
+      "material": { "preset": "chrome" },
+      "position": [0, 0.56, 2.12],
+      "parent": "pickup_root"
+    },
+
+    {
+      "name": "windshield",
+      "type": "box",
+      "params": [1.42, 0.5, 0.03],
+      "material": {
+        "preset": "glass-tinted",
+        "color": "#9ab0b5",
+        "transmission": 0.62,
+        "opacity": 0.34
+      },
+      "position": [0, 1.22, -1.55],
+      "rotation": [-23, 0, 0],
+      "castShadow": false,
+      "receiveShadow": false,
+      "parent": "pickup_root"
+    },
+    {
+      "name": "rear_window",
+      "type": "box",
+      "params": [1.14, 0.32, 0.03],
+      "material": {
+        "preset": "glass-tinted",
+        "color": "#97acb0",
+        "transmission": 0.56,
+        "opacity": 0.36
+      },
+      "position": [0, 1.19, -0.13],
+      "rotation": [7, 0, 0],
+      "castShadow": false,
+      "receiveShadow": false,
+      "parent": "pickup_root"
+    },
+    {
+      "name": "window_side_l",
+      "type": "box",
+      "params": [0.03, 0.32, 0.42],
+      "material": {
+        "preset": "glass-tinted",
+        "color": "#91a8ad",
+        "transmission": 0.56,
+        "opacity": 0.34
+      },
+      "position": [-0.925, 1.22, -0.86],
+      "castShadow": false,
+      "receiveShadow": false,
+      "parent": "pickup_root"
+    },
+    {
+      "name": "window_side_r",
+      "type": "box",
+      "params": [0.03, 0.32, 0.42],
+      "material": {
+        "preset": "glass-tinted",
+        "color": "#91a8ad",
+        "transmission": 0.56,
+        "opacity": 0.34
+      },
+      "position": [0.925, 1.22, -0.86],
+      "castShadow": false,
+      "receiveShadow": false,
+      "parent": "pickup_root"
+    },
+
+    {
+      "name": "seat_base",
+      "type": "roundedBox",
+      "params": [1.3, 0.18, 0.46, 0.04, 2],
+      "material": {
+        "preset": "leather",
+        "color": "#3c2f26",
+        "breakup": {
+          "noise": { "amount": 0.05, "scale": 3.5, "color": "#513f33" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [0, 0.95, -0.63],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "seat_back",
+      "type": "roundedBox",
+      "params": [1.3, 0.36, 0.18, 0.04, 2],
+      "material": { "preset": "leather", "color": "#3f3127" },
+      "position": [0, 1.19, -0.39],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "dash",
+      "type": "roundedBox",
+      "params": [1.46, 0.18, 0.18, 0.03, 2],
+      "material": { "preset": "matte", "color": "#23282d" },
+      "position": [0, 1.05, -1.34],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "cluster_strip",
+      "type": "box",
+      "params": [0.46, 0.04, 0.004],
+      "material": { "preset": "glow", "color": "#ffd27a", "emissiveIntensity": 0.35 },
+      "position": [0, 1.1, -1.245],
+      "castShadow": false,
+      "receiveShadow": false,
+      "parent": "pickup_root"
+    },
+    {
+      "name": "steering_column",
+      "type": "cylinder",
+      "params": [0.03, 0.03, 0.32, 8],
+      "material": { "preset": "matte", "color": "#1d2125" },
+      "position": [-0.42, 1.03, -1.17],
+      "rotation": [58, 0, 0],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "steering_wheel",
+      "type": "torus",
+      "params": [0.16, 0.022, 10, 18],
+      "material": { "preset": "rubber", "color": "#181c20" },
+      "position": [-0.42, 1.14, -1.0],
+      "rotation": [68, 0, 0],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "shifter",
+      "type": "cylinder",
+      "params": [0.012, 0.012, 0.18, 6],
+      "material": { "preset": "chrome" },
+      "position": [0.18, 0.9, -1.05],
+      "rotation": [-18, 0, 0],
+      "parent": "pickup_root"
+    },
+
+    {
+      "name": "door_handle_l",
+      "type": "box",
+      "params": [0.08, 0.025, 0.02],
+      "material": { "preset": "chrome" },
+      "position": [-0.93, 1.01, -0.86],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "door_handle_r",
+      "type": "box",
+      "params": [0.08, 0.025, 0.02],
+      "material": { "preset": "chrome" },
+      "position": [0.93, 1.01, -0.86],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "mirror_stem_l",
+      "type": "cylinder",
+      "params": [0.008, 0.008, 0.14, 6],
+      "material": { "preset": "chrome" },
+      "position": [-0.96, 1.18, -1.36],
+      "rotation": [0, 0, 68],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "mirror_stem_r",
+      "type": "cylinder",
+      "params": [0.008, 0.008, 0.14, 6],
+      "material": { "preset": "chrome" },
+      "position": [0.96, 1.18, -1.36],
+      "rotation": [0, 0, -68],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "mirror_body_l",
+      "type": "roundedBox",
+      "params": [0.12, 0.09, 0.04, 0.015, 2],
+      "material": { "preset": "painted-metal", "color": "#2a2f34" },
+      "position": [-1.05, 1.22, -1.36],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "mirror_body_r",
+      "type": "roundedBox",
+      "params": [0.12, 0.09, 0.04, 0.015, 2],
+      "material": { "preset": "painted-metal", "color": "#2a2f34" },
+      "position": [1.05, 1.22, -1.36],
+      "parent": "pickup_root"
+    },
+
+    {
+      "name": "step_l",
+      "type": "box",
+      "params": [0.1, 0.05, 1.86],
+      "material": { "preset": "steel", "color": "#5f666b" },
+      "position": [-0.95, 0.58, -0.34],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "step_r",
+      "type": "box",
+      "params": [0.1, 0.05, 1.86],
+      "material": { "preset": "steel", "color": "#5f666b" },
+      "position": [0.95, 0.58, -0.34],
+      "parent": "pickup_root"
+    },
+
+    {
+      "name": "fender_front_l",
+      "type": "roundedBox",
+      "params": [0.1, 0.34, 0.94, 0.04, 2],
+      "material": { "preset": "painted-metal", "color": "#708077" },
+      "position": [-0.86, 0.86, -1.84],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "fender_front_r",
+      "type": "roundedBox",
+      "params": [0.1, 0.34, 0.94, 0.04, 2],
+      "material": { "preset": "painted-metal", "color": "#708077" },
+      "position": [0.86, 0.86, -1.84],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "fender_rear_l",
+      "type": "roundedBox",
+      "params": [0.1, 0.32, 0.92, 0.04, 2],
+      "material": { "preset": "painted-metal", "color": "#708077" },
+      "position": [-0.86, 0.83, 1.18],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "fender_rear_r",
+      "type": "roundedBox",
+      "params": [0.1, 0.32, 0.92, 0.04, 2],
+      "material": { "preset": "painted-metal", "color": "#708077" },
+      "position": [0.86, 0.83, 1.18],
+      "parent": "pickup_root"
+    },
+
+    {
+      "name": "taillight_l",
+      "type": "roundedBox",
+      "params": [0.14, 0.18, 0.03, 0.02, 2],
+      "material": { "preset": "glow", "color": "#ff4c38", "emissiveIntensity": 1.0 },
+      "position": [-0.74, 0.95, 2.02],
+      "castShadow": false,
+      "receiveShadow": false,
+      "parent": "pickup_root"
+    },
+    {
+      "name": "taillight_r",
+      "type": "roundedBox",
+      "params": [0.14, 0.18, 0.03, 0.02, 2],
+      "material": { "preset": "glow", "color": "#ff4c38", "emissiveIntensity": 1.0 },
+      "position": [0.74, 0.95, 2.02],
+      "castShadow": false,
+      "receiveShadow": false,
+      "parent": "pickup_root"
+    },
+    {
+      "name": "tailgate_handle",
+      "type": "box",
+      "params": [0.14, 0.03, 0.015],
+      "material": { "preset": "chrome" },
+      "position": [0, 1.04, 2.01],
+      "parent": "pickup_root"
+    },
+
+    {
+      "name": "axle_front",
+      "type": "cylinder",
+      "params": [0.05, 0.05, 1.72, 10],
+      "material": { "preset": "steel", "color": "#454b51" },
+      "position": [0, 0.44, -1.62],
+      "rotation": [0, 0, 90],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "axle_rear",
+      "type": "cylinder",
+      "params": [0.05, 0.05, 1.72, 10],
+      "material": { "preset": "steel", "color": "#454b51" },
+      "position": [0, 0.44, 1.34],
+      "rotation": [0, 0, 90],
+      "parent": "pickup_root"
+    },
+
+    {
+      "name": "wheel_fl",
+      "type": "module",
+      "src": "wheel-utility",
+      "position": [-1.0, 0.44, -1.62],
+      "rotation": [0, 0, 90],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "wheel_fr",
+      "type": "module",
+      "src": "wheel-utility",
+      "position": [1.0, 0.44, -1.62],
+      "rotation": [0, 0, 90],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "wheel_rl",
+      "type": "module",
+      "src": "wheel-utility",
+      "position": [-1.0, 0.44, 1.34],
+      "rotation": [0, 0, 90],
+      "parent": "pickup_root"
+    },
+    {
+      "name": "wheel_rr",
+      "type": "module",
+      "src": "wheel-utility",
+      "position": [1.0, 0.44, 1.34],
+      "rotation": [0, 0, 90],
+      "parent": "pickup_root"
+    }
+  ]
+}

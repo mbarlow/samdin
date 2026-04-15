@@ -1,0 +1,1000 @@
+{
+  "name": "quality-bar-rangefinder-camera",
+  "description": "Hero prop quality anchor. 1960s 35mm rangefinder camera with brass top plate, vulcanite leatherette body wrap, multi-coated lens front element, multi-ring focus/aperture/distance assembly, viewfinder + rangefinder windows, controlled product-shot setup. Companion to the field-radio quality anchor.",
+  "root": "scene_root",
+  "scene": {
+    "quality": "high",
+    "background": { "type": "gradient", "color": "#a89a82", "color2": "#1c1d22" },
+    "lighting": {
+      "preset": "showcase",
+      "environment": "studio",
+      "envMapIntensity": 1.25,
+      "shadowQuality": "high",
+      "intensity": 1.08
+    },
+    "ground": { "reflective": false },
+    "exposure": 1.05,
+    "toneMapping": "ACESFilmic",
+    "camera": {
+      "preset": "threeQuarter",
+      "distanceMultiplier": 0.32,
+      "positionOffset": [0.05, 0.04, 0.18],
+      "targetOffset": [0.05, 0.18, 0]
+    },
+    "postfx": {
+      "ssao": { "enabled": true, "kernelRadius": 6, "minDistance": 0.002, "maxDistance": 0.08 },
+      "bloom": { "enabled": true, "strength": 0.14, "radius": 0.25, "threshold": 0.92 },
+      "vignette": { "enabled": true, "intensity": 0.14, "softness": 0.6 },
+      "colorGrade": { "enabled": true, "saturation": 0.98, "brightness": 1.03, "contrast": 1.07 },
+      "fxaa": true
+    }
+  },
+  "modules": {
+    "engraved-pip": {
+      "root": "pip_root",
+      "parts": [
+        { "name": "pip_root", "type": "group" },
+        {
+          "name": "pip",
+          "type": "box",
+          "params": [0.004, 0.018, 0.002],
+          "material": { "color": "#0a0a0a", "roughness": 0.9, "metalness": 0.1 },
+          "position": [0, 0, 0],
+          "parent": "pip_root"
+        }
+      ]
+    }
+  },
+  "parts": [
+    { "name": "scene_root", "type": "group", "position": [0, 0, 0] },
+
+    {
+      "name": "key_fill",
+      "type": "pointLight",
+      "params": [0.42, 3.0, 1.4, false],
+      "material": { "color": "#fff0d4" },
+      "position": [0.6, 0.85, 0.7],
+      "castShadow": false,
+      "parent": "scene_root"
+    },
+    {
+      "name": "rim_back_light",
+      "type": "pointLight",
+      "params": [0.18, 2.8, 1.6, false],
+      "material": { "color": "#9eb6cc" },
+      "position": [-0.55, 0.5, -0.5],
+      "castShadow": false,
+      "parent": "scene_root"
+    },
+
+    {
+      "name": "plinth_base",
+      "type": "roundedBox",
+      "params": [1.05, 0.05, 0.7, 0.025, 3],
+      "material": {
+        "preset": "wood",
+        "color": "#3a261a",
+        "clearcoat": 0.55,
+        "clearcoatRoughness": 0.35,
+        "breakup": {
+          "noise": { "amount": 0.08, "scale": 1.8, "color": "#4a3024" },
+          "roughnessVariation": 0.08
+        }
+      },
+      "position": [0, 0.025, 0],
+      "receiveShadow": true,
+      "parent": "scene_root"
+    },
+    {
+      "name": "plinth_leather_top",
+      "type": "roundedBox",
+      "params": [0.96, 0.012, 0.62, 0.018, 2],
+      "material": {
+        "preset": "leather",
+        "color": "#1a1410",
+        "roughness": 0.78,
+        "clearcoat": 0.18,
+        "clearcoatRoughness": 0.55,
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 5.0, "color": "#221a14" },
+          "roughnessVariation": 0.08
+        }
+      },
+      "position": [0, 0.056, 0],
+      "receiveShadow": true,
+      "parent": "scene_root"
+    },
+    {
+      "name": "plinth_lip",
+      "type": "roundedBox",
+      "params": [0.99, 0.004, 0.65, 0.02, 1],
+      "material": { "color": "#9c7038", "roughness": 0.45, "metalness": 0.55, "clearcoat": 0.4 },
+      "position": [0, 0.064, 0],
+      "parent": "scene_root"
+    },
+
+    {
+      "name": "camera_root",
+      "type": "group",
+      "position": [0, 0.07, 0.02],
+      "rotation": [0, 22, 0],
+      "parent": "scene_root"
+    },
+
+    {
+      "name": "body_core",
+      "type": "roundedBox",
+      "params": [1.36, 0.62, 0.32, 0.022, 3],
+      "material": {
+        "color": "#0c0c0e",
+        "roughness": 0.78,
+        "metalness": 0.18,
+        "breakup": { "noise": { "amount": 0.04, "scale": 5.0, "color": "#050506" }, "roughnessVariation": 0.05 }
+      },
+      "position": [0, 0.31, 0],
+      "castShadow": true,
+      "receiveShadow": true,
+      "parent": "camera_root"
+    },
+
+    {
+      "name": "leatherette_front",
+      "type": "roundedBox",
+      "params": [1.34, 0.5, 0.012, 0.012, 2],
+      "material": {
+        "preset": "leather",
+        "color": "#13110f",
+        "roughness": 0.88,
+        "clearcoat": 0.12,
+        "clearcoatRoughness": 0.7,
+        "breakup": {
+          "noise": { "amount": 0.085, "scale": 9.0, "color": "#1c1814" },
+          "roughnessVariation": 0.12
+        }
+      },
+      "position": [0, 0.31, 0.165],
+      "parent": "camera_root"
+    },
+    {
+      "name": "leatherette_back",
+      "type": "roundedBox",
+      "params": [1.34, 0.5, 0.012, 0.012, 2],
+      "material": {
+        "preset": "leather",
+        "color": "#13110f",
+        "roughness": 0.88,
+        "clearcoat": 0.12,
+        "clearcoatRoughness": 0.7,
+        "breakup": {
+          "noise": { "amount": 0.085, "scale": 9.0, "color": "#1c1814" },
+          "roughnessVariation": 0.12
+        }
+      },
+      "position": [0, 0.31, -0.165],
+      "parent": "camera_root"
+    },
+    {
+      "name": "leatherette_left_wrap",
+      "type": "roundedBox",
+      "params": [0.012, 0.5, 0.31, 0.012, 2],
+      "material": {
+        "preset": "leather",
+        "color": "#13110f",
+        "roughness": 0.88,
+        "clearcoat": 0.12,
+        "clearcoatRoughness": 0.7,
+        "breakup": { "noise": { "amount": 0.085, "scale": 9.0, "color": "#1c1814" }, "roughnessVariation": 0.12 }
+      },
+      "position": [-0.671, 0.31, 0],
+      "parent": "camera_root"
+    },
+    {
+      "name": "leatherette_right_wrap",
+      "type": "roundedBox",
+      "params": [0.012, 0.5, 0.31, 0.012, 2],
+      "material": {
+        "preset": "leather",
+        "color": "#13110f",
+        "roughness": 0.88,
+        "clearcoat": 0.12,
+        "clearcoatRoughness": 0.7,
+        "breakup": { "noise": { "amount": 0.085, "scale": 9.0, "color": "#1c1814" }, "roughnessVariation": 0.12 }
+      },
+      "position": [0.671, 0.31, 0],
+      "parent": "camera_root"
+    },
+
+    {
+      "name": "top_plate",
+      "type": "roundedBox",
+      "params": [1.38, 0.085, 0.34, 0.014, 3],
+      "material": {
+        "color": "#b08a44",
+        "roughness": 0.32,
+        "metalness": 0.92,
+        "clearcoat": 0.45,
+        "clearcoatRoughness": 0.18,
+        "breakup": {
+          "noise": { "amount": 0.025, "scale": 6.0, "color": "#a07c3a" },
+          "edgeWear": { "amount": 0.05, "color": "#d4a85a" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [0, 0.625, 0],
+      "castShadow": true,
+      "parent": "camera_root"
+    },
+    {
+      "name": "top_plate_seam_front",
+      "type": "box",
+      "params": [1.38, 0.003, 0.005],
+      "material": { "color": "#3a2a14", "roughness": 0.85 },
+      "position": [0, 0.581, 0.171],
+      "parent": "camera_root"
+    },
+    {
+      "name": "top_plate_seam_back",
+      "type": "box",
+      "params": [1.38, 0.003, 0.005],
+      "material": { "color": "#3a2a14", "roughness": 0.85 },
+      "position": [0, 0.581, -0.171],
+      "parent": "camera_root"
+    },
+
+    {
+      "name": "bottom_plate",
+      "type": "roundedBox",
+      "params": [1.38, 0.07, 0.34, 0.014, 3],
+      "material": {
+        "color": "#a88240",
+        "roughness": 0.36,
+        "metalness": 0.9,
+        "clearcoat": 0.4,
+        "clearcoatRoughness": 0.22,
+        "breakup": {
+          "noise": { "amount": 0.025, "scale": 6.0, "color": "#987638" },
+          "edgeWear": { "amount": 0.06, "color": "#cc9c50" },
+          "roughnessVariation": 0.05
+        }
+      },
+      "position": [0, 0.035, 0],
+      "parent": "camera_root"
+    },
+    {
+      "name": "tripod_socket",
+      "type": "cylinder",
+      "params": [0.04, 0.04, 0.012, 18],
+      "material": { "color": "#1a1410", "roughness": 0.7, "metalness": 0.5 },
+      "position": [0, 0.0001, 0],
+      "rotation": [0, 0, 0],
+      "parent": "camera_root"
+    },
+
+    {
+      "name": "viewfinder_recess",
+      "type": "box",
+      "params": [0.115, 0.075, 0.012],
+      "material": { "color": "#0a0a0c", "roughness": 0.85 },
+      "position": [-0.45, 0.46, 0.169],
+      "parent": "camera_root"
+    },
+    {
+      "name": "viewfinder_glass",
+      "type": "box",
+      "params": [0.105, 0.065, 0.006],
+      "material": {
+        "preset": "glass",
+        "color": "#7a8a92",
+        "transmission": 0.55,
+        "ior": 1.5,
+        "roughness": 0.05,
+        "metalness": 0.0,
+        "envMapIntensity": 1.6
+      },
+      "position": [-0.45, 0.46, 0.176],
+      "parent": "camera_root"
+    },
+    {
+      "name": "viewfinder_bezel",
+      "type": "roundedBox",
+      "params": [0.13, 0.09, 0.006, 0.008, 1],
+      "material": { "color": "#16120e", "roughness": 0.6, "metalness": 0.55 },
+      "position": [-0.45, 0.46, 0.171],
+      "parent": "camera_root"
+    },
+
+    {
+      "name": "rangefinder_window",
+      "type": "box",
+      "params": [0.075, 0.06, 0.006],
+      "material": {
+        "preset": "glass",
+        "color": "#5a4a30",
+        "transmission": 0.4,
+        "ior": 1.5,
+        "roughness": 0.08,
+        "envMapIntensity": 1.4
+      },
+      "position": [0.34, 0.46, 0.176],
+      "parent": "camera_root"
+    },
+    {
+      "name": "rangefinder_bezel",
+      "type": "roundedBox",
+      "params": [0.09, 0.075, 0.006, 0.006, 1],
+      "material": { "color": "#16120e", "roughness": 0.6, "metalness": 0.55 },
+      "position": [0.34, 0.46, 0.171],
+      "parent": "camera_root"
+    },
+
+    {
+      "name": "illuminator_window",
+      "type": "box",
+      "params": [0.058, 0.055, 0.006],
+      "material": {
+        "preset": "glass",
+        "color": "#d4d8c2",
+        "transmission": 0.7,
+        "ior": 1.5,
+        "roughness": 0.42,
+        "envMapIntensity": 1.0
+      },
+      "position": [-0.06, 0.46, 0.176],
+      "parent": "camera_root"
+    },
+    {
+      "name": "illuminator_bezel",
+      "type": "roundedBox",
+      "params": [0.07, 0.07, 0.006, 0.006, 1],
+      "material": { "color": "#16120e", "roughness": 0.6, "metalness": 0.55 },
+      "position": [-0.06, 0.46, 0.171],
+      "parent": "camera_root"
+    },
+
+    {
+      "name": "self_timer_lever_pivot",
+      "type": "cylinder",
+      "params": [0.022, 0.022, 0.005, 16],
+      "material": { "color": "#16120e", "roughness": 0.6, "metalness": 0.55 },
+      "position": [-0.22, 0.31, 0.171],
+      "rotation": [90, 0, 0],
+      "parent": "camera_root"
+    },
+    {
+      "name": "self_timer_lever",
+      "type": "box",
+      "params": [0.07, 0.012, 0.004],
+      "material": { "color": "#262220", "roughness": 0.55, "metalness": 0.55 },
+      "position": [-0.18, 0.32, 0.173],
+      "rotation": [0, 0, -28],
+      "parent": "camera_root"
+    },
+
+    {
+      "name": "lens_release_button",
+      "type": "cylinder",
+      "params": [0.018, 0.018, 0.008, 16],
+      "material": { "color": "#1a1614", "roughness": 0.55, "metalness": 0.5 },
+      "position": [0.18, 0.31, 0.172],
+      "rotation": [90, 0, 0],
+      "parent": "camera_root"
+    },
+
+    {
+      "name": "strap_lug_l",
+      "type": "roundedBox",
+      "params": [0.022, 0.04, 0.06, 0.008, 1],
+      "material": { "color": "#a07a3a", "roughness": 0.45, "metalness": 0.85 },
+      "position": [-0.69, 0.55, 0],
+      "parent": "camera_root"
+    },
+    {
+      "name": "strap_lug_l_ring",
+      "type": "torus",
+      "params": [0.022, 0.005, 8, 16],
+      "material": { "color": "#c89c4a", "roughness": 0.4, "metalness": 0.9 },
+      "position": [-0.71, 0.55, 0],
+      "rotation": [0, 90, 0],
+      "parent": "camera_root"
+    },
+    {
+      "name": "strap_lug_r",
+      "type": "roundedBox",
+      "params": [0.022, 0.04, 0.06, 0.008, 1],
+      "material": { "color": "#a07a3a", "roughness": 0.45, "metalness": 0.85 },
+      "position": [0.69, 0.55, 0],
+      "parent": "camera_root"
+    },
+    {
+      "name": "strap_lug_r_ring",
+      "type": "torus",
+      "params": [0.022, 0.005, 8, 16],
+      "material": { "color": "#c89c4a", "roughness": 0.4, "metalness": 0.9 },
+      "position": [0.71, 0.55, 0],
+      "rotation": [0, 90, 0],
+      "parent": "camera_root"
+    },
+
+    {
+      "name": "shutter_speed_dial",
+      "type": "cylinder",
+      "params": [0.078, 0.082, 0.05, 24],
+      "material": {
+        "color": "#16110d",
+        "roughness": 0.5,
+        "metalness": 0.55,
+        "breakup": { "noise": { "amount": 0.04, "scale": 8.0, "color": "#241c14" }, "roughnessVariation": 0.05 }
+      },
+      "position": [0.45, 0.69, -0.04],
+      "parent": "camera_root"
+    },
+    {
+      "name": "shutter_speed_dial_face",
+      "type": "cylinder",
+      "params": [0.072, 0.072, 0.004, 24],
+      "material": { "color": "#d6d2c4", "roughness": 0.45, "metalness": 0.4 },
+      "position": [0.45, 0.715, -0.04],
+      "parent": "camera_root"
+    },
+    {
+      "name": "shutter_speed_index_a",
+      "type": "box",
+      "params": [0.005, 0.018, 0.002],
+      "material": { "color": "#0a0a0a", "roughness": 0.85 },
+      "position": [0.45, 0.718, 0.025],
+      "parent": "camera_root"
+    },
+    {
+      "name": "shutter_speed_index_b",
+      "type": "box",
+      "params": [0.018, 0.005, 0.002],
+      "material": { "color": "#a02418", "roughness": 0.85, "emissive": "#5a0e08", "emissiveIntensity": 0.15 },
+      "position": [0.49, 0.718, -0.04],
+      "parent": "camera_root"
+    },
+    {
+      "name": "shutter_speed_indicator_dot",
+      "type": "cylinder",
+      "params": [0.006, 0.006, 0.002, 12],
+      "material": { "color": "#0a0a0a", "roughness": 0.9 },
+      "position": [0.45, 0.718, -0.04],
+      "parent": "camera_root"
+    },
+    {
+      "name": "shutter_button_collar",
+      "type": "cylinder",
+      "params": [0.026, 0.028, 0.012, 18],
+      "material": { "color": "#0e0a08", "roughness": 0.6, "metalness": 0.55 },
+      "position": [0.45, 0.74, -0.04],
+      "parent": "camera_root"
+    },
+    {
+      "name": "shutter_button",
+      "type": "cylinder",
+      "params": [0.018, 0.018, 0.008, 18],
+      "material": { "color": "#c89c4a", "roughness": 0.4, "metalness": 0.9, "clearcoat": 0.5 },
+      "position": [0.45, 0.748, -0.04],
+      "parent": "camera_root"
+    },
+    {
+      "name": "shutter_button_thread",
+      "type": "ring",
+      "params": [0.005, 0.013, 18],
+      "material": { "color": "#0a0807", "roughness": 0.95 },
+      "position": [0.45, 0.7521, -0.04],
+      "rotation": [-90, 0, 0],
+      "parent": "camera_root"
+    },
+
+    {
+      "name": "advance_lever_base",
+      "type": "cylinder",
+      "params": [0.034, 0.034, 0.012, 20],
+      "material": { "color": "#aa8240", "roughness": 0.42, "metalness": 0.88 },
+      "position": [0.59, 0.675, -0.04],
+      "parent": "camera_root"
+    },
+    {
+      "name": "advance_lever_blade",
+      "type": "box",
+      "params": [0.13, 0.012, 0.026],
+      "material": { "color": "#aa8240", "roughness": 0.42, "metalness": 0.88, "clearcoat": 0.4 },
+      "position": [0.66, 0.681, -0.005],
+      "rotation": [0, 22, 0],
+      "parent": "camera_root"
+    },
+    {
+      "name": "advance_lever_tip",
+      "type": "roundedBox",
+      "params": [0.022, 0.014, 0.026, 0.005, 1],
+      "material": { "color": "#16110d", "roughness": 0.6, "metalness": 0.4 },
+      "position": [0.72, 0.682, 0.018],
+      "rotation": [0, 22, 0],
+      "parent": "camera_root"
+    },
+
+    {
+      "name": "frame_counter_window",
+      "type": "cylinder",
+      "params": [0.022, 0.022, 0.004, 20],
+      "material": {
+        "preset": "glass",
+        "color": "#1a1814",
+        "transmission": 0.5,
+        "roughness": 0.1,
+        "ior": 1.5,
+        "envMapIntensity": 1.4
+      },
+      "position": [0.45, 0.675, 0.04],
+      "parent": "camera_root"
+    },
+    {
+      "name": "frame_counter_bezel",
+      "type": "ring",
+      "params": [0.022, 0.03, 24],
+      "material": { "color": "#0a0807", "roughness": 0.85 },
+      "position": [0.45, 0.6731, 0.04],
+      "rotation": [-90, 0, 0],
+      "parent": "camera_root"
+    },
+    {
+      "name": "frame_counter_digit",
+      "type": "box",
+      "params": [0.012, 0.018, 0.001],
+      "material": { "color": "#d4ccaa", "roughness": 0.7, "emissive": "#3a2418", "emissiveIntensity": 0.2 },
+      "position": [0.45, 0.6741, 0.04],
+      "parent": "camera_root"
+    },
+
+    {
+      "name": "hot_shoe_base",
+      "type": "box",
+      "params": [0.085, 0.018, 0.07],
+      "material": { "color": "#0e0a08", "roughness": 0.7, "metalness": 0.55 },
+      "position": [0.05, 0.679, -0.04],
+      "parent": "camera_root"
+    },
+    {
+      "name": "hot_shoe_rail_l",
+      "type": "box",
+      "params": [0.085, 0.012, 0.012],
+      "material": { "color": "#a07a3a", "roughness": 0.45, "metalness": 0.9 },
+      "position": [0.05, 0.685, -0.018],
+      "parent": "camera_root"
+    },
+    {
+      "name": "hot_shoe_rail_r",
+      "type": "box",
+      "params": [0.085, 0.012, 0.012],
+      "material": { "color": "#a07a3a", "roughness": 0.45, "metalness": 0.9 },
+      "position": [0.05, 0.685, -0.062],
+      "parent": "camera_root"
+    },
+    {
+      "name": "hot_shoe_contact",
+      "type": "cylinder",
+      "params": [0.006, 0.006, 0.002, 12],
+      "material": { "color": "#cca664", "roughness": 0.4, "metalness": 0.9 },
+      "position": [0.05, 0.6791, -0.04],
+      "parent": "camera_root"
+    },
+
+    {
+      "name": "rewind_crank_collar",
+      "type": "cylinder",
+      "params": [0.05, 0.052, 0.018, 24],
+      "material": { "color": "#16110d", "roughness": 0.55, "metalness": 0.5 },
+      "position": [-0.55, 0.678, -0.04],
+      "parent": "camera_root"
+    },
+    {
+      "name": "rewind_knob",
+      "type": "cylinder",
+      "params": [0.038, 0.04, 0.025, 24],
+      "material": {
+        "color": "#a87e3c",
+        "roughness": 0.42,
+        "metalness": 0.88,
+        "clearcoat": 0.4,
+        "breakup": { "noise": { "amount": 0.04, "scale": 8.0, "color": "#8c6a30" }, "roughnessVariation": 0.05 }
+      },
+      "position": [-0.55, 0.7, -0.04],
+      "parent": "camera_root"
+    },
+    {
+      "name": "rewind_knob_top",
+      "type": "cylinder",
+      "params": [0.034, 0.034, 0.004, 24],
+      "material": { "color": "#16110d", "roughness": 0.45, "metalness": 0.5 },
+      "position": [-0.55, 0.715, -0.04],
+      "parent": "camera_root"
+    },
+    {
+      "name": "rewind_arrow",
+      "type": "box",
+      "params": [0.025, 0.005, 0.002],
+      "material": { "color": "#d4ccaa", "roughness": 0.6 },
+      "position": [-0.55, 0.7173, -0.04],
+      "parent": "camera_root"
+    },
+
+    {
+      "name": "logo_engraving",
+      "type": "box",
+      "params": [0.18, 0.03, 0.002],
+      "material": { "color": "#0a0807", "roughness": 0.85 },
+      "position": [0.05, 0.6791, 0.07],
+      "parent": "camera_root"
+    },
+
+    {
+      "name": "lens_mount_ring",
+      "type": "cylinder",
+      "params": [0.18, 0.18, 0.024, 32],
+      "material": {
+        "color": "#c0a04a",
+        "roughness": 0.35,
+        "metalness": 0.92,
+        "clearcoat": 0.4,
+        "breakup": { "noise": { "amount": 0.02, "scale": 6.0, "color": "#a8884a" }, "roughnessVariation": 0.04 }
+      },
+      "position": [0.05, 0.31, 0.18],
+      "rotation": [90, 0, 0],
+      "parent": "camera_root"
+    },
+    {
+      "name": "lens_red_dot",
+      "type": "sphere",
+      "params": [0.012, 1],
+      "material": { "color": "#c61a14", "roughness": 0.3, "metalness": 0.5, "clearcoat": 0.7, "emissive": "#3a0604", "emissiveIntensity": 0.18 },
+      "position": [0.215, 0.32, 0.193],
+      "parent": "camera_root"
+    },
+
+    {
+      "name": "lens_barrel_base",
+      "type": "cylinder",
+      "params": [0.16, 0.165, 0.045, 32],
+      "material": {
+        "color": "#0e0c0a",
+        "roughness": 0.45,
+        "metalness": 0.4,
+        "breakup": { "noise": { "amount": 0.03, "scale": 6.0, "color": "#1a1614" }, "roughnessVariation": 0.05 }
+      },
+      "position": [0.05, 0.31, 0.215],
+      "rotation": [90, 0, 0],
+      "parent": "camera_root"
+    },
+
+    {
+      "name": "aperture_ring",
+      "type": "cylinder",
+      "params": [0.155, 0.155, 0.04, 36],
+      "material": {
+        "color": "#13110f",
+        "roughness": 0.55,
+        "metalness": 0.3,
+        "breakup": { "noise": { "amount": 0.04, "scale": 12.0, "color": "#1c1a16" }, "roughnessVariation": 0.06 }
+      },
+      "position": [0.05, 0.31, 0.255],
+      "rotation": [90, 0, 0],
+      "parent": "camera_root"
+    },
+    {
+      "name": "aperture_index_marker",
+      "type": "box",
+      "params": [0.005, 0.012, 0.005],
+      "material": { "color": "#cabe98", "roughness": 0.6 },
+      "position": [0.05, 0.466, 0.255],
+      "parent": "camera_root"
+    },
+    {
+      "name": "aperture_pip_top",
+      "type": "module",
+      "src": "engraved-pip",
+      "position": [0.05, 0.451, 0.255],
+      "rotation": [90, 0, 0],
+      "parent": "camera_root"
+    },
+    {
+      "name": "aperture_pip_a",
+      "type": "module",
+      "src": "engraved-pip",
+      "position": [0.16, 0.405, 0.255],
+      "rotation": [90, 0, -38],
+      "parent": "camera_root"
+    },
+    {
+      "name": "aperture_pip_b",
+      "type": "module",
+      "src": "engraved-pip",
+      "position": [0.19, 0.31, 0.255],
+      "rotation": [90, 0, -75],
+      "parent": "camera_root"
+    },
+    {
+      "name": "aperture_pip_c",
+      "type": "module",
+      "src": "engraved-pip",
+      "position": [-0.06, 0.405, 0.255],
+      "rotation": [90, 0, 38],
+      "parent": "camera_root"
+    },
+    {
+      "name": "aperture_pip_d",
+      "type": "module",
+      "src": "engraved-pip",
+      "position": [-0.09, 0.31, 0.255],
+      "rotation": [90, 0, 75],
+      "parent": "camera_root"
+    },
+
+    {
+      "name": "distance_scale_ring",
+      "type": "cylinder",
+      "params": [0.158, 0.158, 0.028, 36],
+      "material": {
+        "color": "#15110d",
+        "roughness": 0.5,
+        "metalness": 0.45,
+        "breakup": { "noise": { "amount": 0.03, "scale": 6.0, "color": "#1e1814" }, "roughnessVariation": 0.04 }
+      },
+      "position": [0.05, 0.31, 0.293],
+      "rotation": [90, 0, 0],
+      "parent": "camera_root"
+    },
+    {
+      "name": "distance_scale_band",
+      "type": "ring",
+      "params": [0.143, 0.158, 36],
+      "material": { "color": "#cabe98", "roughness": 0.55, "metalness": 0.2 },
+      "position": [0.05, 0.31, 0.3071],
+      "parent": "camera_root"
+    },
+    {
+      "name": "distance_pip_a",
+      "type": "module",
+      "src": "engraved-pip",
+      "position": [0.05, 0.45, 0.308],
+      "rotation": [90, 0, 0],
+      "parent": "camera_root"
+    },
+    {
+      "name": "distance_pip_b",
+      "type": "module",
+      "src": "engraved-pip",
+      "position": [0.13, 0.42, 0.308],
+      "rotation": [90, 0, -28],
+      "parent": "camera_root"
+    },
+    {
+      "name": "distance_pip_c",
+      "type": "module",
+      "src": "engraved-pip",
+      "position": [-0.03, 0.42, 0.308],
+      "rotation": [90, 0, 28],
+      "parent": "camera_root"
+    },
+    {
+      "name": "distance_index_red",
+      "type": "box",
+      "params": [0.006, 0.018, 0.002],
+      "material": { "color": "#c61a14", "roughness": 0.55, "emissive": "#3a0604", "emissiveIntensity": 0.2 },
+      "position": [0.05, 0.46, 0.31],
+      "parent": "camera_root"
+    },
+
+    {
+      "name": "focus_ring",
+      "type": "cylinder",
+      "params": [0.165, 0.168, 0.07, 36],
+      "material": {
+        "color": "#0a0908",
+        "roughness": 0.62,
+        "metalness": 0.35,
+        "breakup": { "noise": { "amount": 0.06, "scale": 18.0, "color": "#1a1814" }, "roughnessVariation": 0.08 }
+      },
+      "position": [0.05, 0.31, 0.345],
+      "rotation": [90, 0, 0],
+      "parent": "camera_root"
+    },
+    {
+      "name": "focus_grip_band_a",
+      "type": "torus",
+      "params": [0.166, 0.005, 8, 32],
+      "material": { "color": "#0a0908", "roughness": 0.7 },
+      "position": [0.05, 0.31, 0.323],
+      "rotation": [0, 90, 0],
+      "parent": "camera_root"
+    },
+    {
+      "name": "focus_grip_band_b",
+      "type": "torus",
+      "params": [0.166, 0.005, 8, 32],
+      "material": { "color": "#0a0908", "roughness": 0.7 },
+      "position": [0.05, 0.31, 0.367],
+      "rotation": [0, 90, 0],
+      "parent": "camera_root"
+    },
+    {
+      "name": "focus_tab",
+      "type": "roundedBox",
+      "params": [0.04, 0.045, 0.03, 0.008, 1],
+      "material": {
+        "color": "#0a0908",
+        "roughness": 0.55,
+        "metalness": 0.45
+      },
+      "position": [-0.13, 0.32, 0.345],
+      "rotation": [0, 0, 0],
+      "parent": "camera_root"
+    },
+    {
+      "name": "focus_tab_face",
+      "type": "cylinder",
+      "params": [0.012, 0.012, 0.005, 14],
+      "material": { "color": "#caa64a", "roughness": 0.4, "metalness": 0.85 },
+      "position": [-0.155, 0.32, 0.345],
+      "rotation": [0, 0, 90],
+      "parent": "camera_root"
+    },
+
+    {
+      "name": "lens_decorative_ring",
+      "type": "cylinder",
+      "params": [0.17, 0.17, 0.012, 36],
+      "material": {
+        "color": "#c2a04c",
+        "roughness": 0.32,
+        "metalness": 0.92,
+        "clearcoat": 0.45
+      },
+      "position": [0.05, 0.31, 0.388],
+      "rotation": [90, 0, 0],
+      "parent": "camera_root"
+    },
+
+    {
+      "name": "lens_filter_ring",
+      "type": "cylinder",
+      "params": [0.155, 0.16, 0.024, 36],
+      "material": {
+        "color": "#0d0c0b",
+        "roughness": 0.5,
+        "metalness": 0.5
+      },
+      "position": [0.05, 0.31, 0.408],
+      "rotation": [90, 0, 0],
+      "parent": "camera_root"
+    },
+    {
+      "name": "lens_filter_thread",
+      "type": "torus",
+      "params": [0.152, 0.0035, 6, 36],
+      "material": { "color": "#080807", "roughness": 0.85 },
+      "position": [0.05, 0.31, 0.4185],
+      "rotation": [0, 90, 0],
+      "parent": "camera_root"
+    },
+
+    {
+      "name": "lens_inner_barrel",
+      "type": "cylinder",
+      "params": [0.13, 0.135, 0.02, 32],
+      "material": { "color": "#050505", "roughness": 0.85, "metalness": 0.2 },
+      "position": [0.05, 0.31, 0.428],
+      "rotation": [90, 0, 0],
+      "parent": "camera_root"
+    },
+
+    {
+      "name": "lens_glass_outer",
+      "type": "sphere",
+      "params": [0.13, 2],
+      "material": {
+        "preset": "glass",
+        "color": "#1a2240",
+        "transmission": 0.92,
+        "ior": 1.52,
+        "roughness": 0.02,
+        "metalness": 0.0,
+        "envMapIntensity": 2.2,
+        "clearcoat": 1.0,
+        "clearcoatRoughness": 0.05
+      },
+      "position": [0.05, 0.31, 0.43],
+      "scale": [1.0, 1.0, 0.32],
+      "parent": "camera_root"
+    },
+    {
+      "name": "lens_coating_tint",
+      "type": "cylinder",
+      "params": [0.124, 0.124, 0.001, 36],
+      "material": {
+        "color": "#3a3258",
+        "roughness": 0.04,
+        "metalness": 0.6,
+        "transmission": 0.4,
+        "envMapIntensity": 2.0,
+        "emissive": "#1a1838",
+        "emissiveIntensity": 0.08
+      },
+      "position": [0.05, 0.31, 0.443],
+      "rotation": [90, 0, 0],
+      "parent": "camera_root"
+    },
+    {
+      "name": "lens_aperture_blades_hint",
+      "type": "cylinder",
+      "params": [0.08, 0.08, 0.002, 7],
+      "material": { "color": "#000000", "roughness": 0.95 },
+      "position": [0.05, 0.31, 0.418],
+      "rotation": [90, 0, 0],
+      "parent": "camera_root"
+    },
+    {
+      "name": "lens_inner_dark",
+      "type": "cylinder",
+      "params": [0.115, 0.118, 0.06, 32],
+      "material": { "color": "#020202", "roughness": 0.95, "metalness": 0.1 },
+      "position": [0.05, 0.31, 0.39],
+      "rotation": [90, 0, 0],
+      "parent": "camera_root"
+    },
+
+    {
+      "name": "lens_engraving_strip",
+      "type": "ring",
+      "params": [0.165, 0.169, 36],
+      "material": { "color": "#cabe98", "roughness": 0.55, "metalness": 0.25 },
+      "position": [0.05, 0.31, 0.395],
+      "rotation": [0, 90, 0],
+      "parent": "camera_root"
+    },
+
+    {
+      "name": "back_door_seam_top",
+      "type": "box",
+      "params": [1.34, 0.002, 0.005],
+      "material": { "color": "#1a1612", "roughness": 0.85 },
+      "position": [0, 0.555, -0.169],
+      "parent": "camera_root"
+    },
+    {
+      "name": "back_door_hinge",
+      "type": "cylinder",
+      "params": [0.012, 0.012, 0.5, 12],
+      "material": { "color": "#a07a3a", "roughness": 0.5, "metalness": 0.85 },
+      "position": [-0.665, 0.31, -0.165],
+      "rotation": [0, 0, 0],
+      "parent": "camera_root"
+    },
+    {
+      "name": "back_door_latch",
+      "type": "roundedBox",
+      "params": [0.04, 0.05, 0.012, 0.008, 1],
+      "material": { "color": "#a07a3a", "roughness": 0.45, "metalness": 0.85 },
+      "position": [0.65, 0.31, -0.169],
+      "parent": "camera_root"
+    },
+
+    {
+      "name": "leather_grain_accent_l",
+      "type": "box",
+      "params": [0.002, 0.42, 0.002],
+      "material": { "color": "#2a2018", "roughness": 0.85 },
+      "position": [-0.18, 0.31, 0.172],
+      "parent": "camera_root",
+      "modifiers": { "array": { "count": 3, "offset": [-0.06, 0, 0] } }
+    },
+    {
+      "name": "leather_grain_accent_r",
+      "type": "box",
+      "params": [0.002, 0.42, 0.002],
+      "material": { "color": "#2a2018", "roughness": 0.85 },
+      "position": [0.32, 0.31, 0.172],
+      "parent": "camera_root",
+      "modifiers": { "array": { "count": 3, "offset": [0.06, 0, 0] } }
+    }
+  ]
+}
