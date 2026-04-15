@@ -44,6 +44,12 @@ Two specs anchor the current quality bar — both shipped in [`specs/`](specs/) 
 
 > A 1950s Anglepoise 1227 desk lamp, switched on, captured mid-pose with the arm angled forward over the plinth and the red shade tilted down to read the surface. Cast iron base, short vertical post, articulated joint chain (base → lower arm → elbow → upper arm → wrist → shade) with real joint groups and axle hardware; twin chrome tension springs at every joint, rendered as stacked helical coil tori; chrome arm tubes with polished reflective finish; brass end caps on the axles; red enamel bell-shaped shade with cream interior, chrome rim around the wide opening, brass bulb socket, warm glowing bulb inside. A warm three-tier emissive halo spills onto the leather plinth where the light lands. Power cord trailing from the base. Stage on the same wood-and-leather plinth as the other anchors. Match the field radio, rangefinder camera, and espresso machine quality bar.
 
+### Olivetti typewriter — [`specs/quality-bar-typewriter.json`](specs/quality-bar-typewriter.json)
+
+![Samdin — 1963 Olivetti Lettera 32 typewriter quality anchor](quality-typewriter.png)
+
+> A 1963 Olivetti Lettera 32 portable typewriter in signal blue, mid-typing with a sheet of paper in the carriage and two lines of typed text visible on the page plus a cursor mark where the next letter will land. CSG-carved wedge chassis with clean body seams and three chrome plates on the front (logo, engraving, model badge). Dense round cream keycaps with dark legend dots, arrayed in a four-row layout plus spacebar, shift, tab, and return. Carriage across the back: black rubber platen with visible rod through it, wood platen knobs on each end with chrome collars, angled metal paper rest, hinted ribbon spools, chrome carriage return lever angled down on the left. A few darker type bar hints rising toward the platen from inside the body. Rubber feet, plinth with wood + leather + brass lip to match the other anchors. First anchor with a cool palette to balance the warm-heavy set.
+
 ## Quick Start
 
 1. Start the dev server: `make dev PORT=8888` (omit `PORT=` to use the default `7777`)
