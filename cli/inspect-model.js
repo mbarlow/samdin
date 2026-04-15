@@ -3,7 +3,7 @@
  * Samdin Inspector
  * Loads a spec, takes screenshots from multiple angles, with various modes
  *
- * Usage: node inspect-model.js <spec.json> [output-dir]
+ * Usage: node inspect-model.js <spec.json> [output-dir] [port]
  */
 import { chromium } from 'playwright';
 import fs from 'fs';
@@ -90,7 +90,7 @@ function buildReviewTemplate(specName, modelInfo, summary) {
 `;
 }
 
-async function inspectModel(specPath, outputDir) {
+async function inspectModel(specPath, outputDir, requestedPort) {
   console.log('Loading spec:', specPath);
   const spec = JSON.parse(fs.readFileSync(specPath, 'utf-8'));
   const specName = spec.name || path.basename(specPath, '.json');
@@ -104,7 +104,8 @@ async function inspectModel(specPath, outputDir) {
   console.log('Output directory:', outputDir);
 
   // Start local server
-  const port = 8766;
+  const parsedPort = Number.parseInt(requestedPort ?? process.env.SAMDIN_INSPECT_PORT ?? '', 10);
+  const port = Number.isFinite(parsedPort) ? parsedPort : 8766;
   console.log(`Starting local server on port ${port}...`);
   const server = await createServer(VIEWER_DIR, port);
   const viewerUrl = `http://localhost:${port}`;
@@ -258,14 +259,14 @@ async function inspectModel(specPath, outputDir) {
 const args = process.argv.slice(2);
 if (args.length === 0) {
   console.log('Samdin Inspector');
-  console.log('Usage: node inspect-model.js <spec.json> [output-dir]');
+  console.log('Usage: node inspect-model.js <spec.json> [output-dir] [port]');
   console.log('');
   console.log('Takes screenshots of a model from multiple camera angles');
   console.log('with normal, wireframe, and design grid modes.');
   process.exit(0);
 }
 
-inspectModel(args[0], args[1]).catch(err => {
+inspectModel(args[0], args[1], args[2]).catch(err => {
   console.error('Error:', err);
   process.exit(1);
 });

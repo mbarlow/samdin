@@ -44,13 +44,13 @@ const PRIMITIVE_PARAMS = {
   extrudePath: { min: 3, max: 5, skipNumericParams: true },
   cable: { min: 1, max: 5, skipNumericParams: true },
   catenary: { min: 2, max: 6, skipNumericParams: true },
-  pointLight: { min: 0, max: 5 },
-  spotLight: { min: 0, max: 5 },
-  areaLight: { min: 0, max: 4 },
+  pointLight: { min: 0, max: 5, booleanParams: [3] },
+  spotLight: { min: 0, max: 5, booleanParams: [4] },
+  areaLight: { min: 0, max: 4, booleanParams: [3] },
 
-  ibeam: { min: 0, max: 4 },
+  ibeam: { min: 0, max: 5 },
   lbeam: { min: 0, max: 4 },
-  tbeam: { min: 0, max: 4 },
+  tbeam: { min: 0, max: 5 },
   channel: { min: 0, max: 4 },
   hbeam: { min: 0, max: 5 },
   angle: { min: 0, max: 4 },
@@ -186,15 +186,27 @@ function validateParams(part, typeInfo, prefix, issues, warnings) {
     warnings.push(`${prefix} Too many params: got ${part.params.length}, expected at most ${typeInfo.max}`);
   }
 
+  const booleanParamIndices = new Set(typeInfo.booleanParams || []);
+
   if (!typeInfo.skipNumericParams) {
     for (let i = 0; i < part.params.length; i++) {
-      if (typeof part.params[i] !== 'number' || Number.isNaN(part.params[i])) {
-        issues.push(`${prefix} Invalid param[${i}]: ${part.params[i]} (should be number)`);
+      const value = part.params[i];
+
+      if (booleanParamIndices.has(i)) {
+        const isBoolLike = typeof value === 'boolean' || (typeof value === 'number' && !Number.isNaN(value));
+        if (!isBoolLike) {
+          issues.push(`${prefix} Invalid param[${i}]: ${value} (should be boolean or number)`);
+        }
+        continue;
       }
-      if (typeof part.params[i] === 'number' && part.params[i] < 0) {
+
+      if (typeof value !== 'number' || Number.isNaN(value)) {
+        issues.push(`${prefix} Invalid param[${i}]: ${value} (should be number)`);
+      }
+      if (typeof value === 'number' && value < 0) {
         warnings.push(`${prefix} Negative param[${i}]: ${part.params[i]}`);
       }
-      if (part.params[i] === 0 && i < 3) {
+      if (value === 0 && i < 3) {
         warnings.push(`${prefix} Zero dimension param[${i}] may cause issues`);
       }
     }
