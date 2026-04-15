@@ -50,3 +50,9 @@
 1. Vehicle
 2. Character
 3. Environment
+
+## Progress
+
+- Vehicle pass completed: `specs/quality-bar-courier-pickup.json`
+- Status: validated and inspected through the local viewer on 2026-04-14.
+- Current read: viable next-stage quality sample for vehicle work, though the radio remains the stricter overall hero anchor.
