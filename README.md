@@ -1,6 +1,8 @@
 # Samdin
 
-![Samdin — 3D scene builder with viewer controls](screenshot.png)
+https://github.com/mbarlow/samdin/raw/main/samdin-demo.webm
+
+<video src="samdin-demo.webm" controls width="100%"></video>
 
 ![Samdin — Clinic spec loaded in the viewer](clinic.png)
 
@@ -13,6 +15,22 @@
 A JSON-based 3D scene builder using Three.js. Create complex 3D scenes by composing primitives, prefabs, modules, nested CSG parts, and scene-level render settings through declarative JSON specifications.
 
 Latest changes are summarized in [docs/RELEASE_NOTES.md](docs/RELEASE_NOTES.md).
+
+## Example Prompts
+
+Two specs anchor the current quality bar — both shipped in [`specs/`](specs/) and built from prompts. Drop a comparable prompt at an LLM and you should get a result in this neighborhood; if it lands lower, iterate on screenshots, not JSON.
+
+### Field radio — [`specs/quality-bar-field-radio.json`](specs/quality-bar-field-radio.json)
+
+![Samdin — mid-century field radio quality anchor](quality-radio.png)
+
+> Build a hero-quality mid-century field radio. Rugged two-tone painted shell with darker side caps, recessed dark fascia framing two windows: a multi-layer speaker (bezel + wire-mesh + slat array + chrome badge) on the left, and an amber tuning dial (glow strip + tick marks + red needle behind glass) on the right. Knurled rubber knobs as reusable modules, top utility carry handle, telescoping antenna at angle. Stage on a small concrete plinth, studio lighting, restrained bloom, three-quarter camera tight on the prop.
+
+### Rangefinder camera — [`specs/quality-bar-rangefinder-camera.json`](specs/quality-bar-rangefinder-camera.json)
+
+![Samdin — 1960s rangefinder camera quality anchor](quality-camera.png)
+
+> A 1960s 35mm rangefinder camera, Leica M-style. Brass top plate over vulcanite leatherette body wrap; multi-coated front lens element with real glass transmission; concentric multi-ring lens assembly (focus ring with rubber tab + distance scale band + aperture ring with engraved indices); rangefinder, viewfinder, and illuminator windows on the front; hot shoe, shutter speed dial, advance lever, frame counter window, rewind crank on top; eyepiece, LCD, and thumb rest on the back. Stage on a wood-and-leather plinth with brass lip. Match the field radio quality bar.
 
 ## Quick Start
 
