@@ -1,0 +1,963 @@
+{
+  "name": "quality-bar-espresso-machine",
+  "description": "Hero prop quality anchor. Prosumer single-boiler espresso machine, E61-style group head. Mirror chrome shell with brass trim, walnut portafilter handle locked into the group, steel drip tray, pressure gauge with transmission glass, green READY LED, subtle warm group-head glow. Companion to the field-radio and rangefinder-camera quality anchors.",
+  "root": "scene_root",
+  "scene": {
+    "quality": "high",
+    "background": { "type": "gradient", "color": "#aa9c84", "color2": "#1a1c20" },
+    "lighting": {
+      "preset": "showcase",
+      "environment": "studio",
+      "envMapIntensity": 1.4,
+      "shadowQuality": "high",
+      "intensity": 1.05
+    },
+    "ground": { "reflective": false },
+    "exposure": 1.05,
+    "toneMapping": "ACESFilmic",
+    "camera": {
+      "preset": "threeQuarter",
+      "distanceMultiplier": 0.65,
+      "positionOffset": [0.2, 0.0, 0.4],
+      "targetOffset": [0, 1.0, 0]
+    },
+    "postfx": {
+      "ssao": { "enabled": true, "kernelRadius": 6, "minDistance": 0.002, "maxDistance": 0.08 },
+      "bloom": { "enabled": true, "strength": 0.18, "radius": 0.3, "threshold": 0.88 },
+      "vignette": { "enabled": true, "intensity": 0.16, "softness": 0.6 },
+      "colorGrade": { "enabled": true, "saturation": 1.0, "brightness": 1.02, "contrast": 1.07 },
+      "fxaa": true
+    }
+  },
+  "modules": {
+    "wood-knob": {
+      "root": "wk_root",
+      "parts": [
+        { "name": "wk_root", "type": "group" },
+        {
+          "name": "wk_body",
+          "type": "sphere",
+          "params": [0.05, 1],
+          "material": {
+            "preset": "wood",
+            "color": "#3a2418",
+            "roughness": 0.5,
+            "clearcoat": 0.65,
+            "clearcoatRoughness": 0.2,
+            "breakup": {
+              "noise": { "amount": 0.06, "scale": 4.0, "color": "#4a2e1c" },
+              "roughnessVariation": 0.05
+            }
+          },
+          "position": [0, 0, 0],
+          "scale": [1.0, 0.7, 1.0],
+          "parent": "wk_root"
+        },
+        {
+          "name": "wk_collar",
+          "type": "cylinder",
+          "params": [0.022, 0.024, 0.018, 18],
+          "material": { "color": "#a07a3a", "roughness": 0.4, "metalness": 0.9, "clearcoat": 0.4 },
+          "position": [0, -0.04, 0],
+          "parent": "wk_root"
+        }
+      ]
+    }
+  },
+  "parts": [
+    { "name": "scene_root", "type": "group", "position": [0, 0, 0] },
+
+    {
+      "name": "key_fill",
+      "type": "pointLight",
+      "params": [0.42, 4.0, 1.4, false],
+      "material": { "color": "#fff0d4" },
+      "position": [0.7, 1.6, 0.8],
+      "castShadow": false,
+      "parent": "scene_root"
+    },
+    {
+      "name": "rim_back_light",
+      "type": "pointLight",
+      "params": [0.22, 3.5, 1.6, false],
+      "material": { "color": "#9eb6cc" },
+      "position": [-0.6, 1.0, -0.6],
+      "castShadow": false,
+      "parent": "scene_root"
+    },
+    {
+      "name": "warm_under_light",
+      "type": "pointLight",
+      "params": [0.16, 1.2, 1.8, false],
+      "material": { "color": "#ff8838" },
+      "position": [0.0, 0.65, 0.45],
+      "castShadow": false,
+      "parent": "scene_root"
+    },
+
+    {
+      "name": "plinth_base",
+      "type": "roundedBox",
+      "params": [1.7, 0.05, 1.4, 0.025, 3],
+      "material": {
+        "preset": "wood",
+        "color": "#3a261a",
+        "clearcoat": 0.55,
+        "clearcoatRoughness": 0.35,
+        "breakup": { "noise": { "amount": 0.08, "scale": 1.8, "color": "#4a3024" }, "roughnessVariation": 0.08 }
+      },
+      "position": [0, 0.025, 0],
+      "receiveShadow": true,
+      "parent": "scene_root"
+    },
+    {
+      "name": "plinth_leather_top",
+      "type": "roundedBox",
+      "params": [1.6, 0.012, 1.32, 0.018, 2],
+      "material": {
+        "preset": "leather",
+        "color": "#1a1410",
+        "roughness": 0.78,
+        "clearcoat": 0.18,
+        "clearcoatRoughness": 0.55,
+        "breakup": { "noise": { "amount": 0.06, "scale": 5.0, "color": "#221a14" }, "roughnessVariation": 0.08 }
+      },
+      "position": [0, 0.056, 0],
+      "receiveShadow": true,
+      "parent": "scene_root"
+    },
+    {
+      "name": "plinth_lip",
+      "type": "roundedBox",
+      "params": [1.64, 0.004, 1.34, 0.02, 1],
+      "material": { "color": "#9c7038", "roughness": 0.45, "metalness": 0.55, "clearcoat": 0.4 },
+      "position": [0, 0.064, 0],
+      "parent": "scene_root"
+    },
+
+    {
+      "name": "machine_root",
+      "type": "group",
+      "position": [-0.05, 0.07, 0.0],
+      "rotation": [0, 18, 0],
+      "parent": "scene_root"
+    },
+
+    {
+      "name": "body_shell",
+      "type": "roundedBox",
+      "params": [1.16, 1.95, 1.18, 0.06, 4],
+      "material": {
+        "color": "#e8e8ec",
+        "roughness": 0.08,
+        "metalness": 0.95,
+        "clearcoat": 0.7,
+        "clearcoatRoughness": 0.06,
+        "envMapIntensity": 2.6,
+        "breakup": {
+          "noise": { "amount": 0.012, "scale": 8.0, "color": "#d4d4d8" },
+          "roughnessVariation": 0.03
+        }
+      },
+      "position": [0, 1.0, 0],
+      "castShadow": true,
+      "receiveShadow": true,
+      "parent": "machine_root"
+    },
+    {
+      "name": "body_panel_seam_l",
+      "type": "box",
+      "params": [0.002, 1.85, 1.16],
+      "material": { "color": "#1a1a1c", "roughness": 0.85 },
+      "position": [-0.581, 1.0, 0],
+      "parent": "machine_root"
+    },
+    {
+      "name": "body_panel_seam_r",
+      "type": "box",
+      "params": [0.002, 1.85, 1.16],
+      "material": { "color": "#1a1a1c", "roughness": 0.85 },
+      "position": [0.581, 1.0, 0],
+      "parent": "machine_root"
+    },
+    {
+      "name": "body_top_seam_front",
+      "type": "box",
+      "params": [1.16, 0.002, 0.005],
+      "material": { "color": "#1a1a1c", "roughness": 0.85 },
+      "position": [0, 1.973, 0.59],
+      "parent": "machine_root"
+    },
+    {
+      "name": "body_top_seam_back",
+      "type": "box",
+      "params": [1.16, 0.002, 0.005],
+      "material": { "color": "#1a1a1c", "roughness": 0.85 },
+      "position": [0, 1.973, -0.59],
+      "parent": "machine_root"
+    },
+
+    {
+      "name": "warming_plate_well",
+      "type": "roundedBox",
+      "params": [1.0, 0.018, 0.95, 0.04, 2],
+      "material": {
+        "color": "#a8804a",
+        "roughness": 0.42,
+        "metalness": 0.92,
+        "clearcoat": 0.45,
+        "breakup": {
+          "noise": { "amount": 0.04, "scale": 5.0, "color": "#92703e" },
+          "edgeWear": { "amount": 0.06, "color": "#d4a85a" },
+          "roughnessVariation": 0.05
+        }
+      },
+      "position": [0, 1.984, -0.04],
+      "parent": "machine_root"
+    },
+    {
+      "name": "warming_plate_rail_front",
+      "type": "cylinder",
+      "params": [0.012, 0.012, 1.05, 12],
+      "material": { "color": "#b89048", "roughness": 0.4, "metalness": 0.92, "clearcoat": 0.5 },
+      "position": [0, 2.05, 0.42],
+      "rotation": [0, 0, 90],
+      "parent": "machine_root"
+    },
+    {
+      "name": "warming_plate_rail_back",
+      "type": "cylinder",
+      "params": [0.012, 0.012, 1.05, 12],
+      "material": { "color": "#b89048", "roughness": 0.4, "metalness": 0.92, "clearcoat": 0.5 },
+      "position": [0, 2.05, -0.5],
+      "rotation": [0, 0, 90],
+      "parent": "machine_root"
+    },
+    {
+      "name": "warming_plate_rail_l",
+      "type": "cylinder",
+      "params": [0.012, 0.012, 0.92, 12],
+      "material": { "color": "#b89048", "roughness": 0.4, "metalness": 0.92, "clearcoat": 0.5 },
+      "position": [-0.52, 2.05, -0.04],
+      "rotation": [90, 0, 0],
+      "parent": "machine_root"
+    },
+    {
+      "name": "warming_plate_rail_r",
+      "type": "cylinder",
+      "params": [0.012, 0.012, 0.92, 12],
+      "material": { "color": "#b89048", "roughness": 0.4, "metalness": 0.92, "clearcoat": 0.5 },
+      "position": [0.52, 2.05, -0.04],
+      "rotation": [90, 0, 0],
+      "parent": "machine_root"
+    },
+    {
+      "name": "rail_post_fl",
+      "type": "cylinder",
+      "params": [0.014, 0.014, 0.078, 10],
+      "material": { "color": "#a07a3a", "roughness": 0.45, "metalness": 0.9 },
+      "position": [-0.52, 2.018, 0.42],
+      "parent": "machine_root"
+    },
+    {
+      "name": "rail_post_fr",
+      "type": "cylinder",
+      "params": [0.014, 0.014, 0.078, 10],
+      "material": { "color": "#a07a3a", "roughness": 0.45, "metalness": 0.9 },
+      "position": [0.52, 2.018, 0.42],
+      "parent": "machine_root"
+    },
+    {
+      "name": "rail_post_bl",
+      "type": "cylinder",
+      "params": [0.014, 0.014, 0.078, 10],
+      "material": { "color": "#a07a3a", "roughness": 0.45, "metalness": 0.9 },
+      "position": [-0.52, 2.018, -0.5],
+      "parent": "machine_root"
+    },
+    {
+      "name": "rail_post_br",
+      "type": "cylinder",
+      "params": [0.014, 0.014, 0.078, 10],
+      "material": { "color": "#a07a3a", "roughness": 0.45, "metalness": 0.9 },
+      "position": [0.52, 2.018, -0.5],
+      "parent": "machine_root"
+    },
+
+    {
+      "name": "front_brass_plate",
+      "type": "roundedBox",
+      "params": [0.62, 0.85, 0.018, 0.02, 2],
+      "material": {
+        "color": "#a8804a",
+        "roughness": 0.4,
+        "metalness": 0.92,
+        "clearcoat": 0.45,
+        "clearcoatRoughness": 0.18,
+        "breakup": {
+          "noise": { "amount": 0.03, "scale": 6.0, "color": "#947038" },
+          "edgeWear": { "amount": 0.05, "color": "#d0a458" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [0, 1.32, 0.59],
+      "parent": "machine_root"
+    },
+    {
+      "name": "front_brass_seam_l",
+      "type": "box",
+      "params": [0.002, 0.85, 0.022],
+      "material": { "color": "#3a2614", "roughness": 0.85 },
+      "position": [-0.31, 1.32, 0.591],
+      "parent": "machine_root"
+    },
+    {
+      "name": "front_brass_seam_r",
+      "type": "box",
+      "params": [0.002, 0.85, 0.022],
+      "material": { "color": "#3a2614", "roughness": 0.85 },
+      "position": [0.31, 1.32, 0.591],
+      "parent": "machine_root"
+    },
+
+    {
+      "name": "group_head_collar",
+      "type": "cylinder",
+      "params": [0.18, 0.18, 0.05, 32],
+      "material": {
+        "color": "#a8804a",
+        "roughness": 0.38,
+        "metalness": 0.94,
+        "clearcoat": 0.5,
+        "breakup": { "noise": { "amount": 0.03, "scale": 5.0, "color": "#947038" }, "edgeWear": { "amount": 0.06, "color": "#d4a85a" }, "roughnessVariation": 0.05 }
+      },
+      "position": [0, 1.05, 0.62],
+      "rotation": [90, 0, 0],
+      "parent": "machine_root"
+    },
+    {
+      "name": "group_head_body",
+      "type": "cylinder",
+      "params": [0.155, 0.16, 0.085, 32],
+      "material": {
+        "color": "#b08a44",
+        "roughness": 0.35,
+        "metalness": 0.94,
+        "clearcoat": 0.55,
+        "breakup": { "noise": { "amount": 0.025, "scale": 6.0, "color": "#9c7a3c" }, "edgeWear": { "amount": 0.07, "color": "#d8b058" }, "roughnessVariation": 0.05 }
+      },
+      "position": [0, 1.05, 0.68],
+      "rotation": [90, 0, 0],
+      "parent": "machine_root"
+    },
+    {
+      "name": "group_head_taper",
+      "type": "cylinder",
+      "params": [0.13, 0.16, 0.045, 32],
+      "material": {
+        "color": "#a8804a",
+        "roughness": 0.38,
+        "metalness": 0.94,
+        "clearcoat": 0.5,
+        "breakup": { "noise": { "amount": 0.03, "scale": 5.0, "color": "#947038" }, "roughnessVariation": 0.05 }
+      },
+      "position": [0, 1.05, 0.745],
+      "rotation": [90, 0, 0],
+      "parent": "machine_root"
+    },
+    {
+      "name": "group_head_lower_lip",
+      "type": "cylinder",
+      "params": [0.13, 0.13, 0.022, 32],
+      "material": {
+        "color": "#a07838",
+        "roughness": 0.42,
+        "metalness": 0.92,
+        "clearcoat": 0.4
+      },
+      "position": [0, 1.05, 0.78],
+      "rotation": [90, 0, 0],
+      "parent": "machine_root"
+    },
+    {
+      "name": "group_head_inner_glow",
+      "type": "cylinder",
+      "params": [0.105, 0.105, 0.01, 32],
+      "material": {
+        "color": "#ff8838",
+        "roughness": 0.5,
+        "emissive": "#ff8838",
+        "emissiveIntensity": 0.85
+      },
+      "position": [0, 1.05, 0.795],
+      "rotation": [90, 0, 0],
+      "parent": "machine_root"
+    },
+    {
+      "name": "group_head_inner_dark",
+      "type": "cylinder",
+      "params": [0.085, 0.085, 0.04, 28],
+      "material": { "color": "#0a0604", "roughness": 0.95 },
+      "position": [0, 1.05, 0.78],
+      "rotation": [90, 0, 0],
+      "parent": "machine_root"
+    },
+
+    {
+      "name": "portafilter_assembly",
+      "type": "group",
+      "position": [0, 1.05, 0.78],
+      "rotation": [0, 0, 0],
+      "parent": "machine_root"
+    },
+    {
+      "name": "pf_lock_collar",
+      "type": "cylinder",
+      "params": [0.135, 0.14, 0.026, 32],
+      "material": {
+        "color": "#d8d8dc",
+        "roughness": 0.12,
+        "metalness": 0.95,
+        "clearcoat": 0.65,
+        "envMapIntensity": 2.4
+      },
+      "position": [0, 0, 0.025],
+      "rotation": [90, 0, 0],
+      "parent": "portafilter_assembly"
+    },
+    {
+      "name": "pf_lock_lugs",
+      "type": "box",
+      "params": [0.04, 0.018, 0.025],
+      "material": { "color": "#bababe", "roughness": 0.18, "metalness": 0.95 },
+      "position": [0.155, 0, 0.026],
+      "parent": "portafilter_assembly",
+      "modifiers": { "mirror": { "x": true } }
+    },
+    {
+      "name": "pf_neck",
+      "type": "cylinder",
+      "params": [0.07, 0.085, 0.13, 24],
+      "material": {
+        "color": "#d8d8dc",
+        "roughness": 0.12,
+        "metalness": 0.95,
+        "clearcoat": 0.6,
+        "envMapIntensity": 2.4
+      },
+      "position": [0, -0.07, 0.075],
+      "parent": "portafilter_assembly"
+    },
+    {
+      "name": "pf_basket_bowl",
+      "type": "cylinder",
+      "params": [0.085, 0.075, 0.06, 28],
+      "material": {
+        "color": "#9a9a9e",
+        "roughness": 0.32,
+        "metalness": 0.85,
+        "breakup": { "noise": { "amount": 0.05, "scale": 8.0, "color": "#7a7a7e" }, "roughnessVariation": 0.06 }
+      },
+      "position": [0, -0.18, 0.075],
+      "parent": "portafilter_assembly"
+    },
+    {
+      "name": "pf_spout_l",
+      "type": "cylinder",
+      "params": [0.012, 0.018, 0.05, 14],
+      "material": { "color": "#d8d8dc", "roughness": 0.15, "metalness": 0.95 },
+      "position": [-0.022, -0.235, 0.075],
+      "parent": "portafilter_assembly"
+    },
+    {
+      "name": "pf_spout_r",
+      "type": "cylinder",
+      "params": [0.012, 0.018, 0.05, 14],
+      "material": { "color": "#d8d8dc", "roughness": 0.15, "metalness": 0.95 },
+      "position": [0.022, -0.235, 0.075],
+      "parent": "portafilter_assembly"
+    },
+    {
+      "name": "pf_handle_ferrule",
+      "type": "cylinder",
+      "params": [0.034, 0.034, 0.025, 18],
+      "material": {
+        "color": "#a07a3a",
+        "roughness": 0.4,
+        "metalness": 0.9,
+        "clearcoat": 0.45
+      },
+      "position": [0.165, -0.06, 0.075],
+      "rotation": [0, 0, 90],
+      "parent": "portafilter_assembly"
+    },
+    {
+      "name": "pf_handle",
+      "type": "cylinder",
+      "params": [0.026, 0.038, 0.26, 22],
+      "material": {
+        "preset": "wood",
+        "color": "#3a261a",
+        "roughness": 0.55,
+        "clearcoat": 0.7,
+        "clearcoatRoughness": 0.18,
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 4.5, "color": "#4a3020" },
+          "roughnessVariation": 0.05
+        }
+      },
+      "position": [0.31, -0.06, 0.075],
+      "rotation": [0, 0, 90],
+      "parent": "portafilter_assembly"
+    },
+    {
+      "name": "pf_handle_endcap",
+      "type": "sphere",
+      "params": [0.027, 1],
+      "material": { "color": "#a07a3a", "roughness": 0.4, "metalness": 0.9, "clearcoat": 0.45 },
+      "position": [0.44, -0.06, 0.075],
+      "parent": "portafilter_assembly"
+    },
+
+    {
+      "name": "pressure_gauge_collar",
+      "type": "cylinder",
+      "params": [0.13, 0.13, 0.04, 28],
+      "material": {
+        "color": "#a8804a",
+        "roughness": 0.38,
+        "metalness": 0.94,
+        "clearcoat": 0.5,
+        "breakup": { "edgeWear": { "amount": 0.06, "color": "#d4a85a" }, "noise": { "amount": 0.025, "scale": 6.0, "color": "#947038" }, "roughnessVariation": 0.04 }
+      },
+      "position": [0.32, 1.65, 0.6],
+      "rotation": [90, 0, 0],
+      "parent": "machine_root"
+    },
+    {
+      "name": "pressure_gauge_face",
+      "type": "cylinder",
+      "params": [0.105, 0.105, 0.005, 28],
+      "material": { "color": "#e6dec4", "roughness": 0.55, "metalness": 0.05 },
+      "position": [0.32, 1.65, 0.622],
+      "rotation": [90, 0, 0],
+      "parent": "machine_root"
+    },
+    {
+      "name": "gauge_tick_top",
+      "type": "box",
+      "params": [0.005, 0.018, 0.002],
+      "material": { "color": "#0a0a0a", "roughness": 0.9 },
+      "position": [0.32, 1.74, 0.626],
+      "parent": "machine_root"
+    },
+    {
+      "name": "gauge_tick_l1",
+      "type": "box",
+      "params": [0.005, 0.018, 0.002],
+      "material": { "color": "#0a0a0a", "roughness": 0.9 },
+      "position": [0.243, 1.715, 0.626],
+      "rotation": [0, 0, 45],
+      "parent": "machine_root"
+    },
+    {
+      "name": "gauge_tick_l2",
+      "type": "box",
+      "params": [0.005, 0.018, 0.002],
+      "material": { "color": "#0a0a0a", "roughness": 0.9 },
+      "position": [0.225, 1.65, 0.626],
+      "rotation": [0, 0, 90],
+      "parent": "machine_root"
+    },
+    {
+      "name": "gauge_tick_r1",
+      "type": "box",
+      "params": [0.005, 0.018, 0.002],
+      "material": { "color": "#0a0a0a", "roughness": 0.9 },
+      "position": [0.397, 1.715, 0.626],
+      "rotation": [0, 0, -45],
+      "parent": "machine_root"
+    },
+    {
+      "name": "gauge_tick_r2",
+      "type": "box",
+      "params": [0.005, 0.018, 0.002],
+      "material": { "color": "#0a0a0a", "roughness": 0.9 },
+      "position": [0.415, 1.65, 0.626],
+      "rotation": [0, 0, 90],
+      "parent": "machine_root"
+    },
+    {
+      "name": "gauge_red_zone",
+      "type": "ring",
+      "params": [0.084, 0.098, 24],
+      "material": { "color": "#c62a18", "roughness": 0.55 },
+      "position": [0.32, 1.65, 0.625],
+      "parent": "machine_root"
+    },
+    {
+      "name": "gauge_needle",
+      "type": "box",
+      "params": [0.004, 0.078, 0.002],
+      "material": { "color": "#0a0a0a", "roughness": 0.55, "metalness": 0.4 },
+      "position": [0.305, 1.682, 0.628],
+      "rotation": [0, 0, 28],
+      "parent": "machine_root"
+    },
+    {
+      "name": "gauge_pivot",
+      "type": "cylinder",
+      "params": [0.012, 0.012, 0.005, 14],
+      "material": { "color": "#a07a3a", "roughness": 0.4, "metalness": 0.9 },
+      "position": [0.32, 1.65, 0.6285],
+      "rotation": [90, 0, 0],
+      "parent": "machine_root"
+    },
+    {
+      "name": "gauge_glass",
+      "type": "cylinder",
+      "params": [0.108, 0.108, 0.006, 28],
+      "material": {
+        "preset": "glass",
+        "color": "#d4d4d8",
+        "transmission": 0.85,
+        "roughness": 0.05,
+        "ior": 1.5,
+        "envMapIntensity": 1.8,
+        "clearcoat": 1.0
+      },
+      "position": [0.32, 1.65, 0.633],
+      "rotation": [90, 0, 0],
+      "parent": "machine_root"
+    },
+    {
+      "name": "gauge_label_bar",
+      "type": "box",
+      "params": [0.06, 0.012, 0.002],
+      "material": { "color": "#0a0a0a", "roughness": 0.9 },
+      "position": [0.32, 1.59, 0.626],
+      "parent": "machine_root"
+    },
+
+    {
+      "name": "ready_led_bezel",
+      "type": "cylinder",
+      "params": [0.018, 0.018, 0.008, 14],
+      "material": { "color": "#16110d", "roughness": 0.7, "metalness": 0.4 },
+      "position": [-0.21, 1.62, 0.602],
+      "rotation": [90, 0, 0],
+      "parent": "machine_root"
+    },
+    {
+      "name": "ready_led",
+      "type": "sphere",
+      "params": [0.012, 1],
+      "material": {
+        "preset": "glow",
+        "color": "#4aff7a",
+        "emissive": "#4aff7a",
+        "emissiveIntensity": 3.6
+      },
+      "position": [-0.21, 1.62, 0.612],
+      "parent": "machine_root"
+    },
+    {
+      "name": "power_led_bezel",
+      "type": "cylinder",
+      "params": [0.014, 0.014, 0.008, 14],
+      "material": { "color": "#16110d", "roughness": 0.7, "metalness": 0.4 },
+      "position": [-0.21, 1.56, 0.602],
+      "rotation": [90, 0, 0],
+      "parent": "machine_root"
+    },
+    {
+      "name": "power_led",
+      "type": "sphere",
+      "params": [0.009, 1],
+      "material": {
+        "preset": "glow",
+        "color": "#ff2a3a",
+        "emissive": "#ff2a3a",
+        "emissiveIntensity": 3.0
+      },
+      "position": [-0.21, 1.56, 0.612],
+      "parent": "machine_root"
+    },
+
+    {
+      "name": "power_switch_plate",
+      "type": "roundedBox",
+      "params": [0.06, 0.085, 0.014, 0.008, 1],
+      "material": { "color": "#16110d", "roughness": 0.55, "metalness": 0.5 },
+      "position": [-0.21, 1.46, 0.6],
+      "parent": "machine_root"
+    },
+    {
+      "name": "power_switch_rocker",
+      "type": "roundedBox",
+      "params": [0.04, 0.06, 0.014, 0.005, 1],
+      "material": { "color": "#3a2c20", "roughness": 0.55, "metalness": 0.3 },
+      "position": [-0.21, 1.46, 0.61],
+      "rotation": [-12, 0, 0],
+      "parent": "machine_root"
+    },
+
+    {
+      "name": "drip_tray_assembly",
+      "type": "group",
+      "position": [0, 0.27, 0.42],
+      "parent": "machine_root"
+    },
+    {
+      "name": "tray_base",
+      "type": "roundedBox",
+      "params": [0.92, 0.07, 0.34, 0.012, 2],
+      "material": {
+        "color": "#a8a8ac",
+        "roughness": 0.28,
+        "metalness": 0.85,
+        "breakup": { "noise": { "amount": 0.04, "scale": 5.0, "color": "#8a8a8e" }, "roughnessVariation": 0.05 }
+      },
+      "position": [0, 0, 0],
+      "parent": "drip_tray_assembly"
+    },
+    {
+      "name": "tray_grate_slat",
+      "type": "box",
+      "params": [0.84, 0.012, 0.014],
+      "material": {
+        "color": "#c8c8cc",
+        "roughness": 0.18,
+        "metalness": 0.92
+      },
+      "position": [0, 0.04, -0.13],
+      "parent": "drip_tray_assembly",
+      "modifiers": { "array": { "count": 11, "offset": [0, 0, 0.026] } }
+    },
+    {
+      "name": "tray_brass_lip",
+      "type": "box",
+      "params": [0.94, 0.012, 0.018],
+      "material": {
+        "color": "#a8804a",
+        "roughness": 0.4,
+        "metalness": 0.9,
+        "clearcoat": 0.5
+      },
+      "position": [0, 0.038, 0.176],
+      "parent": "drip_tray_assembly"
+    },
+
+    {
+      "name": "demitasse_saucer",
+      "type": "cylinder",
+      "params": [0.085, 0.075, 0.012, 24],
+      "material": { "preset": "ceramic", "color": "#f0ece0", "roughness": 0.35, "clearcoat": 0.55 },
+      "position": [0, 0.322, 0.42],
+      "parent": "machine_root"
+    },
+    {
+      "name": "demitasse_cup",
+      "type": "cylinder",
+      "params": [0.05, 0.045, 0.075, 24],
+      "material": { "preset": "ceramic", "color": "#f0ece0", "roughness": 0.32, "clearcoat": 0.6 },
+      "position": [0, 0.366, 0.42],
+      "parent": "machine_root"
+    },
+    {
+      "name": "demitasse_handle",
+      "type": "torus",
+      "params": [0.025, 0.005, 8, 18],
+      "material": { "preset": "ceramic", "color": "#f0ece0", "roughness": 0.32, "clearcoat": 0.6 },
+      "position": [0.058, 0.37, 0.42],
+      "rotation": [0, 90, 0],
+      "parent": "machine_root"
+    },
+    {
+      "name": "demitasse_coffee",
+      "type": "cylinder",
+      "params": [0.044, 0.044, 0.008, 22],
+      "material": {
+        "color": "#1a0c06",
+        "roughness": 0.4,
+        "metalness": 0.05,
+        "clearcoat": 0.6,
+        "clearcoatRoughness": 0.1
+      },
+      "position": [0, 0.398, 0.42],
+      "parent": "machine_root"
+    },
+    {
+      "name": "demitasse_crema",
+      "type": "cylinder",
+      "params": [0.044, 0.044, 0.001, 22],
+      "material": {
+        "color": "#a86838",
+        "roughness": 0.55,
+        "emissive": "#3a1808",
+        "emissiveIntensity": 0.1
+      },
+      "position": [0, 0.4025, 0.42],
+      "parent": "machine_root"
+    },
+
+    {
+      "name": "steam_wand_pivot_collar",
+      "type": "cylinder",
+      "params": [0.034, 0.034, 0.04, 16],
+      "material": {
+        "color": "#a8804a",
+        "roughness": 0.4,
+        "metalness": 0.92,
+        "clearcoat": 0.45
+      },
+      "position": [0.6, 1.18, 0.18],
+      "rotation": [0, 0, 90],
+      "parent": "machine_root"
+    },
+    {
+      "name": "steam_wand_arm_a",
+      "type": "cylinder",
+      "params": [0.018, 0.018, 0.32, 14],
+      "material": {
+        "color": "#d8d8dc",
+        "roughness": 0.12,
+        "metalness": 0.95,
+        "clearcoat": 0.6,
+        "envMapIntensity": 2.2
+      },
+      "position": [0.78, 1.05, 0.28],
+      "rotation": [-25, 30, -55],
+      "parent": "machine_root"
+    },
+    {
+      "name": "steam_wand_arm_b",
+      "type": "cylinder",
+      "params": [0.014, 0.014, 0.18, 14],
+      "material": {
+        "color": "#d8d8dc",
+        "roughness": 0.12,
+        "metalness": 0.95,
+        "clearcoat": 0.6,
+        "envMapIntensity": 2.2
+      },
+      "position": [0.92, 0.86, 0.42],
+      "rotation": [-50, 25, -50],
+      "parent": "machine_root"
+    },
+    {
+      "name": "steam_wand_tip",
+      "type": "cylinder",
+      "params": [0.013, 0.018, 0.04, 14],
+      "material": { "color": "#3a2c20", "roughness": 0.65, "metalness": 0.5 },
+      "position": [0.985, 0.74, 0.51],
+      "rotation": [-50, 25, -50],
+      "parent": "machine_root"
+    },
+
+    {
+      "name": "steam_knob",
+      "type": "module",
+      "src": "wood-knob",
+      "position": [0.62, 1.32, 0.18],
+      "parent": "machine_root"
+    },
+    {
+      "name": "steam_knob_stem",
+      "type": "cylinder",
+      "params": [0.014, 0.014, 0.04, 12],
+      "material": { "color": "#a07a3a", "roughness": 0.45, "metalness": 0.9 },
+      "position": [0.6, 1.27, 0.18],
+      "rotation": [0, 0, 90],
+      "parent": "machine_root"
+    },
+
+    {
+      "name": "water_knob",
+      "type": "module",
+      "src": "wood-knob",
+      "position": [-0.62, 1.32, 0.18],
+      "parent": "machine_root"
+    },
+    {
+      "name": "water_knob_stem",
+      "type": "cylinder",
+      "params": [0.014, 0.014, 0.04, 12],
+      "material": { "color": "#a07a3a", "roughness": 0.45, "metalness": 0.9 },
+      "position": [-0.6, 1.27, 0.18],
+      "rotation": [0, 0, 90],
+      "parent": "machine_root"
+    },
+    {
+      "name": "water_spout",
+      "type": "cylinder",
+      "params": [0.012, 0.014, 0.18, 14],
+      "material": {
+        "color": "#d8d8dc",
+        "roughness": 0.12,
+        "metalness": 0.95,
+        "clearcoat": 0.6,
+        "envMapIntensity": 2.2
+      },
+      "position": [-0.74, 1.18, 0.18],
+      "rotation": [0, 0, -75],
+      "parent": "machine_root"
+    },
+    {
+      "name": "water_spout_tip",
+      "type": "cylinder",
+      "params": [0.011, 0.013, 0.025, 14],
+      "material": { "color": "#3a2c20", "roughness": 0.65, "metalness": 0.5 },
+      "position": [-0.815, 1.13, 0.18],
+      "rotation": [0, 0, -75],
+      "parent": "machine_root"
+    },
+
+    {
+      "name": "back_feet_l",
+      "type": "cylinder",
+      "params": [0.04, 0.04, 0.04, 14],
+      "material": { "preset": "rubber", "color": "#0a0a0c" },
+      "position": [-0.42, 0.06, -0.5],
+      "parent": "machine_root"
+    },
+    {
+      "name": "back_feet_r",
+      "type": "cylinder",
+      "params": [0.04, 0.04, 0.04, 14],
+      "material": { "preset": "rubber", "color": "#0a0a0c" },
+      "position": [0.42, 0.06, -0.5],
+      "parent": "machine_root"
+    },
+    {
+      "name": "front_feet_l",
+      "type": "cylinder",
+      "params": [0.04, 0.04, 0.04, 14],
+      "material": { "preset": "rubber", "color": "#0a0a0c" },
+      "position": [-0.42, 0.06, 0.5],
+      "parent": "machine_root"
+    },
+    {
+      "name": "front_feet_r",
+      "type": "cylinder",
+      "params": [0.04, 0.04, 0.04, 14],
+      "material": { "preset": "rubber", "color": "#0a0a0c" },
+      "position": [0.42, 0.06, 0.5],
+      "parent": "machine_root"
+    },
+
+    {
+      "name": "brand_badge",
+      "type": "roundedBox",
+      "params": [0.16, 0.04, 0.005, 0.005, 1],
+      "material": {
+        "color": "#a8804a",
+        "roughness": 0.35,
+        "metalness": 0.94,
+        "clearcoat": 0.55
+      },
+      "position": [0, 0.85, 0.6],
+      "parent": "machine_root"
+    }
+  ]
+}

@@ -32,6 +32,12 @@ Two specs anchor the current quality bar — both shipped in [`specs/`](specs/) 
 
 > A 1960s 35mm rangefinder camera, Leica M-style. Brass top plate over vulcanite leatherette body wrap; multi-coated front lens element with real glass transmission; concentric multi-ring lens assembly (focus ring with rubber tab + distance scale band + aperture ring with engraved indices); rangefinder, viewfinder, and illuminator windows on the front; hot shoe, shutter speed dial, advance lever, frame counter window, rewind crank on top; eyepiece, LCD, and thumb rest on the back. Stage on a wood-and-leather plinth with brass lip. Match the field radio quality bar.
 
+### Espresso machine — [`specs/quality-bar-espresso-machine.json`](specs/quality-bar-espresso-machine.json)
+
+![Samdin — prosumer espresso machine quality anchor](quality-espresso.png)
+
+> A prosumer single-boiler espresso machine, E61-style group head. Mirror-polished chrome shell with brass front fascia plate; brass-trimmed group head with portafilter locked in (walnut handle, twin chrome spouts); pressure gauge with cream face, red over-pressure zone, black needle, and transmission glass; green READY LED + red power LED + rocker switch on the front; brass top warming plate with railed perimeter; chrome steam wand on the right with wood steam knob; chrome hot-water spout on the left with matching wood knob; stainless drip tray with slatted grate; demitasse cup of fresh espresso resting on the tray. Stage on the same wood-and-leather plinth used for the radio and camera. Active state — warm group-head glow, LEDs lit. Match the field radio and rangefinder camera quality bar.
+
 ## Quick Start
 
 1. Start the dev server: `make dev PORT=8888` (omit `PORT=` to use the default `7777`)
