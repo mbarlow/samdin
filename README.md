@@ -38,6 +38,12 @@ Two specs anchor the current quality bar — both shipped in [`specs/`](specs/) 
 
 > A prosumer single-boiler espresso machine, E61-style group head. Mirror-polished chrome shell with brass front fascia plate; brass-trimmed group head with portafilter locked in (walnut handle, twin chrome spouts); pressure gauge with cream face, red over-pressure zone, black needle, and transmission glass; green READY LED + red power LED + rocker switch on the front; brass top warming plate with railed perimeter; chrome steam wand on the right with wood steam knob; chrome hot-water spout on the left with matching wood knob; stainless drip tray with slatted grate; demitasse cup of fresh espresso resting on the tray. Stage on the same wood-and-leather plinth used for the radio and camera. Active state — warm group-head glow, LEDs lit. Match the field radio and rangefinder camera quality bar.
 
+### Anglepoise desk lamp — [`specs/quality-bar-anglepoise-lamp.json`](specs/quality-bar-anglepoise-lamp.json)
+
+![Samdin — 1950s Anglepoise desk lamp quality anchor](quality-lamp.png)
+
+> A 1950s Anglepoise 1227 desk lamp, switched on, captured mid-pose with the arm angled forward over the plinth and the red shade tilted down to read the surface. Cast iron base, short vertical post, articulated joint chain (base → lower arm → elbow → upper arm → wrist → shade) with real joint groups and axle hardware; twin chrome tension springs at every joint, rendered as stacked helical coil tori; chrome arm tubes with polished reflective finish; brass end caps on the axles; red enamel bell-shaped shade with cream interior, chrome rim around the wide opening, brass bulb socket, warm glowing bulb inside. A warm three-tier emissive halo spills onto the leather plinth where the light lands. Power cord trailing from the base. Stage on the same wood-and-leather plinth as the other anchors. Match the field radio, rangefinder camera, and espresso machine quality bar.
+
 ## Quick Start
 
 1. Start the dev server: `make dev PORT=8888` (omit `PORT=` to use the default `7777`)

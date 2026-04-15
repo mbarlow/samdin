@@ -1,0 +1,554 @@
+{
+  "name": "quality-bar-anglepoise-lamp",
+  "description": "Hero prop quality anchor. 1950s Anglepoise 1227 desk lamp, switched on, captured mid-pose with the arm angled forward over the plinth and the shade tilted down to read the surface. Cast iron base, twin tension springs at every joint, chrome arms, red enamel shade with warm emissive bulb casting a soft halo on the leather plinth top. Companion to the field-radio, rangefinder-camera, and espresso-machine quality anchors.",
+  "root": "scene_root",
+  "scene": {
+    "quality": "high",
+    "background": { "type": "gradient", "color": "#9a8c74", "color2": "#16181c" },
+    "lighting": {
+      "preset": "showcase",
+      "environment": "studio",
+      "envMapIntensity": 1.2,
+      "shadowQuality": "high",
+      "intensity": 1.0
+    },
+    "ground": { "reflective": false },
+    "exposure": 1.05,
+    "toneMapping": "ACESFilmic",
+    "camera": {
+      "preset": "threeQuarter",
+      "distanceMultiplier": 0.78,
+      "positionOffset": [0.3, 0.05, 0.5],
+      "targetOffset": [0.1, 0.7, 0.1]
+    },
+    "postfx": {
+      "ssao": { "enabled": true, "kernelRadius": 6, "minDistance": 0.002, "maxDistance": 0.08 },
+      "bloom": { "enabled": true, "strength": 0.32, "radius": 0.4, "threshold": 0.82 },
+      "vignette": { "enabled": true, "intensity": 0.18, "softness": 0.6 },
+      "colorGrade": { "enabled": true, "saturation": 1.04, "brightness": 1.02, "contrast": 1.06 },
+      "fxaa": true
+    }
+  },
+  "modules": {
+    "tension-spring": {
+      "root": "spring_root",
+      "parts": [
+        { "name": "spring_root", "type": "group" },
+        {
+          "name": "coil",
+          "type": "torus",
+          "params": [0.026, 0.008, 6, 14],
+          "material": {
+            "preset": "chrome",
+            "color": "#dadadc",
+            "roughness": 0.18,
+            "metalness": 0.95,
+            "envMapIntensity": 1.8,
+            "breakup": { "noise": { "amount": 0.025, "scale": 6.0, "color": "#bababe" }, "roughnessVariation": 0.04 }
+          },
+          "rotation": [90, 0, 0],
+          "position": [0, 0, 0],
+          "parent": "spring_root",
+          "modifiers": { "array": { "count": 10, "offset": [0, 0.018, 0] } }
+        },
+        {
+          "name": "spring_anchor_lower",
+          "type": "cylinder",
+          "params": [0.012, 0.012, 0.024, 12],
+          "material": { "color": "#16161a", "roughness": 0.55, "metalness": 0.65 },
+          "position": [0, -0.018, 0],
+          "parent": "spring_root"
+        },
+        {
+          "name": "spring_anchor_upper",
+          "type": "cylinder",
+          "params": [0.012, 0.012, 0.024, 12],
+          "material": { "color": "#16161a", "roughness": 0.55, "metalness": 0.65 },
+          "position": [0, 0.184, 0],
+          "parent": "spring_root"
+        }
+      ]
+    },
+    "joint-bracket": {
+      "root": "bracket_root",
+      "parts": [
+        { "name": "bracket_root", "type": "group" },
+        {
+          "name": "bracket_body",
+          "type": "roundedBox",
+          "params": [0.08, 0.05, 0.07, 0.012, 2],
+          "material": { "color": "#16161a", "roughness": 0.55, "metalness": 0.7, "breakup": { "noise": { "amount": 0.03, "scale": 6.0, "color": "#0a0a0c" }, "edgeWear": { "amount": 0.05, "color": "#3a3a3e" }, "roughnessVariation": 0.05 } },
+          "position": [0, 0, 0],
+          "parent": "bracket_root"
+        },
+        {
+          "name": "bracket_axle",
+          "type": "cylinder",
+          "params": [0.018, 0.018, 0.085, 16],
+          "material": { "preset": "chrome", "color": "#d8d8dc", "roughness": 0.15, "metalness": 0.95, "envMapIntensity": 1.8 },
+          "position": [0, 0, 0],
+          "rotation": [0, 0, 90],
+          "parent": "bracket_root"
+        },
+        {
+          "name": "bracket_axle_cap_l",
+          "type": "cylinder",
+          "params": [0.022, 0.022, 0.008, 14],
+          "material": { "color": "#a07a3a", "roughness": 0.4, "metalness": 0.9 },
+          "position": [-0.045, 0, 0],
+          "rotation": [0, 0, 90],
+          "parent": "bracket_root"
+        },
+        {
+          "name": "bracket_axle_cap_r",
+          "type": "cylinder",
+          "params": [0.022, 0.022, 0.008, 14],
+          "material": { "color": "#a07a3a", "roughness": 0.4, "metalness": 0.9 },
+          "position": [0.045, 0, 0],
+          "rotation": [0, 0, 90],
+          "parent": "bracket_root"
+        }
+      ]
+    }
+  },
+  "parts": [
+    { "name": "scene_root", "type": "group", "position": [0, 0, 0] },
+
+    {
+      "name": "key_fill",
+      "type": "pointLight",
+      "params": [0.4, 3.5, 1.4, false],
+      "material": { "color": "#fff0d4" },
+      "position": [0.7, 1.4, 0.6],
+      "castShadow": false,
+      "parent": "scene_root"
+    },
+    {
+      "name": "rim_back_light",
+      "type": "pointLight",
+      "params": [0.2, 3.0, 1.6, false],
+      "material": { "color": "#9eb6cc" },
+      "position": [-0.6, 1.0, -0.5],
+      "castShadow": false,
+      "parent": "scene_root"
+    },
+
+    {
+      "name": "plinth_base",
+      "type": "roundedBox",
+      "params": [1.7, 0.05, 1.5, 0.025, 3],
+      "material": {
+        "preset": "wood",
+        "color": "#3a261a",
+        "clearcoat": 0.55,
+        "clearcoatRoughness": 0.35,
+        "breakup": { "noise": { "amount": 0.08, "scale": 1.8, "color": "#4a3024" }, "roughnessVariation": 0.08 }
+      },
+      "position": [0, 0.025, 0],
+      "receiveShadow": true,
+      "parent": "scene_root"
+    },
+    {
+      "name": "plinth_leather_top",
+      "type": "roundedBox",
+      "params": [1.6, 0.012, 1.42, 0.018, 2],
+      "material": {
+        "preset": "leather",
+        "color": "#1a1410",
+        "roughness": 0.78,
+        "clearcoat": 0.18,
+        "clearcoatRoughness": 0.55,
+        "breakup": { "noise": { "amount": 0.06, "scale": 5.0, "color": "#221a14" }, "roughnessVariation": 0.08 }
+      },
+      "position": [0, 0.056, 0],
+      "receiveShadow": true,
+      "parent": "scene_root"
+    },
+    {
+      "name": "plinth_lip",
+      "type": "roundedBox",
+      "params": [1.64, 0.004, 1.44, 0.02, 1],
+      "material": { "color": "#9c7038", "roughness": 0.45, "metalness": 0.55, "clearcoat": 0.4 },
+      "position": [0, 0.064, 0],
+      "parent": "scene_root"
+    },
+
+    {
+      "name": "light_spill_outer",
+      "type": "cylinder",
+      "params": [0.6, 0.6, 0.001, 36],
+      "material": {
+        "color": "#ff8a40",
+        "roughness": 0.6,
+        "emissive": "#ff8a40",
+        "emissiveIntensity": 0.45
+      },
+      "position": [-0.05, 0.0635, 0.62],
+      "parent": "scene_root"
+    },
+    {
+      "name": "light_spill_inner",
+      "type": "cylinder",
+      "params": [0.32, 0.32, 0.0015, 36],
+      "material": {
+        "color": "#ffcc88",
+        "roughness": 0.55,
+        "emissive": "#ffcc88",
+        "emissiveIntensity": 0.85
+      },
+      "position": [-0.05, 0.0645, 0.62],
+      "parent": "scene_root"
+    },
+    {
+      "name": "light_spill_hot",
+      "type": "cylinder",
+      "params": [0.16, 0.16, 0.002, 36],
+      "material": {
+        "color": "#ffe4b8",
+        "roughness": 0.5,
+        "emissive": "#ffe4b8",
+        "emissiveIntensity": 1.4
+      },
+      "position": [-0.05, 0.0655, 0.62],
+      "parent": "scene_root"
+    },
+
+    {
+      "name": "lamp_root",
+      "type": "group",
+      "position": [-0.5, 0.07, -0.3],
+      "rotation": [0, 25, 0],
+      "parent": "scene_root"
+    },
+
+    {
+      "name": "base_disc",
+      "type": "cylinder",
+      "params": [0.42, 0.45, 0.06, 36],
+      "material": {
+        "color": "#1a1a1e",
+        "roughness": 0.55,
+        "metalness": 0.55,
+        "clearcoat": 0.35,
+        "clearcoatRoughness": 0.4,
+        "breakup": {
+          "noise": { "amount": 0.04, "scale": 4.0, "color": "#0a0a0e" },
+          "edgeWear": { "amount": 0.08, "color": "#4a4a4e" },
+          "roughnessVariation": 0.06
+        }
+      },
+      "position": [0, 0.03, 0],
+      "castShadow": true,
+      "receiveShadow": true,
+      "parent": "lamp_root"
+    },
+    {
+      "name": "base_top_bevel",
+      "type": "cylinder",
+      "params": [0.34, 0.42, 0.018, 36],
+      "material": {
+        "color": "#1c1c20",
+        "roughness": 0.5,
+        "metalness": 0.6,
+        "clearcoat": 0.4
+      },
+      "position": [0, 0.069, 0],
+      "parent": "lamp_root"
+    },
+    {
+      "name": "base_logo_plate",
+      "type": "roundedBox",
+      "params": [0.18, 0.005, 0.06, 0.008, 1],
+      "material": {
+        "color": "#a8804a",
+        "roughness": 0.4,
+        "metalness": 0.92,
+        "clearcoat": 0.4
+      },
+      "position": [0, 0.081, 0.18],
+      "parent": "lamp_root"
+    },
+    {
+      "name": "base_post",
+      "type": "cylinder",
+      "params": [0.05, 0.06, 0.07, 24],
+      "material": {
+        "color": "#1c1c20",
+        "roughness": 0.45,
+        "metalness": 0.7,
+        "clearcoat": 0.35
+      },
+      "position": [0, 0.115, 0],
+      "parent": "lamp_root"
+    },
+    {
+      "name": "base_pivot_bracket",
+      "type": "module",
+      "src": "joint-bracket",
+      "position": [0, 0.165, 0],
+      "parent": "lamp_root"
+    },
+
+    {
+      "name": "lower_arm_joint",
+      "type": "group",
+      "position": [0, 0.165, 0],
+      "rotation": [-32, 0, 0],
+      "parent": "lamp_root"
+    },
+    {
+      "name": "lower_arm_anchor_top",
+      "type": "cylinder",
+      "params": [0.014, 0.014, 0.085, 14],
+      "material": { "color": "#16161a", "roughness": 0.55, "metalness": 0.7 },
+      "position": [0, 0.06, 0],
+      "rotation": [0, 0, 90],
+      "parent": "lower_arm_joint"
+    },
+    {
+      "name": "lower_arm_tube",
+      "type": "cylinder",
+      "params": [0.022, 0.022, 1.0, 16],
+      "material": {
+        "color": "#dadadc",
+        "roughness": 0.18,
+        "metalness": 0.95,
+        "clearcoat": 0.55,
+        "envMapIntensity": 1.8,
+        "breakup": { "noise": { "amount": 0.018, "scale": 5.0, "color": "#bababe" }, "roughnessVariation": 0.04 }
+      },
+      "position": [0, 0.55, 0],
+      "parent": "lower_arm_joint"
+    },
+    {
+      "name": "spring_lower_l",
+      "type": "module",
+      "src": "tension-spring",
+      "position": [-0.04, 0.05, 0.06],
+      "rotation": [-12, 0, 0],
+      "parent": "lower_arm_joint"
+    },
+    {
+      "name": "spring_lower_r",
+      "type": "module",
+      "src": "tension-spring",
+      "position": [0.04, 0.05, 0.06],
+      "rotation": [-12, 0, 0],
+      "parent": "lower_arm_joint"
+    },
+    {
+      "name": "lower_arm_top_collar",
+      "type": "cylinder",
+      "params": [0.028, 0.028, 0.032, 18],
+      "material": { "color": "#16161a", "roughness": 0.5, "metalness": 0.7 },
+      "position": [0, 1.0, 0],
+      "parent": "lower_arm_joint"
+    },
+    {
+      "name": "elbow_bracket",
+      "type": "module",
+      "src": "joint-bracket",
+      "position": [0, 1.04, 0],
+      "parent": "lower_arm_joint"
+    },
+
+    {
+      "name": "upper_arm_joint",
+      "type": "group",
+      "position": [0, 1.04, 0],
+      "rotation": [110, 0, 0],
+      "parent": "lower_arm_joint"
+    },
+    {
+      "name": "upper_arm_anchor_bottom",
+      "type": "cylinder",
+      "params": [0.014, 0.014, 0.085, 14],
+      "material": { "color": "#16161a", "roughness": 0.55, "metalness": 0.7 },
+      "position": [0, 0.06, 0],
+      "rotation": [0, 0, 90],
+      "parent": "upper_arm_joint"
+    },
+    {
+      "name": "upper_arm_tube",
+      "type": "cylinder",
+      "params": [0.02, 0.02, 0.92, 16],
+      "material": {
+        "color": "#dadadc",
+        "roughness": 0.18,
+        "metalness": 0.95,
+        "clearcoat": 0.55,
+        "envMapIntensity": 1.8,
+        "breakup": { "noise": { "amount": 0.018, "scale": 5.0, "color": "#bababe" }, "roughnessVariation": 0.04 }
+      },
+      "position": [0, 0.51, 0],
+      "parent": "upper_arm_joint"
+    },
+    {
+      "name": "spring_elbow_l",
+      "type": "module",
+      "src": "tension-spring",
+      "position": [-0.04, 0.05, 0.06],
+      "rotation": [-12, 0, 0],
+      "parent": "upper_arm_joint"
+    },
+    {
+      "name": "spring_elbow_r",
+      "type": "module",
+      "src": "tension-spring",
+      "position": [0.04, 0.05, 0.06],
+      "rotation": [-12, 0, 0],
+      "parent": "upper_arm_joint"
+    },
+    {
+      "name": "upper_arm_top_collar",
+      "type": "cylinder",
+      "params": [0.026, 0.026, 0.03, 18],
+      "material": { "color": "#16161a", "roughness": 0.5, "metalness": 0.7 },
+      "position": [0, 0.94, 0],
+      "parent": "upper_arm_joint"
+    },
+    {
+      "name": "wrist_bracket",
+      "type": "module",
+      "src": "joint-bracket",
+      "position": [0, 0.97, 0],
+      "parent": "upper_arm_joint"
+    },
+
+    {
+      "name": "shade_joint",
+      "type": "group",
+      "position": [0, 0.97, 0],
+      "rotation": [70, 0, 0],
+      "parent": "upper_arm_joint"
+    },
+    {
+      "name": "shade_neck",
+      "type": "cylinder",
+      "params": [0.022, 0.026, 0.045, 18],
+      "material": { "color": "#16161a", "roughness": 0.5, "metalness": 0.7 },
+      "position": [0, 0.04, 0],
+      "parent": "shade_joint"
+    },
+    {
+      "name": "shade_outer",
+      "type": "cylinder",
+      "params": [0.2, 0.06, 0.26, 32],
+      "material": {
+        "color": "#c8302a",
+        "roughness": 0.32,
+        "metalness": 0.18,
+        "clearcoat": 0.7,
+        "clearcoatRoughness": 0.12,
+        "breakup": {
+          "noise": { "amount": 0.025, "scale": 5.0, "color": "#a82820" },
+          "edgeWear": { "amount": 0.04, "color": "#dc4438" },
+          "roughnessVariation": 0.05
+        }
+      },
+      "position": [0, 0.2, 0],
+      "castShadow": true,
+      "parent": "shade_joint"
+    },
+    {
+      "name": "shade_top_cap",
+      "type": "cylinder",
+      "params": [0.05, 0.06, 0.012, 24],
+      "material": { "color": "#a82820", "roughness": 0.4, "metalness": 0.18, "clearcoat": 0.6 },
+      "position": [0, 0.072, 0],
+      "parent": "shade_joint"
+    },
+    {
+      "name": "shade_inner",
+      "type": "cylinder",
+      "params": [0.184, 0.052, 0.245, 32],
+      "material": {
+        "color": "#f0e2c0",
+        "roughness": 0.55,
+        "metalness": 0.05,
+        "emissive": "#ffaa55",
+        "emissiveIntensity": 0.55
+      },
+      "position": [0, 0.205, 0],
+      "parent": "shade_joint"
+    },
+    {
+      "name": "shade_rim",
+      "type": "torus",
+      "params": [0.196, 0.008, 8, 36],
+      "material": {
+        "color": "#dadadc",
+        "roughness": 0.2,
+        "metalness": 0.95,
+        "clearcoat": 0.5
+      },
+      "position": [0, 0.328, 0],
+      "rotation": [90, 0, 0],
+      "parent": "shade_joint"
+    },
+    {
+      "name": "bulb_socket",
+      "type": "cylinder",
+      "params": [0.034, 0.03, 0.05, 18],
+      "material": { "color": "#a8804a", "roughness": 0.45, "metalness": 0.85 },
+      "position": [0, 0.105, 0],
+      "parent": "shade_joint"
+    },
+    {
+      "name": "bulb_glass",
+      "type": "sphere",
+      "params": [0.05, 1],
+      "material": {
+        "color": "#fff0c8",
+        "roughness": 0.18,
+        "metalness": 0.0,
+        "transmission": 0.6,
+        "ior": 1.5,
+        "emissive": "#ffcc78",
+        "emissiveIntensity": 1.6,
+        "envMapIntensity": 1.5
+      },
+      "position": [0, 0.2, 0],
+      "scale": [1.0, 1.2, 1.0],
+      "parent": "shade_joint"
+    },
+    {
+      "name": "bulb_filament_glow",
+      "type": "sphere",
+      "params": [0.022, 1],
+      "material": {
+        "preset": "glow",
+        "color": "#ffe4a8",
+        "emissive": "#ffe4a8",
+        "emissiveIntensity": 6.0
+      },
+      "position": [0, 0.2, 0],
+      "parent": "shade_joint"
+    },
+    {
+      "name": "shade_lamplight",
+      "type": "pointLight",
+      "params": [0.95, 2.5, 1.6, false],
+      "material": { "color": "#ffaa55" },
+      "position": [0, 0.24, 0],
+      "castShadow": false,
+      "parent": "shade_joint"
+    },
+
+    {
+      "name": "cord_anchor",
+      "type": "cylinder",
+      "params": [0.014, 0.014, 0.012, 12],
+      "material": { "color": "#16161a", "roughness": 0.7, "metalness": 0.4 },
+      "position": [0, 0.06, -0.4],
+      "parent": "lamp_root"
+    },
+    {
+      "name": "power_cord",
+      "type": "catenary",
+      "params": [[0, 0.06, -0.4], [-0.6, 0, -0.7], 0.16, 0.02, 24, 6],
+      "material": { "preset": "rubber", "color": "#0a0a0c", "roughness": 0.7 },
+      "parent": "lamp_root"
+    }
+  ]
+}
