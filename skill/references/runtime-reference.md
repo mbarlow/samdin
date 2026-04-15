@@ -65,5 +65,5 @@ Notes:
 
 - The `prefabs/` directory is more reliable than any hard-coded prefab count in docs.
 - Some example scenes mentioned in release notes are not present in the current `specs/` directory.
-- The current validator is stricter than the runtime for some light params with boolean display flags; if legacy light specs fail validation, verify whether the viewer still renders them correctly before treating the spec as broken.
+- The validator accepts bool-like light display params and the documented five-parameter `ibeam` and `tbeam` contracts. If new validation drift appears, re-check `cli/validate-spec.cjs` against the runtime builders before editing specs blindly.
 - If you need the full primitive or material catalog, prefer the runtime, validator, and shipped examples over memorized tables.
