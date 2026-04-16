@@ -19,7 +19,7 @@
       "preset": "threeQuarter",
       "distanceMultiplier": 0.42,
       "positionOffset": [0.3, 0.25, 0.3],
-      "targetOffset": [0, 0.35, 0]
+      "targetOffset": [0, 0.25, 0]
     },
     "postfx": {
       "ssao": { "enabled": true, "kernelRadius": 6, "minDistance": 0.002, "maxDistance": 0.08 },
@@ -189,26 +189,32 @@
       "type": "csg",
       "output": "final",
       "shapes": {
-        "body": { "type": "box", "size": [3.1, 1.1, 2.6], "position": [0, 0.55, 0] },
+        "body": { "type": "box", "size": [3.1, 0.65, 2.6], "position": [0, 0.325, 0] },
         "slope_cutter": {
           "type": "box",
-          "size": [3.4, 1.0, 3.0],
-          "position": [0, 1.4, 0],
-          "rotation": [13, 0, 0]
+          "size": [3.4, 0.6, 3.0],
+          "position": [0, 0.88, 0],
+          "rotation": [10, 0, 0]
+        },
+        "keyboard_well": {
+          "type": "box",
+          "size": [2.6, 0.3, 1.5],
+          "position": [0, 0.58, 0.15]
         }
       },
       "operations": [
-        { "op": "subtract", "a": "body", "b": "slope_cutter", "result": "final" }
+        { "op": "subtract", "a": "body", "b": "slope_cutter", "result": "wedge" },
+        { "op": "subtract", "a": "wedge", "b": "keyboard_well", "result": "final" }
       ],
       "material": {
-        "color": "#a4b4c0",
-        "roughness": 0.42,
-        "metalness": 0.2,
-        "clearcoat": 0.55,
-        "clearcoatRoughness": 0.2,
+        "color": "#6ba3c2",
+        "roughness": 0.38,
+        "metalness": 0.15,
+        "clearcoat": 0.6,
+        "clearcoatRoughness": 0.18,
         "breakup": {
-          "noise": { "amount": 0.025, "scale": 4.0, "color": "#8ea1b0" },
-          "edgeWear": { "amount": 0.04, "color": "#bbc8d4" },
+          "noise": { "amount": 0.025, "scale": 4.0, "color": "#5590ae" },
+          "edgeWear": { "amount": 0.04, "color": "#88bcd6" },
           "roughnessVariation": 0.05
         }
       },
@@ -222,24 +228,24 @@
       "name": "body_seam_front",
       "type": "box",
       "params": [3.1, 0.004, 0.006],
-      "material": { "color": "#3a4a58", "roughness": 0.85 },
-      "position": [0, 0.1, 1.301],
+      "material": { "color": "#2a5a78", "roughness": 0.85 },
+      "position": [0, 0.08, 1.301],
       "parent": "typewriter_root"
     },
     {
       "name": "body_seam_side_l",
       "type": "box",
-      "params": [0.004, 1.1, 2.6],
-      "material": { "color": "#3a4a58", "roughness": 0.85 },
-      "position": [-1.551, 0.55, 0],
+      "params": [0.004, 0.65, 2.6],
+      "material": { "color": "#2a5a78", "roughness": 0.85 },
+      "position": [-1.551, 0.325, 0],
       "parent": "typewriter_root"
     },
     {
       "name": "body_seam_side_r",
       "type": "box",
-      "params": [0.004, 1.1, 2.6],
-      "material": { "color": "#3a4a58", "roughness": 0.85 },
-      "position": [1.551, 0.55, 0],
+      "params": [0.004, 0.65, 2.6],
+      "material": { "color": "#2a5a78", "roughness": 0.85 },
+      "position": [1.551, 0.325, 0],
       "parent": "typewriter_root"
     },
 
@@ -253,7 +259,7 @@
         "metalness": 0.92,
         "clearcoat": 0.55
       },
-      "position": [-0.85, 0.55, 1.31],
+      "position": [-0.85, 0.32, 1.31],
       "parent": "typewriter_root"
     },
     {
@@ -261,7 +267,7 @@
       "type": "box",
       "params": [0.3, 0.002, 0.03],
       "material": { "color": "#1a1814", "roughness": 0.85 },
-      "position": [-0.85, 0.562, 1.312],
+      "position": [-0.85, 0.332, 1.312],
       "parent": "typewriter_root"
     },
     {
@@ -269,29 +275,29 @@
       "type": "roundedBox",
       "params": [0.16, 0.008, 0.05, 0.006, 1],
       "material": { "color": "#d8d8dc", "roughness": 0.25, "metalness": 0.92 },
-      "position": [0.95, 0.55, 1.31],
+      "position": [0.95, 0.32, 1.31],
       "parent": "typewriter_root"
     },
 
     {
       "name": "keyboard_assembly",
       "type": "group",
-      "position": [0, 0.82, 0.1],
-      "rotation": [13, 0, 0],
+      "position": [0, 0.44, 0.15],
+      "rotation": [10, 0, 0],
       "parent": "typewriter_root"
     },
 
     {
       "name": "keyboard_deck",
       "type": "roundedBox",
-      "params": [2.8, 0.01, 1.4, 0.02, 2],
+      "params": [2.5, 0.008, 1.4, 0.02, 2],
       "material": {
-        "color": "#8ea1b0",
+        "color": "#5590ae",
         "roughness": 0.55,
         "metalness": 0.2,
-        "breakup": { "noise": { "amount": 0.04, "scale": 5.0, "color": "#7a8c9c" }, "roughnessVariation": 0.05 }
+        "breakup": { "noise": { "amount": 0.04, "scale": 5.0, "color": "#4a7f9c" }, "roughnessVariation": 0.05 }
       },
-      "position": [0, -0.005, 0.05],
+      "position": [0, -0.005, 0.02],
       "parent": "keyboard_assembly"
     },
 
@@ -353,28 +359,38 @@
       "name": "spacebar",
       "type": "module",
       "src": "wide-key",
-      "position": [0, 0, 0.48],
-      "scale": [6.5, 1.0, 0.9],
+      "position": [0, 0, 0.44],
+      "scale": [3.2, 1.0, 0.9],
       "parent": "keyboard_assembly"
     },
 
     {
       "name": "carriage_assembly",
       "type": "group",
-      "position": [0, 1.22, -0.95],
+      "position": [0, 0.68, -0.85],
       "parent": "typewriter_root"
     },
+
+    {
+      "name": "carriage_rail",
+      "type": "box",
+      "params": [3.0, 0.018, 0.04],
+      "material": { "color": "#3a3a3e", "roughness": 0.35, "metalness": 0.85 },
+      "position": [0, -0.05, 0.12],
+      "parent": "carriage_assembly"
+    },
+
     {
       "name": "carriage_back_wall",
       "type": "roundedBox",
-      "params": [2.9, 0.28, 0.15, 0.022, 2],
+      "params": [2.9, 0.24, 0.12, 0.018, 2],
       "material": {
-        "color": "#6c7e8c",
+        "color": "#4a7080",
         "roughness": 0.55,
         "metalness": 0.35,
-        "breakup": { "noise": { "amount": 0.04, "scale": 5.0, "color": "#5a6c7a" }, "roughnessVariation": 0.05 }
+        "breakup": { "noise": { "amount": 0.04, "scale": 5.0, "color": "#3a606e" }, "roughnessVariation": 0.05 }
       },
-      "position": [0, 0.02, -0.2],
+      "position": [0, 0.02, -0.18],
       "parent": "carriage_assembly"
     },
     {
@@ -389,7 +405,7 @@
     {
       "name": "platen_rubber",
       "type": "cylinder",
-      "params": [0.12, 0.12, 2.5, 28],
+      "params": [0.1, 0.1, 2.5, 28],
       "material": {
         "color": "#0c0c0e",
         "roughness": 0.7,
@@ -403,7 +419,7 @@
     {
       "name": "platen_knob_l",
       "type": "cylinder",
-      "params": [0.11, 0.12, 0.08, 24],
+      "params": [0.1, 0.11, 0.08, 24],
       "material": {
         "preset": "wood",
         "color": "#3a261a",
@@ -419,7 +435,7 @@
     {
       "name": "platen_knob_l_collar",
       "type": "cylinder",
-      "params": [0.08, 0.08, 0.016, 18],
+      "params": [0.07, 0.07, 0.016, 18],
       "material": { "color": "#16161a", "roughness": 0.5, "metalness": 0.6 },
       "position": [-1.255, 0.02, 0],
       "rotation": [0, 0, 90],
@@ -428,7 +444,7 @@
     {
       "name": "platen_knob_r",
       "type": "cylinder",
-      "params": [0.11, 0.12, 0.08, 24],
+      "params": [0.1, 0.11, 0.08, 24],
       "material": {
         "preset": "wood",
         "color": "#3a261a",
@@ -444,7 +460,7 @@
     {
       "name": "platen_knob_r_collar",
       "type": "cylinder",
-      "params": [0.08, 0.08, 0.016, 18],
+      "params": [0.07, 0.07, 0.016, 18],
       "material": { "color": "#16161a", "roughness": 0.5, "metalness": 0.6 },
       "position": [1.255, 0.02, 0],
       "rotation": [0, 0, 90],
@@ -454,23 +470,23 @@
     {
       "name": "paper_rest",
       "type": "box",
-      "params": [2.6, 0.012, 0.42],
+      "params": [2.6, 0.012, 0.36],
       "material": {
-        "color": "#6c7e8c",
+        "color": "#4a7080",
         "roughness": 0.5,
         "metalness": 0.3,
-        "breakup": { "noise": { "amount": 0.04, "scale": 5.0, "color": "#5a6c7a" }, "roughnessVariation": 0.05 }
+        "breakup": { "noise": { "amount": 0.04, "scale": 5.0, "color": "#3a606e" }, "roughnessVariation": 0.05 }
       },
-      "position": [0, 0.22, -0.13],
-      "rotation": [-32, 0, 0],
+      "position": [0, 0.18, -0.12],
+      "rotation": [-30, 0, 0],
       "parent": "carriage_assembly"
     },
     {
       "name": "paper_rest_bar",
       "type": "cylinder",
-      "params": [0.012, 0.012, 2.65, 12],
+      "params": [0.01, 0.01, 2.65, 12],
       "material": { "color": "#3a3a3e", "roughness": 0.4, "metalness": 0.8 },
-      "position": [0, 0.38, -0.21],
+      "position": [0, 0.32, -0.2],
       "rotation": [0, 0, 90],
       "parent": "carriage_assembly"
     },
@@ -478,75 +494,75 @@
     {
       "name": "paper_sheet",
       "type": "box",
-      "params": [1.6, 0.005, 0.9],
+      "params": [1.5, 0.004, 0.8],
       "material": {
         "color": "#f4f0e4",
         "roughness": 0.85,
         "metalness": 0.02,
         "breakup": { "noise": { "amount": 0.02, "scale": 6.0, "color": "#e8e2d0" }, "roughnessVariation": 0.06 }
       },
-      "position": [0.18, 0.22, -0.14],
-      "rotation": [-32, 0, 0],
+      "position": [0.15, 0.18, -0.12],
+      "rotation": [-30, 0, 0],
       "parent": "carriage_assembly"
     },
     {
       "name": "paper_sheet_curl",
       "type": "box",
-      "params": [1.6, 0.005, 0.28],
+      "params": [1.5, 0.004, 0.24],
       "material": {
         "color": "#f4f0e4",
         "roughness": 0.85,
         "metalness": 0.02
       },
-      "position": [0.18, 0.48, -0.32],
-      "rotation": [-55, 0, 0],
+      "position": [0.15, 0.40, -0.28],
+      "rotation": [-52, 0, 0],
       "parent": "carriage_assembly"
     },
     {
       "name": "paper_sheet_below_platen",
       "type": "box",
-      "params": [1.6, 0.005, 0.18],
+      "params": [1.5, 0.004, 0.16],
       "material": {
         "color": "#f4f0e4",
         "roughness": 0.85,
         "metalness": 0.02
       },
-      "position": [0.18, -0.1, 0.05],
+      "position": [0.15, -0.08, 0.05],
       "parent": "carriage_assembly"
     },
 
     {
       "name": "typed_line_a",
       "type": "box",
-      "params": [0.72, 0.002, 0.014],
+      "params": [0.68, 0.002, 0.013],
       "material": { "color": "#1a1612", "roughness": 0.75, "metalness": 0.08 },
-      "position": [-0.14, 0.18, 0.04],
-      "rotation": [-32, 0, 0],
+      "position": [-0.12, 0.14, 0.035],
+      "rotation": [-30, 0, 0],
       "parent": "carriage_assembly"
     },
     {
       "name": "typed_line_b",
       "type": "box",
-      "params": [0.54, 0.002, 0.014],
+      "params": [0.50, 0.002, 0.013],
       "material": { "color": "#1a1612", "roughness": 0.75, "metalness": 0.08 },
-      "position": [-0.23, 0.22, 0.02],
-      "rotation": [-32, 0, 0],
+      "position": [-0.20, 0.18, 0.015],
+      "rotation": [-30, 0, 0],
       "parent": "carriage_assembly"
     },
     {
       "name": "typed_word_cursor",
       "type": "box",
-      "params": [0.04, 0.002, 0.014],
+      "params": [0.04, 0.002, 0.013],
       "material": { "color": "#1a1612", "roughness": 0.75 },
-      "position": [0.07, 0.19, 0.035],
-      "rotation": [-32, 0, 0],
+      "position": [0.06, 0.15, 0.032],
+      "rotation": [-30, 0, 0],
       "parent": "carriage_assembly"
     },
 
     {
       "name": "ribbon_spool_cover_l",
       "type": "cylinder",
-      "params": [0.16, 0.16, 0.06, 24],
+      "params": [0.14, 0.14, 0.06, 24],
       "material": {
         "color": "#d4d4d8",
         "roughness": 0.22,
@@ -554,21 +570,21 @@
         "clearcoat": 0.5,
         "envMapIntensity": 1.8
       },
-      "position": [-0.72, -0.15, 0.25],
-      "parent": "carriage_assembly"
+      "position": [-0.7, 0.42, -0.5],
+      "parent": "typewriter_root"
     },
     {
       "name": "ribbon_spool_core_l",
       "type": "cylinder",
-      "params": [0.05, 0.05, 0.08, 18],
+      "params": [0.045, 0.045, 0.08, 18],
       "material": { "color": "#0e0c0a", "roughness": 0.7 },
-      "position": [-0.72, -0.15, 0.25],
-      "parent": "carriage_assembly"
+      "position": [-0.7, 0.42, -0.5],
+      "parent": "typewriter_root"
     },
     {
       "name": "ribbon_spool_cover_r",
       "type": "cylinder",
-      "params": [0.16, 0.16, 0.06, 24],
+      "params": [0.14, 0.14, 0.06, 24],
       "material": {
         "color": "#d4d4d8",
         "roughness": 0.22,
@@ -576,30 +592,30 @@
         "clearcoat": 0.5,
         "envMapIntensity": 1.8
       },
-      "position": [0.72, -0.15, 0.25],
-      "parent": "carriage_assembly"
+      "position": [0.7, 0.42, -0.5],
+      "parent": "typewriter_root"
     },
     {
       "name": "ribbon_spool_core_r",
       "type": "cylinder",
-      "params": [0.05, 0.05, 0.08, 18],
+      "params": [0.045, 0.045, 0.08, 18],
       "material": { "color": "#0e0c0a", "roughness": 0.7 },
-      "position": [0.72, -0.15, 0.25],
-      "parent": "carriage_assembly"
+      "position": [0.7, 0.42, -0.5],
+      "parent": "typewriter_root"
     },
     {
       "name": "ribbon_strand",
       "type": "box",
-      "params": [1.6, 0.012, 0.008],
+      "params": [1.5, 0.01, 0.008],
       "material": { "color": "#1a1612", "roughness": 0.8 },
-      "position": [0, -0.15, 0.29],
-      "parent": "carriage_assembly"
+      "position": [0, 0.42, -0.46],
+      "parent": "typewriter_root"
     },
 
     {
       "name": "carriage_return_lever_pivot",
       "type": "cylinder",
-      "params": [0.024, 0.024, 0.05, 16],
+      "params": [0.022, 0.022, 0.05, 16],
       "material": { "color": "#3a3a3e", "roughness": 0.4, "metalness": 0.75 },
       "position": [-1.42, 0.02, 0.08],
       "rotation": [0, 0, 90],
@@ -608,7 +624,7 @@
     {
       "name": "carriage_return_lever",
       "type": "cylinder",
-      "params": [0.012, 0.012, 0.36, 12],
+      "params": [0.01, 0.01, 0.34, 12],
       "material": {
         "color": "#d8d8dc",
         "roughness": 0.2,
@@ -616,91 +632,118 @@
         "clearcoat": 0.55,
         "envMapIntensity": 1.8
       },
-      "position": [-1.58, -0.06, 0.22],
+      "position": [-1.56, -0.04, 0.2],
       "rotation": [40, 0, 30],
       "parent": "carriage_assembly"
     },
     {
       "name": "carriage_return_ball",
       "type": "sphere",
-      "params": [0.028, 1],
+      "params": [0.026, 1],
       "material": {
         "preset": "wood",
         "color": "#3a261a",
         "roughness": 0.5,
         "clearcoat": 0.6
       },
-      "position": [-1.72, -0.15, 0.34],
+      "position": [-1.70, -0.12, 0.32],
       "parent": "carriage_assembly"
     },
 
     {
       "name": "type_bar_hint_a",
       "type": "box",
-      "params": [0.022, 0.32, 0.008],
+      "params": [0.02, 0.26, 0.007],
       "material": { "color": "#2a2a2e", "roughness": 0.5, "metalness": 0.65 },
-      "position": [0, 0.95, -0.72],
+      "position": [0, 0.55, -0.62],
       "rotation": [-18, 0, 0],
       "parent": "typewriter_root"
     },
     {
       "name": "type_bar_hint_b",
       "type": "box",
-      "params": [0.022, 0.3, 0.008],
+      "params": [0.02, 0.24, 0.007],
       "material": { "color": "#2a2a2e", "roughness": 0.5, "metalness": 0.65 },
-      "position": [-0.1, 0.94, -0.74],
+      "position": [-0.1, 0.54, -0.64],
       "rotation": [-22, 0, -4],
       "parent": "typewriter_root"
     },
     {
       "name": "type_bar_hint_c",
       "type": "box",
-      "params": [0.022, 0.3, 0.008],
+      "params": [0.02, 0.24, 0.007],
       "material": { "color": "#2a2a2e", "roughness": 0.5, "metalness": 0.65 },
-      "position": [0.1, 0.94, -0.74],
+      "position": [0.1, 0.54, -0.64],
       "rotation": [-22, 0, 4],
       "parent": "typewriter_root"
     },
     {
       "name": "type_bar_hint_d",
       "type": "box",
-      "params": [0.022, 0.28, 0.008],
+      "params": [0.02, 0.22, 0.007],
       "material": { "color": "#2a2a2e", "roughness": 0.5, "metalness": 0.65 },
-      "position": [-0.2, 0.92, -0.76],
+      "position": [-0.2, 0.52, -0.66],
       "rotation": [-26, 0, -7],
+      "parent": "typewriter_root"
+    },
+    {
+      "name": "type_bar_hint_e",
+      "type": "box",
+      "params": [0.02, 0.22, 0.007],
+      "material": { "color": "#2a2a2e", "roughness": 0.5, "metalness": 0.65 },
+      "position": [0.2, 0.52, -0.66],
+      "rotation": [-26, 0, 7],
+      "parent": "typewriter_root"
+    },
+    {
+      "name": "type_bar_hint_f",
+      "type": "box",
+      "params": [0.02, 0.20, 0.007],
+      "material": { "color": "#2a2a2e", "roughness": 0.5, "metalness": 0.65 },
+      "position": [0.05, 0.56, -0.60],
+      "rotation": [-16, 0, 2],
+      "parent": "typewriter_root"
+    },
+    {
+      "name": "type_bar_hint_g",
+      "type": "box",
+      "params": [0.02, 0.20, 0.007],
+      "material": { "color": "#2a2a2e", "roughness": 0.5, "metalness": 0.65 },
+      "position": [-0.15, 0.53, -0.65],
+      "rotation": [-24, 0, -5],
       "parent": "typewriter_root"
     },
 
     {
       "name": "foot_fl",
       "type": "cylinder",
-      "params": [0.09, 0.09, 0.04, 18],
+      "params": [0.08, 0.08, 0.035, 18],
       "material": { "preset": "rubber", "color": "#0a0a0c" },
-      "position": [-1.3, 0.02, 1.1],
+      "position": [-1.3, 0.018, 1.1],
       "parent": "typewriter_root"
     },
     {
       "name": "foot_fr",
       "type": "cylinder",
-      "params": [0.09, 0.09, 0.04, 18],
+      "params": [0.08, 0.08, 0.035, 18],
       "material": { "preset": "rubber", "color": "#0a0a0c" },
-      "position": [1.3, 0.02, 1.1],
+      "position": [1.3, 0.018, 1.1],
       "parent": "typewriter_root"
     },
     {
       "name": "foot_bl",
       "type": "cylinder",
-      "params": [0.09, 0.09, 0.04, 18],
+      "params": [0.08, 0.08, 0.035, 18],
       "material": { "preset": "rubber", "color": "#0a0a0c" },
-      "position": [-1.3, 0.02, -1.1],
+      "position": [-1.3, 0.018, -1.1],
       "parent": "typewriter_root"
     },
     {
       "name": "foot_br",
       "type": "cylinder",
-      "params": [0.09, 0.09, 0.04, 18],
+      "params": [0.08, 0.08, 0.035, 18],
       "material": { "preset": "rubber", "color": "#0a0a0c" },
-      "position": [1.3, 0.02, -1.1],
+      "position": [1.3, 0.018, -1.1],
       "parent": "typewriter_root"
     }
   ]

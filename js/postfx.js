@@ -308,6 +308,7 @@ class PostFXManager {
     };
 
     this.startTime = Date.now();
+    this.wireframeBypass = false;
 
     this.init();
   }
@@ -661,7 +662,7 @@ class PostFXManager {
       this.grainPass.uniforms.time.value = (Date.now() - this.startTime) * 0.001;
     }
 
-    if (this.isActive()) {
+    if (this.isActive() && !this.wireframeBypass) {
       this.composer.render();
     } else {
       this.renderer.render(this.scene, this.camera);

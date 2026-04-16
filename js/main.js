@@ -444,6 +444,7 @@ class App {
     });
 
     camWireframe.addEventListener('change', (e) => {
+      this.postfx.wireframeBypass = e.target.checked;
       this.viewer.setWireframe(e.target.checked);
     });
 
