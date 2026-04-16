@@ -5,6 +5,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { TransformController } from './transform.js';
+import { applyDisplayMode as applyTerrainDisplayMode } from './terrain-compositor.js';
 
 // Camera preset positions
 const CAMERA_PRESETS = {
@@ -638,6 +639,27 @@ class Viewer {
    */
   getCameraPresetNames() {
     return Object.keys(CAMERA_PRESETS);
+  }
+
+  /**
+   * Set the terrain display mode for the current model.
+   * Modes: "primitives" | "terrain" | "both". Structures are always visible.
+   * @param {string} mode
+   */
+  setTerrainDisplay(mode) {
+    this.terrainDisplayMode = mode;
+    if (this.currentModel) {
+      applyTerrainDisplayMode(this.currentModel, mode);
+    }
+  }
+
+  /**
+   * Returns the terrain display mode currently active on the model, if any.
+   */
+  getTerrainDisplay() {
+    return this.currentModel?.userData?.terrainDisplay
+      || this.terrainDisplayMode
+      || null;
   }
 
   /**

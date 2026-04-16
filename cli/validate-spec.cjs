@@ -247,6 +247,69 @@ function validateSceneSettings(scene, issues, warnings) {
   if (scene.toneMapping !== undefined && typeof scene.toneMapping !== 'string') {
     issues.push('scene.toneMapping must be a string');
   }
+
+  if (scene.terrain !== undefined) {
+    validateTerrainSettings(scene.terrain, issues, warnings);
+  }
+}
+
+const TERRAIN_METHODS = new Set(['heightfield', 'marching-cubes', 'cloth-drape']);
+const TERRAIN_DISPLAY_MODES = new Set(['primitives', 'terrain', 'both']);
+
+function validateTerrainSettings(terrain, issues, warnings) {
+  if (typeof terrain !== 'object' || terrain === null) {
+    issues.push('scene.terrain must be an object');
+    return;
+  }
+
+  if (terrain.enabled !== undefined && typeof terrain.enabled !== 'boolean') {
+    issues.push('scene.terrain.enabled must be a boolean');
+  }
+
+  if (terrain.flipNormals !== undefined && typeof terrain.flipNormals !== 'boolean') {
+    issues.push('scene.terrain.flipNormals must be a boolean');
+  }
+
+  if (terrain.method !== undefined && !TERRAIN_METHODS.has(terrain.method)) {
+    issues.push(`scene.terrain.method must be one of: ${[...TERRAIN_METHODS].join(', ')}`);
+  }
+
+  if (terrain.display !== undefined && !TERRAIN_DISPLAY_MODES.has(terrain.display)) {
+    issues.push(`scene.terrain.display must be one of: ${[...TERRAIN_DISPLAY_MODES].join(', ')}`);
+  }
+
+  if (terrain.bounds !== undefined) {
+    const okAuto = terrain.bounds === 'auto';
+    const okArray = Array.isArray(terrain.bounds) && terrain.bounds.length === 4
+      && terrain.bounds.every((n) => typeof n === 'number');
+    if (!okAuto && !okArray) {
+      issues.push('scene.terrain.bounds must be "auto" or [minX, minZ, maxX, maxZ]');
+    }
+  }
+
+  if (terrain.resolution !== undefined) {
+    if (typeof terrain.resolution !== 'number' || terrain.resolution < 4 || terrain.resolution > 1024) {
+      issues.push('scene.terrain.resolution must be a number in [4, 1024]');
+    }
+  }
+
+  if (terrain.smoothing !== undefined) {
+    if (typeof terrain.smoothing !== 'number' || terrain.smoothing < 0 || terrain.smoothing > 1) {
+      issues.push('scene.terrain.smoothing must be a number in [0, 1]');
+    }
+  }
+
+  if (terrain.material !== undefined && typeof terrain.material !== 'object') {
+    issues.push('scene.terrain.material must be an object');
+  }
+
+  if (terrain.variableResolution !== undefined && typeof terrain.variableResolution !== 'object') {
+    issues.push('scene.terrain.variableResolution must be an object');
+  }
+
+  if (terrain.methodOptions !== undefined && typeof terrain.methodOptions !== 'object') {
+    issues.push('scene.terrain.methodOptions must be an object');
+  }
 }
 
 function validateEmbeddedCSG(part) {
