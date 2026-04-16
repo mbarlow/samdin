@@ -157,6 +157,49 @@ Parts-based specs can now host local boolean-op geometry directly:
 }
 ```
 
+### Terrain Compositor
+
+An optional middle-pass that drapes a single unified mesh ("physics blanket") over every part tagged `category: "environment"` — ground plates, cliffs, rocks, and other natural scatter — while leaving structures and props untouched. The generated mesh is attached under the model root as `__terrain__` so it rides along with GLB exports.
+
+```json
+{
+  "scene": {
+    "terrain": {
+      "enabled": true,
+      "method": "heightfield",
+      "display": "terrain",
+      "flipNormals": true,
+      "bounds": "auto",
+      "resolution": 96,
+      "smoothing": 0.35,
+      "material": { "color": "#506874", "roughness": 0.9, "flatShading": true },
+      "methodOptions": {
+        "heightfield": { "padding": 0.75, "skirt": 3.0 }
+      }
+    }
+  },
+  "parts": [
+    { "name": "rock_a", "type": "prefab", "src": "rock-large", "category": "environment" }
+  ]
+}
+```
+
+| Field | Description |
+|-------|-------------|
+| `enabled` | Master switch. When `false` or omitted, the compositor is a no-op. |
+| `method` | `"heightfield"` (implemented), `"marching-cubes"` / `"cloth-drape"` (stubbed — fall back to heightfield). |
+| `display` | `"primitives"` (hide terrain), `"terrain"` (hide env primitives), `"both"` (lookdev/debug). |
+| `flipNormals` | Flip terrain normals if the surface reads inside-out. |
+| `bounds` | `"auto"` (derived from env meshes + padding) or `[minX, minZ, maxX, maxZ]`. |
+| `resolution` | Grid resolution, clamped to `[4, 1024]`. |
+| `smoothing` | Gaussian smoothing pass, `[0, 1]`. |
+| `material` | Standard material object applied to the generated mesh. |
+| `methodOptions.heightfield` | `{ padding, skirt }` for the default heightfield sampler. |
+
+Heightfield sampling rasterizes a grid over the bounds, raycasts top-down against the tagged env meshes, optionally smooths, and triangulates with a skirt. Any part without `category: "environment"` is treated as a structure or prop and is rendered on top of the terrain.
+
+The viewer exposes a **Terrain** dropdown that flips `display` live without a rebuild, and a **Flip Normals** button that targets the current selection or the `__terrain__` mesh by default. See [`specs/landscape-example.json`](specs/landscape-example.json) and [`specs/landscape-stress.json`](specs/landscape-stress.json) for working examples.
+
 ## Primitives
 
 ### Basic Shapes

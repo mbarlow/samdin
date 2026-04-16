@@ -1,0 +1,369 @@
+{
+  "name": "landscape-stress",
+  "description": "Stress-test for the terrain compositor. Rolling hills, a valley with a riverbed, a shoreline with water plane, scattered rock clusters, a cliff edge, and a ruined structure. Uses a larger bounds (~32x32) and higher resolution than landscape-example to exercise raycasting and memory. All natural primitives are category: \"environment\"; the ruin is category: \"structure\"; trees and props float above on top of the terrain.",
+  "root": "scene_root",
+  "scene": {
+    "quality": "standard",
+    "background": { "type": "gradient", "color": "#8ca8ba", "color2": "#3a5260" },
+    "fog": { "type": "exp2", "color": "#6a8090", "density": 0.018 },
+    "lighting": {
+      "preset": "outdoor",
+      "environment": "dusk",
+      "envMapIntensity": 0.5,
+      "shadowQuality": "high",
+      "intensity": 1.3,
+      "ambient": { "color": "#7a94a6", "intensity": 0.55 },
+      "directional": { "color": "#ffe6c4", "intensity": 1.5, "position": [8, 14, 5] },
+      "hemisphere": { "skyColor": "#a6c0cc", "groundColor": "#3e4a52", "intensity": 1.0 }
+    },
+    "ground": { "reflective": false },
+    "exposure": 1.3,
+    "toneMapping": "ACESFilmic",
+    "camera": {
+      "preset": "highAngle",
+      "fov": 38,
+      "distanceMultiplier": 1.6,
+      "positionOffset": [6, 8, 10],
+      "targetOffset": [0, 0.5, 0]
+    },
+    "postfx": {
+      "bloom": { "enabled": true, "strength": 0.35, "radius": 0.5, "threshold": 0.92 },
+      "vignette": { "enabled": true, "intensity": 0.12, "softness": 0.6 },
+      "colorGrade": { "enabled": true, "saturation": 1.02, "brightness": 1.05, "contrast": 1.03 },
+      "fxaa": true
+    },
+    "terrain": {
+      "enabled": true,
+      "method": "heightfield",
+      "display": "terrain",
+      "bounds": [-18, -18, 18, 18],
+      "resolution": 160,
+      "smoothing": 0.45,
+      "variableResolution": { "enabled": false, "highDensityRadius": 4.0, "lowDensityFactor": 0.4 },
+      "material": { "color": "#5c7080", "metalness": 0.0, "roughness": 0.92, "flatShading": true },
+      "methodOptions": {
+        "heightfield": { "padding": 1.0, "skirt": 4.0 },
+        "marchingCubes": { "isoLevel": 0.0, "smoothingRadius": 0.3 },
+        "clothDrape": { "iterations": 80, "stiffness": 0.75, "gravity": -9.8 }
+      }
+    }
+  },
+  "parts": [
+    { "name": "scene_root", "type": "group", "position": [0, 0, 0] },
+
+    { "name": "terrain_primitives", "type": "group", "parent": "scene_root", "category": "environment" },
+
+    {
+      "name": "base_plain",
+      "type": "box",
+      "params": [36, 0.5, 36],
+      "material": { "color": "#5c7080", "metalness": 0.0, "roughness": 0.92, "flatShading": true },
+      "position": [0, -0.25, 0],
+      "parent": "terrain_primitives",
+      "category": "environment"
+    },
+
+    {
+      "name": "hill_a",
+      "type": "sphere",
+      "params": [5.5, 12],
+      "material": { "color": "#607686", "metalness": 0.0, "roughness": 0.92, "flatShading": true },
+      "position": [-8, 0.5, -6],
+      "scale": [1.0, 0.6, 1.1],
+      "parent": "terrain_primitives",
+      "category": "environment"
+    },
+    {
+      "name": "hill_b",
+      "type": "sphere",
+      "params": [4.2, 12],
+      "material": { "color": "#586e7e", "metalness": 0.0, "roughness": 0.92, "flatShading": true },
+      "position": [6, 0.3, -9],
+      "scale": [1.2, 0.45, 1.0],
+      "parent": "terrain_primitives",
+      "category": "environment"
+    },
+    {
+      "name": "hill_c",
+      "type": "sphere",
+      "params": [6.0, 12],
+      "material": { "color": "#627686", "metalness": 0.0, "roughness": 0.92, "flatShading": true },
+      "position": [12, 0.8, 2],
+      "scale": [0.9, 0.5, 1.3],
+      "parent": "terrain_primitives",
+      "category": "environment"
+    },
+    {
+      "name": "ridge_north",
+      "type": "box",
+      "params": [24, 2.6, 3.0],
+      "material": { "color": "#4e6272", "metalness": 0.0, "roughness": 0.92, "flatShading": true },
+      "position": [-2, 0.6, -15],
+      "rotation": [0.15, 0.08, 0],
+      "parent": "terrain_primitives",
+      "category": "environment"
+    },
+
+    {
+      "name": "valley_floor",
+      "type": "box",
+      "params": [8, 0.4, 14],
+      "material": { "color": "#546a78", "metalness": 0.0, "roughness": 0.92, "flatShading": true },
+      "position": [0, -0.9, 2],
+      "rotation": [0, 0.02, 0],
+      "parent": "terrain_primitives",
+      "category": "environment"
+    },
+    {
+      "name": "valley_wall_east",
+      "type": "box",
+      "params": [2.0, 3.2, 14],
+      "material": { "color": "#4e6272", "metalness": 0.0, "roughness": 0.92, "flatShading": true },
+      "position": [4.2, 0.8, 2],
+      "rotation": [0, 0, -0.2],
+      "parent": "terrain_primitives",
+      "category": "environment"
+    },
+    {
+      "name": "valley_wall_west",
+      "type": "box",
+      "params": [2.0, 3.2, 14],
+      "material": { "color": "#4e6272", "metalness": 0.0, "roughness": 0.92, "flatShading": true },
+      "position": [-4.2, 0.8, 2],
+      "rotation": [0, 0, 0.2],
+      "parent": "terrain_primitives",
+      "category": "environment"
+    },
+
+    {
+      "name": "shore_slope",
+      "type": "box",
+      "params": [20, 1.2, 6],
+      "material": { "color": "#607686", "metalness": 0.0, "roughness": 0.92, "flatShading": true },
+      "position": [0, -0.6, 12],
+      "rotation": [0.18, 0, 0],
+      "parent": "terrain_primitives",
+      "category": "environment"
+    },
+    {
+      "name": "shore_edge",
+      "type": "box",
+      "params": [20, 0.6, 2.5],
+      "material": { "color": "#6a8090", "metalness": 0.0, "roughness": 0.92, "flatShading": true },
+      "position": [0, -1.3, 15],
+      "rotation": [0.35, 0, 0],
+      "parent": "terrain_primitives",
+      "category": "environment"
+    },
+
+    {
+      "name": "cliff_east_edge",
+      "type": "box",
+      "params": [4, 5, 12],
+      "material": { "color": "#465a68", "metalness": 0.0, "roughness": 0.92, "flatShading": true },
+      "position": [16, 2.2, -4],
+      "rotation": [0, -0.08, 0.05],
+      "parent": "terrain_primitives",
+      "category": "environment"
+    },
+    {
+      "name": "cliff_east_spike",
+      "type": "cone",
+      "params": [1.6, 4.0, 6],
+      "material": { "color": "#3e5260", "metalness": 0.0, "roughness": 0.92, "flatShading": true },
+      "position": [17, 4.6, -2],
+      "parent": "terrain_primitives",
+      "category": "environment"
+    },
+
+    { "name": "rocks", "type": "group", "parent": "scene_root", "category": "environment" },
+    {
+      "name": "rock_a",
+      "type": "icosahedron",
+      "params": [0.9, 0],
+      "material": { "color": "#566a7a", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [-3, 0.7, -2],
+      "rotation": [0.2, 0.3, 0.15],
+      "parent": "rocks",
+      "category": "environment"
+    },
+    {
+      "name": "rock_b",
+      "type": "cone",
+      "params": [1.1, 2.2, 6],
+      "material": { "color": "#4e6272", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [-10, 1.1, 4],
+      "rotation": [0.1, 0.4, 0.08],
+      "parent": "rocks",
+      "category": "environment"
+    },
+    {
+      "name": "rock_c",
+      "type": "icosahedron",
+      "params": [1.3, 0],
+      "material": { "color": "#52667a", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [8, 1.3, 6],
+      "rotation": [0.3, 0.2, 0.1],
+      "parent": "rocks",
+      "category": "environment"
+    },
+    {
+      "name": "rock_d",
+      "type": "cone",
+      "params": [0.7, 1.4, 6],
+      "material": { "color": "#586e7e", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [1.5, 0.7, 8],
+      "rotation": [-0.1, 0.6, 0.12],
+      "parent": "rocks",
+      "category": "environment"
+    },
+    {
+      "name": "rock_e",
+      "type": "icosahedron",
+      "params": [0.55, 0],
+      "material": { "color": "#506476", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [-12, 0.5, -2],
+      "rotation": [0.15, 0.8, 0.05],
+      "parent": "rocks",
+      "category": "environment"
+    },
+    {
+      "name": "rock_f",
+      "type": "icosahedron",
+      "params": [0.8, 0],
+      "material": { "color": "#52667a", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [5, 0.8, -3],
+      "rotation": [0.2, 0.1, 0.2],
+      "parent": "rocks",
+      "category": "environment"
+    },
+
+    { "name": "ruin", "type": "group", "parent": "scene_root", "category": "structure" },
+    {
+      "name": "ruin_pillar_a",
+      "type": "box",
+      "params": [0.8, 4.2, 0.8],
+      "material": { "color": "#6e7a84", "metalness": 0.0, "roughness": 0.85, "flatShading": true },
+      "position": [-6.8, 2.8, -6.2],
+      "rotation": [0, 0, 0.03],
+      "parent": "ruin",
+      "castShadow": true
+    },
+    {
+      "name": "ruin_pillar_b",
+      "type": "box",
+      "params": [0.8, 3.6, 0.8],
+      "material": { "color": "#6a7680", "metalness": 0.0, "roughness": 0.85, "flatShading": true },
+      "position": [-8.6, 2.5, -5.4],
+      "rotation": [0.02, 0.1, -0.04],
+      "parent": "ruin",
+      "castShadow": true
+    },
+    {
+      "name": "ruin_pillar_c",
+      "type": "box",
+      "params": [0.8, 2.6, 0.8],
+      "material": { "color": "#6e7a84", "metalness": 0.0, "roughness": 0.85, "flatShading": true },
+      "position": [-7.4, 2.0, -7.8],
+      "parent": "ruin",
+      "castShadow": true
+    },
+    {
+      "name": "ruin_lintel",
+      "type": "box",
+      "params": [3.0, 0.5, 0.9],
+      "material": { "color": "#626e78", "metalness": 0.0, "roughness": 0.85, "flatShading": true },
+      "position": [-7.7, 4.8, -5.8],
+      "rotation": [0, 0.15, -0.02],
+      "parent": "ruin",
+      "castShadow": true
+    },
+    {
+      "name": "ruin_rubble_a",
+      "type": "box",
+      "params": [1.0, 0.5, 0.7],
+      "material": { "color": "#6a7680", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [-5.8, 0.9, -5.0],
+      "rotation": [0.1, 0.3, 0.08],
+      "parent": "ruin",
+      "castShadow": true
+    },
+    {
+      "name": "ruin_rubble_b",
+      "type": "box",
+      "params": [0.7, 0.4, 0.8],
+      "material": { "color": "#6e7a84", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [-9.2, 0.8, -7.2],
+      "rotation": [0.2, -0.4, -0.1],
+      "parent": "ruin",
+      "castShadow": true
+    },
+
+    { "name": "trees", "type": "group", "parent": "scene_root", "category": "prop" },
+    {
+      "name": "tree_a_trunk",
+      "type": "cylinder",
+      "params": [0.18, 0.25, 3.0, 6],
+      "material": { "color": "#3e4e58", "metalness": 0.0, "roughness": 1.0, "flatShading": true },
+      "position": [2, 2.5, -4],
+      "parent": "trees",
+      "castShadow": true
+    },
+    {
+      "name": "tree_a_canopy",
+      "type": "icosahedron",
+      "params": [1.4, 1],
+      "material": { "color": "#2a4038", "metalness": 0.0, "roughness": 1.0, "flatShading": true },
+      "position": [2, 4.6, -4],
+      "parent": "trees",
+      "castShadow": true
+    },
+    {
+      "name": "tree_b_trunk",
+      "type": "cylinder",
+      "params": [0.15, 0.22, 2.6, 6],
+      "material": { "color": "#3e4e58", "metalness": 0.0, "roughness": 1.0, "flatShading": true },
+      "position": [-2, 2.7, 5],
+      "parent": "trees",
+      "castShadow": true
+    },
+    {
+      "name": "tree_b_canopy",
+      "type": "icosahedron",
+      "params": [1.2, 1],
+      "material": { "color": "#2c4238", "metalness": 0.0, "roughness": 1.0, "flatShading": true },
+      "position": [-2, 4.5, 5],
+      "parent": "trees",
+      "castShadow": true
+    },
+    {
+      "name": "tree_c_trunk",
+      "type": "cylinder",
+      "params": [0.12, 0.2, 2.2, 6],
+      "material": { "color": "#3e4e58", "metalness": 0.0, "roughness": 1.0, "flatShading": true },
+      "position": [9, 2.3, -1],
+      "parent": "trees",
+      "castShadow": true
+    },
+    {
+      "name": "tree_c_canopy",
+      "type": "icosahedron",
+      "params": [1.0, 1],
+      "material": { "color": "#2c4238", "metalness": 0.0, "roughness": 1.0, "flatShading": true },
+      "position": [9, 3.9, -1],
+      "parent": "trees",
+      "castShadow": true
+    },
+
+    { "name": "water", "type": "group", "parent": "scene_root", "category": "prop" },
+    {
+      "name": "water_surface",
+      "type": "plane",
+      "params": [40, 20],
+      "material": { "color": "#3a6a84", "metalness": 0.0, "roughness": 0.35, "flatShading": true, "transparent": true, "opacity": 0.78 },
+      "position": [0, -1.0, 18],
+      "rotation": [-1.5708, 0, 0],
+      "parent": "water"
+    }
+  ]
+}

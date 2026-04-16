@@ -1,0 +1,456 @@
+{
+  "name": "landscape-example",
+  "description": "Lowpoly forest ruin — adapted from scratchpad/lowpoly-example. Demonstrates the terrain compositor with category-tagged parts. Natural env (ground, cliffs, rocks) gets draped into a single mesh; the gateway is a structure and remains visible; trees, crystals, lantern, and figure are props and are rendered on top of the terrain. Toggle scene.terrain.display between 'primitives', 'terrain', and 'both' (or use the Terrain dropdown in the viewer).",
+  "root": "scene_root",
+  "scene": {
+    "quality": "standard",
+    "background": { "type": "gradient", "color": "#6a8090", "color2": "#2a3e4a" },
+    "fog": { "type": "exp2", "color": "#3e5260", "density": 0.025 },
+    "lighting": {
+      "preset": "outdoor",
+      "environment": "dusk",
+      "envMapIntensity": 0.6,
+      "shadowQuality": "high",
+      "intensity": 1.3,
+      "ambient": { "color": "#6a8090", "intensity": 0.5 },
+      "directional": { "color": "#ffe8d0", "intensity": 1.6, "position": [3, 8, 6] },
+      "hemisphere": { "skyColor": "#9ab4c4", "groundColor": "#3a4a54", "intensity": 1.1 }
+    },
+    "ground": { "reflective": false },
+    "exposure": 1.35,
+    "toneMapping": "ACESFilmic",
+    "camera": {
+      "preset": "threeQuarter",
+      "fov": 32,
+      "distanceMultiplier": 1.1,
+      "positionOffset": [2.0, 1.8, 3.5],
+      "targetOffset": [0, 1.0, 0]
+    },
+    "postfx": {
+      "bloom": { "enabled": true, "strength": 0.45, "radius": 0.6, "threshold": 0.9 },
+      "vignette": { "enabled": true, "intensity": 0.15, "softness": 0.7 },
+      "colorGrade": { "enabled": true, "saturation": 1.0, "brightness": 1.05, "contrast": 1.05 },
+      "fxaa": true
+    },
+    "terrain": {
+      "enabled": true,
+      "method": "heightfield",
+      "display": "terrain",
+      "flipNormals": true,
+      "bounds": "auto",
+      "resolution": 96,
+      "smoothing": 0.35,
+      "variableResolution": { "enabled": false, "highDensityRadius": 3.0, "lowDensityFactor": 0.25 },
+      "material": { "color": "#506874", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "methodOptions": {
+        "heightfield": { "padding": 0.75, "skirt": 3.0 },
+        "marchingCubes": { "isoLevel": 0.0, "smoothingRadius": 0.25 },
+        "clothDrape": { "iterations": 60, "stiffness": 0.8, "gravity": -9.8 }
+      }
+    }
+  },
+  "parts": [
+    { "name": "scene_root", "type": "group", "position": [0, 0, 0] },
+
+    { "name": "ground", "type": "group", "parent": "scene_root", "category": "environment" },
+    {
+      "name": "ground_plate_center",
+      "type": "box",
+      "params": [8, 0.2, 8],
+      "material": { "color": "#506874", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [0, -0.1, 0],
+      "rotation": [0, 0, 0],
+      "parent": "ground",
+      "category": "environment",
+      "receiveShadow": true
+    },
+    {
+      "name": "ground_plate_front_left",
+      "type": "box",
+      "params": [4.2, 0.2, 3.6],
+      "material": { "color": "#4a6270", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [-3.2, -0.07, 4.6],
+      "rotation": [0.04, 0.08, -0.03],
+      "parent": "ground",
+      "category": "environment",
+      "receiveShadow": true
+    },
+    {
+      "name": "ground_plate_front_right",
+      "type": "box",
+      "params": [4.8, 0.2, 3.2],
+      "material": { "color": "#4c6472", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [3.6, -0.09, 4.3],
+      "rotation": [-0.03, -0.1, 0.05],
+      "parent": "ground",
+      "category": "environment",
+      "receiveShadow": true
+    },
+    {
+      "name": "ground_plate_back",
+      "type": "box",
+      "params": [7.5, 0.2, 4.0],
+      "material": { "color": "#486070", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [0.3, -0.12, -5.4],
+      "rotation": [0.05, -0.06, 0.02],
+      "parent": "ground",
+      "category": "environment",
+      "receiveShadow": true
+    },
+
+    { "name": "cliffs", "type": "group", "parent": "scene_root", "category": "environment" },
+    {
+      "name": "cliff_spike_back_left",
+      "type": "cone",
+      "params": [1.4, 5.2, 6],
+      "material": { "color": "#3a505c", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [-6.0, 2.6, -7.0],
+      "rotation": [0.08, 0.4, -0.06],
+      "parent": "cliffs",
+      "category": "environment",
+      "castShadow": true
+    },
+    {
+      "name": "cliff_spike_back_center",
+      "type": "cone",
+      "params": [1.8, 6.4, 6],
+      "material": { "color": "#344a56", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [-1.4, 3.2, -8.8],
+      "rotation": [0, 0.15, 0.04],
+      "parent": "cliffs",
+      "category": "environment",
+      "castShadow": true
+    },
+    {
+      "name": "cliff_spike_back_right",
+      "type": "cone",
+      "params": [1.6, 5.8, 6],
+      "material": { "color": "#3a505c", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [3.6, 2.9, -8.2],
+      "rotation": [-0.06, -0.3, 0.1],
+      "parent": "cliffs",
+      "category": "environment",
+      "castShadow": true
+    },
+    {
+      "name": "cliff_spike_back_far_right",
+      "type": "cone",
+      "params": [1.2, 4.6, 6],
+      "material": { "color": "#3a505c", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [7.2, 2.3, -7.6],
+      "rotation": [0.04, -0.5, -0.08],
+      "parent": "cliffs",
+      "category": "environment",
+      "castShadow": true
+    },
+    {
+      "name": "cliff_wedge_left",
+      "type": "box",
+      "params": [2.0, 4.4, 2.6],
+      "material": { "color": "#344852", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [-5.5, 2.2, -2.8],
+      "rotation": [0, 0.25, 0.12],
+      "parent": "cliffs",
+      "category": "environment",
+      "castShadow": true
+    },
+    {
+      "name": "cliff_wedge_right",
+      "type": "box",
+      "params": [2.4, 5.0, 2.4],
+      "material": { "color": "#344a56", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [6.2, 2.5, -2.2],
+      "rotation": [0, -0.3, -0.08],
+      "parent": "cliffs",
+      "category": "environment",
+      "castShadow": true
+    },
+
+    { "name": "rocks", "type": "group", "parent": "scene_root", "category": "environment" },
+    {
+      "name": "rock_cluster_left_01",
+      "type": "cone",
+      "params": [0.9, 1.8, 6],
+      "material": { "color": "#3a505c", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [-3.2, 0.9, 1.6],
+      "rotation": [0.08, 0.3, 0.05],
+      "parent": "rocks",
+      "category": "environment",
+      "castShadow": true
+    },
+    {
+      "name": "rock_cluster_left_02",
+      "type": "icosahedron",
+      "params": [0.55, 0],
+      "material": { "color": "#465a66", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [-2.4, 0.5, 2.2],
+      "rotation": [0.2, 0.4, 0.15],
+      "parent": "rocks",
+      "category": "environment",
+      "castShadow": true
+    },
+    {
+      "name": "rock_cluster_right_01",
+      "type": "cone",
+      "params": [0.75, 1.3, 6],
+      "material": { "color": "#3a505c", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [3.0, 0.65, 2.0],
+      "rotation": [-0.06, -0.25, 0.08],
+      "parent": "rocks",
+      "category": "environment",
+      "castShadow": true
+    },
+    {
+      "name": "rock_cluster_right_02",
+      "type": "icosahedron",
+      "params": [0.45, 0],
+      "material": { "color": "#4c6472", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [3.8, 0.42, 1.3],
+      "rotation": [0.1, 0.2, 0.3],
+      "parent": "rocks",
+      "category": "environment",
+      "castShadow": true
+    },
+    {
+      "name": "rock_fore_left",
+      "type": "icosahedron",
+      "params": [0.38, 0],
+      "material": { "color": "#4a6270", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [-1.8, 0.35, 4.2],
+      "rotation": [0.25, 0.1, 0.12],
+      "parent": "rocks",
+      "category": "environment",
+      "castShadow": true
+    },
+    {
+      "name": "rock_fore_right",
+      "type": "cone",
+      "params": [0.5, 0.9, 6],
+      "material": { "color": "#3a505c", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [2.2, 0.45, 4.0],
+      "rotation": [-0.1, 0.45, 0.08],
+      "parent": "rocks",
+      "category": "environment",
+      "castShadow": true
+    },
+
+    { "name": "trees", "type": "group", "parent": "scene_root", "category": "prop" },
+    {
+      "name": "bare_tree_left_trunk",
+      "type": "cylinder",
+      "params": [0.08, 0.14, 3.2, 6],
+      "material": { "color": "#344a56", "metalness": 0.0, "roughness": 1.0, "flatShading": true },
+      "position": [-4.8, 1.6, -4.5],
+      "parent": "trees",
+      "castShadow": true
+    },
+    {
+      "name": "bare_tree_left_branch_a",
+      "type": "cylinder",
+      "params": [0.04, 0.06, 1.6, 5],
+      "material": { "color": "#344a56", "metalness": 0.0, "roughness": 1.0, "flatShading": true },
+      "position": [-4.4, 2.6, -4.2],
+      "rotation": [0, 0, -0.8],
+      "parent": "trees"
+    },
+    {
+      "name": "bare_tree_left_branch_b",
+      "type": "cylinder",
+      "params": [0.04, 0.06, 1.4, 5],
+      "material": { "color": "#344a56", "metalness": 0.0, "roughness": 1.0, "flatShading": true },
+      "position": [-5.2, 2.9, -4.8],
+      "rotation": [0.3, 0, 0.6],
+      "parent": "trees"
+    },
+    {
+      "name": "bare_tree_right_trunk",
+      "type": "cylinder",
+      "params": [0.07, 0.12, 2.8, 6],
+      "material": { "color": "#344a56", "metalness": 0.0, "roughness": 1.0, "flatShading": true },
+      "position": [5.4, 1.4, -4.2],
+      "parent": "trees",
+      "castShadow": true
+    },
+    {
+      "name": "leafy_tree_trunk",
+      "type": "cylinder",
+      "params": [0.12, 0.18, 2.2, 6],
+      "material": { "color": "#344a56", "metalness": 0.0, "roughness": 1.0, "flatShading": true },
+      "position": [-7.5, 1.1, 2.2],
+      "parent": "trees",
+      "castShadow": true
+    },
+    {
+      "name": "leafy_tree_canopy_main",
+      "type": "icosahedron",
+      "params": [1.1, 1],
+      "material": { "color": "#2a3e3a", "metalness": 0.0, "roughness": 1.0, "flatShading": true },
+      "position": [-7.5, 2.9, 2.2],
+      "parent": "trees",
+      "castShadow": true
+    },
+    {
+      "name": "leafy_tree_canopy_left",
+      "type": "icosahedron",
+      "params": [0.7, 1],
+      "material": { "color": "#253a36", "metalness": 0.0, "roughness": 1.0, "flatShading": true },
+      "position": [-8.1, 2.6, 1.7],
+      "parent": "trees"
+    },
+    {
+      "name": "leafy_tree_canopy_top",
+      "type": "icosahedron",
+      "params": [0.55, 1],
+      "material": { "color": "#304640", "metalness": 0.0, "roughness": 1.0, "flatShading": true },
+      "position": [-7.2, 3.7, 2.5],
+      "parent": "trees"
+    },
+
+    { "name": "architecture", "type": "group", "parent": "scene_root", "category": "structure" },
+    {
+      "name": "gateway_left_pillar",
+      "type": "box",
+      "params": [0.6, 3.4, 0.6],
+      "material": { "color": "#3a505c", "metalness": 0.0, "roughness": 0.85, "flatShading": true },
+      "position": [-1.6, 1.7, -2.4],
+      "rotation": [0, 0, 0.02],
+      "parent": "architecture",
+      "castShadow": true
+    },
+    {
+      "name": "gateway_right_pillar",
+      "type": "box",
+      "params": [0.6, 3.4, 0.6],
+      "material": { "color": "#3a505c", "metalness": 0.0, "roughness": 0.85, "flatShading": true },
+      "position": [1.6, 1.7, -2.4],
+      "rotation": [0, 0, -0.02],
+      "parent": "architecture",
+      "castShadow": true
+    },
+    {
+      "name": "gateway_lintel",
+      "type": "box",
+      "params": [3.8, 0.5, 0.7],
+      "material": { "color": "#344a56", "metalness": 0.0, "roughness": 0.85, "flatShading": true },
+      "position": [0, 3.55, -2.4],
+      "parent": "architecture",
+      "castShadow": true
+    },
+    {
+      "name": "gateway_keystone",
+      "type": "cone",
+      "params": [0.5, 0.8, 4],
+      "material": { "color": "#344a56", "metalness": 0.0, "roughness": 0.85, "flatShading": true },
+      "position": [0, 4.2, -2.4],
+      "rotation": [0, 0.785, 0],
+      "parent": "architecture",
+      "castShadow": true
+    },
+    {
+      "name": "gateway_rubble_left",
+      "type": "box",
+      "params": [0.8, 0.4, 0.5],
+      "material": { "color": "#3a505c", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [-2.1, 0.2, -1.6],
+      "rotation": [0.1, 0.3, 0.08],
+      "parent": "architecture",
+      "castShadow": true
+    },
+    {
+      "name": "gateway_rubble_right",
+      "type": "box",
+      "params": [0.6, 0.3, 0.6],
+      "material": { "color": "#344a56", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [2.3, 0.15, -1.4],
+      "rotation": [0.2, -0.4, -0.1],
+      "parent": "architecture",
+      "castShadow": true
+    },
+
+    { "name": "crystals", "type": "group", "parent": "scene_root", "category": "prop" },
+    {
+      "name": "crystal_main",
+      "type": "cone",
+      "params": [0.22, 1.1, 6],
+      "material": { "color": "#34c0b0", "metalness": 0.0, "roughness": 0.3, "flatShading": true, "emissive": "#34c0b0", "emissiveIntensity": 1.4 },
+      "position": [-3.5, 0.55, -0.6],
+      "rotation": [0, 0.1, -0.08],
+      "parent": "crystals",
+      "castShadow": true
+    },
+    {
+      "name": "crystal_mid",
+      "type": "cone",
+      "params": [0.16, 0.8, 6],
+      "material": { "color": "#34c0b0", "metalness": 0.0, "roughness": 0.3, "flatShading": true, "emissive": "#34c0b0", "emissiveIntensity": 1.2 },
+      "position": [-3.1, 0.4, -0.3],
+      "rotation": [0.1, 0.5, 0.15],
+      "parent": "crystals"
+    },
+    {
+      "name": "crystal_small",
+      "type": "cone",
+      "params": [0.1, 0.5, 6],
+      "material": { "color": "#34c0b0", "metalness": 0.0, "roughness": 0.3, "flatShading": true, "emissive": "#34c0b0", "emissiveIntensity": 1.0 },
+      "position": [-3.7, 0.25, -0.1],
+      "rotation": [-0.1, 0.2, 0.3],
+      "parent": "crystals"
+    },
+    {
+      "name": "crystal_light",
+      "type": "pointLight",
+      "params": [1.2, 5, 2, false, 0.0],
+      "material": { "color": "#34c0b0" },
+      "position": [-3.4, 0.8, -0.4],
+      "parent": "crystals"
+    },
+
+    { "name": "figure", "type": "group", "parent": "scene_root", "position": [0.8, 0, 1.8], "category": "character" },
+    {
+      "name": "figure_torso",
+      "type": "box",
+      "params": [0.45, 0.55, 0.3],
+      "material": { "color": "#344852", "metalness": 0.1, "roughness": 0.7, "flatShading": true },
+      "position": [0, 1.15, 0],
+      "parent": "figure",
+      "castShadow": true
+    },
+    {
+      "name": "figure_cloak",
+      "type": "cone",
+      "params": [0.55, 1.1, 8],
+      "material": { "color": "#3a7e8a", "metalness": 0.0, "roughness": 1.0, "flatShading": true },
+      "position": [0, 0.95, -0.1],
+      "rotation": [-0.06, 0, 0],
+      "parent": "figure",
+      "castShadow": true
+    },
+    {
+      "name": "figure_head",
+      "type": "box",
+      "params": [0.24, 0.26, 0.22],
+      "material": { "color": "#2a3842", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [0, 1.6, 0],
+      "parent": "figure",
+      "castShadow": true
+    },
+    {
+      "name": "figure_hood",
+      "type": "cone",
+      "params": [0.22, 0.32, 6],
+      "material": { "color": "#3a7e8a", "metalness": 0.0, "roughness": 1.0, "flatShading": true },
+      "position": [0, 1.76, -0.02],
+      "rotation": [-0.2, 0, 0],
+      "parent": "figure",
+      "castShadow": true
+    },
+    {
+      "name": "figure_eye_glow",
+      "type": "box",
+      "params": [0.14, 0.03, 0.02],
+      "material": { "color": "#d8456a", "metalness": 0.0, "roughness": 0.5, "flatShading": true, "emissive": "#d8456a", "emissiveIntensity": 2.2 },
+      "position": [0, 1.62, 0.11],
+      "parent": "figure"
+    }
+  ]
+}

@@ -11,6 +11,7 @@ import { ModelLoader } from './loader.js';
 import { ModelExporter } from './exporter.js';
 import { PostFXManager } from './postfx.js';
 import { CameraSystem } from './camera.js';
+import { flipNormalsOnObject } from './terrain/sampler.js';
 
 class App {
   constructor() {
@@ -125,6 +126,26 @@ class App {
         if (model) this.setModel(model, spec);
       }
     });
+
+    // Terrain display mode — live toggle, no rebuild needed.
+    const terrainMode = document.getElementById('terrain-mode');
+    if (terrainMode) {
+      terrainMode.addEventListener('change', (e) => {
+        this.viewer.setTerrainDisplay(e.target.value);
+      });
+    }
+
+    // Flip normals on current selection (or __terrain__ as default)
+    const btnFlipNormals = document.getElementById('btn-flip-normals');
+    if (btnFlipNormals) {
+      btnFlipNormals.addEventListener('click', () => this.flipSelectedNormals());
+    }
+
+    // Save spec with persisted normal-flip state
+    const btnSaveSpec = document.getElementById('btn-save-spec');
+    if (btnSaveSpec) {
+      btnSaveSpec.addEventListener('click', () => this.saveCurrentSpec());
+    }
 
     // Paste modal elements
     const pasteModal = document.getElementById('paste-modal');
@@ -993,6 +1014,98 @@ class App {
     document.getElementById('info-objects').textContent = info.objects;
   }
 
+  /**
+   * Flip normals on the current selection, or on the generated terrain mesh
+   * if nothing is selected. Toggles userData.normalsFlipped so the state can
+   * be persisted via saveCurrentSpec().
+   */
+  flipSelectedNormals() {
+    const model = this.viewer?.currentModel;
+    if (!model) {
+      console.warn('[flipNormals] no model loaded');
+      return;
+    }
+
+    let target = this.viewer.selectedPart || null;
+    let label = target?.name || null;
+
+    if (!target) {
+      model.traverse((child) => {
+        if (!target && child.name === '__terrain__') target = child;
+      });
+      label = '__terrain__ (default)';
+    }
+
+    if (!target) {
+      console.warn('[flipNormals] no selection and no __terrain__ mesh present');
+      return;
+    }
+
+    flipNormalsOnObject(target);
+    console.log(
+      `[flipNormals] flipped ${label} — userData.normalsFlipped=${!!target.userData.normalsFlipped}`
+    );
+  }
+
+  /**
+   * Download the current spec as JSON, persisting any runtime normal-flip
+   * state. Writes scene.terrain.flipNormals for the generated terrain, and
+   * part.flipNormals for individual parts with userData.normalsFlipped.
+   */
+  saveCurrentSpec() {
+    const model = this.viewer?.currentModel;
+    const spec = model?.userData?.spec;
+    if (!spec) {
+      console.warn('[saveSpec] no spec attached to current model');
+      return;
+    }
+
+    const out = JSON.parse(JSON.stringify(spec));
+
+    // Generated terrain → scene.terrain.flipNormals
+    let terrainMesh = null;
+    model.traverse((child) => {
+      if (!terrainMesh && child.name === '__terrain__') terrainMesh = child;
+    });
+    if (terrainMesh) {
+      out.scene = out.scene || {};
+      out.scene.terrain = out.scene.terrain || {};
+      out.scene.terrain.flipNormals = !!terrainMesh.userData.normalsFlipped;
+    }
+
+    // Per-part flips
+    if (Array.isArray(out.parts)) {
+      const flippedByName = new Map();
+      model.traverse((child) => {
+        if (child === terrainMesh) return;
+        if (!child.name) return;
+        if (child.userData?.normalsFlipped) {
+          flippedByName.set(child.name, true);
+        }
+      });
+      for (const part of out.parts) {
+        if (part?.name && flippedByName.has(part.name)) {
+          part.flipNormals = true;
+        } else if (part && part.flipNormals === true && !flippedByName.has(part.name)) {
+          // Was flipped in spec, now toggled off — clear the flag
+          delete part.flipNormals;
+        }
+      }
+    }
+
+    const json = JSON.stringify(out, null, 2);
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${out.name || 'spec'}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    console.log(`[saveSpec] downloaded ${a.download}`);
+  }
+
   applySpecSettings(spec) {
     this.viewer.resetSceneSettings();
     this.lighting.reset();
@@ -1046,6 +1159,13 @@ class App {
 
     if (scene.postfx) {
       this.postfx.applyConfig(scene.postfx);
+    }
+
+    if (scene.terrain && scene.terrain.enabled) {
+      const mode = scene.terrain.display || 'terrain';
+      this.viewer.setTerrainDisplay(mode);
+      const tel = document.getElementById('terrain-mode');
+      if (tel) tel.value = mode;
     }
 
     this.syncSceneControls(scene);

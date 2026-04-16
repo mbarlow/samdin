@@ -10,6 +10,8 @@ import * as THREE from 'three';
 import { Primitives, Materials, ModelAssembler } from './primitives.js';
 import { buildCSG } from './CSGBuilder.js';
 import { CSGPrimitives, CSG_PRIMITIVE_TYPES } from './CSGPrimitives.js';
+import { applyTerrainCompositor } from './terrain-compositor.js';
+import { flipNormalsOnObject } from './terrain/sampler.js';
 
 /**
  * Model spec format:
@@ -328,6 +330,8 @@ class ModelBuilder {
     model.name = spec.name;
     model.userData.spec = spec;
     model.userData.parts = assembler.getAnimatableParts();
+
+    applyTerrainCompositor(model, spec);
 
     return model;
   }
@@ -1006,6 +1010,15 @@ class ModelBuilder {
 
     if (def.visible !== undefined) {
       object.visible = def.visible;
+    }
+
+    if (def.category !== undefined) {
+      object.userData = object.userData || {};
+      object.userData.category = def.category;
+    }
+
+    if (def.flipNormals === true) {
+      flipNormalsOnObject(object);
     }
 
     return object;

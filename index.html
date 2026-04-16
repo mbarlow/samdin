@@ -53,6 +53,16 @@
               <option value="high">High</option>
             </select>
           </div>
+          <div class="control-group">
+            <label>Terrain</label>
+            <select id="terrain-mode">
+              <option value="primitives">Primitives</option>
+              <option value="terrain" selected>Terrain</option>
+              <option value="both">Both</option>
+            </select>
+            <button id="btn-flip-normals" title="Flip normals on selected part, or on the generated terrain if nothing is selected">Flip Normals</button>
+            <button id="btn-save-spec" title="Download the current spec JSON with normal-flip state persisted">Save Spec</button>
+          </div>
           <div id="upload-progress">
             <div class="upload-info">
               <span class="upload-filename" id="upload-filename"></span>
