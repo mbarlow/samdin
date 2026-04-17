@@ -44,7 +44,7 @@
       "material": { "color": "#506874", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
       "methodOptions": {
         "heightfield": { "padding": 0.75, "skirt": 3.0 },
-        "marchingCubes": { "isoLevel": 0.0, "smoothingRadius": 0.25 },
+        "marchingCubes": { "padding": 0.75, "isoLevel": 0.5, "smoothingPasses": 1 },
         "clothDrape": { "iterations": 60, "stiffness": 0.8, "gravity": -9.8 }
       }
     }
