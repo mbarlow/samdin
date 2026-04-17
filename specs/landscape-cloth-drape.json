@@ -1,0 +1,137 @@
+{
+  "name": "landscape-cloth-drape",
+  "description": "Cloth-drape terrain demo. Env-tagged rocks and a back cliff are scattered with gaps; the cloth settles across them as a single continuous blanket, bridging low spots the raw heightfield would show as holes. Compare to specs/landscape-marching-cubes.json (same staging) to see the difference between a draped 2.5D cloth and a volumetric iso-surface.",
+  "root": "scene_root",
+  "scene": {
+    "quality": "standard",
+    "background": { "type": "gradient", "color": "#6a8090", "color2": "#1e2a34" },
+    "fog": { "type": "exp2", "color": "#3e5260", "density": 0.02 },
+    "lighting": {
+      "preset": "outdoor",
+      "environment": "dusk",
+      "envMapIntensity": 0.55,
+      "shadowQuality": "high",
+      "intensity": 1.2,
+      "ambient": { "color": "#6a8090", "intensity": 0.45 },
+      "directional": { "color": "#ffe4c8", "intensity": 1.6, "position": [4, 9, 5] },
+      "hemisphere": { "skyColor": "#9ab4c4", "groundColor": "#36424c", "intensity": 1.0 }
+    },
+    "ground": { "reflective": false },
+    "exposure": 1.3,
+    "toneMapping": "ACESFilmic",
+    "camera": {
+      "preset": "threeQuarter",
+      "fov": 34,
+      "distanceMultiplier": 1.15,
+      "positionOffset": [2.5, 2.0, 4.0],
+      "targetOffset": [0, 0.8, 0]
+    },
+    "postfx": {
+      "bloom": { "enabled": true, "strength": 0.4, "radius": 0.6, "threshold": 0.9 },
+      "vignette": { "enabled": true, "intensity": 0.15, "softness": 0.7 },
+      "colorGrade": { "enabled": true, "saturation": 1.0, "brightness": 1.05, "contrast": 1.05 },
+      "fxaa": true
+    },
+    "terrain": {
+      "enabled": true,
+      "method": "cloth-drape",
+      "display": "terrain",
+      "bounds": "auto",
+      "resolution": 96,
+      "material": { "color": "#4d5a64", "metalness": 0.0, "roughness": 0.92, "flatShading": true },
+      "methodOptions": {
+        "clothDrape": {
+          "iterations": 120,
+          "stiffness": 0.72,
+          "gravity": -9.8,
+          "damping": 0.985,
+          "thickness": 0.05,
+          "startMargin": 2.5,
+          "skirt": 3.0,
+          "padding": 0.75
+        }
+      }
+    }
+  },
+  "parts": [
+    { "name": "scene_root", "type": "group", "position": [0, 0, 0] },
+
+    { "name": "rocks", "type": "group", "parent": "scene_root", "category": "environment" },
+    {
+      "name": "boulder_a",
+      "type": "sphere",
+      "params": [1.3, 1],
+      "material": { "color": "#586772", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [-2.2, 0.4, 0.6],
+      "scale": [1.3, 0.9, 1.1],
+      "parent": "rocks",
+      "category": "environment"
+    },
+    {
+      "name": "boulder_b",
+      "type": "sphere",
+      "params": [1.0, 1],
+      "material": { "color": "#5a6b77", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [0.2, 0.5, -0.4],
+      "scale": [1.2, 1.0, 1.0],
+      "parent": "rocks",
+      "category": "environment"
+    },
+    {
+      "name": "boulder_c",
+      "type": "sphere",
+      "params": [1.1, 1],
+      "material": { "color": "#556673", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [2.3, 0.4, 0.8],
+      "scale": [1.1, 0.95, 1.2],
+      "parent": "rocks",
+      "category": "environment"
+    },
+    {
+      "name": "boulder_small_left",
+      "type": "sphere",
+      "params": [0.6, 1],
+      "material": { "color": "#596875", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [-3.6, 0.2, 2.4],
+      "scale": [1.2, 0.8, 1.0],
+      "parent": "rocks",
+      "category": "environment"
+    },
+    {
+      "name": "boulder_small_right",
+      "type": "sphere",
+      "params": [0.7, 1],
+      "material": { "color": "#566571", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [3.5, 0.2, 2.6],
+      "scale": [1.1, 0.8, 1.1],
+      "parent": "rocks",
+      "category": "environment"
+    },
+    {
+      "name": "cliff_back",
+      "type": "box",
+      "params": [8, 2.2, 1.4],
+      "material": { "color": "#4a5a66", "metalness": 0.0, "roughness": 0.9, "flatShading": true },
+      "position": [0, 0.9, -3.2],
+      "rotation": [0, 3, 0],
+      "parent": "rocks",
+      "category": "environment"
+    },
+
+    {
+      "name": "gateway",
+      "type": "prefab",
+      "src": "broken-column",
+      "position": [2.2, 0.5, 1.4],
+      "rotation": [0, 20, 0],
+      "scale": [0.9, 1.1, 0.9]
+    },
+    {
+      "name": "lantern",
+      "type": "prefab",
+      "src": "japanese-lantern",
+      "position": [-3.0, 0.5, 2.4],
+      "scale": [0.7, 0.7, 0.7]
+    }
+  ]
+}

@@ -17,6 +17,7 @@ import {
 } from './terrain/sampler.js';
 import { buildHeightfield } from './terrain/heightfield.js';
 import { buildMarchingCubes } from './terrain/marching-cubes.js';
+import { buildClothDrape } from './terrain/cloth-drape.js';
 
 const TERRAIN_MESH_NAME = '__terrain__';
 const ROLE_ENV = 'environment-primitive';
@@ -58,8 +59,11 @@ export function applyTerrainCompositor(model, spec) {
       }
       break;
     case 'cloth-drape':
-      console.warn('[terrain] cloth-drape not yet implemented — falling back to heightfield');
-      terrainMesh = buildHeightfield(envMeshes, terrainSpec);
+      terrainMesh = buildClothDrape(envMeshes, terrainSpec);
+      if (!terrainMesh) {
+        console.warn('[terrain] cloth-drape produced no mesh — falling back to heightfield');
+        terrainMesh = buildHeightfield(envMeshes, terrainSpec);
+      }
       break;
     default:
       console.warn(`[terrain] unknown method "${method}" — falling back to heightfield`);
@@ -75,7 +79,7 @@ export function applyTerrainCompositor(model, spec) {
   terrainMesh.userData.role = ROLE_TERRAIN;
   terrainMesh.userData.terrainMethodRequested = method;
 
-  if (terrainSpec.flipNormals === true) {
+  if (terrainSpec.flipNormals !== false) {
     flipNormalsOnObject(terrainMesh);
   }
 
