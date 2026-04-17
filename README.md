@@ -187,19 +187,20 @@ An optional middle-pass that drapes a single unified mesh ("physics blanket") ov
 | Field | Description |
 |-------|-------------|
 | `enabled` | Master switch. When `false` or omitted, the compositor is a no-op. |
-| `method` | `"heightfield"` (2.5D raycast grid), `"marching-cubes"` (volumetric iso-surface, supports overhangs). `"cloth-drape"` is stubbed and falls back to heightfield. |
+| `method` | `"heightfield"` (2.5D raycast grid), `"marching-cubes"` (volumetric iso-surface, supports overhangs), or `"cloth-drape"` (Verlet cloth that settles onto env meshes, bridges gaps). |
 | `display` | `"primitives"` (hide terrain), `"terrain"` (hide env primitives), `"both"` (lookdev/debug). |
-| `flipNormals` | Flip terrain normals if the surface reads inside-out. |
+| `flipNormals` | Flip terrain normals. **Defaults to `true`** — the sampled iso-surfaces and draped sheets read inside-out otherwise. Set `false` to opt out. |
 | `bounds` | `"auto"` (derived from env meshes + padding) or `[minX, minZ, maxX, maxZ]`. |
 | `resolution` | Grid resolution, clamped to `[4, 1024]`. |
 | `smoothing` | Gaussian smoothing pass, `[0, 1]`. |
 | `material` | Standard material object applied to the generated mesh. |
 | `methodOptions.heightfield` | `{ padding, skirt }` for the default heightfield sampler. |
 | `methodOptions.marchingCubes` | `{ padding, isoLevel, smoothingPasses }` for the volumetric sampler (`isoLevel` in `[0.05, 0.95]`). |
+| `methodOptions.clothDrape` | `{ padding, skirt, iterations, stiffness, gravity, damping, thickness, startMargin, timeStep, shear }` for the Verlet cloth simulator. |
 
-Heightfield sampling rasterizes a grid over the bounds, raycasts top-down against the tagged env meshes, optionally smooths, and triangulates with a skirt. Marching-cubes builds a 3D density grid from the same raycasts (odd crossings per column mark interior voxels), smooths in 3D, and extracts an iso-surface — use it when the env meshes have overhangs or fused silhouettes that a heightfield flattens. Any part without `category: "environment"` is treated as a structure or prop and is rendered on top of the terrain.
+Heightfield sampling rasterizes a grid over the bounds, raycasts top-down against the tagged env meshes, optionally smooths, and triangulates with a skirt. Marching-cubes builds a 3D density grid from the same raycasts (odd crossings per column mark interior voxels), smooths in 3D, and extracts an iso-surface — use it when the env meshes have overhangs or fused silhouettes that a heightfield flattens. Cloth-drape initialises a grid of Verlet particles above the bounds and lets them fall under gravity with structural and shear distance constraints between neighbours; the final resting heights bridge gaps between disjoint env chunks into a single continuous blanket. Any part without `category: "environment"` is treated as a structure or prop and is rendered on top of the terrain.
 
-The viewer exposes a **Terrain** dropdown that flips `display` live without a rebuild, and a **Flip Normals** button that targets the current selection or the `__terrain__` mesh by default. See [`specs/landscape-example.json`](specs/landscape-example.json) (heightfield), [`specs/landscape-marching-cubes.json`](specs/landscape-marching-cubes.json), and [`specs/landscape-stress.json`](specs/landscape-stress.json) for working examples.
+The viewer exposes a **Terrain** dropdown that flips `display` live without a rebuild, and a **Flip Normals** button that targets the current selection or the `__terrain__` mesh by default. See [`specs/landscape-example.json`](specs/landscape-example.json) (heightfield), [`specs/landscape-marching-cubes.json`](specs/landscape-marching-cubes.json), [`specs/landscape-cloth-drape.json`](specs/landscape-cloth-drape.json), and [`specs/landscape-stress.json`](specs/landscape-stress.json) for working examples.
 
 ## Primitives
 
