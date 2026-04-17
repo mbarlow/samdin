@@ -22,14 +22,23 @@ Install CLI deps once with `cd cli && npm install` (Playwright is a dep of `cli/
 
 ## Architecture
 
-Samdin is a browser-based 3D scene viewer/builder. It is a **static web app**: there is no build step for the frontend — `index.html` loads `js/main.js` as an ES module directly. All logic lives in the browser; the CLI is an optional companion for validation, headless inspection, and GLB export.
+Samdin is a browser-based 3D scene viewer/builder. It is a **static web app**: there is no build step for the frontend — `src/index.html` loads `src/js/main.js` as an ES module directly. All logic lives in the browser; the CLI is an optional companion for validation, headless inspection, and GLB export.
+
+### Repo layout
+
+- `src/` — the app: `index.html`, `js/`, `css/`. This is what gets served as the site root in dev and Pages.
+- `specs/`, `prefabs/` — data, served at `/specs` and `/prefabs` respectively (browser-sync routes in dev; copied into the Pages artifact by the workflow).
+- `media/` — images, demo video, referenced from `README.md` and `docs/`.
+- `cli/` — Playwright and Node tools (see `cli/README.md`).
+- `docs/` — reference docs split by topic; also `inventory.md`, `RELEASE_NOTES.md`, and `thumbs/`.
+- `scripts/dev.sh` + `scripts/bs-config.cjs` — browser-sync launcher.
 
 ### Runtime entry + app composition
 
-`js/main.js` defines `App`, which wires together the subsystems created in `init()`:
+`src/js/main.js` defines `App`, which wires together the subsystems created in `init()`:
 
-- `Viewer` (`js/viewer.js`) — Three.js scene/camera/renderer, orbit + first-person controls, camera presets (`front`, `back`, `left`, `right`, `top`, `threeQuarter`, `lowAngle`, `highAngle`), `fitToModel()`, wireframe/grid toggles, and the animation loop. It exposes `setRenderCallback()` so the app can drive post-processing and animation ticks.
-- `ModelBuilder` (`js/builder.js`) — The core of the project. Holds a `Map` of registered specs and a prefab cache. Turns spec JSON into Three.js `Group`s.
+- `Viewer` (`src/js/viewer.js`) — Three.js scene/camera/renderer, orbit + first-person controls, camera presets (`front`, `back`, `left`, `right`, `top`, `threeQuarter`, `lowAngle`, `highAngle`), `fitToModel()`, wireframe/grid toggles, and the animation loop. It exposes `setRenderCallback()` so the app can drive post-processing and animation ticks.
+- `ModelBuilder` (`src/js/builder.js`) — The core of the project. Holds a `Map` of registered specs and a prefab cache. Turns spec JSON into Three.js `Group`s.
 - `LightingManager`, `PostFXManager`, `AnimationController`, `ModelLoader`, `ModelExporter`, `CameraSystem` — Named subsystems attached to `App`. `CameraSystem` is a first-person "photography" layer (viewfinder, polaroid strip, photo export), distinct from the orbit camera on `Viewer`.
 
 `App` is exposed on `window.app` (and `window._app`), which is how automation (inspect/export CLI scripts, MCP Playwright, manual debugging) reaches the builder and viewer.
@@ -41,14 +50,15 @@ The data model is a JSON "spec". `ModelBuilder.build(spec)` → Three.js `Group`
 - **Registration is keyed by `spec.name`.** `registerSpec(spec)` does `this.specs.set(spec.name, spec)`. `loadSpec(name)` (on `App`) only accepts a name that's already in that map — it will not take a raw spec object. To load an arbitrary JSON from disk at runtime: `builder.registerSpec(spec); app.loadSpec(spec.name)`.
 - Specs support a `parts[]` tree (each with `name`, `type`, `params`, `material`, `position/rotation/scale`, `parent`, `pivot`), spec-local `modules` referenced via `type: "module"`, embedded `type: "csg"` parts (boolean ops over local shapes), prefab instances via `type: "prefab"` + `src`, and scene-level settings under `scene` (background, fog, lighting preset, tone mapping, exposure, camera framing, postfx).
 - Builder pipeline (order matters): `normalizeSpec` → `expandPrefabs` / `expandCompositeRefs` / `expandRegions` → `expandProcedural` (array/mirror/scatter modifiers) → `sortByDependency` (parent chains) → `createPart` → `finalizePart` → surface treatments (material breakup, roughness variation, decals, emissive strips).
-- `buildCSG` / `CSGBuilder.js` / `CSGPrimitives.js` handle boolean-op geometry (I-beams, hollow boxes, gears, etc. — see README prefab list).
+- `buildCSG` / `src/js/CSGBuilder.js` / `src/js/CSGPrimitives.js` handle boolean-op geometry (I-beams, hollow boxes, gears, etc. — see `docs/primitives.md`).
 - `qualityTier` ("draft" / "standard" / "high") affects segment counts and surface detail across the pipeline; the Quality dropdown in the UI drives it via `setQualityTier`.
 
 ### Assets on disk
 
-- `specs/` — Scene specs (`*.json`). `make smoke` validates `specs/showcase.json`.
-- `prefabs/` — Reusable `type: "prefab"` JSON components loaded lazily by the builder (`prefabsBasePath`). README lists categories but may lag behind disk; trust the directory listing.
-- `index.html` is the single HTML entry; all UI panels (`#model-section`, `#info`, `#camera`, etc.) are static markup wired up in `App.setupUI()`.
+- `specs/` — Scene specs (`*.json`). `make smoke` validates `specs/showcase.json`. Served at `/specs` via browser-sync routes.
+- `prefabs/` — Reusable `type: "prefab"` JSON components loaded lazily by the builder (`prefabsBasePath = './prefabs/'`). `docs/prefabs.md` lists categories but may lag behind disk; trust the directory listing.
+- `media/` — Images and demo video for the README and docs.
+- `src/index.html` is the single HTML entry; all UI panels (`#model-section`, `#info`, `#camera`, etc.) are static markup wired up in `App.setupUI()`.
 
 ### Service worker
 

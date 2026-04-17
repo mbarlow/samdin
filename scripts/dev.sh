@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
-# Serve locally with bun + hot reload via browser-sync
+# Serve locally with browser-sync + hot reload.
+# Config lives in scripts/bs-config.cjs — doc root is src/,
+# with /specs, /prefabs, /media mounted from sibling dirs.
 set -e
 
 PORT=${PORT:-7777}
+cd "$(dirname "$0")/.."
 
 echo ""
 echo -e "\033[38;5;99m    ███████╗ █████╗ ███╗   ███╗██████╗ ██╗███╗   ██╗\033[0m  version  \033[1mv1.0.0\033[0m"
@@ -15,9 +18,4 @@ echo -e "                            \033[38;5;99m◆ ◇\033[0m       Three.js 
 echo -e "               \033[38;5;243mส า ม มิ ติ  —  Samdin\033[0m"
 echo ""
 
-exec npx browser-sync start \
-  --server \
-  --port "$PORT" \
-  --files "**/*.html" "**/*.css" "**/*.js" "**/*.json" \
-  --no-notify \
-  --no-open
+exec env PORT="$PORT" npx browser-sync start --config scripts/bs-config.cjs
