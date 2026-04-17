@@ -187,7 +187,7 @@ An optional middle-pass that drapes a single unified mesh ("physics blanket") ov
 | Field | Description |
 |-------|-------------|
 | `enabled` | Master switch. When `false` or omitted, the compositor is a no-op. |
-| `method` | `"heightfield"` (implemented), `"marching-cubes"` / `"cloth-drape"` (stubbed — fall back to heightfield). |
+| `method` | `"heightfield"` (2.5D raycast grid), `"marching-cubes"` (volumetric iso-surface, supports overhangs). `"cloth-drape"` is stubbed and falls back to heightfield. |
 | `display` | `"primitives"` (hide terrain), `"terrain"` (hide env primitives), `"both"` (lookdev/debug). |
 | `flipNormals` | Flip terrain normals if the surface reads inside-out. |
 | `bounds` | `"auto"` (derived from env meshes + padding) or `[minX, minZ, maxX, maxZ]`. |
@@ -195,10 +195,11 @@ An optional middle-pass that drapes a single unified mesh ("physics blanket") ov
 | `smoothing` | Gaussian smoothing pass, `[0, 1]`. |
 | `material` | Standard material object applied to the generated mesh. |
 | `methodOptions.heightfield` | `{ padding, skirt }` for the default heightfield sampler. |
+| `methodOptions.marchingCubes` | `{ padding, isoLevel, smoothingPasses }` for the volumetric sampler (`isoLevel` in `[0.05, 0.95]`). |
 
-Heightfield sampling rasterizes a grid over the bounds, raycasts top-down against the tagged env meshes, optionally smooths, and triangulates with a skirt. Any part without `category: "environment"` is treated as a structure or prop and is rendered on top of the terrain.
+Heightfield sampling rasterizes a grid over the bounds, raycasts top-down against the tagged env meshes, optionally smooths, and triangulates with a skirt. Marching-cubes builds a 3D density grid from the same raycasts (odd crossings per column mark interior voxels), smooths in 3D, and extracts an iso-surface — use it when the env meshes have overhangs or fused silhouettes that a heightfield flattens. Any part without `category: "environment"` is treated as a structure or prop and is rendered on top of the terrain.
 
-The viewer exposes a **Terrain** dropdown that flips `display` live without a rebuild, and a **Flip Normals** button that targets the current selection or the `__terrain__` mesh by default. See [`specs/landscape-example.json`](specs/landscape-example.json) and [`specs/landscape-stress.json`](specs/landscape-stress.json) for working examples.
+The viewer exposes a **Terrain** dropdown that flips `display` live without a rebuild, and a **Flip Normals** button that targets the current selection or the `__terrain__` mesh by default. See [`specs/landscape-example.json`](specs/landscape-example.json) (heightfield), [`specs/landscape-marching-cubes.json`](specs/landscape-marching-cubes.json), and [`specs/landscape-stress.json`](specs/landscape-stress.json) for working examples.
 
 ## Primitives
 

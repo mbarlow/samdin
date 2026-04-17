@@ -16,6 +16,7 @@ import {
   flipNormalsOnObject
 } from './terrain/sampler.js';
 import { buildHeightfield } from './terrain/heightfield.js';
+import { buildMarchingCubes } from './terrain/marching-cubes.js';
 
 const TERRAIN_MESH_NAME = '__terrain__';
 const ROLE_ENV = 'environment-primitive';
@@ -50,8 +51,11 @@ export function applyTerrainCompositor(model, spec) {
       terrainMesh = buildHeightfield(envMeshes, terrainSpec);
       break;
     case 'marching-cubes':
-      console.warn('[terrain] marching-cubes not yet implemented — falling back to heightfield');
-      terrainMesh = buildHeightfield(envMeshes, terrainSpec);
+      terrainMesh = buildMarchingCubes(envMeshes, terrainSpec);
+      if (!terrainMesh) {
+        console.warn('[terrain] marching-cubes produced no mesh — falling back to heightfield');
+        terrainMesh = buildHeightfield(envMeshes, terrainSpec);
+      }
       break;
     case 'cloth-drape':
       console.warn('[terrain] cloth-drape not yet implemented — falling back to heightfield');
