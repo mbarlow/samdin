@@ -12,10 +12,15 @@ import http from 'http';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const VIEWER_DIR = path.resolve(__dirname, '..');
+const REPO_ROOT = path.resolve(__dirname, '..');
+const SERVE_ROOTS = [
+  path.join(REPO_ROOT, 'src'),
+  REPO_ROOT
+];
 
-// Simple static file server
-function createServer(dir, port) {
+// Simple static file server — walks SERVE_ROOTS in order so /index.html and
+// /js/* come from src/ while /specs/*, /prefabs/*, /media/* fall back to repo root.
+function createServer(roots, port) {
   const mimeTypes = {
     '.html': 'text/html',
     '.js': 'application/javascript',
@@ -26,16 +31,27 @@ function createServer(dir, port) {
     '.jpg': 'image/jpeg',
     '.svg': 'image/svg+xml',
     '.woff': 'font/woff',
-    '.woff2': 'font/woff2'
+    '.woff2': 'font/woff2',
+    '.webm': 'video/webm',
+    '.mp4': 'video/mp4'
   };
 
-  const server = http.createServer((req, res) => {
-    let filePath = path.join(dir, req.url === '/' ? 'index.html' : req.url);
-    filePath = filePath.split('?')[0];
-    const ext = path.extname(filePath).toLowerCase();
-    const contentType = mimeTypes[ext] || 'application/octet-stream';
+  function resolveFile(urlPath, cb) {
+    const rel = urlPath === '/' ? 'index.html' : urlPath.replace(/^\/+/, '').split('?')[0];
+    let i = 0;
+    const tryNext = () => {
+      if (i >= roots.length) return cb(Object.assign(new Error('ENOENT'), { code: 'ENOENT' }));
+      const candidate = path.join(roots[i++], rel);
+      fs.readFile(candidate, (err, content) => {
+        if (err && err.code === 'ENOENT') return tryNext();
+        cb(err, content, candidate);
+      });
+    };
+    tryNext();
+  }
 
-    fs.readFile(filePath, (err, content) => {
+  const server = http.createServer((req, res) => {
+    resolveFile(req.url, (err, content, filePath) => {
       if (err) {
         if (err.code === 'ENOENT') {
           res.writeHead(404);
@@ -44,10 +60,11 @@ function createServer(dir, port) {
           res.writeHead(500);
           res.end('Server error');
         }
-      } else {
-        res.writeHead(200, { 'Content-Type': contentType });
-        res.end(content);
+        return;
       }
+      const ext = path.extname(filePath).toLowerCase();
+      res.writeHead(200, { 'Content-Type': mimeTypes[ext] || 'application/octet-stream' });
+      res.end(content);
     });
   });
 
@@ -107,7 +124,7 @@ async function inspectModel(specPath, outputDir, requestedPort) {
   const parsedPort = Number.parseInt(requestedPort ?? process.env.SAMDIN_INSPECT_PORT ?? '', 10);
   const port = Number.isFinite(parsedPort) ? parsedPort : 8766;
   console.log(`Starting local server on port ${port}...`);
-  const server = await createServer(VIEWER_DIR, port);
+  const server = await createServer(SERVE_ROOTS, port);
   const viewerUrl = `http://localhost:${port}`;
 
   console.log('Launching browser...');
