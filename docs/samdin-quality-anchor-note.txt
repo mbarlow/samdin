@@ -1,0 +1,32 @@
+Starting a Samdin Quality Anchor Session
+=========================================
+
+Say something like:
+
+  "I want to build a new samdin quality anchor — a [vintage sextant / chess set / whatever].
+   Check the quality anchor memory first."
+
+That's enough. Claude will:
+1. Load the quality-anchor memory (plinth recipe, lighting recipe, pitfall list)
+2. Read the existing anchors in specs/quality-bar-*.json
+3. Follow the discipline: build → validate → inspect → fix from screenshots → ship
+4. Match the shared plinth (wood + leather + brass lip) and lighting (warm key + cool rim)
+
+The memory covers:
+- Build methodology (one strong hero at a time, render evidence over JSON theory)
+- Shared plinth and lighting recipes
+- 6 key pitfalls (rotation signs, torus orientation, fog density, camera scaling, etc.)
+- What each of the 5 existing anchors tests
+
+Existing anchors (in specs/):
+  1. quality-bar-field-radio.json        — multi-layer fascia, dial glow, knurled knobs
+  2. quality-bar-rangefinder-camera.json  — brass/leather/glass, multi-ring lens, transmission
+  3. quality-bar-espresso-machine.json    — mirror chrome via IBL, active state LEDs
+  4. quality-bar-anglepoise-lamp.json     — articulated joint chain, active light spill
+  5. quality-bar-typewriter.json          — CSG wedge, dense keyboard array, cool palette
+
+All of this persists automatically via:
+  ~/.claude/projects/.../memory/feedback_samdin_quality_anchors.md
+  ~/.claude/skills/samdin/ (skill with references/)
+  samdin/CLAUDE.md (repo architecture)
+  samdin/specs/rebuild-review.md (quality-bar decision doc)
