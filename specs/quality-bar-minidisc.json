@@ -1,0 +1,374 @@
+{
+  "name": "quality-bar-minidisc",
+  "description": "Hero prop. Sony-style 7cm minidisc with translucent blue shell, visible inner hub disc, anodized metal shutter, and a recessed white sticker label area on the top face for future printed text.",
+  "root": "scene_root",
+  "scene": {
+    "quality": "high",
+    "background": { "type": "gradient", "color": "#d8d2c0", "color2": "#1f2129" },
+    "lighting": {
+      "preset": "showcase",
+      "environment": "studio",
+      "envMapIntensity": 1.35,
+      "shadowQuality": "high",
+      "intensity": 1.08
+    },
+    "ground": { "reflective": false },
+    "exposure": 1.05,
+    "toneMapping": "ACESFilmic",
+    "camera": {
+      "preset": "threeQuarter",
+      "distanceMultiplier": 0.32,
+      "positionOffset": [0.1, 0.4, 0.15],
+      "targetOffset": [0, 0.18, 0]
+    },
+    "postfx": {
+      "ssao": { "enabled": true, "kernelRadius": 4, "minDistance": 0.001, "maxDistance": 0.05 },
+      "bloom": { "enabled": true, "strength": 0.12, "radius": 0.3, "threshold": 0.92 },
+      "vignette": { "enabled": true, "intensity": 0.14, "softness": 0.65 },
+      "colorGrade": { "enabled": true, "saturation": 1.04, "brightness": 1.03, "contrast": 1.06 },
+      "fxaa": true
+    }
+  },
+  "parts": [
+    { "name": "scene_root", "type": "group", "position": [0, 0, 0] },
+
+    {
+      "name": "key_fill",
+      "type": "pointLight",
+      "params": [1.4, 2.8, 8.0, false],
+      "material": { "color": "#f4ecda" },
+      "position": [1.0, 1.6, 0.9],
+      "castShadow": false,
+      "parent": "scene_root"
+    },
+    {
+      "name": "rim_fill",
+      "type": "pointLight",
+      "params": [0.9, 2.4, 7.0, false],
+      "material": { "color": "#86b4ff" },
+      "position": [-0.9, 1.2, -1.0],
+      "castShadow": false,
+      "parent": "scene_root"
+    },
+
+    {
+      "name": "disc_root",
+      "type": "group",
+      "position": [0, 0.05, 0],
+      "rotation": [173, 14, 0],
+      "scale": [10, 10, 10],
+      "parent": "scene_root"
+    },
+
+    {
+      "name": "shell_bottom",
+      "type": "roundedBox",
+      "params": [0.072, 0.0025, 0.068, 0.0042, 3],
+      "material": {
+        "preset": "glass",
+        "color": "#3d8fe2",
+        "transmission": 0.32,
+        "opacity": 0.78,
+        "ior": 1.5,
+        "roughness": 0.14,
+        "metalness": 0.0,
+        "envMapIntensity": 1.7,
+        "clearcoat": 0.7,
+        "clearcoatRoughness": 0.12
+      },
+      "position": [0, 0.00125, 0],
+      "castShadow": true,
+      "receiveShadow": true,
+      "parent": "disc_root"
+    },
+    {
+      "name": "shell_top",
+      "type": "roundedBox",
+      "params": [0.072, 0.0025, 0.068, 0.0042, 3],
+      "material": {
+        "preset": "glass",
+        "color": "#4a9ce8",
+        "transmission": 0.3,
+        "opacity": 0.8,
+        "ior": 1.5,
+        "roughness": 0.12,
+        "metalness": 0.0,
+        "envMapIntensity": 1.8,
+        "clearcoat": 0.8,
+        "clearcoatRoughness": 0.1
+      },
+      "position": [0, 0.00375, 0],
+      "castShadow": true,
+      "receiveShadow": true,
+      "parent": "disc_root"
+    },
+    {
+      "name": "shell_seam",
+      "type": "box",
+      "params": [0.0721, 0.0002, 0.0681],
+      "material": { "preset": "matte", "color": "#0e1a2c", "roughness": 0.85 },
+      "position": [0, 0.0025, 0],
+      "castShadow": false,
+      "receiveShadow": false,
+      "parent": "disc_root"
+    },
+
+    {
+      "name": "inner_disc",
+      "type": "cylinder",
+      "params": [0.0265, 0.0265, 0.0009, 48],
+      "material": {
+        "preset": "matte",
+        "color": "#0a0b0e",
+        "roughness": 0.42,
+        "metalness": 0.18,
+        "breakup": {
+          "noise": { "amount": 0.04, "scale": 9.0, "color": "#16181c" },
+          "roughnessVariation": 0.05
+        }
+      },
+      "position": [0, 0.0019, 0],
+      "parent": "disc_root"
+    },
+    {
+      "name": "inner_disc_ring",
+      "type": "cylinder",
+      "params": [0.0085, 0.0085, 0.001, 32],
+      "material": { "preset": "chrome", "color": "#c8ccd1", "roughness": 0.22 },
+      "position": [0, 0.00195, 0],
+      "parent": "disc_root"
+    },
+    {
+      "name": "center_hub",
+      "type": "cylinder",
+      "params": [0.0048, 0.0048, 0.0014, 24],
+      "material": { "preset": "steel", "color": "#5a6066", "roughness": 0.32 },
+      "position": [0, 0.002, 0],
+      "parent": "disc_root"
+    },
+    {
+      "name": "center_pin",
+      "type": "cylinder",
+      "params": [0.0011, 0.0011, 0.0018, 12],
+      "material": { "preset": "matte", "color": "#0c0d0f" },
+      "position": [0, 0.00208, 0],
+      "parent": "disc_root"
+    },
+
+    {
+      "name": "shutter_recess",
+      "type": "roundedBox",
+      "params": [0.034, 0.0008, 0.03, 0.0014, 2],
+      "material": { "preset": "matte", "color": "#0c1320", "roughness": 0.6 },
+      "position": [0.0095, 0.00065, -0.001],
+      "parent": "disc_root"
+    },
+    {
+      "name": "shutter_plate",
+      "type": "roundedBox",
+      "params": [0.032, 0.0006, 0.028, 0.0012, 2],
+      "material": {
+        "preset": "painted-metal",
+        "color": "#1a2530",
+        "metalness": 0.85,
+        "roughness": 0.32,
+        "clearcoat": 0.55,
+        "clearcoatRoughness": 0.28,
+        "breakup": {
+          "noise": { "amount": 0.04, "scale": 8.0, "color": "#243140" },
+          "roughnessVariation": 0.05
+        }
+      },
+      "position": [0.0095, 0.00075, -0.001],
+      "parent": "disc_root"
+    },
+    {
+      "name": "shutter_edge_clip",
+      "type": "box",
+      "params": [0.034, 0.0006, 0.0018],
+      "material": { "preset": "chrome", "color": "#aab0b8", "roughness": 0.3 },
+      "position": [0.0095, 0.00078, -0.0145],
+      "parent": "disc_root"
+    },
+    {
+      "name": "shutter_grip_notch",
+      "type": "box",
+      "params": [0.005, 0.0007, 0.0035],
+      "material": { "preset": "matte", "color": "#0a0e15" },
+      "position": [0.0252, 0.00078, -0.001],
+      "parent": "disc_root"
+    },
+
+    {
+      "name": "arrow_triangle",
+      "type": "cylinder",
+      "params": [0.002, 0.0005, 0.0006, 3],
+      "material": { "preset": "matte", "color": "#f1f3f5", "roughness": 0.55 },
+      "position": [0, 0.00012, 0.029],
+      "rotation": [0, 30, 0],
+      "parent": "disc_root"
+    },
+    {
+      "name": "insert_text_strip",
+      "type": "box",
+      "params": [0.014, 0.0003, 0.005],
+      "material": {
+        "preset": "matte",
+        "color": "#dde2e6",
+        "roughness": 0.6,
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 12.0, "color": "#a9b0b6" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [0, 0.00009, 0.022],
+      "parent": "disc_root"
+    },
+
+    {
+      "name": "sony_badge",
+      "type": "box",
+      "params": [0.018, 0.0006, 0.0035],
+      "material": { "preset": "chrome", "color": "#cfd2d6", "roughness": 0.18 },
+      "position": [0, 0.00018, -0.0312],
+      "parent": "disc_root"
+    },
+    {
+      "name": "himd_badge_well",
+      "type": "box",
+      "params": [0.018, 0.0004, 0.008],
+      "material": { "preset": "matte", "color": "#0a0d12", "roughness": 0.55 },
+      "position": [0.018, 0.00076, -0.011],
+      "parent": "disc_root"
+    },
+    {
+      "name": "himd_badge_text",
+      "type": "box",
+      "params": [0.014, 0.0002, 0.005],
+      "material": { "preset": "chrome", "color": "#b8bcc0", "roughness": 0.3 },
+      "position": [0.018, 0.00088, -0.011],
+      "parent": "disc_root"
+    },
+
+    {
+      "name": "label_well",
+      "type": "roundedBox",
+      "params": [0.066, 0.0004, 0.057, 0.0036, 2],
+      "material": { "preset": "matte", "color": "#1f4d80", "roughness": 0.6 },
+      "position": [0, 0.0049, -0.003],
+      "parent": "disc_root"
+    },
+    {
+      "name": "label_sticker",
+      "type": "roundedBox",
+      "params": [0.0648, 0.0006, 0.0558, 0.0034, 2],
+      "material": {
+        "preset": "matte",
+        "color": "#f1ead8",
+        "roughness": 0.78,
+        "metalness": 0.0,
+        "clearcoat": 0.08,
+        "clearcoatRoughness": 0.6,
+        "breakup": {
+          "noise": { "amount": 0.025, "scale": 14.0, "color": "#ddd5c0" },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [0, 0.00525, -0.003],
+      "castShadow": false,
+      "receiveShadow": true,
+      "parent": "disc_root"
+    },
+    {
+      "name": "label_corner_notch",
+      "type": "box",
+      "params": [0.005, 0.0008, 0.005],
+      "material": { "preset": "glass-tinted", "color": "#3a8ad8", "transmission": 0.45, "opacity": 0.55, "roughness": 0.18 },
+      "position": [0.031, 0.00525, 0.026],
+      "parent": "disc_root"
+    },
+
+    {
+      "name": "corner_pin_fl",
+      "type": "cylinder",
+      "params": [0.0014, 0.0014, 0.0008, 10],
+      "material": { "preset": "steel", "color": "#7a808a", "roughness": 0.4 },
+      "position": [-0.031, 0.0046, 0.029],
+      "parent": "disc_root"
+    },
+    {
+      "name": "corner_pin_fr",
+      "type": "cylinder",
+      "params": [0.0014, 0.0014, 0.0008, 10],
+      "material": { "preset": "steel", "color": "#7a808a", "roughness": 0.4 },
+      "position": [0.031, 0.0046, 0.029],
+      "parent": "disc_root"
+    },
+    {
+      "name": "corner_pin_bl",
+      "type": "cylinder",
+      "params": [0.0014, 0.0014, 0.0008, 10],
+      "material": { "preset": "steel", "color": "#7a808a", "roughness": 0.4 },
+      "position": [-0.031, 0.0046, -0.029],
+      "parent": "disc_root"
+    },
+    {
+      "name": "corner_pin_br",
+      "type": "cylinder",
+      "params": [0.0014, 0.0014, 0.0008, 10],
+      "material": { "preset": "steel", "color": "#7a808a", "roughness": 0.4 },
+      "position": [0.031, 0.0046, -0.029],
+      "parent": "disc_root"
+    },
+
+    {
+      "name": "side_groove_front",
+      "type": "box",
+      "params": [0.07, 0.0003, 0.0006],
+      "material": { "preset": "matte", "color": "#0c1828", "roughness": 0.7 },
+      "position": [0, 0.0025, 0.0337],
+      "parent": "disc_root"
+    },
+    {
+      "name": "side_groove_back",
+      "type": "box",
+      "params": [0.07, 0.0003, 0.0006],
+      "material": { "preset": "matte", "color": "#0c1828", "roughness": 0.7 },
+      "position": [0, 0.0025, -0.0337],
+      "parent": "disc_root"
+    },
+    {
+      "name": "side_groove_left",
+      "type": "box",
+      "params": [0.0006, 0.0003, 0.066],
+      "material": { "preset": "matte", "color": "#0c1828", "roughness": 0.7 },
+      "position": [-0.0357, 0.0025, 0],
+      "parent": "disc_root"
+    },
+    {
+      "name": "side_groove_right",
+      "type": "box",
+      "params": [0.0006, 0.0003, 0.066],
+      "material": { "preset": "matte", "color": "#0c1828", "roughness": 0.7 },
+      "position": [0.0357, 0.0025, 0],
+      "parent": "disc_root"
+    },
+
+    {
+      "name": "write_protect_tab",
+      "type": "box",
+      "params": [0.0045, 0.0008, 0.0028],
+      "material": { "preset": "matte", "color": "#0a0e15", "roughness": 0.65 },
+      "position": [-0.031, 0.00075, -0.0294],
+      "parent": "disc_root"
+    },
+    {
+      "name": "write_protect_slider",
+      "type": "box",
+      "params": [0.003, 0.0006, 0.0018],
+      "material": { "preset": "matte", "color": "#a9aeb4", "roughness": 0.45 },
+      "position": [-0.031, 0.00088, -0.0294],
+      "parent": "disc_root"
+    }
+  ]
+}
