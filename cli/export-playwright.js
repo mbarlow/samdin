@@ -86,8 +86,9 @@ async function exportSpec(specPath, outputPath) {
     outputPath = specPath.replace('.json', '.glb');
   }
 
-  // Start local server
-  const port = 8765;
+  // Start local server (port overridable — callers like nodal's make
+  // models need to dodge whatever else is squatting 8765)
+  const port = Number(process.env.SAMDIN_EXPORT_PORT) || 8765;
   console.log(`Starting local server on port ${port}...`);
   const server = await createServer(SERVE_ROOTS, port);
   const viewerUrl = `http://localhost:${port}`;
