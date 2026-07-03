@@ -1,0 +1,32 @@
+{
+  "name": "csg-primitives-test",
+  "description": "Fixture exercising the curved CSG primitives so quality-tier segment scaling is measurable (draft < standard < high). Not a hero anchor.",
+  "root": "root",
+  "parts": [
+    { "name": "root", "type": "group" },
+
+    { "name": "hollow_cyl", "type": "hollowCylinder", "params": [0.35, 0.22, 0.7],
+      "material": { "preset": "steel" }, "position": [-1.6, 0.35, 0], "parent": "root" },
+
+    { "name": "pipe_flange", "type": "pipeFlange", "params": [0.15, 0.3, 0.08, 0.8, 6],
+      "material": { "preset": "steel" }, "position": [-0.8, 0.4, 0], "parent": "root" },
+
+    { "name": "elbow", "type": "elbow", "params": [0.25, 0.09, 90],
+      "material": { "preset": "chrome" }, "position": [0, 0.3, 0], "parent": "root" },
+
+    { "name": "dome", "type": "dome", "params": [0.4, 0.08],
+      "material": { "preset": "brass" }, "position": [0.8, 0.0, 0], "parent": "root" },
+
+    { "name": "half_torus", "type": "halfTorus", "params": [0.3, 0.1],
+      "material": { "preset": "chrome" }, "position": [1.6, 0.3, 0], "parent": "root" },
+
+    { "name": "gear", "type": "gear", "params": [0.4, 10, 0.2, 0.12],
+      "material": { "preset": "steel" }, "position": [2.5, 0.4, 0], "parent": "root" }
+  ],
+  "scene": {
+    "quality": "high",
+    "background": { "type": "gradient", "top": "#2a2f38", "bottom": "#0e1116" },
+    "lighting": { "preset": "studio", "environment": "studio", "envMapIntensity": 1.2 },
+    "camera": { "preset": "threeQuarter" }
+  }
+}
