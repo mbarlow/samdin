@@ -90,13 +90,17 @@ async function captureAnchor(page, spec, specName, outDir) {
   }));
   const fingerprint = { tris: num(info.tris), verts: num(info.verts), objects: num(info.objects) };
 
-  // Canvas bounding box for a clip-based capture. locator.screenshot() waits
-  // for element "stability", which samdin's continuous render loop never
-  // satisfies — page.screenshot({clip}) skips that wait. Screenshots are the
-  // soft layer: a render hiccup must not abort the fingerprint gate, so each
-  // is best-effort.
-  const box = await page.locator('#viewport canvas').boundingBox();
+  // Pixel layer is local-only. Under CI/software GL, capturing the busy WebGL
+  // canvas times out (8s+ each) and the accumulated thrash wedges the page so
+  // later anchors' interactions die. Skip screenshots entirely when the pixel
+  // gate is off — CI only needs the DOM-read fingerprint above.
   const shots = {};
+  if (NO_PIXEL) return { fingerprint, shots };
+
+  // locator.screenshot() waits for element "stability", which samdin's
+  // continuous render loop never satisfies — page.screenshot({clip}) skips
+  // that wait. Each shot is best-effort; a hiccup must not lose the fingerprint.
+  const box = await page.locator('#viewport canvas').boundingBox();
   for (const view of VIEWS) {
     if (view !== 'specCamera') {
       await page.selectOption('#camera-select', view);
@@ -140,9 +144,9 @@ async function main() {
 
   const port = Number.parseInt(process.env.SAMDIN_GOLDEN_PORT ?? '', 10) || 8767;
   const server = await createServer(SERVE_ROOTS, port);
+  const viewerUrl = `http://localhost:${port}`;
   const browser = await chromium.launch({ headless: true });
   const context = await browser.newContext({ viewport: { width: 1920, height: 1080 } });
-  const page = await context.newPage();
 
   const fpPath = path.join(GOLDEN_DIR, 'fingerprints.json');
   const goldenFp = fs.existsSync(fpPath) ? JSON.parse(fs.readFileSync(fpPath, 'utf-8')) : {};
@@ -150,24 +154,28 @@ async function main() {
   const failures = [];
 
   try {
-    await page.goto(`http://localhost:${port}`);
-    await page.waitForLoadState('networkidle');
-    await page.waitForFunction(() => document.querySelector('#btn-export') !== null, { timeout: 10000 });
-    await page.waitForTimeout(800);
-
     for (const specPath of anchors) {
       const spec = JSON.parse(fs.readFileSync(specPath, 'utf-8'));
       const specName = spec.name || path.basename(specPath, '.json');
       process.stdout.write(`\n▸ ${specName}\n`);
 
       const dest = update ? GOLDEN_DIR : workDir;
+      // Fresh page per anchor. Building multiple heavy specs in one page
+      // session wedges the paste modal after ~2 builds, so isolate each.
       let fingerprint;
+      const page = await context.newPage();
       try {
+        await page.goto(viewerUrl);
+        await page.waitForLoadState('networkidle');
+        await page.waitForFunction(() => document.querySelector('#btn-export') !== null, { timeout: 15000 });
+        await page.waitForTimeout(600);
         ({ fingerprint } = await captureAnchor(page, spec, specName, dest));
       } catch (e) {
         failures.push(`${specName}: capture failed — ${e.message.split('\n')[0]}`);
         console.log(`   ✗ capture failed: ${e.message.split('\n')[0]}`);
         continue;
+      } finally {
+        await page.close();
       }
       newFp[specName] = fingerprint;
       console.log(`   fingerprint  tris=${fingerprint.tris} verts=${fingerprint.verts} objects=${fingerprint.objects}`);
