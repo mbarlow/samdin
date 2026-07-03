@@ -24,15 +24,16 @@ Repo-level commands:
 
 CLI commands:
 
-- `node cli/validate-spec.cjs <spec.json>`
-- `node cli/inspect-model.js <spec.json> [out-dir]`
+- `node cli/validate-spec.cjs <spec.json>` — add `--strict` (or `make lint`) for the quality-rule lint tier (advisory: scene block, metals-need-env, clone-read, ground-contact, preset typos).
+- `node cli/inspect-model.js <spec.json> [out-dir] [port]` — out-dir defaults to `/tmp/samdin-inspect`; `[port]` lets you run parallel inspections.
+- `node cli/golden.js` (`make golden`) — fingerprint regression check on the quality-bar anchors; `--update` (`make golden-update`) reblesses after an intended change.
 - `node cli/export-playwright.js <spec.json> [out.glb]`
 - `node cli/index.js <spec.json> [out]`
 
 Notes:
 
-- `inspect-model.js` and `export-playwright.js` start their own local server; they do not require `make dev`.
-- `make smoke` validates `specs/showcase.json`.
+- `inspect-model.js`, `golden.js`, and `export-playwright.js` start their own local server; they do not require `make dev`.
+- `make smoke` validates a hero anchor; `make test` validates every spec and prefab (also runs in CI on push/PR).
 
 ## Supported Authoring Paths
 
@@ -41,7 +42,9 @@ Notes:
 - Embedded `type: "csg"` parts are supported inside parts-based specs.
 - Spec-local `modules` are supported.
 - Nested `children` arrays are supported and flattened by the builder and validator.
-- Procedural specs exist, but treat them as experimental unless verified in the current runtime.
+- Procedural **modifiers** — `array` (scalar or grid `count:[x,y,z]`), `mirror` (`{x,y,z}` or `{axis:"xz"}`), `scatter` (with `seed` for reproducibility) — are stable and documented in `docs/modifiers.md`. There is no top-level `type: "procedural"`.
+- The `scene.terrain` compositor (heightfield / marching-cubes / cloth-drape; normals flip by default) turns `category: "environment"` parts into ground. See `specs/landscape-*.json`.
+- The `animations` block exists but is unvalidated and used by no shipped spec — experimental.
 
 ## Frequently Missed Runtime Features
 
