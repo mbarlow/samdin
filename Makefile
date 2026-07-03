@@ -10,8 +10,8 @@ help:
 	@echo "  make test             - Validate every spec and prefab on disk"
 	@echo "  make lint             - Quality-rule lint (--strict) over specs (advisory)"
 	@echo "  make schema-check     - Validate specs against the JSON Schema (needs cli deps)"
-	@echo "  make golden           - Regression-check the quality-bar anchors"
-	@echo "  make golden-update    - Rewrite the anchor goldens from current build"
+	@echo "  make golden           - Fingerprint-check the quality-bar anchors (tris/verts/objects vs goldens/)"
+	@echo "  make golden-update    - Re-bless the anchor goldens after an intended builder change"
 	@echo "  make help             - Show this help"
 
 dev:
