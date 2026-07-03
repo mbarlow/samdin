@@ -12,19 +12,21 @@ Primitive types you can use as a part's `type`. `params` is type-specific.
 | `cone` | `[radius, height, segments]` | Cone |
 | `torus` | `[radius, tube, radialSegments, tubularSegments]` | Donut shape |
 | `capsule` | `[radius, length, capSegments, radialSegments]` | Pill shape |
-| `plane` | `[width, height]` | Flat plane |
-| `ring` | `[innerRadius, outerRadius, segments]` | Flat ring |
+| `plane` | `[width, height, segmentsW, segmentsH]` | Flat plane |
+| `ring` | `[outerRadius, innerRadius, segments]` | Flat ring |
+
+> **`ring` param order:** outer radius comes **first**, then inner. This is inverted from Three.js's own `RingGeometry(inner, outer)` — don't be surprised. Author against the order shown here.
 
 ## Geometric solids
 
 | Type | Params | Description |
 |------|--------|-------------|
-| `tetrahedron` | `[radius]` | 4-sided solid |
-| `octahedron` | `[radius]` | 8-sided solid |
-| `dodecahedron` | `[radius]` | 12-sided solid |
+| `tetrahedron` | `[radius, detail]` | 4-sided solid (detail subdivides) |
+| `octahedron` | `[radius, detail]` | 8-sided solid (detail subdivides) |
+| `dodecahedron` | `[radius, detail]` | 12-sided solid (detail subdivides) |
 | `icosahedron` | `[radius, detail]` | 20-sided solid |
 | `prism` | `[radius, height, sides]` | N-sided prism |
-| `pyramid` | `[baseWidth, height]` | Square pyramid |
+| `pyramid` | `[baseWidth, baseDepth, height]` | Pyramid (omit `baseDepth` for square base) |
 | `wedge` | `[width, height, depth]` | Triangular wedge |
 
 ## Architectural
@@ -35,7 +37,6 @@ Primitive types you can use as a part's `type`. `params` is type-specific.
 | `stairs` | `[width, height, depth, steps]` | Staircase |
 | `arch` | `[width, height, depth, segments]` | Archway |
 | `tube` | `[outerRadius, innerRadius, height, segments]` | Hollow cylinder |
-| `dome` | `[radius, widthSegments, heightSegments, phiLength]` | Hemisphere/dome |
 
 ## Lathe & extrusion
 
@@ -98,30 +99,31 @@ Complex shapes created via boolean operations:
 
 | Type | Params | Description |
 |------|--------|-------------|
-| `ibeam` | `[width, height, length, flangeThickness, webThickness]` | I-beam structural |
-| `lbeam` | `[width, height, length, thickness]` | L-shaped angle |
-| `tbeam` | `[width, height, length, flangeThickness, webThickness]` | T-beam |
-| `channel` | `[width, height, length, thickness]` | C-channel |
-| `hbeam` | `[width, height, length, flangeThickness, webThickness]` | H-beam |
-| `angle` | `[width, height, length, thickness]` | Angle bracket |
-| `hollowBox` | `[width, height, depth, wallThickness]` | Hollow rectangular tube |
+| `ibeam` | `[width, height, depth, flangeThickness, webThickness]` | I-beam structural (`webThickness` defaults to `flangeThickness`) |
+| `lbeam` | `[width, height, depth, thickness]` | L-shaped angle |
+| `tbeam` | `[width, height, depth, flangeThickness, webThickness]` | T-beam (`webThickness` defaults to `flangeThickness`) |
+| `channel` | `[width, height, depth, thickness]` | C-channel |
+| `hbeam` | `[width, height, depth, flangeThickness, webThickness]` | H-beam |
+| `angle` | `[width, height, depth, thickness]` | Angle bracket |
+| `hollowBox` | `[width, height, depth, thickness]` | Hollow rectangular tube |
 | `hollowCylinder` | `[outerRadius, innerRadius, height, segments]` | Pipe/tube |
 | `pipeFlange` | `[pipeRadius, flangeRadius, flangeThickness, pipeLength, boltHoles]` | Pipe flange |
 | `elbow` | `[radius, tubeRadius, angle, segments]` | Pipe elbow |
 | `bracket` | `[width, height, depth, thickness, holeRadius]` | Mounting bracket |
-| `gear` | `[radius, teeth, thickness, toothDepth]` | Gear wheel |
+| `gear` | `[radius, teeth, height, toothDepth]` | Gear wheel |
 | `cross` | `[armLength, armWidth, thickness]` | Plus/cross shape |
-| `frame` | `[width, height, thickness, depth]` | Picture frame |
+| `frame` | `[width, height, border, depth]` | Picture frame |
 | `windowFrame` | `[width, height, frameWidth, frameDepth, divisions]` | Window with panes |
+| `dome` | `[radius, thickness, segments]` | Hollow half-sphere shell (`thickness` = shell wall) |
 | `hexNut` | `[radius, height, holeRadius]` | Hexagonal nut |
 | `countersunk` | `[headRadius, shaftRadius, headHeight, shaftLength]` | Countersunk screw |
-| `keyhole` | `[width, height, depth, holeRadius, slotWidth]` | Keyhole mount |
+| `keyhole` | `[width, height, depth, circleRadius, slotWidth]` | Keyhole mount |
 | `halfTorus` | `[radius, tube, segments]` | Half donut |
-| `sphereSlab` | `[radius, thickness]` | Sliced sphere |
+| `sphereSlab` | `[radius, thickness, segments]` | Sliced sphere |
 | `notchedCylinder` | `[radius, height, notchWidth, notchDepth, segments]` | Cylinder with notch |
-| `steppedPyramid` | `[baseWidth, height, steps]` | Mayan-style pyramid |
+| `steppedPyramid` | `[baseSize, height, steps]` | Mayan-style pyramid |
 | `boxSphereIntersect` | `[boxSize, sphereRadius]` | Rounded cube |
 | `cylinderIntersect` | `[radius, height, segments]` | Cylinder intersection |
-| `swissCheese` | `[width, height, depth, holeRadius, holeCount]` | Block with random holes |
+| `swissCheese` | `[width, height, depth, holeRadius, holes]` | Block with random holes |
 
 For embedded CSG blocks that compose multiple shapes with boolean ops, see [scene-spec.md](scene-spec.md#embedded-csg-parts).
