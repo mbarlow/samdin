@@ -1,0 +1,30 @@
+{
+  "name": "primitives-organic-test",
+  "description": "Fixture for the organic/coil primitives: helix (spring), rock (noise-displaced icosahedron), canopy (foliage blob). Deterministic by seed. Not a hero anchor.",
+  "root": "root",
+  "parts": [
+    { "name": "root", "type": "group" },
+
+    { "name": "spring", "type": "helix", "params": [0.18, 0.03, 6, 0.5],
+      "material": { "preset": "chrome" }, "position": [-1.2, 0.0, 0], "parent": "root" },
+
+    { "name": "rock_a", "type": "rock", "params": [0.45, 1, 0.35],
+      "position": [-0.2, 0.4, 0], "parent": "root" },
+    { "name": "rock_b", "type": "rock", "params": [0.35, 7, 0.45],
+      "position": [0.6, 0.3, 0.3], "parent": "root" },
+
+    { "name": "bush", "type": "canopy", "params": [0.55, 5, 3],
+      "position": [1.6, 0.5, 0], "parent": "root" },
+
+    { "name": "tree_trunk", "type": "cylinder", "params": [0.08, 0.1, 0.9, 8],
+      "material": { "preset": "wood" }, "position": [2.8, 0.45, 0], "parent": "root" },
+    { "name": "tree_crown", "type": "canopy", "params": [0.5, 4, 9],
+      "position": [2.8, 1.15, 0], "parent": "root" }
+  ],
+  "scene": {
+    "quality": "high",
+    "background": { "type": "gradient", "top": "#3a4a55", "bottom": "#12181c" },
+    "lighting": { "preset": "studio", "environment": "outdoor", "envMapIntensity": 1.0 },
+    "camera": { "preset": "threeQuarter" }
+  }
+}

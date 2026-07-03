@@ -44,6 +44,9 @@ const PRIMITIVE_PARAMS = {
   extrudePath: { min: 3, max: 5, skipNumericParams: true },
   cable: { min: 1, max: 5, skipNumericParams: true },
   catenary: { min: 2, max: 6, skipNumericParams: true },
+  helix: { min: 0, max: 4 },
+  rock: { min: 0, max: 3 },
+  canopy: { min: 0, max: 3 },
   pointLight: { min: 0, max: 5, booleanParams: [3] },
   spotLight: { min: 0, max: 5, booleanParams: [4] },
   areaLight: { min: 0, max: 4, booleanParams: [3] },
@@ -78,8 +81,9 @@ const PRIMITIVE_PARAMS = {
 
 const CSG_SHAPE_TYPES = new Set(['box', 'sphere', 'cylinder', 'cone', 'torus', 'capsule']);
 
-// Types whose param[1] (and beyond) is a subdivision `detail`, not a dimension.
-const DETAIL_AT_1 = new Set(['sphere', 'icosahedron', 'octahedron', 'tetrahedron', 'dodecahedron']);
+// Types whose param[1] (and beyond) is not a dimension (subdivision detail,
+// seed, lobe count) — a 0 there is valid and should not warn.
+const DETAIL_AT_1 = new Set(['sphere', 'icosahedron', 'octahedron', 'tetrahedron', 'dodecahedron', 'rock', 'canopy']);
 
 function validateHollowBox(params) {
   const [width, height, depth, thickness = 0.1] = params;

@@ -75,6 +75,31 @@ Primitive types you can use as a part's `type`. `params` is type-specific.
 }
 ```
 
+## Organic & coils
+
+| Type | Params | Description |
+|------|--------|-------------|
+| `helix` | `[radius, tubeRadius, coils, height]` | Tube swept along a helix — springs, coils, screw threads |
+| `rock` | `[radius, seed, roughness]` | Noise-displaced icosahedron, faceted. Deterministic per `seed` |
+| `canopy` | `[radius, lobes, seed]` | Rounded foliage blob for tree crowns and shrubs. Deterministic per `seed` |
+
+`rock` and `canopy` displace vertices by a smooth function of direction, so the surface never cracks; vary `seed` for a different lump without changing the silhouette budget. Both default to a stone-grey / foliage-green material and honor the quality tier (higher tiers subdivide further). `helix` segment density scales with the tier.
+
+**Spring example** (tension coil):
+```json
+{
+  "type": "helix",
+  "params": [0.18, 0.03, 6, 0.5],
+  "material": { "preset": "chrome" }
+}
+```
+
+**Tree example** (trunk + crown):
+```json
+{ "name": "trunk", "type": "cylinder", "params": [0.08, 0.1, 0.9, 8], "material": { "preset": "wood" } },
+{ "name": "crown", "type": "canopy", "params": [0.5, 4, 9], "position": [0, 0.7, 0] }
+```
+
 ## Lights
 
 | Type | Params | Description |
