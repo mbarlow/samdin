@@ -22,6 +22,22 @@ jobs:
       - name: Validate every spec and prefab
         run: make test
 
+  schema:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install CLI deps
+        working-directory: cli
+        run: npm ci || npm install
+
+      - name: Schema-check every spec
+        run: make schema-check
+
   golden:
     runs-on: ubuntu-latest
     steps:
