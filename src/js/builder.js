@@ -299,7 +299,8 @@ class ModelBuilder {
    */
   buildCSG(spec) {
     console.log('[Builder] Building CSG model:', spec.name);
-    return buildCSG(spec);
+    const tier = QUALITY_TIERS[this.qualityTier] || QUALITY_TIERS.draft;
+    return buildCSG(spec, { segMul: tier.segMul });
   }
 
   /**

@@ -317,7 +317,7 @@ const Primitives = {
    * Octahedron - good for gems, indicators
    */
   octahedron(radius, detail = 0, opts = {}) {
-    const geo = new THREE.OctahedronGeometry(radius, detail);
+    const geo = new THREE.OctahedronGeometry(radius, Math.max(detail, opts.qualitySphereDetail || 0));
     const mesh = new THREE.Mesh(geo, opts.material || Materials.matte(0x888888));
     mesh.castShadow = true;
     mesh.receiveShadow = true;
@@ -451,7 +451,7 @@ const Primitives = {
    * Tetrahedron - 4-faced triangular pyramid
    */
   tetrahedron(radius, detail = 0, opts = {}) {
-    const geo = new THREE.TetrahedronGeometry(radius, detail);
+    const geo = new THREE.TetrahedronGeometry(radius, Math.max(detail, opts.qualitySphereDetail || 0));
     const mesh = new THREE.Mesh(geo, opts.material || Materials.matte(0x888888));
 
     switch (opts.pivot) {
@@ -513,7 +513,8 @@ const Primitives = {
    * @param {number} segments
    */
   ring(outerRadius, innerRadius, segments = 16, opts = {}) {
-    const geo = new THREE.RingGeometry(innerRadius, outerRadius, segments);
+    const segs = Math.round(segments * (opts.qualitySegMul || 1));
+    const geo = new THREE.RingGeometry(innerRadius, outerRadius, segs);
     geo.rotateX(-Math.PI / 2); // Make it horizontal
 
     const mesh = new THREE.Mesh(geo, opts.material || Materials.matte(0x888888));
@@ -700,7 +701,9 @@ const Primitives = {
    * @param {number} sides - number of sides (3=triangle, 5=pentagon, 6=hexagon, etc.)
    */
   prism(radius, height, sides = 6, opts = {}) {
-    sides = Math.round(sides * (opts.qualitySegMul || 1));
+    // `sides` is the prism's identity (hex = 6), not tessellation — do NOT
+    // scale it by qualitySegMul, or a hexagonal prism becomes an 18-gon at
+    // high tier. Exempt like stairs.steps.
     const shape = new THREE.Shape();
 
     for (let i = 0; i < sides; i++) {
@@ -743,7 +746,7 @@ const Primitives = {
    * Dodecahedron - 12-faced polyhedron
    */
   dodecahedron(radius, detail = 0, opts = {}) {
-    const geo = new THREE.DodecahedronGeometry(radius, detail);
+    const geo = new THREE.DodecahedronGeometry(radius, Math.max(detail, opts.qualitySphereDetail || 0));
     const mesh = new THREE.Mesh(geo, opts.material || Materials.matte(0x888888));
     mesh.castShadow = true;
     mesh.receiveShadow = true;
@@ -754,7 +757,7 @@ const Primitives = {
    * Icosahedron - 20-faced polyhedron
    */
   icosahedron(radius, detail = 0, opts = {}) {
-    const geo = new THREE.IcosahedronGeometry(radius, detail);
+    const geo = new THREE.IcosahedronGeometry(radius, Math.max(detail, opts.qualitySphereDetail || 0));
     const mesh = new THREE.Mesh(geo, opts.material || Materials.matte(0x888888));
     mesh.castShadow = true;
     mesh.receiveShadow = true;
@@ -808,6 +811,7 @@ const Primitives = {
    * @param {boolean} closed - Whether the path is closed
    */
   extrudePath(shape, shapeParams, waypoints, segments = 64, closed = false, opts = {}) {
+    segments = Math.round(segments * (opts.qualitySegMul || 1));
     // Create the path from waypoints using CatmullRom spline
     const pathPoints = waypoints.map(p => new THREE.Vector3(p[0], p[1], p[2]));
     const curve = new THREE.CatmullRomCurve3(pathPoints, closed, 'catmullrom', 0.5);
@@ -816,7 +820,7 @@ const Primitives = {
     if (shape === 'circle') {
       // Use TubeGeometry for circular cross-section
       const radius = shapeParams[0] || 0.1;
-      const radialSegments = shapeParams[1] || 8;
+      const radialSegments = Math.round((shapeParams[1] || 8) * (opts.qualitySegMul || 1));
       geo = new THREE.TubeGeometry(curve, segments, radius, radialSegments, closed);
     } else {
       // For other shapes, use ExtrudeGeometry along the path
@@ -860,6 +864,9 @@ const Primitives = {
    * @param {string} tension - 'tight' (0.5), 'normal' (0.25), 'loose' (0)
    */
   cable(waypoints, radius = 0.02, segments = 32, radialSegments = 8, tension = 'normal', opts = {}) {
+    const mul = opts.qualitySegMul || 1;
+    segments = Math.round(segments * mul);
+    radialSegments = Math.round(radialSegments * mul);
     const tensionValues = { tight: 0.5, normal: 0.25, loose: 0 };
     const t = tensionValues[tension] ?? 0.25;
 
@@ -884,6 +891,9 @@ const Primitives = {
    * @param {number} radialSegments - Segments around the cable
    */
   catenary(start, end, sag = 0.2, radius = 0.02, segments = 32, radialSegments = 8, opts = {}) {
+    const mul = opts.qualitySegMul || 1;
+    segments = Math.round(segments * mul);
+    radialSegments = Math.round(radialSegments * mul);
     const p1 = new THREE.Vector3(start[0], start[1], start[2]);
     const p2 = new THREE.Vector3(end[0], end[1], end[2]);
 

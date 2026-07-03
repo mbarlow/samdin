@@ -1,7 +1,7 @@
 {
   "quality-bar-anglepoise-lamp": {
-    "tris": 83820,
-    "verts": 77372,
+    "tris": 86124,
+    "verts": 78584,
     "objects": 86
   },
   "quality-bar-courier-pickup": {
@@ -10,8 +10,8 @@
     "objects": 84
   },
   "quality-bar-espresso-machine": {
-    "tris": 27936,
-    "verts": 61905,
+    "tris": 28032,
+    "verts": 62001,
     "objects": 89
   },
   "quality-bar-field-radio": {
@@ -25,8 +25,8 @@
     "objects": 29
   },
   "quality-bar-rangefinder-camera": {
-    "tris": 53748,
-    "verts": 104347,
+    "tris": 54060,
+    "verts": 104659,
     "objects": 96
   },
   "quality-bar-typewriter": {
