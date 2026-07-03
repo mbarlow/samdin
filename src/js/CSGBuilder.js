@@ -37,8 +37,10 @@ import { Primitives, Materials } from './primitives.js';
  */
 
 class CSGBuilder {
-  constructor() {
+  constructor(opts = {}) {
     this.evaluator = new Evaluator();
+    // Quality-tier segment multiplier for the basic CSG brush shapes.
+    this.segMul = opts.segMul || 1;
   }
 
   /**
@@ -143,6 +145,8 @@ class CSGBuilder {
    */
   createBrush(shapeDef) {
     let geometry;
+    const mul = this.segMul;
+    const seg = (n) => Math.round(n * mul);
 
     switch (shapeDef.type) {
       case 'box':
@@ -153,8 +157,8 @@ class CSGBuilder {
       case 'sphere':
         geometry = new THREE.SphereGeometry(
           shapeDef.radius || 0.5,
-          shapeDef.segments || 32,
-          shapeDef.segments || 32
+          seg(shapeDef.segments || 32),
+          seg(shapeDef.segments || 32)
         );
         break;
 
@@ -163,7 +167,7 @@ class CSGBuilder {
           shapeDef.radiusTop ?? shapeDef.radius ?? 0.5,
           shapeDef.radiusBottom ?? shapeDef.radius ?? 0.5,
           shapeDef.height || 1,
-          shapeDef.segments || 32
+          seg(shapeDef.segments || 32)
         );
         break;
 
@@ -171,7 +175,7 @@ class CSGBuilder {
         geometry = new THREE.ConeGeometry(
           shapeDef.radius || 0.5,
           shapeDef.height || 1,
-          shapeDef.segments || 32
+          seg(shapeDef.segments || 32)
         );
         break;
 
@@ -179,8 +183,8 @@ class CSGBuilder {
         geometry = new THREE.TorusGeometry(
           shapeDef.radius || 0.5,
           shapeDef.tube || 0.2,
-          shapeDef.radialSegments || 16,
-          shapeDef.tubularSegments || 48
+          seg(shapeDef.radialSegments || 16),
+          seg(shapeDef.tubularSegments || 48)
         );
         break;
 
@@ -188,8 +192,8 @@ class CSGBuilder {
         geometry = new THREE.CapsuleGeometry(
           shapeDef.radius || 0.5,
           shapeDef.length || 1,
-          shapeDef.capSegments || 8,
-          shapeDef.radialSegments || 16
+          seg(shapeDef.capSegments || 8),
+          seg(shapeDef.radialSegments || 16)
         );
         break;
 
@@ -306,8 +310,8 @@ function isCSGSpec(spec) {
 /**
  * Build a CSG model from spec
  */
-function buildCSG(spec) {
-  const builder = new CSGBuilder();
+function buildCSG(spec, opts = {}) {
+  const builder = new CSGBuilder(opts);
   return builder.build(spec);
 }
 
