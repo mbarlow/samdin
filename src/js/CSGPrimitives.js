@@ -184,6 +184,8 @@ const CSGPrimitives = {
    * Hollow Cylinder: Pipe/tube shape
    */
   hollowCylinder(outerRadius = 0.35, innerRadius = 0.22, height = 0.7, segments = 32, opts = {}) {
+    if (isOptionsArg(segments)) { opts = segments; segments = 32; }
+    segments = qseg(segments, opts);
     const evaluator = new Evaluator();
 
     // Guard against invalid radii
@@ -207,6 +209,8 @@ const CSGPrimitives = {
       opts = boltHoles;
       boltHoles = 0;
     }
+    const seg = qseg(32, opts);
+    const boltSeg = qseg(16, opts);
     const evaluator = new Evaluator();
     const safeFlangeRadius = Math.max(flangeRadius, pipeRadius + 0.01);
     const safePipeRadius = Math.max(Math.min(pipeRadius, safeFlangeRadius - 0.01), 0.01);
@@ -214,21 +218,21 @@ const CSGPrimitives = {
     const safePipeLength = Math.max(pipeLength, safeFlangeThickness * 2 + 0.02);
     const coreRadius = Math.max(safePipeRadius * 0.58, 0.004);
 
-    const pipe = new Brush(new THREE.CylinderGeometry(safePipeRadius, safePipeRadius, safePipeLength, 32));
+    const pipe = new Brush(new THREE.CylinderGeometry(safePipeRadius, safePipeRadius, safePipeLength, seg));
     pipe.updateMatrixWorld(true);
 
-    const flange1 = new Brush(new THREE.CylinderGeometry(safeFlangeRadius, safeFlangeRadius, safeFlangeThickness, 32));
+    const flange1 = new Brush(new THREE.CylinderGeometry(safeFlangeRadius, safeFlangeRadius, safeFlangeThickness, seg));
     flange1.position.set(0, -safePipeLength / 2 + safeFlangeThickness / 2, 0);
     flange1.updateMatrixWorld(true);
 
-    const flange2 = new Brush(new THREE.CylinderGeometry(safeFlangeRadius, safeFlangeRadius, safeFlangeThickness, 32));
+    const flange2 = new Brush(new THREE.CylinderGeometry(safeFlangeRadius, safeFlangeRadius, safeFlangeThickness, seg));
     flange2.position.set(0, safePipeLength / 2 - safeFlangeThickness / 2, 0);
     flange2.updateMatrixWorld(true);
 
     let result = evaluator.evaluate(pipe, flange1, ADDITION);
     result = evaluator.evaluate(result, flange2, ADDITION);
 
-    const core = new Brush(new THREE.CylinderGeometry(coreRadius, coreRadius, safePipeLength + safeFlangeThickness * 2 + 0.2, 32));
+    const core = new Brush(new THREE.CylinderGeometry(coreRadius, coreRadius, safePipeLength + safeFlangeThickness * 2 + 0.2, seg));
     core.updateMatrixWorld(true);
     result = evaluator.evaluate(result, core, SUBTRACTION);
 
@@ -244,7 +248,7 @@ const CSGPrimitives = {
       for (const flangeY of flangeYs) {
         for (let i = 0; i < safeBoltHoles; i++) {
           const angle = (i / safeBoltHoles) * Math.PI * 2;
-          const bolt = new Brush(new THREE.CylinderGeometry(boltHoleRadius, boltHoleRadius, safeFlangeThickness + 0.04, 16));
+          const bolt = new Brush(new THREE.CylinderGeometry(boltHoleRadius, boltHoleRadius, safeFlangeThickness + 0.04, boltSeg));
           bolt.position.set(
             Math.cos(angle) * orbitRadius,
             flangeY,
@@ -267,6 +271,7 @@ const CSGPrimitives = {
       opts = segments;
       segments = 32;
     }
+    segments = qseg(segments, opts);
     const safeRadius = Math.max(radius, 0.02);
     const safeTubeRadius = Math.max(Math.min(tubeRadius, safeRadius - 0.001), 0.004);
     const safeAngle = THREE.MathUtils.degToRad(Math.max(Math.min(angle, 360), 5));
@@ -351,7 +356,7 @@ const CSGPrimitives = {
     const base = new Brush(new THREE.CylinderGeometry(radius, radius, safeHeight, Math.max(safeTeeth * 2, 12)));
     base.updateMatrixWorld(true);
 
-    const hole = new Brush(new THREE.CylinderGeometry(safeHoleRadius, safeHoleRadius, safeHeight + 0.1, 32));
+    const hole = new Brush(new THREE.CylinderGeometry(safeHoleRadius, safeHoleRadius, safeHeight + 0.1, qseg(32, opts)));
     hole.updateMatrixWorld(true);
 
     let result = evaluator.evaluate(base, hole, SUBTRACTION);
@@ -472,6 +477,8 @@ const CSGPrimitives = {
    * Dome: Half sphere, optionally hollow
    */
   dome(radius = 0.4, thickness = 0.08, segments = 32, opts = {}) {
+    if (isOptionsArg(segments)) { opts = segments; segments = 32; }
+    segments = qseg(segments, opts);
     const evaluator = new Evaluator();
 
     const sphere = new Brush(new THREE.SphereGeometry(radius, segments, segments));
@@ -508,7 +515,7 @@ const CSGPrimitives = {
     const hex = new Brush(new THREE.CylinderGeometry(radius, radius, height, 6));
     hex.updateMatrixWorld(true);
 
-    const hole = new Brush(new THREE.CylinderGeometry(holeRadius, holeRadius, height + 0.1, 32));
+    const hole = new Brush(new THREE.CylinderGeometry(holeRadius, holeRadius, height + 0.1, qseg(32, opts)));
     hole.updateMatrixWorld(true);
 
     const result = evaluator.evaluate(hex, hole, SUBTRACTION);
@@ -525,10 +532,10 @@ const CSGPrimitives = {
     }
     const evaluator = new Evaluator();
 
-    const shaft = new Brush(new THREE.CylinderGeometry(shaftRadius, shaftRadius, shaftLength, 24));
+    const shaft = new Brush(new THREE.CylinderGeometry(shaftRadius, shaftRadius, shaftLength, qseg(24, opts)));
     shaft.updateMatrixWorld(true);
 
-    const head = new Brush(new THREE.CylinderGeometry(headRadius, shaftRadius, headHeight, 24));
+    const head = new Brush(new THREE.CylinderGeometry(headRadius, shaftRadius, headHeight, qseg(24, opts)));
     head.position.set(0, shaftLength / 2 + headHeight / 2 - 0.001, 0);
     head.updateMatrixWorld(true);
 
@@ -545,7 +552,7 @@ const CSGPrimitives = {
     const plate = new Brush(new THREE.BoxGeometry(width, height, depth));
     plate.updateMatrixWorld(true);
 
-    const circle = new Brush(new THREE.CylinderGeometry(circleRadius, circleRadius, depth + 0.1, 32));
+    const circle = new Brush(new THREE.CylinderGeometry(circleRadius, circleRadius, depth + 0.1, qseg(32, opts)));
     circle.position.set(0, height * 0.15, 0);
     circle.updateMatrixWorld(true);
 
@@ -562,6 +569,8 @@ const CSGPrimitives = {
    * Half Torus: Half of a donut shape
    */
   halfTorus(radius = 0.3, tube = 0.1, segments = 32, opts = {}) {
+    if (isOptionsArg(segments)) { opts = segments; segments = 32; }
+    segments = qseg(segments, opts);
     const evaluator = new Evaluator();
 
     const torus = new Brush(new THREE.TorusGeometry(radius, tube, 16, segments));
@@ -580,6 +589,8 @@ const CSGPrimitives = {
    * Sphere Slab: Sphere sliced into a slab
    */
   sphereSlab(radius = 0.4, thickness = 0.25, segments = 32, opts = {}) {
+    if (isOptionsArg(segments)) { opts = segments; segments = 32; }
+    segments = qseg(segments, opts);
     const evaluator = new Evaluator();
 
     const sphere = new Brush(new THREE.SphereGeometry(radius, segments, segments));
@@ -602,6 +613,8 @@ const CSGPrimitives = {
    * Notched Cylinder: Cylinder with notches cut out
    */
   notchedCylinder(radius = 0.3, height = 0.6, notchWidth = 0.15, notchDepth = 0.15, segments = 32, opts = {}) {
+    if (isOptionsArg(segments)) { opts = segments; segments = 32; }
+    segments = qseg(segments, opts);
     const evaluator = new Evaluator();
 
     const cyl = new Brush(new THREE.CylinderGeometry(radius, radius, height, segments));
@@ -670,6 +683,8 @@ const CSGPrimitives = {
    * Cylinder Intersection: Two cylinders intersected at 90 degrees
    */
   cylinderIntersect(radius = 0.3, height = 0.8, segments = 32, opts = {}) {
+    if (isOptionsArg(segments)) { opts = segments; segments = 32; }
+    segments = qseg(segments, opts);
     const evaluator = new Evaluator();
 
     const vCyl = new Brush(new THREE.CylinderGeometry(radius, radius, height, segments));
@@ -708,7 +723,7 @@ const CSGPrimitives = {
 
     for (let i = 0; i < Math.min(safeHoles, positions.length); i++) {
       const r = safeHoleRadius * (0.8 + Math.random() * 0.4);
-      const hole = new Brush(new THREE.CylinderGeometry(r, r, depth + 0.1, 32));
+      const hole = new Brush(new THREE.CylinderGeometry(r, r, depth + 0.1, qseg(32, opts)));
       hole.position.set(positions[i][0], positions[i][1], 0);
       hole.updateMatrixWorld(true);
       result = evaluator.evaluate(result, hole, SUBTRACTION);
@@ -765,6 +780,13 @@ function createMesh(geometry, opts = {}) {
 
 function isOptionsArg(value) {
   return value !== null && typeof value === 'object' && Array.isArray(value) === false;
+}
+
+// Scale a tessellation segment count by the quality tier (opts.qualitySegMul).
+// Use only for tessellation — never for identity counts (gear teeth, nut sides,
+// swissCheese holes), which define the shape, not its smoothness.
+function qseg(segments, opts) {
+  return Math.round(segments * ((opts && opts.qualitySegMul) || 1));
 }
 
 /**
