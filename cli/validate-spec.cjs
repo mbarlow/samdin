@@ -78,6 +78,9 @@ const PRIMITIVE_PARAMS = {
 
 const CSG_SHAPE_TYPES = new Set(['box', 'sphere', 'cylinder', 'cone', 'torus', 'capsule']);
 
+// Types whose param[1] (and beyond) is a subdivision `detail`, not a dimension.
+const DETAIL_AT_1 = new Set(['sphere', 'icosahedron', 'octahedron', 'tetrahedron', 'dodecahedron']);
+
 function validateHollowBox(params) {
   const [width, height, depth, thickness = 0.1] = params;
   const issues = [];
@@ -206,7 +209,10 @@ function validateParams(part, typeInfo, prefix, issues, warnings) {
       if (typeof value === 'number' && value < 0) {
         warnings.push(`${prefix} Negative param[${i}]: ${part.params[i]}`);
       }
-      if (value === 0 && i < 3) {
+      // param[1+] on platonic solids / sphere is `detail` (subdivision), not a
+      // dimension — 0 is valid and common. Only flag genuine zero dimensions.
+      const nonDimParam = i >= 1 && DETAIL_AT_1.has(part.type);
+      if (value === 0 && i < 3 && !nonDimParam && !partIgnores(part, 'zero-dimension')) {
         warnings.push(`${prefix} Zero dimension param[${i}] may cause issues`);
       }
     }
@@ -431,7 +437,161 @@ function validatePartCollection(parts, issues, warnings, scopeLabel = 'spec') {
   return flatParts;
 }
 
-function validateSpec(specPath) {
+// ─── Strict lint tier (opt-in via --strict) ──────────────────────────────
+// Encodes the samdin skill's quality rules as warnings. These never fail the
+// build; they surface convention gaps the structural validator can't see.
+
+const STRICT = {
+  cameraPresets: new Set(['front', 'back', 'left', 'right', 'top', 'threeQuarter', 'lowAngle', 'highAngle']),
+  lightingPresets: new Set(['studio', 'sunset', 'night', 'overcast', 'dramatic', 'neon', 'cyberpunk', 'warm', 'cool', 'rim', 'backlit', 'goldenHour', 'noir', 'underwater', 'horror', 'industrialRuin', 'showcase']),
+  environments: new Set(['none', 'studio', 'outdoor', 'sunset', 'night']),
+  toneMappings: new Set(['none', 'linear', 'reinhard', 'cineon', 'acesfilmic', 'neutral']),
+  metalKeywords: /chrome|steel|brass|gold|copper|aluminum|iron|silver|bronze|gunmetal|metal/i,
+  structuralTypes: new Set(['box', 'roundedBox', 'cylinder']),
+  scenePartThreshold: 12,
+  emissiveBudget: 6,
+  groundEps: 0.05
+};
+
+function partIgnores(part, rule) {
+  const list = part && part.lintIgnore;
+  return Array.isArray(list) && (list.includes(rule) || list.includes('all'));
+}
+
+function specIgnores(spec, rule) {
+  const list = spec && spec.lintIgnore;
+  return Array.isArray(list) && (list.includes(rule) || list.includes('all'));
+}
+
+function isEmissive(material) {
+  if (!material) return false;
+  const e = material.emissive;
+  const hasColor = e && e !== '#000000' && e !== '#000' && e !== 0x000000;
+  return !!hasColor && (material.emissiveIntensity ?? 1) > 0;
+}
+
+function isMetal(material) {
+  if (!material) return false;
+  if (typeof material.metalness === 'number' && material.metalness >= 0.5) return true;
+  return typeof material.preset === 'string' && STRICT.metalKeywords.test(material.preset);
+}
+
+// Half-extent along Y for the common grounded primitives, from params.
+function halfHeightY(part) {
+  const p = part.params || [];
+  switch (part.type) {
+    case 'box':
+    case 'roundedBox': return (p[1] || 0) / 2;
+    case 'cylinder':
+    case 'cone': return (p[2] || 0) / 2;
+    case 'sphere': return p[0] || 0;
+    default: return 0;
+  }
+}
+
+function worldY(part, byName) {
+  let y = 0;
+  let cur = part;
+  const seen = new Set();
+  while (cur) {
+    if (seen.has(cur.name)) break; // cycle guard
+    seen.add(cur.name);
+    const pos = Array.isArray(cur.position) ? cur.position[1] || 0 : 0;
+    y += pos;
+    cur = cur.parent ? byName.get(cur.parent) : null;
+  }
+  return y;
+}
+
+function runStrictLints(spec, flatParts, findings) {
+  const add = (rule, msg) => { if (!specIgnores(spec, rule)) findings.push(`[strict:${rule}] ${msg}`); };
+  const scene = spec.scene || null;
+  const geomParts = flatParts.filter((p) => p.type && p.type !== 'group' && !/Light$/.test(p.type));
+
+  // Scene block presence on a presentation-scale asset.
+  if (!scene && geomParts.length >= STRICT.scenePartThreshold) {
+    add('scene-block', `${geomParts.length} parts and no scene block — presentation assets should ship a scene`);
+  }
+
+  // Preset / enum typos (silent fallbacks at runtime otherwise).
+  if (scene) {
+    const cam = scene.camera && scene.camera.preset;
+    if (cam && !STRICT.cameraPresets.has(cam)) add('camera-preset', `unknown camera.preset "${cam}"`);
+    const lp = scene.lighting && scene.lighting.preset;
+    if (lp && !STRICT.lightingPresets.has(lp)) add('lighting-preset', `unknown lighting.preset "${lp}"`);
+    const env = scene.lighting && scene.lighting.environment;
+    if (env && !STRICT.environments.has(env)) add('lighting-environment', `unknown lighting.environment "${env}"`);
+    const tm = scene.toneMapping;
+    if (tm && !STRICT.toneMappings.has(String(tm).toLowerCase())) add('tonemapping', `unknown toneMapping "${tm}"`);
+  }
+
+  // Metals/glass need image-based lighting to read.
+  const env = scene && scene.lighting && scene.lighting.environment;
+  const hasEnv = env && env !== 'none';
+  if (!hasEnv) {
+    const metal = geomParts.find((p) => isMetal(p.material) && !partIgnores(p, 'metal-no-env'));
+    if (metal) add('metal-no-env', `metallic material on "${metal.name}" but no scene.lighting.environment — chrome/steel/glass won't read`);
+  }
+
+  // Emissive budget — 1–3 controlled accents, not wallpaper.
+  const emissive = geomParts.filter((p) => isEmissive(p.material));
+  if (emissive.length > STRICT.emissiveBudget) {
+    add('emissive-budget', `${emissive.length} emissive materials (skill: 1–3 accents) — e.g. ${emissive.slice(0, 4).map((p) => p.name).join(', ')}…`);
+  }
+
+  // Material breakup on primary non-emissive surfaces at standard/high.
+  const quality = scene && scene.quality;
+  if (quality === 'standard' || quality === 'high') {
+    for (const p of geomParts) {
+      if (!STRICT.structuralTypes.has(p.type)) continue;
+      // Polished metal/glass trim is intentionally smooth — breakup is for
+      // painted/matte primary surfaces, not chrome or brass.
+      if (isEmissive(p.material) || isMetal(p.material) || partIgnores(p, 'breakup')) continue;
+      const dims = (p.params || []).slice(0, 3).filter((n) => typeof n === 'number');
+      const big = dims.some((n) => n >= 0.3);
+      // Exclude paper-thin sheets (seams, decal overlays, trim lips): they read
+      // as lines/planes, not primary painted volume that wants breakup.
+      const thin = dims.length >= 3 && Math.min(...dims) < 0.015;
+      const hasMat = p.material && (p.material.preset || p.material.color);
+      if (big && !thin && hasMat && !(p.material && p.material.breakup)) {
+        add('breakup', `"${p.name}" is a large ${p.type} at quality:${quality} with no material.breakup`);
+        break; // one representative finding, not a wall
+      }
+    }
+  }
+
+  // Clone-read: N identical name_1..name_N siblings (no per-copy variation).
+  const groups = new Map();
+  for (const p of geomParts) {
+    const m = /^(.*?)[_-]?\d+$/.exec(p.name || '');
+    if (!m || !m[1]) continue;
+    const key = m[1];
+    const sig = JSON.stringify([p.material || null, p.scale || null, p.rotation || null, p.type]);
+    if (!groups.has(key)) groups.set(key, new Map());
+    const sigs = groups.get(key);
+    sigs.set(sig, (sigs.get(sig) || 0) + 1);
+  }
+  for (const [key, sigs] of groups) {
+    for (const [, count] of sigs) {
+      if (count >= 3 && !specIgnores(spec, 'clone-read')) {
+        add('clone-read', `${count} "${key}N" siblings share identical material/scale/rotation — vary them or use an array modifier`);
+        break;
+      }
+    }
+  }
+
+  // Ground contact heuristic: does anything sit near the floor?
+  const byName = new Map(flatParts.map((p) => [p.name, p]));
+  const grounded = geomParts.filter((p) => !partIgnores(p, 'ground-contact') && halfHeightY(p) > 0);
+  if (grounded.length) {
+    const minBottom = Math.min(...grounded.map((p) => worldY(p, byName) - halfHeightY(p)));
+    if (minBottom > STRICT.groundEps) {
+      add('ground-contact', `lowest geometry sits ${minBottom.toFixed(3)} above y=0 — asset may float (heuristic; ignores rotation)`);
+    }
+  }
+}
+
+function validateSpec(specPath, strict = false) {
   const issues = [];
   const warnings = [];
 
@@ -451,14 +611,17 @@ function validateSpec(specPath) {
     validateSceneSettings(spec.scene, issues, warnings);
   }
 
+  const strictFindings = [];
+
   if (spec.type === 'csg') {
     validateCSGSpec(spec, issues, warnings);
-    return { valid: issues.length === 0, issues, warnings };
+    if (strict) runStrictLints(spec, flattenParts(spec.parts || []), strictFindings);
+    return { valid: issues.length === 0, issues, warnings, strict: strictFindings };
   }
 
   if (!spec.parts || !Array.isArray(spec.parts)) {
     issues.push('Missing or invalid field: parts (should be array)');
-    return { valid: false, issues, warnings };
+    return { valid: false, issues, warnings, strict: strictFindings };
   }
 
   validatePartCollection(spec.parts, issues, warnings);
@@ -476,10 +639,13 @@ function validateSpec(specPath) {
     validatePartCollection(moduleDef.parts, issues, warnings, `module:${moduleDef.name}`);
   }
 
+  if (strict) runStrictLints(spec, flattenParts(spec.parts), strictFindings);
+
   return {
     valid: issues.length === 0,
     issues,
-    warnings
+    warnings,
+    strict: strictFindings
   };
 }
 
@@ -494,11 +660,14 @@ function expandArgs(args) {
 }
 
 function main() {
-  const args = process.argv.slice(2);
+  const argv = process.argv.slice(2);
+  const strict = argv.includes('--strict');
+  const args = argv.filter((a) => a !== '--strict');
 
   if (args.length === 0) {
-    console.log('Usage: node validate-spec.js <spec-file.json> [more-files...]');
+    console.log('Usage: node validate-spec.js [--strict] <spec-file.json> [more-files...]');
     console.log('       node validate-spec.js specs/*.json');
+    console.log('  --strict  also run the quality-rule lint tier (warnings only)');
     process.exit(1);
   }
 
@@ -510,12 +679,13 @@ function main() {
 
   let totalIssues = 0;
   let totalWarnings = 0;
+  let totalStrict = 0;
 
   for (const file of files) {
     console.log(`\n📄 ${path.basename(file)}`);
     console.log('─'.repeat(40));
 
-    const result = validateSpec(file);
+    const result = validateSpec(file, strict);
 
     if (result.issues.length > 0) {
       console.log('❌ Issues:');
@@ -529,7 +699,13 @@ function main() {
       totalWarnings += result.warnings.length;
     }
 
-    if (result.valid && result.warnings.length === 0) {
+    if (strict && result.strict && result.strict.length > 0) {
+      console.log('🔎 Strict:');
+      result.strict.forEach((s) => console.log(`   ${s}`));
+      totalStrict += result.strict.length;
+    }
+
+    if (result.valid && result.warnings.length === 0 && (!strict || !result.strict || result.strict.length === 0)) {
       console.log('✅ Valid');
     } else if (result.valid) {
       console.log('✅ Valid (with warnings)');
@@ -537,8 +713,9 @@ function main() {
   }
 
   console.log('\n' + '═'.repeat(40));
-  console.log(`Total: ${totalIssues} issues, ${totalWarnings} warnings`);
+  console.log(`Total: ${totalIssues} issues, ${totalWarnings} warnings${strict ? `, ${totalStrict} strict` : ''}`);
 
+  // Strict findings never fail the build — they are advisory warnings.
   process.exit(totalIssues > 0 ? 1 : 0);
 }
 

@@ -24,6 +24,18 @@ node validate-spec.cjs ../specs/*.json
 
 Exit status is non-zero on validation failure.
 
+#### `--strict` — quality-rule lint tier
+
+Encodes the samdin skill's quality rules as advisory findings (prefixed `[strict:<rule>]`). **Never fails the build** — surfaces convention gaps the structural validator can't see. Run via `make lint`.
+
+```bash
+node validate-spec.cjs --strict ../specs/*.json
+```
+
+Rules: `scene-block` (presentation-scale asset with no scene), `camera-preset` / `lighting-preset` / `lighting-environment` / `tonemapping` (enum typos that silently fall back at runtime), `metal-no-env` (metallic material with no `scene.lighting.environment`), `emissive-budget` (more than ~6 emissive materials), `breakup` (large non-emissive, non-metal painted surface at quality standard/high with no `material.breakup`), `clone-read` (3+ `name_N` siblings with identical material/scale/rotation), `ground-contact` (nothing near `y=0` — heuristic, ignores rotation).
+
+Suppress a rule with `lintIgnore`: `"lintIgnore": ["clone-read"]` at spec level, or on a part (`"lintIgnore": ["breakup", "ground-contact"]`). The dimension checks also honor a per-part `"lintIgnore": ["zero-dimension"]`. Use `"all"` to silence everything on a part.
+
 ### `inspect-model.js`
 
 Loads a spec in headless Chromium, captures a preset sweep of screenshots (normal / wireframe / design-grid across all camera presets, plus the spec-defined first camera as `*-specCamera.png`), and writes a review template markdown file.
