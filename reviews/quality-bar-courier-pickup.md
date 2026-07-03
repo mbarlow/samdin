@@ -42,4 +42,29 @@ Shots: `make review SPEC=specs/quality-bar-courier-pickup.json` (6 shaded + 2 wi
 
 ---
 
-*Next: execute the fixes, `make review` again, re-grade toward 80.*
+## Review — 2026-07-03 (loop 2) · score 72 · REVISE
+
+Executed the four fixes, re-shot, re-graded.
+
+| Dim | 1 → 2 | Note |
+|---|---|---|
+| Concept match | 72 → 74 | Cleaner read from more angles. |
+| Proportion & scale | 58 → **70** | Wheel track pulled in (`±1.0`→`±0.85`) — wheels no longer break the top/rear silhouette. Biggest gain. |
+| Feature completeness | 74 → 76 | Bigger chrome rim face + brighter hub cap — helps, but see below. |
+| Silhouette & readability | 65 → 70 | Top silhouette clean now; side a touch better with the taller greenhouse. |
+| Construction integrity | 62 → **72** | Stage rotated 168° to match the truck — no longer crosswise/disconnected. |
+| Material & colour | 68 → 70 | Tire lightened `#262b30`→`#3b4147`. |
+
+**Formula:** 74·.25 + 70·.20 + 76·.20 + 70·.15 + 72·.10 + 70·.10 = **72** → still *revise* (target 80).
+
+**What worked:** wheel track and stage alignment moved the two lowest dimensions up hard.
+**What underdelivered:** the hub-detail fix. The wheels still read dark from every angle — a bigger chrome face wasn't enough against the near-black tire and the deep-set hub. Honest call: partial.
+
+### Open fixes (loop 3)
+
+- [x] wheel track in · [x] stage aligned · [x] greenhouse raised · [~] hub contrast (partial)
+- [ ] **Hub still reads dark.** Try: lighter tire (`#4a5157`), a raised (proud) hub cap that catches light, and a visible lug pattern — or accept low-poly and move on.
+- [ ] Front wheels sit slightly forward of the arch line — nudge `wheel_f* z` back ~0.1.
+- [ ] Cab still a touch small vs the long bed — consider shortening the bed by ~0.2 rather than growing the cab.
+
+*+5 in one loop. The structural fixes paid; the material one needs another pass. Loop again or ship at 72 as "good, not anchor-grade."*
