@@ -72,7 +72,7 @@ class ModelBuilder {
     this.prefabs = new Map();
     this.prefabsBasePath = './prefabs/';
     this.regionRules = { ...REGION_RULES };
-    this.qualityTier = 'draft'; // default: legacy behavior
+    this.qualityTier = 'standard'; // matches the UI default and the docs' breakup promises
   }
 
   setQualityTier(tier) {
@@ -275,6 +275,14 @@ class ModelBuilder {
    * Build a model from a spec object
    */
   async build(spec) {
+    // Honor the spec's own quality tier BEFORE generating geometry. It used to
+    // be applied post-build (via applySpecSettings on setModel), so a cold
+    // first build fell back to the current tier and scene.quality only took
+    // effect on the next rebuild — making output depend on session warmth.
+    if (spec?.scene?.quality) {
+      this.setQualityTier(spec.scene.quality);
+    }
+
     const normalized = this.normalizeSpec(spec);
 
     // Check spec type
