@@ -21,8 +21,9 @@ Current practical rules:
 
 - Prefer parts-based specs for almost everything.
 - Use top-level `type: "csg"` only when the asset is primarily boolean geometry.
-- Treat procedural specs as experimental unless you verify them in the current runtime.
-- The runtime supports more than the older docs emphasize, including nested `children`, `pivot` or `options.pivot`, material breakup, `decals`, emissive strips, `wire-mesh`, and scene-owned camera/lookdev settings.
+- For repetition, use the **procedural modifiers** — `array` (scalar or grid `count: [x,y,z]`), `mirror` (`{x,y,z}` or `{axis:"xz"}`), and `scatter` (with a fixed `seed` for a reproducible layout). These are stable and documented in `docs/modifiers.md`; reach for them before hand-copying `name_1..name_N` parts. (There is no top-level `type: "procedural"`.)
+- The runtime supports more than the older docs emphasize, including nested `children`, `pivot` or `options.pivot`, material breakup, `decals`, emissive strips, `wire-mesh`, the `scene.terrain` compositor, category-driven regions, and scene-owned camera/lookdev settings.
+- The `animations` spec block exists but is unvalidated and unused by any shipped spec — treat as experimental; verify in the runtime before relying on it.
 - Trust the actual `prefabs/` directory over hard-coded prefab counts in docs.
 
 ## Use This Skill For
@@ -39,9 +40,11 @@ Use this default decision tree:
 - Background prop or filler object: simple parts or an existing prefab
 - Hero prop: parts-based assembly with stronger material breakup and a presentation `scene` block
 - Vehicle or mechanical asset: parts-based assembly plus embedded CSG where cutouts, beams, brackets, or hollow sections matter
-- Character or creature: parts-based joint chains; do not default to procedural
-- Environment or room: scene root plus reusable modules, prefabs, and a full `scene` block
-- Repeated architecture: module definitions first, then `type: "module"` placements
+- Character or creature: parts-based joint chains, not modifiers
+- Environment or room: scene root plus reusable modules, prefabs, and a full `scene` block; for large ground use the `scene.terrain` compositor (tag ground parts `category: "environment"`)
+- Terrain / landscape: `scene.terrain` block — `method` heightfield / marching-cubes / cloth-drape, `display` primitives|terrain|both. Normals flip by default now; only set `flipNormals: false` to opt out. See the four `specs/landscape-*.json` examples.
+- Repeated architecture: module definitions first, then `type: "module"` placements; or an `array`/`scatter` modifier for grids and fields
+- Repeated scatter (rocks, foliage, debris): a `scatter` modifier with a fixed `seed`
 - Broken existing spec: inspect first, then edit the failing hierarchy, scale, material, or camera
 
 ## Quality Modes
@@ -52,7 +55,7 @@ Match effort to the request:
 - `standard`: default for most work; readable hierarchy, believable scale, breakup on primary non-emissive surfaces
 - `high`: hero shots and portfolio work; richer breakup, stronger camera framing, cleaner asymmetry, denser secondary detail
 
-If the user does not specify, default to `standard`.
+If the user does not specify, default to `standard` — this now matches the runtime: the builder defaults to `standard`, and a spec's `scene.quality` is applied *before* geometry is built, so it takes effect on the first build (no longer dependent on session warmth). Pin `scene.quality: "high"` on hero specs so the inspect loop renders the tier you are judging.
 
 ## Core Workflow
 
@@ -61,9 +64,10 @@ If the user does not specify, default to `standard`.
 3. Block primary forms first. Get silhouette, stance, and scale right before adding tertiary detail.
 4. Build hierarchy around real attachment points rather than convenience.
 5. Add material contrast and a `scene` block early enough to judge the asset in context.
-6. Validate with `node cli/validate-spec.cjs <spec.json>`.
-7. Inspect with `node cli/inspect-model.js <spec.json> [out-dir]`.
+6. Validate with `node cli/validate-spec.cjs <spec.json>`. Run `node cli/validate-spec.cjs --strict <spec.json>` (or `make lint`) to surface quality-rule gaps — missing scene block, metals without environment lighting, un-varied clones, floating geometry, preset typos.
+7. Inspect with `node cli/inspect-model.js <spec.json> [out-dir] [port]` (out-dir defaults to `/tmp/samdin-inspect`; pass a `[port]` to run parallel inspections).
 8. Revise from concrete screenshot findings, not vague taste-only notes.
+9. If you touch the builder or a shared primitive, run `make golden` — it fingerprint-checks the quality-bar anchors so a change can't silently move their geometry. Rebless intended changes with `make golden-update`.
 
 ## Non-Negotiable Authoring Rules
 

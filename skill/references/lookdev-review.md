@@ -20,7 +20,7 @@ Use this file when the task is about presentation quality, camera framing, or di
 ## Inspection Workflow
 
 1. `node cli/validate-spec.cjs <spec.json>`
-2. `node cli/inspect-model.js <spec.json> [out-dir]`
+2. `node cli/inspect-model.js <spec.json> [out-dir] [port]`
 3. Review `*-specCamera.png`, preset views, wireframes, and design-grid views
 4. Fix the concrete issue
 5. Re-inspect if the change affects silhouette, hierarchy, or camera read
