@@ -107,7 +107,7 @@
           "type": "roundedBox",
           "params": [0.06, 0.025, 0.05, 0.01, 2],
           "material": { "preset": "rubber", "color": "#141517" },
-          "position": [0, 0.0125, 0],
+          "position": [0, -0.0125, 0],
           "parent": "foot_root"
         }
       ]
