@@ -39,7 +39,8 @@ Seven hero specs anchor the current output ceiling. Full prompts and the [anchor
 | [Modifiers & part properties](docs/modifiers.md) | Array/mirror/scatter and the part schema |
 | [Editor & shortcuts](docs/editor.md) | Blender-style G/R/S transforms, first-person mode, editor features |
 | [Validation & inspection](docs/validation.md) | CLI validators, screenshot sweeps, example scenes |
-| [Quality bar prompts](docs/quality-bar.md) | The five hero anchor prompts |
+| [Quality bar prompts](docs/quality-bar.md) | The seven hero anchor prompts + the anchor rubric |
+| [Quality tiers](docs/quality-tiers.md) | `scene.quality` draft/standard/high, with a same-spec before/after |
 | [CLI reference](cli/README.md) | `validate-spec`, `inspect-model`, `export-playwright`, `index` |
 | [Release notes](docs/RELEASE_NOTES.md) | Latest changes |
 
