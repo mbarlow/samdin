@@ -21,7 +21,7 @@ Then open the URL, pick a spec from the **Built-in specs** dropdown or drop your
 
 ## Gallery — the quality bar
 
-Five hero specs anchor the current output ceiling. Full prompts in [docs/quality-bar.md](docs/quality-bar.md).
+Seven hero specs anchor the current output ceiling. Full prompts and the [anchor rubric](docs/quality-bar.md#anchor-rubric) in [docs/quality-bar.md](docs/quality-bar.md).
 
 | | | |
 |---|---|---|

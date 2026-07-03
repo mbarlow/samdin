@@ -1,13 +1,13 @@
 # Samdin Prefab Inventory
 
-> Generated 2026-04-02 via automated inspection (`cli/inspect-model.js`) + visual review.
+> **Hand-curated snapshot, 2026-04-02** (via `cli/inspect-model.js` + visual review). The tri counts and quality scores are a point-in-time review — the value here is the subjective read, not the numbers. For the authoritative, always-current prefab list trust the [`prefabs/`](../prefabs/) directory and [`prefabs.md`](prefabs.md); those are kept in sync, this snapshot is not.
 
 ## Overview
 
 | Metric | Value |
 |--------|-------|
-| Total prefabs | 76 (+ 1 test scene) |
-| Categories | 9 |
+| Total prefabs | 77 (+ 1 test scene) at last count; see [`prefabs/`](../prefabs/) for the live count |
+| Categories | 8 (per [`prefabs.md`](prefabs.md)) |
 | Avg quality | 5.9 / 10 |
 | Total unique tris | ~128k (excluding prefab-test) |
 | Style | Low-poly / stylized primitives |
