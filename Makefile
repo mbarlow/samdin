@@ -1,4 +1,4 @@
-.PHONY: dev serve smoke test help
+.PHONY: dev serve smoke test golden golden-update help
 
 PORT ?= 7777
 
@@ -8,6 +8,8 @@ help:
 	@echo "  make serve            - Plain static server (bunx serve, no hot reload)"
 	@echo "  make smoke            - Validate a hero anchor spec via CLI (fast check)"
 	@echo "  make test             - Validate every spec and prefab on disk"
+	@echo "  make golden           - Regression-check the quality-bar anchors"
+	@echo "  make golden-update    - Rewrite the anchor goldens from current build"
 	@echo "  make help             - Show this help"
 
 dev:
@@ -21,3 +23,9 @@ smoke:
 
 test:
 	@node cli/validate-spec.cjs specs/*.json prefabs/*.json
+
+golden:
+	@node cli/golden.js
+
+golden-update:
+	@node cli/golden.js --update

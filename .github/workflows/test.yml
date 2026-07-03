@@ -21,3 +21,33 @@ jobs:
 
       - name: Validate every spec and prefab
         run: make test
+
+  golden:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install CLI deps
+        working-directory: cli
+        run: npm ci || npm install
+
+      - name: Install Playwright Chromium
+        working-directory: cli
+        run: npx playwright install --with-deps chromium
+
+      - name: Fingerprint-check the quality-bar anchors
+        env:
+          GOLDEN_NO_PIXEL: "1"
+        run: make golden
+
+      - name: Upload rendered anchors
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: golden-renders
+          path: .golden-work/
+          if-no-files-found: ignore
