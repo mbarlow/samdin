@@ -122,6 +122,10 @@ class App {
       this.builder.setQualityTier(e.target.value);
       const spec = this.viewer.currentModel?.userData?.spec;
       if (spec) {
+        // Persist the manual choice into the spec so build()'s pre-build
+        // scene.quality application honors it instead of overriding it.
+        spec.scene = spec.scene || {};
+        spec.scene.quality = e.target.value;
         const model = await this.builder.build(spec);
         if (model) this.setModel(model, spec);
       }
