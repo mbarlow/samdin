@@ -29,6 +29,8 @@ Samdin scenes are declarative JSON documents. The builder turns a spec into a Th
 }
 ```
 
+Beyond the fields shown above, each part also accepts `category` (a tag; `"environment"` is consumed by the [Terrain compositor](#terrain-compositor)) and `flipNormals` (invert face winding on the part's meshes). A part's `type` accepts `module`, `csg`, `composite`, and `region` in addition to the primitive names, `prefab`, and `group` shown here — see the sections below.
+
 ## Scene-level settings
 
 Specs can carry their own viewer/render mood:
@@ -37,9 +39,18 @@ Specs can carry their own viewer/render mood:
 {
   "name": "scene-with-lookdev",
   "scene": {
+    "quality": "high",
     "background": { "type": "gradient", "color": "#d6d0c7", "color2": "#090a0c" },
+    "floor": { "visible": false },
+    "ground": { "reflective": true },
     "fog": { "type": "exp2", "color": "#7a7772", "density": 0.02 },
-    "lighting": { "preset": "industrialRuin", "intensity": 1.05, "shadowQuality": "high" },
+    "lighting": {
+      "preset": "industrialRuin",
+      "intensity": 1.05,
+      "shadowQuality": "high",
+      "environment": "sunset",
+      "envMapIntensity": 1.0
+    },
     "exposure": 1.05,
     "toneMapping": "ACESFilmic",
     "camera": {
@@ -57,7 +68,57 @@ Specs can carry their own viewer/render mood:
 }
 ```
 
-`scene.camera` supports `preset`, `fit`, `distanceMultiplier`, `scaleToModel`, `positionOffset`, and `targetOffset` — useful when a scene needs a specific gameplay or hero-shot framing without scaling the whole model.
+Every `scene.*` field is optional; omitted fields fall back to the viewer's current UI state (which `applySpecSettings` first resets to defaults on each load).
+
+| Field | Description |
+|-------|-------------|
+| `quality` | Quality tier: `"draft"`, `"standard"`, or `"high"`. **Applied *before* geometry is built**, so a spec pins its own tier on the very first cold build (it no longer depends on session warmth or the current dropdown). The runtime default is `"standard"`; hero specs pin `"high"`. Higher tiers raise segment counts and sphere detail across the pipeline. |
+| `background` | `{ type, color, color2 }` — `type` is `solid` / `gradient` / etc. `color2` is the gradient's second stop. |
+| `floor` | `{ visible }` — the ground helper plane. Defaults to visible; set `"visible": false` to hide it. |
+| `ground` | `{ reflective }` — mirror-style reflective ground plane. Defaults to `false`; set `"reflective": true` to enable. |
+| `fog` | `{ type, color, density }` — `type` is `linear` / `exp2` / etc. |
+| `lighting.preset` | Named lighting rig (e.g. `studio`, `industrialRuin`). |
+| `lighting.intensity` | Master light multiplier. |
+| `lighting.shadowQuality` | `"low"` / `"medium"` / `"high"`. |
+| `lighting.environment` | Image-based lighting (IBL) preset: `none` / `studio` / `outdoor` / `sunset` / `night`. Required for metals and glass to read — without an env map, reflective materials render flat. Defaults to `none`. |
+| `lighting.envMapIntensity` | Strength of the env-map reflections, applied to all standard materials. |
+| `exposure` | Renderer tone-mapping exposure. |
+| `toneMapping` | e.g. `ACESFilmic`, `Reinhard`, `Linear`. |
+| `camera` | Framing override (see below). |
+| `postfx` | Post-processing stack (see below). |
+| `terrain` | Terrain compositor (see [Terrain compositor](#terrain-compositor)). |
+
+`scene.camera` supports `preset`, `fit`, `distanceMultiplier`, `scaleToModel`, `positionOffset`, and `targetOffset` — useful when a scene needs a specific gameplay or hero-shot framing without scaling the whole model. `positionOffset` and `targetOffset` are added to the resolved preset before the model-size scale; `scaleToModel` (default `true`) and `distanceMultiplier` (default `1`) control that scaling.
+
+### Post-processing (`scene.postfx`)
+
+`postfx` is a map keyed by effect name. Each value is either a boolean or an object with an `enabled` flag (defaulting to `true` when the key is present) plus effect-specific options. The runtime reads twelve effects:
+
+| Effect | Options (with defaults) |
+|--------|-------------------------|
+| `ssao` | `kernelRadius` (8), `minDistance` (0.005), `maxDistance` (0.1) |
+| `dof` | `focus` (5.0), `aperture` (0.002), `maxblur` (0.01) |
+| `ssr` | `thickness` (0.018), `maxDistance` (0.3), `opacity` (0.5) |
+| `bloom` | `strength` (1.0), `radius` (0.4), `threshold` (0.8) |
+| `outline` | `color` (`0xffffff`), `thickness` (2), `strength` (3) |
+| `pixel` | `size` (4) |
+| `vignette` | `intensity` (0.5), `softness` (0.5) |
+| `chromatic` | `amount` (0.005) |
+| `grain` | `intensity` (0.15) |
+| `scanlines` | `intensity` (0.3), `count` (300) |
+| `colorGrade` | `hue` (0), `saturation` (1), `brightness` (1), `contrast` (1) |
+| `fxaa` | boolean, or `{ enabled }` — no other options |
+
+Example:
+
+```json
+"postfx": {
+  "dof": { "enabled": true, "focus": 4.0, "aperture": 0.004 },
+  "ssr": { "enabled": true, "opacity": 0.6 },
+  "vignette": { "enabled": true, "intensity": 0.4 },
+  "grain": true
+}
+```
 
 ## Spec-local modules
 
