@@ -1,6 +1,8 @@
 # Quality Bar — Anchor Prompts
 
-Five hero specs anchor the current quality bar — all shipped in [`../specs/`](../specs/) and built from the prompts below. Drop a comparable prompt at an LLM and you should get a result in this neighborhood; if it lands lower, iterate on screenshots, not JSON.
+Seven hero specs anchor the current quality bar — all shipped in [`../specs/`](../specs/) and built from the prompts below. Drop a comparable prompt at an LLM and you should get a result in this neighborhood; if it lands lower, iterate on screenshots, not JSON.
+
+The [Anchor rubric](#anchor-rubric) at the bottom is the acceptance test — what "match the quality bar" concretely means.
 
 ## Field radio
 
@@ -41,3 +43,28 @@ Spec: [`specs/quality-bar-typewriter.json`](../specs/quality-bar-typewriter.json
 ![Samdin — 1963 Olivetti Lettera 32 typewriter quality anchor](../media/quality-typewriter.png)
 
 > A 1963 Olivetti Lettera 32 portable typewriter in signal blue, mid-typing with a sheet of paper in the carriage and two lines of typed text visible on the page plus a cursor mark where the next letter will land. CSG-carved wedge chassis with clean body seams and three chrome plates on the front (logo, engraving, model badge). Dense round cream keycaps with dark legend dots, arrayed in a four-row layout plus spacebar, shift, tab, and return. Carriage across the back: black rubber platen with visible rod through it, wood platen knobs on each end with chrome collars, angled metal paper rest, hinted ribbon spools, chrome carriage return lever angled down on the left. A few darker type bar hints rising toward the platen from inside the body. Rubber feet, plinth with wood + leather + brass lip to match the other anchors. First anchor with a cool palette to balance the warm-heavy set.
+
+## Sony minidisc
+
+Spec: [`specs/quality-bar-minidisc.json`](../specs/quality-bar-minidisc.json)
+
+> A Sony-style 7cm minidisc. Translucent blue shell with a visible inner hub disc reading through the plastic, an anodized metal shutter sliding across the read window, and a recessed white sticker label area on the top face for printed text. Real transmission on the shell, brushed-metal shutter, crisp shutter-track detail. Stage on the shared wood-and-leather plinth with brass lip. Match the hard-surface quality bar — the test here is believable translucency and a clean, small, high-density object that still reads as premium at a tight camera.
+
+## Courier pickup
+
+Spec: [`specs/quality-bar-courier-pickup.json`](../specs/quality-bar-courier-pickup.json)
+
+> A compact courier pickup — the vehicle-class quality anchor. Two-tone utility body with an open cargo bed, a readable cabin interior (seats, dash, wheel), chrome lighting trim front and rear, glass with real transmission, rubber tires with hub detail. Two-tone paint separation and honest panel proportions over a boxy-but-deliberate silhouette. Stage on the shared product-shot plinth. The vehicle bar: silhouette and stance first, then cabin and trim read, before micro-detail. The radio remains the stricter overall hero anchor.
+
+## Anchor rubric
+
+"Match the quality bar" means, concretely, before an anchor is accepted:
+
+1. **Silhouette first.** The form reads as a deliberate hero prop, not a rough procedural sketch — clean stance, believable proportions, footprint sized so the model (not the plinth) drives framing.
+2. **Material separation.** Adjacent surfaces read at a glance — shell vs fascia vs metal trim vs glass vs knobs differ in color family, roughness, or metalness. Non-emissive primary surfaces carry `breakup` (noise + roughnessVariation); metals and glass sit on `scene.lighting.environment`.
+3. **Staged render, judged from screenshots.** Every revision is validated (`node cli/validate-spec.cjs`) and inspected through the actual viewer (`node cli/inspect-model.js`) — construction problems get fixed from render evidence, not JSON theory.
+4. **Spec-camera hero view.** The spec's own `scene.camera` frames a strong three-quarter hero shot without manual adjustment; the broader preset sweep is acceptable but the spec camera is the bar.
+5. **No renderer-hostile detail.** Micro-detail that produces broken shadow artifacts is removed rather than kept for its own sake.
+6. **Grounded and honest.** Feet/base contact the plinth (`make lint` ground-contact catches floaters); emissive stays a 1–3 accent focal tool, not wallpaper.
+
+Regression is guarded by `make golden` — a builder change that moves any anchor's geometry fails CI. Build the next anchor by the same discipline: silhouette, staged render, then detail.
