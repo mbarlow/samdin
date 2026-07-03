@@ -13,7 +13,7 @@ Treat the local runtime as source of truth when docs disagree. Check these in or
 
 - `CLAUDE.md`
 - `cli/validate-spec.cjs`
-- `js/builder.js`
+- `src/js/builder.js`
 - shipped `prefabs/*.json` and `specs/*.json`
 - `README.md` and `docs/RELEASE_NOTES.md`
 

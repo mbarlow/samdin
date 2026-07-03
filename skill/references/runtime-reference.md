@@ -8,7 +8,7 @@ When documentation conflicts:
 
 1. `CLAUDE.md`
 2. `cli/validate-spec.cjs`
-3. `js/builder.js`
+3. `src/js/builder.js`
 4. shipped `prefabs/*.json` and `specs/*.json`
 5. `README.md`
 6. `docs/RELEASE_NOTES.md`
