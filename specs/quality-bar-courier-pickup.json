@@ -40,7 +40,7 @@
           "params": [0.47, 0.47, 0.3, 20],
           "material": {
             "preset": "rubber",
-            "color": "#262b30",
+            "color": "#3b4147",
             "breakup": {
               "noise": { "amount": 0.05, "scale": 5.0, "color": "#23272b" },
               "roughnessVariation": 0.05
@@ -65,7 +65,7 @@
         {
           "name": "rim_face_outer",
           "type": "cylinder",
-          "params": [0.33, 0.33, 0.024, 16],
+          "params": [0.38, 0.38, 0.03, 16],
           "material": { "preset": "chrome" },
           "position": [0, 0.085, 0],
           "parent": "wheel_root"
@@ -73,7 +73,7 @@
         {
           "name": "rim_face_inner",
           "type": "cylinder",
-          "params": [0.33, 0.33, 0.024, 16],
+          "params": [0.38, 0.38, 0.03, 16],
           "material": { "preset": "chrome" },
           "position": [0, -0.085, 0],
           "parent": "wheel_root"
@@ -81,8 +81,8 @@
         {
           "name": "hub_cap",
           "type": "cylinder",
-          "params": [0.12, 0.12, 0.19, 10],
-          "material": { "preset": "chrome" },
+          "params": [0.15, 0.15, 0.2, 10],
+          "material": { "preset": "chrome", "color": "#d6dade" },
           "parent": "wheel_root"
         },
         {
@@ -121,6 +121,7 @@
       "name": "display_base",
       "type": "roundedBox",
       "params": [3.8, 0.06, 1.9, 0.05, 3],
+      "rotation": [0, 168, 0],
       "material": {
         "preset": "concrete",
         "color": "#b7ab97",
@@ -201,13 +202,13 @@
           "roughnessVariation": 0.04
         }
       },
-      "position": [0, 1.42, -0.9],
+      "position": [0, 1.47, -0.9],
       "parent": "pickup_root"
     },
     {
       "name": "pillar_a_l",
       "type": "box",
-      "params": [0.07, 0.36, 0.09],
+      "params": [0.07, 0.44, 0.09],
       "material": { "preset": "painted-metal", "color": "#4c5a52" },
       "position": [-0.9, 1.24, -1.24],
       "rotation": [18, 0, 0],
@@ -216,7 +217,7 @@
     {
       "name": "pillar_a_r",
       "type": "box",
-      "params": [0.07, 0.36, 0.09],
+      "params": [0.07, 0.44, 0.09],
       "material": { "preset": "painted-metal", "color": "#4c5a52" },
       "position": [0.9, 1.24, -1.24],
       "rotation": [18, 0, 0],
@@ -225,7 +226,7 @@
     {
       "name": "pillar_c_l",
       "type": "box",
-      "params": [0.08, 0.36, 0.1],
+      "params": [0.08, 0.44, 0.1],
       "material": { "preset": "painted-metal", "color": "#4c5a52" },
       "position": [-0.9, 1.24, -0.34],
       "parent": "pickup_root"
@@ -233,7 +234,7 @@
     {
       "name": "pillar_c_r",
       "type": "box",
-      "params": [0.08, 0.36, 0.1],
+      "params": [0.08, 0.44, 0.1],
       "material": { "preset": "painted-metal", "color": "#4c5a52" },
       "position": [0.9, 1.24, -0.34],
       "parent": "pickup_root"
@@ -751,7 +752,7 @@
       "name": "wheel_fl",
       "type": "module",
       "src": "wheel-utility",
-      "position": [-1.0, 0.5, -1.62],
+      "position": [-0.85, 0.5, -1.62],
       "rotation": [0, 0, 90],
       "parent": "pickup_root"
     },
@@ -759,7 +760,7 @@
       "name": "wheel_fr",
       "type": "module",
       "src": "wheel-utility",
-      "position": [1.0, 0.5, -1.62],
+      "position": [0.85, 0.5, -1.62],
       "rotation": [0, 0, 90],
       "parent": "pickup_root"
     },
@@ -767,7 +768,7 @@
       "name": "wheel_rl",
       "type": "module",
       "src": "wheel-utility",
-      "position": [-1.0, 0.5, 1.34],
+      "position": [-0.85, 0.5, 1.34],
       "rotation": [0, 0, 90],
       "parent": "pickup_root"
     },
@@ -775,7 +776,7 @@
       "name": "wheel_rr",
       "type": "module",
       "src": "wheel-utility",
-      "position": [1.0, 0.5, 1.34],
+      "position": [0.85, 0.5, 1.34],
       "rotation": [0, 0, 90],
       "parent": "pickup_root"
     }
