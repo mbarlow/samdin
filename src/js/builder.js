@@ -871,6 +871,21 @@ class ModelBuilder {
         return this.finalizePart(Primitives.catenary(start, end, sag, radius, segments, radialSegments, opts), def);
       }
 
+      case 'helix': {
+        const [radius = 0.3, tubeRadius = 0.04, coils = 5, height = 0.5] = params;
+        return this.finalizePart(Primitives.helix(radius, tubeRadius, coils, height, opts), def);
+      }
+
+      case 'rock': {
+        const [radius = 0.5, seed = 1, roughness = 0.35] = params;
+        return this.finalizePart(Primitives.rock(radius, seed, roughness, opts), def);
+      }
+
+      case 'canopy': {
+        const [radius = 0.6, lobes = 4, seed = 1] = params;
+        return this.finalizePart(Primitives.canopy(radius, lobes, seed, opts), def);
+      }
+
       case 'pointLight': {
         // Pass light color from material
         if (def.material) {

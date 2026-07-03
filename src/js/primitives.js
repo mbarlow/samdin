@@ -942,6 +942,92 @@ const Primitives = {
   },
 
   /**
+   * Helix - a tube swept along a helical path. Springs, coils, screw threads.
+   * @param {number} radius - helix radius (distance from axis to tube center)
+   * @param {number} tubeRadius - thickness of the wound tube
+   * @param {number} coils - number of full turns
+   * @param {number} height - total rise along +Y
+   */
+  helix(radius = 0.3, tubeRadius = 0.04, coils = 5, height = 0.5, opts = {}) {
+    const mul = opts.qualitySegMul || 1;
+    const steps = Math.max(24, Math.round(Math.max(coils, 0.25) * 32 * mul));
+    const radialSegments = Math.max(4, Math.round(6 * mul));
+    const turns = Math.max(coils, 0.1);
+    const points = [];
+    for (let i = 0; i <= steps; i++) {
+      const t = i / steps;
+      const a = t * turns * Math.PI * 2;
+      points.push(new THREE.Vector3(Math.cos(a) * radius, t * height, Math.sin(a) * radius));
+    }
+    const curve = new THREE.CatmullRomCurve3(points);
+    const geo = new THREE.TubeGeometry(curve, steps, tubeRadius, radialSegments, false);
+    const mesh = new THREE.Mesh(geo, opts.material || Materials.matte(0x888888));
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+    return mesh;
+  },
+
+  /**
+   * Rock - a noise-displaced icosahedron. Deterministic per `seed`. Displacement
+   * is a pure function of vertex direction, so shared vertices move together and
+   * the surface never cracks. Faceted (flatShading) read by default.
+   * @param {number} radius
+   * @param {number} seed - deterministic shape selector
+   * @param {number} roughness - 0..1 displacement amount
+   */
+  rock(radius = 0.5, seed = 1, roughness = 0.35, opts = {}) {
+    const detail = 1 + (opts.qualitySphereDetail || 0);
+    const geo = new THREE.IcosahedronGeometry(radius, detail);
+    Primitives._displace(geo, seed, roughness, 3.2);
+    const mesh = new THREE.Mesh(
+      geo,
+      opts.material || Materials.create({ color: 0x6d6a63, roughness: 0.95, flatShading: true })
+    );
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+    return mesh;
+  },
+
+  /**
+   * Canopy - a rounded foliage blob. Same displacement as `rock` but lower
+   * frequency (bigger lobes) and gentler, for tree crowns and shrubs.
+   * @param {number} radius
+   * @param {number} lobes - roughly the number of bulges (noise frequency)
+   * @param {number} seed
+   */
+  canopy(radius = 0.6, lobes = 4, seed = 1, opts = {}) {
+    const detail = 2 + (opts.qualitySphereDetail || 0);
+    const geo = new THREE.IcosahedronGeometry(radius, detail);
+    Primitives._displace(geo, seed, 0.22, Math.max(lobes, 1) * 0.8);
+    const mesh = new THREE.Mesh(
+      geo,
+      opts.material || Materials.create({ color: 0x4a7a3a, roughness: 0.9 })
+    );
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+    return mesh;
+  },
+
+  // Crack-free radial displacement: a smooth function of the unit direction, so
+  // duplicated vertices at the same position always receive the same offset.
+  _displace(geo, seed, amount, freq) {
+    const pos = geo.attributes.position;
+    const v = new THREE.Vector3();
+    for (let i = 0; i < pos.count; i++) {
+      v.fromBufferAttribute(pos, i);
+      const len = v.length() || 1;
+      const dx = v.x / len, dy = v.y / len, dz = v.z / len;
+      const n = (Math.sin(dx * freq + seed) * Math.cos(dy * freq * 1.3 + seed * 1.7)
+        + Math.sin(dz * freq * 1.1 + seed * 0.7)) / 2;
+      const scale = 1 + n * amount;
+      pos.setXYZ(i, v.x * scale, v.y * scale, v.z * scale);
+    }
+    pos.needsUpdate = true;
+    geo.computeVertexNormals();
+    return geo;
+  },
+
+  /**
    * PointLight - Creates a point light with optional visible bulb
    * @param {number} intensity - Light intensity
    * @param {number} distance - Light reach (0 = infinite)
