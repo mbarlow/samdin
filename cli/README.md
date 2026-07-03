@@ -34,6 +34,21 @@ node inspect-model.js ../specs/clinic.json ./out
 node inspect-model.js ../specs/clinic.json ./out 8800  # override port
 ```
 
+### `golden.js`
+
+Regression guard for the `quality-bar-*` anchors. Two layers:
+
+- **Structural fingerprint** (hard gate) — triangle / vertex / object counts per anchor. Renderer-independent, so it is stable across machines and gates CI. This is what catches a `qualityTier` or builder change that silently moves anchor geometry.
+- **Canvas PNGs** (soft, local only) — per-anchor renders at `specCamera`, `threeQuarter`, `lowAngle`, diffed with `pixelmatch`. Skipped under CI (`GOLDEN_NO_PIXEL=1` / `CI=true`) because the browser renderer is not portable across GPUs.
+
+```bash
+node golden.js              # compare against ../goldens/, exit 1 on drift
+node golden.js --update     # rewrite goldens after an intentional change
+GOLDEN_NO_PIXEL=1 node golden.js   # fingerprint gate only (CI mode)
+```
+
+Goldens live in `../goldens/` (`fingerprints.json` + reference PNGs). Work renders land in `../.golden-work/` (gitignored); diff PNGs are written there on a pixel failure.
+
 ### `export-playwright.js`
 
 Automates the viewer to export a spec as `.glb` with materials preserved.

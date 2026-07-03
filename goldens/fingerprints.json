@@ -1,0 +1,37 @@
+{
+  "quality-bar-anglepoise-lamp": {
+    "tris": 83820,
+    "verts": 77372,
+    "objects": 86
+  },
+  "quality-bar-courier-pickup": {
+    "tris": 47480,
+    "verts": 127189,
+    "objects": 84
+  },
+  "quality-bar-espresso-machine": {
+    "tris": 27936,
+    "verts": 61905,
+    "objects": 89
+  },
+  "quality-bar-field-radio": {
+    "tris": 30012,
+    "verts": 82710,
+    "objects": 69
+  },
+  "quality-bar-minidisc": {
+    "tris": 12036,
+    "verts": 33114,
+    "objects": 29
+  },
+  "quality-bar-rangefinder-camera": {
+    "tris": 53748,
+    "verts": 104347,
+    "objects": 96
+  },
+  "quality-bar-typewriter": {
+    "tris": 46103,
+    "verts": 101125,
+    "objects": 187
+  }
+}

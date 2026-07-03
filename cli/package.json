@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@gltf-transform/core": "^4.3.0",
+    "pixelmatch": "^7.2.0",
     "playwright": "^1.59.1",
+    "pngjs": "^7.0.0",
     "three": "^0.160.0"
   }
 }
