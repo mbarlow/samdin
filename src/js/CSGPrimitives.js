@@ -370,7 +370,7 @@ const CSGPrimitives = {
         0,
         Math.sin(angle) * (radius + safeToothDepth / 2 - 0.01)
       );
-      tooth.rotation.set(0, angle, 0);
+      tooth.rotation.set(0, -angle, 0); // face the tooth radially out (Y-rot sends +X to (cos φ, 0, −sin φ), so use −angle)
       tooth.updateMatrixWorld(true);
       result = evaluator.evaluate(result, tooth, ADDITION);
     }
