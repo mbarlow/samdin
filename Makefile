@@ -1,4 +1,4 @@
-.PHONY: dev serve smoke test lint schema-check golden golden-update help
+.PHONY: dev serve smoke test lint schema-check shot golden golden-update help
 
 PORT ?= 7777
 
@@ -10,6 +10,7 @@ help:
 	@echo "  make test             - Validate every spec and prefab on disk"
 	@echo "  make lint             - Quality-rule lint (--strict) over specs (advisory)"
 	@echo "  make schema-check     - Validate specs against the JSON Schema (needs cli deps)"
+	@echo "  make shot SPEC=... [OUT=... VIEW=...] - One fast render of a spec (iteration loop)"
 	@echo "  make golden           - Fingerprint-check the quality-bar anchors (tris/verts/objects vs goldens/)"
 	@echo "  make golden-update    - Re-bless the anchor goldens after an intended builder change"
 	@echo "  make help             - Show this help"
@@ -31,6 +32,11 @@ lint:
 
 schema-check:
 	@node cli/schema-check.js specs/*.json
+
+OUT ?= /tmp/samdin-shot.png
+VIEW ?= threeQuarter
+shot:
+	@node cli/shot.js $(SPEC) $(OUT) $(VIEW)
 
 golden:
 	@node cli/golden.js

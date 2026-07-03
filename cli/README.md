@@ -47,6 +47,15 @@ node schema-check.js ../specs/*.json      # or: make schema-check
 
 The schema doubles as **editor autocomplete + inline validation**: add `"$schema": "../schema/samdin-spec.schema.json"` to a spec (or map it in your editor) and typos in preset names surface as you type. One source of truth — the schema catches the enum/shape drift the audit kept finding by hand.
 
+### `shot.js`
+
+One fast render — a single spec, a single camera, one screenshot. `inspect-model.js` sweeps ~18 angles (normal + wireframe + design-grid); when you're iterating on a model you want one image now. Use this in the modelling loop; use `inspect-model.js` for a full review sweep.
+
+```bash
+node shot.js ../specs/quality-bar-courier-pickup.json out.png            # threeQuarter
+node shot.js ../specs/quality-bar-courier-pickup.json out.png front       # or: make shot SPEC=... VIEW=front
+```
+
 ### `inspect-model.js`
 
 Loads a spec in headless Chromium, captures a preset sweep of screenshots (normal / wireframe / design-grid across all camera presets, plus the spec-defined first camera as `*-specCamera.png`), and writes a review template markdown file.
