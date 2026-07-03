@@ -72,7 +72,7 @@ Every `scene.*` field is optional; omitted fields fall back to the viewer's curr
 
 | Field | Description |
 |-------|-------------|
-| `quality` | Quality tier: `"draft"`, `"standard"`, or `"high"`. **Applied *before* geometry is built**, so a spec pins its own tier on the very first cold build (it no longer depends on session warmth or the current dropdown). The runtime default is `"standard"`; hero specs pin `"high"`. Higher tiers raise segment counts and sphere detail across the pipeline — see [quality-tiers.md](quality-tiers.md) for a same-spec before/after. |
+| `quality` | Quality tier: `"draft"`, `"standard"`, or `"high"`. **Applied *before* geometry is built**, so a spec pins its own tier on the very first cold build (it no longer depends on session warmth or the current dropdown). The runtime default is `"standard"`; hero specs pin `"high"`. Higher tiers raise segment counts and sphere detail across the pipeline — it is a performance/iteration knob, not a quality knob. See [render tiers](quality-tiers.md). |
 | `background` | `{ type, color, color2 }` — `type` is `solid` / `gradient` / etc. `color2` is the gradient's second stop. |
 | `floor` | `{ visible }` — the ground helper plane. Defaults to visible; set `"visible": false` to hide it. |
 | `ground` | `{ reflective }` — mirror-style reflective ground plane. Defaults to `false`; set `"reflective": true` to enable. |
