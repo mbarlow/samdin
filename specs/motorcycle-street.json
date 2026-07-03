@@ -2,6 +2,14 @@
   "name": "motorcycle-street",
   "description": "First-person motorcycle POV on a city street with buildings on both sides, road with lane markings, distant car, motorcycle handlebars in foreground, street lamps, foggy atmosphere",
   "root": "scene",
+  "scene": {
+    "quality": "standard",
+    "background": { "type": "gradient", "top": "#1a2028", "bottom": "#0a0d12" },
+    "fog": { "type": "exp2", "color": "#12161c", "density": 0.02 },
+    "lighting": { "preset": "night", "environment": "night", "envMapIntensity": 0.8 },
+    "camera": { "preset": "threeQuarter", "distanceMultiplier": 1.1 },
+    "postfx": { "bloom": { "strength": 0.3, "threshold": 0.7 }, "vignette": true, "fxaa": true }
+  },
   "parts": [
     {
       "name": "scene",
@@ -13,7 +21,7 @@
       "name": "road",
       "type": "box",
       "params": [8, 0.15, 40],
-      "material": { "preset": "asphalt", "color": "#1a1a1a" },
+      "material": { "preset": "asphalt", "color": "#1a1a1a", "breakup": { "noise": { "amount": 0.06, "scale": 8 }, "roughnessVariation": 0.05 } },
       "position": [0, -0.075, 0],
       "parent": "scene"
     },
@@ -56,31 +64,8 @@
       "params": [0.1, 0.01, 2],
       "material": { "preset": "glow", "color": "#888866", "emissiveIntensity": 0.5 },
       "position": [0, 0.01, -5],
-      "parent": "scene"
-    },
-    {
-      "name": "lane_center_2",
-      "type": "box",
-      "params": [0.1, 0.01, 2],
-      "material": { "preset": "glow", "color": "#888866", "emissiveIntensity": 0.5 },
-      "position": [0, 0.01, -9],
-      "parent": "scene"
-    },
-    {
-      "name": "lane_center_3",
-      "type": "box",
-      "params": [0.1, 0.01, 2],
-      "material": { "preset": "glow", "color": "#888866", "emissiveIntensity": 0.5 },
-      "position": [0, 0.01, -13],
-      "parent": "scene"
-    },
-    {
-      "name": "lane_center_4",
-      "type": "box",
-      "params": [0.1, 0.01, 2],
-      "material": { "preset": "glow", "color": "#888866", "emissiveIntensity": 0.5 },
-      "position": [0, 0.01, -17],
-      "parent": "scene"
+      "parent": "scene",
+      "modifiers": { "array": { "count": 4, "offset": [0, 0, -4] } }
     },
 
     {

@@ -2,6 +2,13 @@
   "name": "shalom-clinic",
   "description": "Luxury aesthetic clinic lobby — SHALOM BANGKOK. Ultra-clean white interior with rose-gold LED ceiling accents, large display screens, low-profile seating.",
   "root": "room",
+  "scene": {
+    "quality": "standard",
+    "background": { "type": "gradient", "top": "#e8ecf0", "bottom": "#c8d0d8" },
+    "lighting": { "preset": "studio", "environment": "studio", "envMapIntensity": 1.2 },
+    "camera": { "preset": "threeQuarter" },
+    "postfx": { "bloom": { "strength": 0.25, "threshold": 0.8 }, "vignette": true, "fxaa": true }
+  },
   "parts": [
     {
       "name": "room",
@@ -15,7 +22,8 @@
       "material": { "color": "#f0ece8", "metalness": 0.3, "roughness": 0.1 },
       "position": [0, -0.025, 0],
       "parent": "room",
-      "receiveShadow": true
+      "receiveShadow": true,
+      "lintIgnore": ["breakup"]
     },
     {
       "name": "wall_back",

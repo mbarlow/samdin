@@ -2,6 +2,13 @@
   "name": "showcase",
   "description": "Feature showcase - demonstrating primitives, lathe, cables, lights, CSG, and prefabs",
   "root": "scene_root",
+  "scene": {
+    "quality": "standard",
+    "background": { "type": "gradient", "top": "#2a3138", "bottom": "#12161a" },
+    "lighting": { "preset": "studio", "environment": "studio", "envMapIntensity": 1.1 },
+    "camera": { "preset": "threeQuarter" },
+    "postfx": { "bloom": { "strength": 0.2, "threshold": 0.85 }, "vignette": true, "fxaa": true }
+  },
   "parts": [
     {
       "name": "scene_root",
@@ -13,7 +20,7 @@
       "name": "ground",
       "type": "box",
       "params": [30, 0.1, 30],
-      "material": { "preset": "concrete", "color": "#5a5a5a" },
+      "material": { "preset": "concrete", "color": "#5a5a5a", "breakup": { "noise": { "amount": 0.05, "scale": 6 }, "roughnessVariation": 0.05 } },
       "position": [0, -0.05, 0],
       "parent": "scene_root"
     },
