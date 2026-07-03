@@ -7,8 +7,8 @@
     "background": { "type": "gradient", "color": "#6a8090", "color2": "#2a3e4a" },
     "fog": { "type": "exp2", "color": "#3e5260", "density": 0.025 },
     "lighting": {
-      "preset": "outdoor",
-      "environment": "dusk",
+      "preset": "sunset",
+      "environment": "sunset",
       "envMapIntensity": 0.6,
       "shadowQuality": "high",
       "intensity": 1.3,

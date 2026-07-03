@@ -36,6 +36,17 @@ Rules: `scene-block` (presentation-scale asset with no scene), `camera-preset` /
 
 Suppress a rule with `lintIgnore`: `"lintIgnore": ["clone-read"]` at spec level, or on a part (`"lintIgnore": ["breakup", "ground-contact"]`). The dimension checks also honor a per-part `"lintIgnore": ["zero-dimension"]`. Use `"all"` to silence everything on a part.
 
+### `schema-check.js`
+
+Validates specs against [`schema/samdin-spec.schema.json`](../schema/samdin-spec.schema.json) (JSON Schema draft-07) using `ajv`. This is the **structural** layer — required fields, enums (type names, `lighting.preset` / `environment` / `toneMapping` / `camera.preset`, `scene.quality`), and value shapes. Per-type param counts, parent resolution, CSG wiring, and the quality lints stay in `validate-spec.cjs` (which is stdlib-only so it can gate CI with no install).
+
+```bash
+node schema-check.js ../specs/showcase.json
+node schema-check.js ../specs/*.json      # or: make schema-check
+```
+
+The schema doubles as **editor autocomplete + inline validation**: add `"$schema": "../schema/samdin-spec.schema.json"` to a spec (or map it in your editor) and typos in preset names surface as you type. One source of truth — the schema catches the enum/shape drift the audit kept finding by hand.
+
 ### `inspect-model.js`
 
 Loads a spec in headless Chromium, captures a preset sweep of screenshots (normal / wireframe / design-grid across all camera presets, plus the spec-defined first camera as `*-specCamera.png`), and writes a review template markdown file.
