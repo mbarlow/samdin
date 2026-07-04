@@ -58,14 +58,36 @@ await page.evaluate(async (s) => {
   window.app.builder.registerSpec(s);
   await window.app.loadSpec(s.name);
 }, spec);
-await page.waitForTimeout(900);
+await page.waitForTimeout(1600);
 
 const canvas = page.locator('#viewport canvas');
+// A blank/black frame (heavy specs don't always render before the shot)
+// compresses to almost nothing. Retry with more settle until it has content.
+const MIN_BYTES = 12000;
 async function shot(preset, file) {
   await page.selectOption('#camera-select', preset);
   await page.waitForTimeout(500);
   const box = await canvas.boundingBox();
-  await page.screenshot({ path: path.join(outDir, file), clip: box });
+  const dest = path.join(outDir, file);
+  for (let attempt = 0; attempt < 4; attempt++) {
+    const buf = await page.screenshot({ clip: box });
+    if (buf.length >= MIN_BYTES) { fs.writeFileSync(dest, buf); return; }
+    if (attempt === 0) {
+      await page.waitForTimeout(700); // timing blank — settle and retry
+    } else {
+      // Persistent blank: the camera is likely clipping into a flat, wide
+      // model at fit distance. Dolly out and re-shoot.
+      await page.evaluate(() => {
+        const c = window.app.viewer.camera;
+        c.position.multiplyScalar(1.35);
+        window.app.viewer.controls.update();
+      });
+      await page.waitForTimeout(500);
+    }
+  }
+  const buf = await page.screenshot({ clip: box });
+  fs.writeFileSync(dest, buf);
+  if (buf.length < MIN_BYTES) console.error(`  ! ${file} still blank after dolly-out`);
 }
 
 for (const v of SHADED) await shot(v, `shaded-${v}.png`);
