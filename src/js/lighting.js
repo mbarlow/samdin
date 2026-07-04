@@ -222,7 +222,9 @@ class LightingManager {
 
     this.clearLights();
     this.keyLight = null;
-    this.intensityMultiplier = config.intensity ?? 1.0;
+    // Preserve the current multiplier when a config doesn't set one — otherwise
+    // setIntensity()'s re-apply resets the slider to 1 and the control does nothing.
+    this.intensityMultiplier = config.intensity ?? this.intensityMultiplier ?? 1.0;
 
     this.ambient = new THREE.AmbientLight(
       ambientDef.color,

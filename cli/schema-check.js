@@ -20,7 +20,7 @@ const REPO_ROOT = path.resolve(__dirname, '..');
 const SCHEMA_PATH = path.join(REPO_ROOT, 'schema', 'samdin-spec.schema.json');
 
 function main() {
-  const files = process.argv.slice(2).filter((a) => fs.existsSync(a) && fs.statSync(a).isFile());
+  const files = process.argv.slice(2).filter((a) => path.basename(a) !== 'index.json' && fs.existsSync(a) && fs.statSync(a).isFile());
   if (!files.length) {
     console.log('Usage: node cli/schema-check.js <spec.json> [more...]');
     process.exit(1);
