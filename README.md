@@ -21,12 +21,15 @@ Then open the URL, pick a spec from the **Built-in specs** dropdown or drop your
 
 ## Gallery — the quality bar
 
-Seven hero specs anchor the current output ceiling. Full prompts and the [anchor rubric](docs/quality-bar.md#anchor-rubric) in [docs/quality-bar.md](docs/quality-bar.md).
+Seven hero specs anchor the current output ceiling — all graded to *ship* against their prompts (see the [review scoreboard](reviews/SUMMARY.md)). Full prompts and the [anchor rubric](docs/quality-bar.md#anchor-rubric) in [docs/quality-bar.md](docs/quality-bar.md).
 
 | | | |
 |---|---|---|
-| [![Field radio](media/quality-radio.png)](docs/quality-bar.md#field-radio) | [![Rangefinder camera](media/quality-camera.png)](docs/quality-bar.md#rangefinder-camera) | [![Espresso machine](media/quality-espresso.png)](docs/quality-bar.md#espresso-machine) |
-| [![Anglepoise lamp](media/quality-lamp.png)](docs/quality-bar.md#anglepoise-desk-lamp) | [![Olivetti typewriter](media/quality-typewriter.png)](docs/quality-bar.md#olivetti-typewriter) | [![Clinic scene](media/clinic.png)](specs/clinic.json) |
+| [![Field radio](media/hero-field-radio.png)](docs/quality-bar.md#field-radio) | [![Rangefinder camera](media/hero-rangefinder-camera.png)](docs/quality-bar.md#rangefinder-camera) | [![Espresso machine](media/hero-espresso-machine.png)](docs/quality-bar.md#espresso-machine) |
+| [![Anglepoise lamp](media/hero-anglepoise-lamp.png)](docs/quality-bar.md#anglepoise-desk-lamp) | [![Olivetti typewriter](media/hero-typewriter.png)](docs/quality-bar.md#olivetti-typewriter) | [![Sony minidisc](media/hero-minidisc.png)](docs/quality-bar.md#sony-minidisc) |
+| [![Courier pickup](media/hero-courier-pickup.png)](docs/quality-bar.md#courier-pickup) | | |
+
+Every gallery shot is one command: `node cli/hero.js specs/quality-bar-<name>.json` — centered, 3-point front lighting, fully framed. The review harness (`make review`) grades them.
 
 ## Docs
 
