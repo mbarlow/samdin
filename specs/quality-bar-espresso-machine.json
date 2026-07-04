@@ -353,14 +353,17 @@
       "type": "roundedBox",
       "params": [0.62, 0.85, 0.018, 0.02, 2],
       "material": {
-        "color": "#a8804a",
-        "roughness": 0.4,
-        "metalness": 0.92,
+        "color": "#bc934f",
+        "roughness": 0.44,
+        "metalness": 0.9,
         "clearcoat": 0.45,
         "clearcoatRoughness": 0.18,
+        "envMapIntensity": 2.2,
+        "emissive": "#2a1c0a",
+        "emissiveIntensity": 0.14,
         "breakup": {
-          "noise": { "amount": 0.03, "scale": 6.0, "color": "#947038" },
-          "edgeWear": { "amount": 0.05, "color": "#d0a458" },
+          "noise": { "amount": 0.03, "scale": 6.0, "color": "#a07a3c" },
+          "edgeWear": { "amount": 0.05, "color": "#e0b466" },
           "roughnessVariation": 0.04
         }
       },
@@ -769,13 +772,13 @@
     {
       "name": "drip_tray_assembly",
       "type": "group",
-      "position": [0, 0.27, 0.42],
+      "position": [0, 0.27, 0.50],
       "parent": "machine_root"
     },
     {
       "name": "tray_base",
       "type": "roundedBox",
-      "params": [0.92, 0.07, 0.34, 0.012, 2],
+      "params": [0.92, 0.07, 0.68, 0.012, 2],
       "material": {
         "color": "#a8a8ac",
         "roughness": 0.28,
@@ -794,9 +797,9 @@
         "roughness": 0.18,
         "metalness": 0.92
       },
-      "position": [0, 0.04, -0.13],
+      "position": [0, 0.04, -0.29],
       "parent": "drip_tray_assembly",
-      "modifiers": { "array": { "count": 11, "offset": [0, 0, 0.026] } }
+      "modifiers": { "array": { "count": 23, "offset": [0, 0, 0.026] } }
     },
     {
       "name": "tray_brass_lip",
@@ -808,7 +811,7 @@
         "metalness": 0.9,
         "clearcoat": 0.5
       },
-      "position": [0, 0.038, 0.176],
+      "position": [0, 0.038, 0.33],
       "parent": "drip_tray_assembly"
     },
 
@@ -817,7 +820,7 @@
       "type": "cylinder",
       "params": [0.085, 0.075, 0.012, 24],
       "material": { "preset": "ceramic", "color": "#f0ece0", "roughness": 0.35, "clearcoat": 0.55 },
-      "position": [0, 0.322, 0.42],
+      "position": [0, 0.322, 0.80],
       "parent": "machine_root"
     },
     {
@@ -825,7 +828,7 @@
       "type": "cylinder",
       "params": [0.05, 0.045, 0.075, 24],
       "material": { "preset": "ceramic", "color": "#f0ece0", "roughness": 0.32, "clearcoat": 0.6 },
-      "position": [0, 0.366, 0.42],
+      "position": [0, 0.366, 0.80],
       "parent": "machine_root"
     },
     {
@@ -833,7 +836,7 @@
       "type": "torus",
       "params": [0.025, 0.005, 8, 18],
       "material": { "preset": "ceramic", "color": "#f0ece0", "roughness": 0.32, "clearcoat": 0.6 },
-      "position": [0.058, 0.37, 0.42],
+      "position": [0.058, 0.37, 0.80],
       "rotation": [0, 90, 0],
       "parent": "machine_root"
     },
@@ -848,7 +851,7 @@
         "clearcoat": 0.6,
         "clearcoatRoughness": 0.1
       },
-      "position": [0, 0.398, 0.42],
+      "position": [0, 0.398, 0.80],
       "parent": "machine_root"
     },
     {
@@ -861,7 +864,7 @@
         "emissive": "#3a1808",
         "emissiveIntensity": 0.1
       },
-      "position": [0, 0.4025, 0.42],
+      "position": [0, 0.4025, 0.80],
       "parent": "machine_root"
     },
 
@@ -875,14 +878,21 @@
         "metalness": 0.92,
         "clearcoat": 0.45
       },
-      "position": [0.6, 1.18, 0.18],
+      "position": [0.6, 1.18, 0.30],
       "rotation": [0, 0, 90],
+      "parent": "machine_root"
+    },
+    {
+      "name": "steam_wand",
+      "type": "group",
+      "position": [0.62, 1.18, 0.30],
+      "rotation": [-35, 0, 0],
       "parent": "machine_root"
     },
     {
       "name": "steam_wand_arm_a",
       "type": "cylinder",
-      "params": [0.018, 0.018, 0.32, 14],
+      "params": [0.018, 0.018, 0.30, 14],
       "material": {
         "color": "#d8d8dc",
         "roughness": 0.12,
@@ -890,14 +900,13 @@
         "clearcoat": 0.6,
         "envMapIntensity": 2.2
       },
-      "position": [0.78, 1.05, 0.28],
-      "rotation": [-25, 30, -55],
-      "parent": "machine_root"
+      "position": [0, -0.15, 0],
+      "parent": "steam_wand"
     },
     {
       "name": "steam_wand_arm_b",
       "type": "cylinder",
-      "params": [0.014, 0.014, 0.18, 14],
+      "params": [0.015, 0.015, 0.16, 14],
       "material": {
         "color": "#d8d8dc",
         "roughness": 0.12,
@@ -905,34 +914,31 @@
         "clearcoat": 0.6,
         "envMapIntensity": 2.2
       },
-      "position": [0.92, 0.86, 0.42],
-      "rotation": [-50, 25, -50],
-      "parent": "machine_root"
+      "position": [0, -0.37, 0],
+      "parent": "steam_wand"
     },
     {
       "name": "steam_wand_tip",
       "type": "cylinder",
       "params": [0.013, 0.018, 0.04, 14],
       "material": { "color": "#3a2c20", "roughness": 0.65, "metalness": 0.5 },
-      "position": [0.985, 0.74, 0.51],
-      "rotation": [-50, 25, -50],
-      "parent": "machine_root"
+      "position": [0, -0.47, 0],
+      "parent": "steam_wand"
     },
 
     {
       "name": "steam_knob",
       "type": "module",
       "src": "wood-knob",
-      "position": [0.62, 1.32, 0.18],
+      "position": [0.6, 1.35, 0.30],
       "parent": "machine_root"
     },
     {
       "name": "steam_knob_stem",
       "type": "cylinder",
-      "params": [0.014, 0.014, 0.04, 12],
+      "params": [0.014, 0.014, 0.16, 12],
       "material": { "color": "#a07a3a", "roughness": 0.45, "metalness": 0.9 },
-      "position": [0.6, 1.27, 0.18],
-      "rotation": [0, 0, 90],
+      "position": [0.6, 1.26, 0.30],
       "parent": "machine_root"
     },
 
@@ -940,22 +946,37 @@
       "name": "water_knob",
       "type": "module",
       "src": "wood-knob",
-      "position": [-0.62, 1.32, 0.18],
+      "position": [-0.6, 1.35, 0.30],
       "parent": "machine_root"
     },
     {
       "name": "water_knob_stem",
       "type": "cylinder",
-      "params": [0.014, 0.014, 0.04, 12],
+      "params": [0.014, 0.014, 0.16, 12],
       "material": { "color": "#a07a3a", "roughness": 0.45, "metalness": 0.9 },
-      "position": [-0.6, 1.27, 0.18],
+      "position": [-0.6, 1.26, 0.30],
+      "parent": "machine_root"
+    },
+    {
+      "name": "water_wand_collar",
+      "type": "cylinder",
+      "params": [0.034, 0.034, 0.04, 16],
+      "material": { "color": "#a8804a", "roughness": 0.4, "metalness": 0.92, "clearcoat": 0.45 },
+      "position": [-0.6, 1.18, 0.30],
       "rotation": [0, 0, 90],
+      "parent": "machine_root"
+    },
+    {
+      "name": "water_wand",
+      "type": "group",
+      "position": [-0.62, 1.18, 0.30],
+      "rotation": [-35, 0, 0],
       "parent": "machine_root"
     },
     {
       "name": "water_spout",
       "type": "cylinder",
-      "params": [0.012, 0.014, 0.18, 14],
+      "params": [0.012, 0.014, 0.20, 14],
       "material": {
         "color": "#d8d8dc",
         "roughness": 0.12,
@@ -963,18 +984,16 @@
         "clearcoat": 0.6,
         "envMapIntensity": 2.2
       },
-      "position": [-0.74, 1.18, 0.18],
-      "rotation": [0, 0, -75],
-      "parent": "machine_root"
+      "position": [0, -0.12, 0],
+      "parent": "water_wand"
     },
     {
       "name": "water_spout_tip",
       "type": "cylinder",
-      "params": [0.011, 0.013, 0.025, 14],
+      "params": [0.011, 0.013, 0.03, 14],
       "material": { "color": "#3a2c20", "roughness": 0.65, "metalness": 0.5 },
-      "position": [-0.815, 1.13, 0.18],
-      "rotation": [0, 0, -75],
-      "parent": "machine_root"
+      "position": [0, -0.24, 0],
+      "parent": "water_wand"
     },
 
     {
