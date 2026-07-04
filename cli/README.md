@@ -56,6 +56,14 @@ node shot.js ../specs/quality-bar-courier-pickup.json out.png            # three
 node shot.js ../specs/quality-bar-courier-pickup.json out.png front       # or: make shot SPEC=... VIEW=front
 ```
 
+### `hero.js`
+
+One clean gallery render of a spec: camera-relative **3-point front lighting** (key + fill + rim, always lighting the face the camera sees), centered, fully in frame, grid + UI off. The spec's own background and emissive accents are kept. This is what the README gallery shots are made with.
+
+```bash
+node hero.js ../specs/quality-bar-field-radio.json out.png   # or: make hero SPEC=...
+```
+
 ### `inspect-model.js`
 
 Loads a spec in headless Chromium, captures a preset sweep of screenshots (normal / wireframe / design-grid across all camera presets, plus the spec-defined first camera as `*-specCamera.png`), and writes a review template markdown file.
