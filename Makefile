@@ -1,4 +1,4 @@
-.PHONY: dev serve smoke test lint schema-check shot hero review spec-index golden golden-update help
+.PHONY: dev serve smoke test lint schema-check shot hero review scoreboard spec-index golden golden-update help
 
 PORT ?= 7777
 
@@ -14,6 +14,7 @@ help:
 	@echo "  make hero SPEC=... [OUT=...] - Clean hero render (3-point front light, centered)"
 	@echo "  make spec-index       - Regenerate specs/index.json (viewer dropdown manifest)"
 	@echo "  make review SPEC=...  - Render the review shot-set (6 shaded + 2 wireframe + stats)"
+	@echo "  make scoreboard       - Show the critic score board (latest score + delta per spec)"
 	@echo "  make golden           - Fingerprint-check the quality-bar anchors (tris/verts/objects vs goldens/)"
 	@echo "  make golden-update    - Re-bless the anchor goldens after an intended builder change"
 	@echo "  make help             - Show this help"
@@ -49,6 +50,9 @@ spec-index:
 
 review:
 	@node cli/review-shots.js $(SPEC)
+
+scoreboard:
+	@node cli/scoreboard.cjs
 
 golden:
 	@node cli/golden.js

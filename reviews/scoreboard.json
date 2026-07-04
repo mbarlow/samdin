@@ -1,0 +1,11 @@
+{
+  "entries": [
+    { "spec": "quality-bar-anglepoise-lamp", "date": "2026-07-03", "score": 88, "verdict": "ship", "note": "Active bulb glow + articulated pose sell a genuinely lit lamp." },
+    { "spec": "quality-bar-field-radio", "date": "2026-07-03", "score": 86, "verdict": "ship", "note": "Every named feature reads; glowing amber dial. Antenna thin, back plain." },
+    { "spec": "quality-bar-rangefinder-camera", "date": "2026-07-03", "score": 86, "verdict": "ship", "note": "Concentric brass lens is the hero; body leatherette a bit flat." },
+    { "spec": "quality-bar-typewriter", "date": "2026-07-03", "score": 84, "verdict": "ship", "note": "Signal-blue portable; clean keycap array + carriage." },
+    { "spec": "quality-bar-espresso-machine", "date": "2026-07-03", "score": 81, "verdict": "ship", "note": "Widened body killed the monolith; side vents help. Pure side still wants a boiler bulge." },
+    { "spec": "quality-bar-courier-pickup", "date": "2026-07-03", "score": 80, "verdict": "ship", "note": "Reached 80 over four review loops (67 -> 72 -> 78 -> 80)." },
+    { "spec": "quality-bar-minidisc", "date": "2026-07-03", "score": 80, "verdict": "ship", "note": "Faithful but simple flat object; low silhouette by nature." }
+  ]
+}
