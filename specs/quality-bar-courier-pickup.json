@@ -268,7 +268,7 @@
     {
       "name": "bed_floor",
       "type": "box",
-      "params": [1.56, 0.08, 1.88],
+      "params": [1.56, 0.08, 1.68],
       "material": {
         "preset": "matte",
         "color": "#1c2125",
@@ -277,13 +277,13 @@
           "roughnessVariation": 0.05
         }
       },
-      "position": [0, 0.82, 1.0],
+      "position": [0, 0.82, 0.9],
       "parent": "pickup_root"
     },
     {
       "name": "bed_left",
       "type": "roundedBox",
-      "params": [0.08, 0.44, 1.86, 0.025, 2],
+      "params": [0.08, 0.44, 1.66, 0.025, 2],
       "material": {
         "preset": "painted-metal",
         "color": "#85978c",
@@ -292,13 +292,13 @@
           "roughnessVariation": 0.04
         }
       },
-      "position": [-0.82, 1.02, 1.0],
+      "position": [-0.82, 1.02, 0.9],
       "parent": "pickup_root"
     },
     {
       "name": "bed_right",
       "type": "roundedBox",
-      "params": [0.08, 0.44, 1.86, 0.025, 2],
+      "params": [0.08, 0.44, 1.66, 0.025, 2],
       "material": {
         "preset": "painted-metal",
         "color": "#85978c",
@@ -307,7 +307,7 @@
           "roughnessVariation": 0.04
         }
       },
-      "position": [0.82, 1.02, 1.0],
+      "position": [0.82, 1.02, 0.9],
       "parent": "pickup_root"
     },
     {
@@ -323,7 +323,7 @@
       "type": "roundedBox",
       "params": [1.52, 0.4, 0.06, 0.02, 2],
       "material": { "preset": "painted-metal", "color": "#809187" },
-      "position": [0, 0.99, 1.97],
+      "position": [0, 0.99, 1.77],
       "parent": "pickup_root"
     },
     {
@@ -331,23 +331,23 @@
       "type": "box",
       "params": [1.46, 0.03, 0.025],
       "material": { "preset": "steel", "color": "#8b8f93" },
-      "position": [0, 1.2, 1.99],
+      "position": [0, 1.2, 1.79],
       "parent": "pickup_root"
     },
     {
       "name": "bed_rail_l",
       "type": "box",
-      "params": [0.03, 0.03, 1.84],
+      "params": [0.03, 0.03, 1.64],
       "material": { "preset": "steel", "color": "#90959a" },
-      "position": [-0.78, 1.24, 1.0],
+      "position": [-0.78, 1.24, 0.9],
       "parent": "pickup_root"
     },
     {
       "name": "bed_rail_r",
       "type": "box",
-      "params": [0.03, 0.03, 1.84],
+      "params": [0.03, 0.03, 1.64],
       "material": { "preset": "steel", "color": "#90959a" },
-      "position": [0.78, 1.24, 1.0],
+      "position": [0.78, 1.24, 0.9],
       "parent": "pickup_root"
     },
 
@@ -447,7 +447,7 @@
       "type": "roundedBox",
       "params": [1.8, 0.14, 0.15, 0.03, 2],
       "material": { "preset": "chrome" },
-      "position": [0, 0.57, 2.05],
+      "position": [0, 0.57, 1.85],
       "parent": "pickup_root"
     },
     {
@@ -463,7 +463,7 @@
       "type": "box",
       "params": [0.34, 0.08, 0.01],
       "material": { "preset": "chrome" },
-      "position": [0, 0.56, 2.12],
+      "position": [0, 0.56, 1.92],
       "parent": "pickup_root"
     },
 
@@ -705,7 +705,7 @@
       "type": "roundedBox",
       "params": [0.14, 0.18, 0.03, 0.02, 2],
       "material": { "preset": "glow", "color": "#ff4c38", "emissiveIntensity": 1.0 },
-      "position": [-0.74, 0.95, 2.02],
+      "position": [-0.74, 0.95, 1.82],
       "castShadow": false,
       "receiveShadow": false,
       "parent": "pickup_root"
@@ -715,7 +715,7 @@
       "type": "roundedBox",
       "params": [0.14, 0.18, 0.03, 0.02, 2],
       "material": { "preset": "glow", "color": "#ff4c38", "emissiveIntensity": 1.0 },
-      "position": [0.74, 0.95, 2.02],
+      "position": [0.74, 0.95, 1.82],
       "castShadow": false,
       "receiveShadow": false,
       "parent": "pickup_root"
@@ -725,7 +725,7 @@
       "type": "box",
       "params": [0.14, 0.03, 0.015],
       "material": { "preset": "chrome" },
-      "position": [0, 1.04, 2.01],
+      "position": [0, 1.04, 1.81],
       "parent": "pickup_root"
     },
 
