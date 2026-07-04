@@ -5,9 +5,10 @@
   "scene": {
     "quality": "standard",
     "background": { "type": "gradient", "top": "#e8ecf0", "bottom": "#c8d0d8" },
-    "lighting": { "preset": "studio", "environment": "studio", "envMapIntensity": 1.2 },
+    "lighting": { "preset": "studio", "environment": "none", "envMapIntensity": 0.4, "intensity": 0.72 },
     "camera": { "preset": "threeQuarter" },
-    "postfx": { "bloom": { "strength": 0.25, "threshold": 0.8 }, "vignette": true, "fxaa": true }
+    "exposure": 0.8,
+    "postfx": { "bloom": { "strength": 0.08, "threshold": 0.97 }, "vignette": true, "fxaa": true }
   },
   "parts": [
     {
