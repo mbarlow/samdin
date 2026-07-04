@@ -1,11 +1,83 @@
 {
   "entries": [
-    { "spec": "quality-bar-anglepoise-lamp", "date": "2026-07-03", "score": 88, "verdict": "ship", "note": "Active bulb glow + articulated pose sell a genuinely lit lamp." },
-    { "spec": "quality-bar-field-radio", "date": "2026-07-03", "score": 86, "verdict": "ship", "note": "Every named feature reads; glowing amber dial. Antenna thin, back plain." },
-    { "spec": "quality-bar-rangefinder-camera", "date": "2026-07-03", "score": 86, "verdict": "ship", "note": "Concentric brass lens is the hero; body leatherette a bit flat." },
-    { "spec": "quality-bar-typewriter", "date": "2026-07-03", "score": 84, "verdict": "ship", "note": "Signal-blue portable; clean keycap array + carriage." },
-    { "spec": "quality-bar-espresso-machine", "date": "2026-07-03", "score": 81, "verdict": "ship", "note": "Widened body killed the monolith; side vents help. Pure side still wants a boiler bulge." },
-    { "spec": "quality-bar-courier-pickup", "date": "2026-07-03", "score": 80, "verdict": "ship", "note": "Reached 80 over four review loops (67 -> 72 -> 78 -> 80)." },
-    { "spec": "quality-bar-minidisc", "date": "2026-07-03", "score": 80, "verdict": "ship", "note": "Faithful but simple flat object; low silhouette by nature." }
+    {
+      "spec": "quality-bar-anglepoise-lamp",
+      "date": "2026-07-03",
+      "score": 88,
+      "verdict": "ship",
+      "note": "Active bulb glow + articulated pose sell a genuinely lit lamp."
+    },
+    {
+      "spec": "quality-bar-field-radio",
+      "date": "2026-07-03",
+      "score": 86,
+      "verdict": "ship",
+      "note": "Every named feature reads; glowing amber dial. Antenna thin, back plain."
+    },
+    {
+      "spec": "quality-bar-rangefinder-camera",
+      "date": "2026-07-03",
+      "score": 86,
+      "verdict": "ship",
+      "note": "Concentric brass lens is the hero; body leatherette a bit flat."
+    },
+    {
+      "spec": "quality-bar-typewriter",
+      "date": "2026-07-03",
+      "score": 84,
+      "verdict": "ship",
+      "note": "Signal-blue portable; clean keycap array + carriage."
+    },
+    {
+      "spec": "quality-bar-espresso-machine",
+      "date": "2026-07-03",
+      "score": 81,
+      "verdict": "ship",
+      "note": "Widened body killed the monolith; side vents help. Pure side still wants a boiler bulge."
+    },
+    {
+      "spec": "quality-bar-courier-pickup",
+      "date": "2026-07-03",
+      "score": 80,
+      "verdict": "ship",
+      "note": "Reached 80 over four review loops (67 -> 72 -> 78 -> 80)."
+    },
+    {
+      "spec": "quality-bar-minidisc",
+      "date": "2026-07-03",
+      "score": 80,
+      "verdict": "ship",
+      "note": "Faithful but simple flat object; low silhouette by nature."
+    },
+    {
+      "spec": "quality-bar-espresso-machine",
+      "date": "2026-07-04",
+      "score": 66,
+      "verdict": "revise",
+      "dims": {
+        "concept": 68,
+        "proportion": 58,
+        "feature": 80,
+        "silhouette": 60,
+        "construction": 52,
+        "material": 68
+      },
+      "note": "Multi-angle: floating wand segments + detached knobs, cup stranded 0.45u below spouts, group head too high w/ dead lower front, brass fascia reads black; hero front still strong."
+    },
+    {
+      "spec": "quality-bar-espresso-machine",
+      "date": "2026-07-04",
+      "score": 68,
+      "verdict": "revise",
+      "dims": {
+        "concept": 70,
+        "proportion": 57,
+        "feature": 80,
+        "silhouette": 60,
+        "construction": 74,
+        "material": 68
+      },
+      "note": "Wands welded + brass reads now; cup still marooned below spouts, body still 2u fridge"
+    }
   ]
 }
