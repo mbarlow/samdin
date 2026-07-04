@@ -5,8 +5,8 @@
   "scene": {
     "quality": "standard",
     "background": { "type": "gradient", "top": "#1a2028", "bottom": "#0a0d12" },
-    "fog": { "type": "exp2", "color": "#12161c", "density": 0.02 },
-    "lighting": { "preset": "night", "environment": "night", "envMapIntensity": 0.8 },
+    "fog": { "type": "exp2", "color": "#1a2230", "density": 0.006 },
+    "lighting": { "preset": "night", "environment": "night", "envMapIntensity": 0.8, "intensity": 1.5 },
     "camera": { "preset": "threeQuarter", "distanceMultiplier": 1.1 },
     "postfx": { "bloom": { "strength": 0.3, "threshold": 0.7 }, "vignette": true, "fxaa": true }
   },
@@ -78,7 +78,7 @@
       "name": "bldg_l1",
       "type": "box",
       "params": [4, 10, 8],
-      "material": { "color": "#1e1c1a", "roughness": 0.85, "metalness": 0.15 },
+      "material": { "color": "#3b4450", "roughness": 0.85, "metalness": 0.15 },
       "position": [0, 5, 5],
       "parent": "buildings_left"
     },
@@ -110,7 +110,7 @@
       "name": "bldg_l2",
       "type": "box",
       "params": [4, 14, 8],
-      "material": { "color": "#201e1c", "roughness": 0.85, "metalness": 0.15 },
+      "material": { "color": "#414a57", "roughness": 0.85, "metalness": 0.15 },
       "position": [0, 7, -5],
       "parent": "buildings_left"
     },
@@ -134,7 +134,7 @@
       "name": "bldg_l3",
       "type": "box",
       "params": [4, 8, 8],
-      "material": { "color": "#1c1a18", "roughness": 0.85, "metalness": 0.15 },
+      "material": { "color": "#363f4a", "roughness": 0.85, "metalness": 0.15 },
       "position": [0, 4, -15],
       "parent": "buildings_left"
     },
@@ -149,7 +149,7 @@
       "name": "bldg_r1",
       "type": "box",
       "params": [4, 12, 8],
-      "material": { "color": "#1e1c1a", "roughness": 0.85, "metalness": 0.15 },
+      "material": { "color": "#3d4652", "roughness": 0.85, "metalness": 0.15 },
       "position": [0, 6, 3],
       "parent": "buildings_right"
     },
@@ -173,7 +173,7 @@
       "name": "bldg_r2",
       "type": "box",
       "params": [4, 9, 8],
-      "material": { "color": "#201e1c", "roughness": 0.85, "metalness": 0.15 },
+      "material": { "color": "#434c59", "roughness": 0.85, "metalness": 0.15 },
       "position": [0, 4.5, -7],
       "parent": "buildings_right"
     },
@@ -189,7 +189,7 @@
       "name": "bldg_r3",
       "type": "box",
       "params": [4, 16, 8],
-      "material": { "color": "#1c1a18", "roughness": 0.85, "metalness": 0.15 },
+      "material": { "color": "#343d48", "roughness": 0.85, "metalness": 0.15 },
       "position": [0, 8, -17],
       "parent": "buildings_right"
     },
@@ -260,17 +260,17 @@
     {
       "name": "ambient_fill",
       "type": "pointLight",
-      "params": [0.3, 25, 2, false],
-      "material": { "color": "#445566" },
-      "position": [0, 8, 0],
+      "params": [0.6, 35, 0, false],
+      "material": { "color": "#556680" },
+      "position": [0, 8, 6],
       "parent": "scene"
     },
     {
       "name": "overhead_moon",
       "type": "pointLight",
-      "params": [0.5, 30, 2, false],
-      "material": { "color": "#667788" },
-      "position": [5, 15, -10],
+      "params": [1.1, 60, 0, false],
+      "material": { "color": "#8095b0" },
+      "position": [5, 18, 0],
       "parent": "scene",
       "comment": "Moonlight from above"
     }
