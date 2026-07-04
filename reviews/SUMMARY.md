@@ -10,7 +10,7 @@ All seven quality-bar anchors, graded from the render against their prompts ([ru
 | typewriter | **84** | ship | Signal-blue portable; clean keycap array + carriage. |
 | courier-pickup | **80** | ship | Reached 80 over four review loops (67 → 72 → 78 → 80). |
 | minidisc | **80** | ship | Faithful but simple flat object; low silhouette by nature. |
-| espresso-machine | **79** | revise | Front is anchor-grade; sides + back are bare chrome slabs. The only one under bar. |
+| espresso-machine | **81** | ship | Widened the body (killed the monolith); side vents help. Pure side still wants a boiler bulge. |
 
 ## What the sweep found that a single shot wouldn't
 
@@ -20,5 +20,4 @@ All seven quality-bar anchors, graded from the render against their prompts ([ru
 
 ## Open
 
-- **espresso-machine** → revise (side/back detail). One targeted pass.
 - Enhancements per anchor live in each `reviews/quality-bar-*.md`.
