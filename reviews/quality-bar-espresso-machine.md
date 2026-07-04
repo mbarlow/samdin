@@ -122,3 +122,95 @@ Fresh 6-shaded + 2-wireframe sweep, verified from every angle. Two of the six pr
 - [ ] **Make the top plate read brass.** Lower `warming_plate_well` roughness/raise its base value or drop shell/plate envMapIntensity so #a8804a reads brass, not white chrome.
 - [ ] **Tame the bloom clip.** Reduce bloom strength (0.18) or shell envMapIntensity (2.6) so back/top hold form instead of blowing to white.
 - [ ] **Cool the fascia a touch.** Trim `front_brass_plate` emissiveIntensity (0.14) / the group inner-glow spill so it reads brushed brass rather than backlit orange.
+
+---
+
+## Review — 2026-07-04 (re-grade after de-fridge + cup + flank pass) · score 80 · SHIP
+
+Fresh 6-shaded + 2-wireframe sweep, verified from every angle. All three targeted structural fixes verifiably landed; no new floating parts introduced by the remap. This is the first honest crossing of the bar (the earlier 81 hid floating wands + a marooned cup — this one holds up in the round).
+
+| Dimension | w | 68 → 80 | Note |
+|---|---|---|---|
+| Concept match | 0.25 | 70 → 81 | Reads as a prosumer E61 from front, three-quarter, low-angle AND back. Cube proportion + group in lower-third + cup catching the pour sells "active machine." Minor: 18° yaw means "front" isn't square; fascia reads brown-dim. |
+| Proportion & scale | 0.20 | 57 → 79 | **De-fridge landed.** `body_shell` 1.95→1.45h, 1.18→0.95d, width held 1.32 → W:H 0.91, believable footprint. Group head dropped 1.05→0.72. Depth slightly < width (real machines are deeper), minor. |
+| Feature completeness | 0.20 | 80 → 85 | All prompt features present + well-placed now; added boiler bulge, flank valves, rear plumbing boss/nut, feet. Twin spouts, both wands+wood knobs, gauge, both LEDs, rocker, brass warming plate w/ rails, slatted tray, demitasse. |
+| Silhouette & readability | 0.15 | 60 → 72 | Front/three-quarter/low/back all read. **Weakest dim:** pure-left flank is still a chrome slab with small brass nubs + a subtle boiler swell; the bulge reads as a swell, not a bold cylinder. 5 of 6 angles good. |
+| Construction integrity | 0.10 | 74 → 80 | **Clean.** Wands welded to collars, knobs have stems, cup grounded on tray (rim ~0.06u under spout tip — physical gap closed), feet on plinth. Wireframes show zero detached specks. Nit: wands at x±0.62 hug inside the 0.66 half-width. |
+| Material & colour | 0.10 | 68 → 77 | Mirror chrome reads (three-quarter/low), warming plate now reads brass w/ rails (top), walnut handle good, back no longer blown white. Residual: brass fascia reads dim brown in shaded-front; one bloom hotspot on the front-top edge. |
+
+**Formula:** 81·.25 + 79·.20 + 85·.20 + 72·.15 + 80·.10 + 77·.10 = **80** → ship (soft). No hard floor (lowest = silhouette 72).
+
+### Fix verification (did the claimed fixes land?)
+- **De-fridge → LANDED. ✔** `body_shell` [1.32, 1.45, 0.95] (was 1.32×1.95×1.18). W:H 0.91, depth < width. The 2u-fridge read is gone in every angle.
+- **Cup under the pour → LANDED. ✔** Group head dropped to y0.72; `pf_spout_l/r` tip lands ~y0.46, `demitasse_cup` rim ~y0.40, both at z0.70. ~0.06u gap — the pour falls into the cup, which catches the active glow in shaded-front + shaded-lowAngle. The 0.37u void is closed.
+- **Flanks/back geometry → LANDED. ✔** `rear_boiler_bulge` (back), `flank_valve_l/r`+caps, `rear_plumbing_boss`+`nut`, 4 `feet`. shaded-back reads as a real machine back (recessed panel + plumbing boss + seam); shaded-left has a valve + boiler swell + feet. Not bare slabs anymore.
+- **No new floats → CLEAN. ✔** wire-threeQuarter + wire-top show everything anchored; the 18° `machine_root` yaw on an axis-aligned plinth explains the top-view plate/body offset (parallax, not a rotation defect).
+
+### Residual defects (worst first) — polish, not blockers
+1. **[silhouette] Pure-left flank still reads boxy.** The `rear_boiler_bulge` (0.28 deep) reads as a swell, not a cylinder; flank valves are small nubs. Seen in shaded-left. FIX: give the boiler a proud upper-flank cylinder (radius ~0.22 poking ~0.15 past the 0.66 shell edge on one side) so the pure-side silhouette breaks.
+2. **[material] Brass fascia reads dim brown, not brushed brass.** `front_brass_plate` sits in shadow behind the surround chrome; reads chocolate in shaded-front. FIX: raise its base value / envMapIntensity a touch or add a small fascia fill so it reads brass in a flat front light.
+3. **[material] One bloom hotspot on the front-top edge.** Seen in shaded-front. FIX: trim bloom strength or the top-edge chrome envMapIntensity slightly.
+4. **[feature] Wands hug the shell (x±0.62 inside 0.66 half-width).** Read but don't project. FIX: push collars to x±0.70 and toward the front so the steam/water arms reach clear of the flank.
+
+Crossed the bar honestly at 80. Single highest-leverage next move: bolder boiler cylinder on the flank to convert the last plain silhouette (pure-left) — that alone would make it a confident ship rather than a soft one.
+
+---
+
+## Review — 2026-07-04 (re-grade after domed-cap + brass + bloom + wand polish) · score 79 · REVISE
+
+Fresh 6-shaded + 2-wireframe sweep, verified from every angle. The four polish items partly landed — brass is brighter, wands now project — but the headline "domed steel boiler end-caps" **regressed the flank**: they render as dark faceted portholes, not polished convex steel. Net a soft step DOWN from the 80 soft-ship.
+
+| Dimension | w | 80 → 79 | Note |
+|---|---|---|---|
+| Concept match | 0.25 | 81 → 80 | Front/threeQuarter/low/back still read as a prosumer E61. Docked: the left flank now reads like a washing-machine porthole (dark faceted disc), and a large white bloom sunburst sits on the front-top edge. |
+| Proportion & scale | 0.20 | 79 → 79 | Unchanged cube (`body_shell` 1.32×1.45×0.95). Believable footprint held. Caps add roundness to the flank volume. |
+| Feature completeness | 0.20 | 85 → 84 | All prompt features present + well placed; wands now project on both flanks (x±0.70), cup catches the pour, both LEDs, gauge, rocker, walnut twin-spout portafilter, brass warming plate, slatted tray. The boiler cap is present but misreads. |
+| Silhouette & readability | 0.15 | 72 → 74 | The flank cap now protrudes — the pure-left outline steps into a double-volume instead of a plain slab (geometric win). But the dark porthole read muddies that flank, so the gain is partial. |
+| Construction integrity | 0.10 | 80 → 81 | Clean. wire-threeQuarter shows the boiler cylinder threading both end-caps through the body, wands welded to their pivot collars and projecting, cup grounded on the tray, feet on the plinth. Zero floats. |
+| Material & colour | 0.10 | 77 → 74 | Brass fascia brighter (reads warm brass, no longer chocolate) — real win. But two new material defects: the boiler end-caps read dark/matte/faceted (porthole, not steel), and the front-top bloom sunburst persists despite the claimed bloom reduction. |
+
+**Formula:** 80·.25 + 79·.20 + 84·.20 + 74·.15 + 81·.10 + 74·.10 = **79** → revise. No hard floor (lowest = material/silhouette 74).
+
+### Fix verification (did the four polish items land?)
+- **Domed steel end-caps → LANDED GEOMETRICALLY, FAILED MATERIALLY.** `boiler_cap_l/r` (sphere r0.23) bulge both flanks and wire-threeQuarter confirms they thread a central boiler cylinder — construction is sound and the flank outline finally breaks. **But** they render as dark faceted portholes: `params: [0.23, 1]` gives a near-facetless low-seg sphere (chunky gem, not smooth dome) and `envMapIntensity: 0.7` (vs the shell's 2.6) means they pick up almost no environment → dark interior + bright rim = reads *concave*. This is the exact "matte domes reading as portholes" regression that was flagged. Seen in shaded-left, shaded-lowAngle.
+- **Brighter brass fascia → LANDED. ✔** `front_brass_plate` reads warm brass in shaded-front/threeQuarter — the dim-brown read is gone. Slightly hot/plasticky-orange still.
+- **Reduced bloom → NOT CONVINCING.** shaded-front still carries a large white sunburst blob on the top-right shell edge. The hotspot did not clear.
+- **Wands pushed out (x±0.70) → LANDED. ✔** Both wands now project past the flank and read as arms reaching down — steam wand + knob on the right, water wand on the left (shaded-front, shaded-threeQuarter, shaded-lowAngle). wire-threeQuarter shows them anchored to their pivot collars — projected but NOT detached.
+
+### Findings (worst first)
+1. **[material/concept] Boiler end-caps read as dark faceted portholes, not polished steel domes.** The one polish item that was meant to help the flank hurt it. Seen in shaded-left, shaded-lowAngle. FIX: `boiler_cap_l/r` — raise segment count (`params` [0.23, 1] → [0.23, 32, 24]) so it's a smooth dome not a gem; raise `envMapIntensity` 0.7 → ~2.2 and drop `roughness` 0.34 → ~0.15 so it reads polished convex steel with a specular hotspot near the crown; lighten base `#b9bdc4` → ~`#c8ccd0`. The dome must catch the bright environment like the shell does.
+2. **[material] Front-top bloom sunburst persists.** Seen in shaded-front (and threeQuarter). FIX: drop `scene.postfx.bloom.strength` another notch, or lower the top-front-edge chrome `envMapIntensity` (shell 2.6) so the specular clip on that edge stops blooming to a white disc.
+3. **[silhouette/material] Flank cap seat is ambiguous.** `boiler_band_r` (torus) sits at x0.7 while `boiler_cap_r` is at x0.6 — the brass ring floats outboard of the cap crown instead of ringing its base, so nothing reads the disc as a *seated boiler cap* vs a hole. FIX: move the band to the cap's base plane (align x to the cap face, widen radius to ring the 0.23 sphere waist) so it reads as a bolted-on cap collar.
+4. **[material] Brass fascia slightly hot/plasticky.** Minor. Seen in shaded-front. FIX: trim `front_brass_plate` emissiveIntensity a touch toward brushed brass.
+
+Verdict: revise. The polish traded one weak-side complaint (boxy flank) for a worse one (porthole flank) while genuinely improving brass + wands. Once the caps read as convex polished steel (segments + envMap + roughness) and the front bloom is tamed, this is a clean ≥80 ship — the geometry is already there in the wireframe.
+
+---
+
+## Review — 2026-07-04 (re-grade after porthole removal) · score 80 · SHIP
+
+Fresh 6-shaded + 2-wireframe sweep, graded objectively from every angle. The domed flank end-caps that read as portholes were **removed**; the good polish was kept. This crosses the bar honestly — no regressions from the removal, and the flank read is restored.
+
+| Dimension | w | 79 → 80 | Note |
+|---|---|---|---|
+| Concept match | 0.25 | 80 → 82 | Reads as a prosumer E61 from front / threeQuarter / low / back. The washing-machine porthole is gone — the left flank no longer reads like a laundromat. Cup catches the pour, group in lower third, brass fascia warm. Minor: a white bloom sunburst still sits on the front-top edge. |
+| Proportion & scale | 0.20 | 79 → 80 | Cube body held (`body_shell` 1.32×1.45×0.95). Believable footprint. Depth slightly < width (real machines are deeper), minor. |
+| Feature completeness | 0.20 | 84 → 85 | All prompt features present + well placed. Twin walnut-handle spouts, both wands+wood knobs projecting on both flanks, gauge, both LEDs, rocker, brass warming plate w/ gold rails, slatted tray, demitasse catching the pour, rear boiler bulge + flank valves + plumbing boss. |
+| Silhouette & readability | 0.15 | 74 → 75 | Front / threeQuarter / low / back all read cleanly. Boiler bulge still steps the lower flank into a double-volume (not the bare slab of old, not the porthole disc either). Pure-left remains the weakest — the swell reads as a box, not a bold cylinder. 5 of 6 angles good. |
+| Construction integrity | 0.10 | 81 → 81 | Clean. wire-threeQuarter + wire-top show the boiler cylinder threading the body (no sphere end-caps now), wands welded to pivot collars and projecting, cup grounded on tray under the spouts, feet on plinth. Zero detached specks. |
+| Material & colour | 0.10 | 74 → 76 | Chrome reads mirror, warming plate reads brass w/ rails (top), walnut good, back holds form (no blow-white). Brass fascia reads warm brass in shaded-front / shaded-lowAngle (the porthole material defect is gone). Residual: fascia dims to reddish-brown in threeQuarter shadow; front-top bloom sunburst persists. |
+
+**Formula:** 82·.25 + 80·.20 + 85·.20 + 75·.15 + 81·.10 + 76·.10 = **80** → ship (soft). No hard floor (lowest = silhouette 75).
+
+### Fix verification
+- **Porthole removed → LANDED. ✔** No dark faceted disc on any flank (shaded-left, shaded-lowAngle, shaded-threeQuarter). wire-threeQuarter confirms the boiler is now a plain horizontal cylinder threading the body — the sphere end-caps that read concave are gone. The flank keeps the protruding boiler-box volume + valve nubs + steam knob, so the silhouette gain was retained without the porthole liability.
+- **Brighter brass fascia → KEPT. ✔** `front_brass_plate` reads warm brass in shaded-front and shaded-lowAngle — no black hole, no chocolate.
+- **Wands projected (x±0.70) → KEPT. ✔** Both wands reach clear of the flank and read as arms in shaded-front / threeQuarter / low; wire shows them anchored to their collars.
+- **Rear boiler bulge + flank valves + plumbing boss → KEPT. ✔** shaded-back reads as a real machine back (recessed panel + brass plumbing nut + seam); shaded-left has valves + boiler swell + feet.
+
+### Residual defects (worst first) — polish, not blockers
+1. **[material/concept] Front-top bloom sunburst persists.** A white specular disc sits on the front-top shell edge in shaded-front (and a smaller one in shaded-lowAngle / shaded-back top-right). FIX: drop `scene.postfx.bloom.strength` another notch or lower the top-edge chrome `envMapIntensity` so that edge specular stops clipping to a white disc.
+2. **[silhouette] Pure-left flank still reads boxy.** The boiler bulge is a lower-front box swell, not a proud cylinder. FIX: give the boiler a proud upper-flank cylinder (radius ~0.22 poking ~0.15 past the 0.66 shell edge) so the pure-side outline breaks with a round volume.
+3. **[material] Brass fascia dims to reddish-brown in threeQuarter.** Sits in the surround-chrome shadow. FIX: raise its base value / envMapIntensity a touch or add a small fascia fill so it holds brass off-axis.
+
+Crossed the bar honestly at 80. The porthole regression is fully reverted with the geometric gain kept. Single highest-leverage next move: tame the front-top bloom hotspot — it's the most visible remaining blemish in the hero front angle.
