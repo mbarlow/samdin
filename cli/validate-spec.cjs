@@ -656,6 +656,7 @@ function validateSpec(specPath, strict = false) {
 function expandArgs(args) {
   const files = [];
   for (const arg of args) {
+    if (path.basename(arg) === 'index.json') continue; // the viewer manifest, not a spec
     if (fs.existsSync(arg) && fs.statSync(arg).isFile()) {
       files.push(arg);
     }

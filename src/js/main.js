@@ -72,11 +72,42 @@ class App {
 
     // Setup UI
     this.setupUI();
-    
+
+    // Populate the dropdown from the specs/ directory (the real, current specs —
+    // the inline EXAMPLE_SPECS above are just the boot fallback).
+    this.loadDiskSpecs();
+
     // Load default model for testing
     this.loadSpec('simpleDrone');
-    
+
     console.log('Samdin initialized');
+  }
+
+  async loadDiskSpecs() {
+    const specSelect = document.getElementById('spec-select');
+    if (!specSelect) return;
+    let list;
+    try {
+      list = await (await fetch('./specs/index.json')).json();
+    } catch {
+      console.warn('[specs] specs/index.json not found — dropdown shows built-ins only. Run `make spec-index`.');
+      return;
+    }
+    // Fetch in parallel, then register + append in manifest order (anchors first).
+    const specs = await Promise.all(list.map(async (file) => {
+      try { return await (await fetch(`./specs/${file}`)).json(); }
+      catch (e) { console.warn(`[specs] failed to load ${file}:`, e.message); return null; }
+    }));
+    for (const spec of specs) {
+      if (!spec || !spec.name) continue;
+      this.builder.registerSpec(spec);
+      if (![...specSelect.options].some((o) => o.value === spec.name)) {
+        const opt = document.createElement('option');
+        opt.value = spec.name;
+        opt.textContent = spec.name;
+        specSelect.appendChild(opt);
+      }
+    }
   }
   
   setupUI() {
