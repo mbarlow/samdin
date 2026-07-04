@@ -78,6 +78,51 @@
         "material": 68
       },
       "note": "Wands welded + brass reads now; cup still marooned below spouts, body still 2u fridge"
+    },
+    {
+      "spec": "quality-bar-espresso-machine",
+      "date": "2026-07-04",
+      "score": 80,
+      "verdict": "ship",
+      "dims": {
+        "concept": 81,
+        "proportion": 79,
+        "feature": 85,
+        "silhouette": 72,
+        "construction": 80,
+        "material": 77
+      },
+      "note": "De-fridge + cup-under-pour + flank/back geometry all landed; no floats; soft ship, pure-left flank still plainest"
+    },
+    {
+      "spec": "quality-bar-espresso-machine",
+      "date": "2026-07-04",
+      "score": 79,
+      "verdict": "revise",
+      "dims": {
+        "concept": 80,
+        "proportion": 79,
+        "feature": 84,
+        "silhouette": 74,
+        "construction": 81,
+        "material": 74
+      },
+      "note": "Polish fixed brass+wands but boiler end-caps read as dark faceted portholes (low segs + low envMap); front bloom sunburst persists"
+    },
+    {
+      "spec": "quality-bar-espresso-machine",
+      "date": "2026-07-04",
+      "score": 80,
+      "verdict": "ship",
+      "dims": {
+        "concept": 82,
+        "proportion": 80,
+        "feature": 85,
+        "silhouette": 75,
+        "construction": 81,
+        "material": 76
+      },
+      "note": "Porthole removed, flank read restored; brighter brass + projected wands kept; front-top bloom hotspot persists"
     }
   ]
 }
