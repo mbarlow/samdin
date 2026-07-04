@@ -68,3 +68,28 @@ Executed the four fixes, re-shot, re-graded.
 - [ ] Cab still a touch small vs the long bed — consider shortening the bed by ~0.2 rather than growing the cab.
 
 *+5 in one loop. The structural fixes paid; the material one needs another pass. Loop again or ship at 72 as "good, not anchor-grade."*
+
+---
+
+## Review — 2026-07-03 (loop 3) · score 78 · REVISE (2 off ship)
+
+Fixed the flagged hub, nudged the front wheels.
+
+| Dim | 2 → 3 | Note |
+|---|---|---|
+| Concept match | 74 → 78 | Wheels read properly now; the truck is unambiguous from every angle. |
+| Proportion & scale | 70 → 74 | Front wheels pulled back to the arch line (`z -1.62`→`-1.5`). |
+| Feature completeness | 76 → **82** | **Hub detail now reads** — lighter tire `#4a5157`, lighter rim, a proud brighter hub cap, visible lug band. The prompt's "tires with hub detail" is satisfied. |
+| Silhouette & readability | 70 → 76 | Defined wheels; clean from all six angles. |
+| Construction integrity | 72 → 76 | Wheels at the arch line, stage aligned, grounded. |
+| Material & colour | 70 → **78** | The wheels are no longer black voids. |
+
+**Formula:** 78·.25 + 74·.20 + 82·.20 + 76·.15 + 76·.10 + 78·.10 = **78** → *revise*, 2 short of ship.
+
+The hub fix that underdelivered in loop 2 landed here — making the hub *proud* (it catches light) plus lifting the tire out of near-black did it. A bigger flat chrome disc alone wasn't enough; depth was.
+
+### Loop 4 (the last 2 points)
+
+- [ ] **Cab-to-bed proportion** is the only dimension still under bar. The cab reads small against the long hood + bed in side profile. Shorten the bed ~0.2 (pull the rear in) rather than growing the cab — a compact pickup has a short bed. This should carry proportion 74→80 and cross the ship line.
+
+*67 → 72 → 78 over three loops. One structural proportion pass left. The material and feature dimensions are now anchor-grade; the read is a real compact pickup.*
