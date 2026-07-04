@@ -146,7 +146,7 @@
     {
       "name": "body_shell",
       "type": "roundedBox",
-      "params": [1.16, 1.95, 1.18, 0.06, 4],
+      "params": [1.32, 1.95, 1.18, 0.06, 4],
       "material": {
         "color": "#e8e8ec",
         "roughness": 0.08,
@@ -169,7 +169,7 @@
       "type": "box",
       "params": [0.002, 1.85, 1.16],
       "material": { "color": "#1a1a1c", "roughness": 0.85 },
-      "position": [-0.581, 1.0, 0],
+      "position": [-0.661, 1.0, 0],
       "parent": "machine_root"
     },
     {
@@ -177,13 +177,13 @@
       "type": "box",
       "params": [0.002, 1.85, 1.16],
       "material": { "color": "#1a1a1c", "roughness": 0.85 },
-      "position": [0.581, 1.0, 0],
+      "position": [0.661, 1.0, 0],
       "parent": "machine_root"
     },
     {
       "name": "body_top_seam_front",
       "type": "box",
-      "params": [1.16, 0.002, 0.005],
+      "params": [1.32, 0.002, 0.005],
       "material": { "color": "#1a1a1c", "roughness": 0.85 },
       "position": [0, 1.973, 0.59],
       "parent": "machine_root"
@@ -191,9 +191,73 @@
     {
       "name": "body_top_seam_back",
       "type": "box",
-      "params": [1.16, 0.002, 0.005],
+      "params": [1.32, 0.002, 0.005],
       "material": { "color": "#1a1a1c", "roughness": 0.85 },
       "position": [0, 1.973, -0.59],
+      "parent": "machine_root"
+    },
+    {
+      "name": "side_panel_l",
+      "type": "roundedBox",
+      "params": [0.03, 1.4, 0.82, 0.02, 2],
+      "material": { "color": "#3f454c", "roughness": 0.5, "metalness": 0.8, "envMapIntensity": 0.8 },
+      "position": [-0.672, 1.02, -0.02],
+      "parent": "machine_root"
+    },
+    {
+      "name": "side_vent_l_1",
+      "type": "box",
+      "params": [0.02, 0.032, 0.6],
+      "material": { "color": "#202327", "roughness": 0.8 },
+      "position": [-0.686, 0.5, -0.02],
+      "parent": "machine_root"
+    },
+    {
+      "name": "side_vent_l_2",
+      "type": "box",
+      "params": [0.02, 0.032, 0.6],
+      "material": { "color": "#202327", "roughness": 0.8 },
+      "position": [-0.686, 0.72, -0.02],
+      "parent": "machine_root"
+    },
+    {
+      "name": "side_vent_l_3",
+      "type": "box",
+      "params": [0.02, 0.032, 0.6],
+      "material": { "color": "#202327", "roughness": 0.8 },
+      "position": [-0.686, 0.94, -0.02],
+      "parent": "machine_root"
+    },
+    {
+      "name": "side_panel_r",
+      "type": "roundedBox",
+      "params": [0.03, 1.4, 0.82, 0.02, 2],
+      "material": { "color": "#3f454c", "roughness": 0.5, "metalness": 0.8, "envMapIntensity": 0.8 },
+      "position": [0.672, 1.02, -0.02],
+      "parent": "machine_root"
+    },
+    {
+      "name": "side_vent_r_1",
+      "type": "box",
+      "params": [0.02, 0.032, 0.6],
+      "material": { "color": "#202327", "roughness": 0.8 },
+      "position": [0.686, 0.5, -0.02],
+      "parent": "machine_root"
+    },
+    {
+      "name": "side_vent_r_2",
+      "type": "box",
+      "params": [0.02, 0.032, 0.6],
+      "material": { "color": "#202327", "roughness": 0.8 },
+      "position": [0.686, 0.72, -0.02],
+      "parent": "machine_root"
+    },
+    {
+      "name": "side_vent_r_3",
+      "type": "box",
+      "params": [0.02, 0.032, 0.6],
+      "material": { "color": "#202327", "roughness": 0.8 },
+      "position": [0.686, 0.94, -0.02],
       "parent": "machine_root"
     },
 
