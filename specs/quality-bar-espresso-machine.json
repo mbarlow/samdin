@@ -44,7 +44,7 @@
       },
       "bloom": {
         "enabled": true,
-        "strength": 0.18,
+        "strength": 0.13,
         "radius": 0.3,
         "threshold": 0.88
       },
@@ -551,6 +551,132 @@
       "comment": "boiler housing bulging the rear \u2014 silhouette relief"
     },
     {
+      "name": "boiler_cap_r",
+      "type": "sphere",
+      "params": [
+        0.23,
+        1
+      ],
+      "material": {
+        "color": "#b9bdc4",
+        "roughness": 0.34,
+        "metalness": 0.92,
+        "clearcoat": 0.3,
+        "envMapIntensity": 0.7,
+        "breakup": {
+          "noise": {
+            "amount": 0.02,
+            "scale": 6.0,
+            "color": "#aeb2b8"
+          },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [
+        0.6,
+        1.02,
+        -0.06
+      ],
+      "scale": [
+        0.85,
+        1.0,
+        1.0
+      ],
+      "castShadow": true,
+      "parent": "machine_root",
+      "comment": "boiler end cap bulging the right flank \u2014 3D from all angles"
+    },
+    {
+      "name": "boiler_band_r",
+      "type": "torus",
+      "params": [
+        0.175,
+        0.016,
+        10,
+        20
+      ],
+      "material": {
+        "color": "#a8804a",
+        "roughness": 0.42,
+        "metalness": 0.9,
+        "clearcoat": 0.4
+      },
+      "position": [
+        0.7,
+        1.02,
+        -0.06
+      ],
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "parent": "machine_root",
+      "comment": "brass band around the boiler cap"
+    },
+    {
+      "name": "boiler_cap_l",
+      "type": "sphere",
+      "params": [
+        0.23,
+        1
+      ],
+      "material": {
+        "color": "#b9bdc4",
+        "roughness": 0.34,
+        "metalness": 0.92,
+        "clearcoat": 0.3,
+        "envMapIntensity": 0.7,
+        "breakup": {
+          "noise": {
+            "amount": 0.02,
+            "scale": 6.0,
+            "color": "#aeb2b8"
+          },
+          "roughnessVariation": 0.04
+        }
+      },
+      "position": [
+        -0.6,
+        1.02,
+        -0.06
+      ],
+      "scale": [
+        0.85,
+        1.0,
+        1.0
+      ],
+      "castShadow": true,
+      "parent": "machine_root"
+    },
+    {
+      "name": "boiler_band_l",
+      "type": "torus",
+      "params": [
+        0.175,
+        0.016,
+        10,
+        20
+      ],
+      "material": {
+        "color": "#a8804a",
+        "roughness": 0.42,
+        "metalness": 0.9,
+        "clearcoat": 0.4
+      },
+      "position": [
+        -0.7,
+        1.02,
+        -0.06
+      ],
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "parent": "machine_root"
+    },
+    {
       "name": "rear_plumbing_boss",
       "type": "cylinder",
       "params": [
@@ -992,14 +1118,14 @@
         2
       ],
       "material": {
-        "color": "#bc934f",
+        "color": "#d2aa62",
         "roughness": 0.44,
         "metalness": 0.9,
         "clearcoat": 0.45,
         "clearcoatRoughness": 0.18,
-        "envMapIntensity": 2.2,
+        "envMapIntensity": 2.4,
         "emissive": "#2a1c0a",
-        "emissiveIntensity": 0.14,
+        "emissiveIntensity": 0.2,
         "breakup": {
           "noise": {
             "amount": 0.03,
@@ -2158,9 +2284,9 @@
         "clearcoat": 0.45
       },
       "position": [
-        0.6,
+        0.7,
         0.8838,
-        0.2415
+        0.36
       ],
       "rotation": [
         0,
@@ -2173,9 +2299,9 @@
       "name": "steam_wand",
       "type": "group",
       "position": [
-        0.62,
+        0.7,
         0.8838,
-        0.2415
+        0.36
       ],
       "rotation": [
         -35,
@@ -2256,9 +2382,9 @@
       "type": "module",
       "src": "wood-knob",
       "position": [
-        0.6,
+        0.7,
         1.0103,
-        0.2415
+        0.36
       ],
       "parent": "machine_root"
     },
@@ -2277,9 +2403,9 @@
         "metalness": 0.9
       },
       "position": [
-        0.6,
+        0.7,
         0.9433,
-        0.2415
+        0.36
       ],
       "parent": "machine_root"
     },
@@ -2288,9 +2414,9 @@
       "type": "module",
       "src": "wood-knob",
       "position": [
-        -0.6,
+        -0.7,
         1.0103,
-        0.2415
+        0.36
       ],
       "parent": "machine_root"
     },
@@ -2309,9 +2435,9 @@
         "metalness": 0.9
       },
       "position": [
-        -0.6,
+        -0.7,
         0.9433,
-        0.2415
+        0.36
       ],
       "parent": "machine_root"
     },
@@ -2331,9 +2457,9 @@
         "clearcoat": 0.45
       },
       "position": [
-        -0.6,
+        -0.7,
         0.8838,
-        0.2415
+        0.36
       ],
       "rotation": [
         0,
@@ -2346,9 +2472,9 @@
       "name": "water_wand",
       "type": "group",
       "position": [
-        -0.62,
+        -0.7,
         0.8838,
-        0.2415
+        0.36
       ],
       "rotation": [
         -35,
