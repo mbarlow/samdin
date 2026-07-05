@@ -7,9 +7,39 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <!-- Inline SVG icon sprite (minimal, 24×24, stroke=currentColor) -->
+  <svg id="icon-sprite" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="i-sliders" viewBox="0 0 24 24"><line x1="4" y1="9" x2="20" y2="9"/><circle cx="15" cy="9" r="2.2"/><line x1="4" y1="15" x2="20" y2="15"/><circle cx="9" cy="15" r="2.2"/></symbol>
+    <symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 2 21 7v10l-9 5-9-5V7Z"/><path d="M3 7l9 5 9-5"/><line x1="12" y1="12" x2="12" y2="22"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12" y2="8"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7l1.5-2h5L16 7"/><circle cx="12" cy="13" r="3.5"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10c1 1 1.5 2 1.5 3h5c0-1 .5-2 1.5-3a6 6 0 0 0-4-10Z"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><ellipse cx="12" cy="12" rx="4" ry="9"/></symbol>
+    <symbol id="i-wand" viewBox="0 0 24 24"><path d="M12 3l1.7 4.3L18 9l-4.3 1.7L12 15l-1.7-4.3L6 9l4.3-1.7Z"/><line x1="18.5" y1="15" x2="19" y2="17.5"/><line x1="5" y1="16" x2="5.5" y2="18.5"/></symbol>
+    <symbol id="i-film" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="8.5" y1="5" x2="8.5" y2="19"/><line x1="15.5" y1="5" x2="15.5" y2="19"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4v16l13-8Z"/></symbol>
+    <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="1.5"/></symbol>
+    <symbol id="i-frame" viewBox="0 0 24 24"><path d="M4 8V5a1 1 0 0 1 1-1h3"/><path d="M16 4h3a1 1 0 0 1 1 1v3"/><path d="M20 16v3a1 1 0 0 1-1 1h-3"/><path d="M8 20H5a1 1 0 0 1-1-1v-3"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.8"/><path d="M4 18l5-5 4 4 3-3 4 4"/></symbol>
+    <symbol id="i-flip" viewBox="0 0 24 24"><line x1="12" y1="3" x2="12" y2="21"/><path d="M8 8l-4 4 4 4"/><path d="M16 8l4 4-4 4"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 20V8"/><path d="M7 12l5-5 5 5"/><path d="M4 20h16"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></symbol>
+    <symbol id="i-pencil" viewBox="0 0 24 24"><path d="M4 20h4L20 8l-4-4L4 16Z"/><line x1="14" y1="6" x2="18" y2="10"/></symbol>
+    <symbol id="i-clipboard" viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="17" rx="2"/><rect x="9" y="2.5" width="6" height="4" rx="1"/></symbol>
+  </svg>
+
   <div id="app">
     <!-- Three.js canvas container -->
     <div id="viewport"></div>
+
+    <!-- Mobile drawer toggle (hidden on desktop) -->
+    <button id="panel-toggle" aria-label="Toggle controls" aria-expanded="false">
+      <svg class="icon"><use href="#i-sliders"/></svg>
+    </button>
+    <div id="panel-backdrop" hidden></div>
 
     <!-- First-person crosshair overlay -->
     <div id="fp-crosshair" class="hidden">
@@ -22,28 +52,31 @@
       <header>
         <h1>SAM DIN</h1>
         <span class="version">v0.0.1</span>
+        <button id="panel-close" aria-label="Close controls">
+          <svg class="icon"><use href="#i-x"/></svg>
+        </button>
       </header>
 
       <!-- Model controls -->
       <section id="model-section">
-        <h2>MODEL</h2>
+        <h2><span class="h2-label"><svg class="icon"><use href="#i-cube"/></svg>MODEL</span></h2>
         <div class="section-body">
           <div class="control-group">
-            <button id="btn-load">Load GLTF/GLB</button>
-            <button id="btn-export">Export GLTF</button>
+            <button id="btn-load"><svg class="icon"><use href="#i-upload"/></svg>Load GLTF/GLB</button>
+            <button id="btn-export"><svg class="icon"><use href="#i-download"/></svg>Export GLTF</button>
             <input type="file" id="file-input" accept=".gltf,.glb,.GLB,.GLTF" hidden>
           </div>
           <div class="control-group">
-            <button id="btn-load-spec">Load Spec</button>
-            <button id="btn-paste-spec">Paste</button>
-            <button id="btn-open-editor">Editor</button>
+            <button id="btn-load-spec"><svg class="icon"><use href="#i-upload"/></svg>Load Spec</button>
+            <button id="btn-paste-spec"><svg class="icon"><use href="#i-clipboard"/></svg>Paste</button>
+            <button id="btn-open-editor"><svg class="icon"><use href="#i-pencil"/></svg>Editor</button>
             <input type="file" id="spec-file-input" accept=".json" hidden>
           </div>
           <div class="control-group">
             <select id="spec-select">
               <option value="">Built-in specs...</option>
             </select>
-            <button id="btn-build">Build</button>
+            <button id="btn-build"><svg class="icon"><use href="#i-cube"/></svg>Build</button>
           </div>
           <div class="control-group">
             <label>Quality</label>
@@ -60,8 +93,8 @@
               <option value="terrain" selected>Terrain</option>
               <option value="both">Both</option>
             </select>
-            <button id="btn-flip-normals" title="Flip normals on selected part, or on the generated terrain if nothing is selected">Flip Normals</button>
-            <button id="btn-save-spec" title="Download the current spec JSON with normal-flip state persisted">Save Spec</button>
+            <button id="btn-flip-normals" title="Flip normals on selected part, or on the generated terrain if nothing is selected"><svg class="icon"><use href="#i-flip"/></svg>Flip Normals</button>
+            <button id="btn-save-spec" title="Download the current spec JSON with normal-flip state persisted"><svg class="icon"><use href="#i-download"/></svg>Save Spec</button>
           </div>
           <div id="upload-progress">
             <div class="upload-info">
@@ -77,7 +110,7 @@
 
       <!-- Info display — compact chips -->
       <section id="info-section">
-        <h2>INFO</h2>
+        <h2><span class="h2-label"><svg class="icon"><use href="#i-info"/></svg>INFO</span></h2>
         <div class="section-body">
           <div id="model-info">
             <div class="info-chip"><span id="info-tris">0</span><small>Tris</small></div>
@@ -89,7 +122,7 @@
 
       <!-- Part Inspector -->
       <section id="part-section">
-        <h2>SELECTED PART</h2>
+        <h2><span class="h2-label"><svg class="icon"><use href="#i-target"/></svg>SELECTED PART</span></h2>
         <div class="section-body">
           <div id="part-info">
             <p class="no-selection">Click a part to inspect</p>
@@ -107,7 +140,7 @@
 
       <!-- Camera/View controls -->
       <section id="camera-section">
-        <h2>CAMERA</h2>
+        <h2><span class="h2-label"><svg class="icon"><use href="#i-camera"/></svg>CAMERA</span></h2>
         <div class="section-body">
           <div class="control-group">
             <label>Mode</label>
@@ -155,8 +188,8 @@
             </select>
           </div>
           <div class="control-group orbit-controls">
-            <button id="btn-fit">Fit</button>
-            <button id="btn-screenshot">Screenshot</button>
+            <button id="btn-fit"><svg class="icon"><use href="#i-frame"/></svg>Fit</button>
+            <button id="btn-screenshot"><svg class="icon"><use href="#i-image"/></svg>Screenshot</button>
           </div>
           <div class="control-group">
             <label><input type="checkbox" id="cam-wireframe"> Wireframe</label>
@@ -171,7 +204,7 @@
 
       <!-- Lighting controls -->
       <section id="lighting-section" class="collapsed">
-        <h2>LIGHTING</h2>
+        <h2><span class="h2-label"><svg class="icon"><use href="#i-bulb"/></svg>LIGHTING</span></h2>
         <div class="section-body">
           <div class="control-group">
             <label>Preset</label>
@@ -229,7 +262,7 @@
 
       <!-- Environment controls -->
       <section id="env-section" class="collapsed">
-        <h2>ENVIRONMENT</h2>
+        <h2><span class="h2-label"><svg class="icon"><use href="#i-globe"/></svg>ENVIRONMENT</span></h2>
         <div class="section-body">
           <div class="control-group">
             <label>BG</label>
@@ -264,7 +297,7 @@
 
       <!-- Post-processing controls -->
       <section id="post-section" class="collapsed">
-        <h2>POST-FX</h2>
+        <h2><span class="h2-label"><svg class="icon"><use href="#i-wand"/></svg>POST-FX</span></h2>
         <div class="section-body">
           <div class="control-group">
             <label><input type="checkbox" id="fx-ssao"> SSAO</label>
@@ -335,7 +368,7 @@
 
       <!-- Animation controls -->
       <section id="anim-section" class="collapsed">
-        <h2>ANIMATION</h2>
+        <h2><span class="h2-label"><svg class="icon"><use href="#i-film"/></svg>ANIMATION</span></h2>
         <div class="section-body">
           <div class="control-group" id="clip-controls" style="display: none;">
             <label>Clips</label>
@@ -366,15 +399,15 @@
             </select>
           </div>
           <div class="control-group">
-            <button id="btn-play">Play</button>
-            <button id="btn-stop">Stop</button>
+            <button id="btn-play"><svg class="icon"><use href="#i-play"/></svg>Play</button>
+            <button id="btn-stop"><svg class="icon"><use href="#i-stop"/></svg>Stop</button>
           </div>
         </div>
       </section>
 
       <!-- Part Library -->
       <section id="library-section" class="collapsed">
-        <h2>PART LIBRARY</h2>
+        <h2><span class="h2-label"><svg class="icon"><use href="#i-grid"/></svg>PART LIBRARY</span></h2>
         <div class="section-body">
           <div class="library-tabs">
             <button class="lib-tab active" data-tab="primitives">Primitives</button>
@@ -436,7 +469,7 @@
           <input type="checkbox" id="editor-live-preview" checked> Live
         </label>
         <button id="btn-editor-build">Build</button>
-        <button id="btn-editor-close">X</button>
+        <button id="btn-editor-close"><svg class="icon"><use href="#i-x"/></svg></button>
       </div>
     </div>
     <div class="editor-body">
@@ -457,6 +490,21 @@
         h2.closest('section').classList.toggle('collapsed');
       });
     });
+
+    // Mobile drawer: floating toggle opens/closes the control panel over the 3D view.
+    (function () {
+      const body = document.body;
+      const toggle = document.getElementById('panel-toggle');
+      const backdrop = document.getElementById('panel-backdrop');
+      const setOpen = (open) => {
+        body.classList.toggle('panel-open', open);
+        toggle.setAttribute('aria-expanded', String(open));
+        backdrop.hidden = !open;
+      };
+      toggle.addEventListener('click', () => setOpen(!body.classList.contains('panel-open')));
+      backdrop.addEventListener('click', () => setOpen(false));
+      document.getElementById('panel-close').addEventListener('click', () => setOpen(false));
+    })();
   </script>
 
   <div id="toast-container"></div>
