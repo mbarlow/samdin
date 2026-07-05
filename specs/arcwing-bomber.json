@@ -1,0 +1,428 @@
+{
+  "name": "arcwing-bomber",
+  "description": "Arcwing enemy bomber \u2014 heavy slab fuselage, tapered nose, cockpit slit, underslung bomb rack with a row of warhead tips, twin fat engine pods with hot exhausts, stub wings, dorsal fin. Reads slow and pregnant with ordnance. Dark-red hull, orange glow. Nose +Z.",
+  "root": "ship",
+  "scene": {
+    "quality": "high",
+    "background": {
+      "type": "gradient",
+      "top": "#1a0e10",
+      "bottom": "#05020a"
+    },
+    "lighting": {
+      "preset": "showcase",
+      "environment": "studio",
+      "envMapIntensity": 1.3,
+      "intensity": 1.1
+    },
+    "camera": {
+      "preset": "threeQuarter",
+      "distanceMultiplier": 0.95,
+      "positionOffset": [
+        -1.0,
+        -0.8,
+        2.2
+      ],
+      "targetOffset": [
+        0,
+        0.05,
+        0.2
+      ]
+    },
+    "exposure": 1.02,
+    "postfx": {
+      "bloom": {
+        "strength": 0.26,
+        "threshold": 0.8,
+        "radius": 0.4
+      },
+      "vignette": {
+        "enabled": true,
+        "intensity": 0.24
+      },
+      "fxaa": true
+    }
+  },
+  "parts": [
+    {
+      "name": "ship",
+      "type": "group",
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "key_light",
+      "type": "pointLight",
+      "params": [
+        1.5,
+        26,
+        0,
+        false
+      ],
+      "material": {
+        "color": "#ffe6d0"
+      },
+      "position": [
+        3.4,
+        4.2,
+        3.2
+      ],
+      "parent": "ship"
+    },
+    {
+      "name": "rim_light",
+      "type": "pointLight",
+      "params": [
+        1.9,
+        26,
+        0,
+        false
+      ],
+      "material": {
+        "color": "#ff8a5a"
+      },
+      "position": [
+        -2.8,
+        1.4,
+        -4.2
+      ],
+      "parent": "ship"
+    },
+    {
+      "name": "fill_light",
+      "type": "pointLight",
+      "params": [
+        0.55,
+        26,
+        0,
+        false
+      ],
+      "material": {
+        "color": "#906060"
+      },
+      "position": [
+        -3.6,
+        2.6,
+        2.6
+      ],
+      "parent": "ship"
+    },
+    {
+      "name": "fuselage",
+      "type": "roundedBox",
+      "params": [
+        1.5,
+        0.78,
+        2.2,
+        0.08,
+        2
+      ],
+      "material": {
+        "color": "#6f2a24",
+        "roughness": 0.5,
+        "metalness": 0.8,
+        "envMapIntensity": 0.95,
+        "breakup": {
+          "noise": {
+            "amount": 0.035,
+            "scale": 4.5,
+            "color": "#571e19"
+          },
+          "roughnessVariation": 0.06
+        }
+      },
+      "position": [
+        0,
+        0,
+        -0.2
+      ],
+      "parent": "ship"
+    },
+    {
+      "name": "nose",
+      "type": "cone",
+      "params": [
+        0.7,
+        1.35,
+        6
+      ],
+      "material": {
+        "color": "#7a3028",
+        "roughness": 0.5,
+        "metalness": 0.8,
+        "envMapIntensity": 0.95
+      },
+      "position": [
+        0,
+        0.02,
+        1.25
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "parent": "ship"
+    },
+    {
+      "name": "cockpit_slit",
+      "type": "box",
+      "params": [
+        0.66,
+        0.14,
+        0.42
+      ],
+      "material": {
+        "color": "#8c4d4d",
+        "roughness": 0.1,
+        "metalness": 0.3,
+        "clearcoat": 1.0,
+        "clearcoatRoughness": 0.06,
+        "emissive": "#3a1010",
+        "emissiveIntensity": 0.5
+      },
+      "position": [
+        0,
+        0.34,
+        0.9
+      ],
+      "parent": "ship"
+    },
+    {
+      "name": "bomb_rail",
+      "type": "box",
+      "params": [
+        1.7,
+        0.24,
+        1.5
+      ],
+      "material": {
+        "color": "#241210",
+        "roughness": 0.6,
+        "metalness": 0.7,
+        "breakup": {
+          "noise": {
+            "amount": 0.04,
+            "scale": 6.0,
+            "color": "#180b09"
+          },
+          "roughnessVariation": 0.06
+        }
+      },
+      "position": [
+        0,
+        -0.52,
+        -0.15
+      ],
+      "parent": "ship"
+    },
+    {
+      "name": "warhead",
+      "type": "capsule",
+      "params": [
+        0.16,
+        0.28,
+        4,
+        10
+      ],
+      "material": {
+        "color": "#ffa633",
+        "roughness": 0.45,
+        "emissive": "#ff7a1a",
+        "emissiveIntensity": 1.6
+      },
+      "position": [
+        0,
+        -0.72,
+        0.42
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "parent": "ship",
+      "modifiers": {
+        "array": {
+          "count": 3,
+          "offset": [
+            0,
+            0,
+            -0.55
+          ]
+        }
+      }
+    },
+    {
+      "name": "engine_pod_l",
+      "type": "capsule",
+      "params": [
+        0.3,
+        0.9,
+        4,
+        12
+      ],
+      "material": {
+        "color": "#5f251f",
+        "roughness": 0.48,
+        "metalness": 0.82,
+        "envMapIntensity": 1.0
+      },
+      "position": [
+        1.05,
+        0,
+        -0.35
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "parent": "ship"
+    },
+    {
+      "name": "engine_pod_r",
+      "type": "capsule",
+      "params": [
+        0.3,
+        0.9,
+        4,
+        12
+      ],
+      "material": {
+        "color": "#5f251f",
+        "roughness": 0.48,
+        "metalness": 0.82,
+        "envMapIntensity": 1.0
+      },
+      "position": [
+        -1.05,
+        0,
+        -0.35
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "parent": "ship"
+    },
+    {
+      "name": "pod_exhaust_l",
+      "type": "cylinder",
+      "params": [
+        0.24,
+        0.24,
+        0.06,
+        16
+      ],
+      "material": {
+        "color": "#ffa633",
+        "roughness": 0.4,
+        "emissive": "#ff8a1a",
+        "emissiveIntensity": 1.7
+      },
+      "position": [
+        1.05,
+        0,
+        -1.28
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "parent": "ship"
+    },
+    {
+      "name": "pod_exhaust_r",
+      "type": "cylinder",
+      "params": [
+        0.24,
+        0.24,
+        0.06,
+        16
+      ],
+      "material": {
+        "color": "#ffa633",
+        "roughness": 0.4,
+        "emissive": "#ff8a1a",
+        "emissiveIntensity": 1.7
+      },
+      "position": [
+        -1.05,
+        0,
+        -1.28
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "parent": "ship"
+    },
+    {
+      "name": "stub_wing_l",
+      "type": "box",
+      "params": [
+        0.9,
+        0.12,
+        0.95
+      ],
+      "material": {
+        "color": "#6e2a24",
+        "roughness": 0.5,
+        "metalness": 0.8
+      },
+      "position": [
+        0.82,
+        0.06,
+        -0.35
+      ],
+      "parent": "ship"
+    },
+    {
+      "name": "stub_wing_r",
+      "type": "box",
+      "params": [
+        0.9,
+        0.12,
+        0.95
+      ],
+      "material": {
+        "color": "#6e2a24",
+        "roughness": 0.5,
+        "metalness": 0.8
+      },
+      "position": [
+        -0.82,
+        0.06,
+        -0.35
+      ],
+      "parent": "ship"
+    },
+    {
+      "name": "dorsal_fin",
+      "type": "wedge",
+      "params": [
+        0.9,
+        0.42,
+        0.08
+      ],
+      "material": {
+        "color": "#7a3028",
+        "roughness": 0.5,
+        "metalness": 0.8
+      },
+      "position": [
+        0,
+        0.4,
+        -0.8
+      ],
+      "parent": "ship"
+    }
+  ]
+}
