@@ -11,7 +11,11 @@ self-contained `.gltf` and samdin stays the lookdev/screenshot layer.
 | Asset | Tool |
 |---|---|
 | Props, rooms, vehicles from parts, anything assembled | spec JSON (`specs/`) |
-| Sculpted continuous hulls — ships, sleek vehicles, creature-adjacent volumes | hullgen ship def (`cli/ships/`) |
+| Sculpted continuous volumes — ships, boats, creatures, organic forms | hullgen def (`cli/ships/`) |
+
+The dividing line: **assembled things → spec kitbash; grown/sculpted things →
+loft.** hullgen isn't ship-specific — the `lofts` component takes any profile
+along any curved path (see `whale.json`, a full creature from four lofts).
 
 ## Usage
 
@@ -79,6 +83,27 @@ A ship is a JSON def: a `palette` plus optional lofted components. Only
     "rearPoint": { "z": -0.18, "lift": 0.05 },
     "rings": [ { "z": 0.6, "w": 0.12, "h": 0.11 } ]
   },
+
+  // THE GENERIC COMPONENT — arbitrary profile points lofted along an
+  // arbitrary (curved) path. Anything the fixed-profile components can't
+  // express: creature bodies, flukes, fins, boat hulls, bottles.
+  // Each station: a ring center + profile offsets [px,py] in the plane
+  // perpendicular to the local path tangent (px ≈ horizontal, py ≈ vertical).
+  // Same point count at every station. bandMaterials recolors facet bands
+  // by index (e.g. a pale belly). startPoint/endPoint make pointed caps;
+  // omit for flat caps. mirror duplicates across x (pectoral fins).
+  // Reference: cli/ships/whale.json — a full creature from four lofts.
+  "lofts": [
+    { "material": "hull",
+      "bandMaterials": { "2": "panel", "3": "panel" },
+      "startPoint": [0, -0.06, 1.72],
+      "mirror": false,
+      "stations": [
+        { "at": [0, -0.03, 1.3],
+          "points": [[0, 0.15], [0.13, 0.1], [0.18, 0], [0.13, -0.1],
+                     [0, -0.13], [-0.13, -0.1], [-0.18, 0], [-0.13, 0.1]] }
+      ] }
+  ],
 
   // octagonal prisms along any axis, optional pointed tip. The utility
   // component: barrels (gunship), warheads (bomber), radial spikes (rammer),

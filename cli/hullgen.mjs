@@ -225,6 +225,51 @@ function buildCanopy(mesh, def, spineTopAt) {
   mesh.fan([0, spineTopAt(def.rearPoint.z) + def.rearPoint.lift, def.rearPoint.z], rings[rings.length - 1], matId, c);
 }
 
+// lofts: the fully generic component — arbitrary profile points lofted along
+// an arbitrary (curved) path. Everything the fixed-profile components can't
+// express: creature bodies, flukes, fins, boat hulls, bottles-with-character.
+// def: { material, bandMaterials?: {"<bandIdx>": mat}, mirror?,
+//        startPoint?/endPoint?: [x,y,z] (pointed cap; else flat cap),
+//        stations: [{ at:[x,y,z], points:[[px,py],...] }] }
+// Each station is a ring: profile [px,py] mapped onto a plane perpendicular
+// to the local path tangent (px ≈ horizontal, py ≈ vertical). All stations
+// need the same point count. Winding is auto-oriented like everything else.
+function buildLofts(mesh, defs) {
+  for (const L of defs) {
+    const sides = L.mirror ? [-1, 1] : [1];
+    for (const side of sides) {
+      const centers = L.stations.map((s) => [side * s.at[0], s.at[1], s.at[2]]);
+      const tangent = (i) => {
+        const a = centers[Math.max(0, i - 1)], b = centers[Math.min(centers.length - 1, i + 1)];
+        const d = sub(b, a); const l = Math.hypot(...d) || 1;
+        return d.map((c) => c / l);
+      };
+      const rings = L.stations.map((s, i) => {
+        const t = tangent(i);
+        const up = Math.abs(t[1]) > 0.9 ? [0, 0, 1] : [0, 1, 0];
+        let u = cross(up, t);
+        const ul = Math.hypot(...u) || 1; u = u.map((c) => c / ul);
+        const v = cross(t, u);
+        return s.points.map(([px, py]) => [
+          centers[i][0] + u[0] * px * side + v[0] * py,
+          centers[i][1] + u[1] * px * side + v[1] * py,
+          centers[i][2] + u[2] * px * side + v[2] * py
+        ]);
+      });
+      const c = ringCentroid(rings);
+      const base = slot(L.material, HULL);
+      const bandMat = (k) =>
+        L.bandMaterials && L.bandMaterials[k] != null ? slot(L.bandMaterials[k], base) : base;
+      const ringAvg = (r) => r.reduce((a, p) => [a[0] + p[0] / r.length, a[1] + p[1] / r.length, a[2] + p[2] / r.length], [0, 0, 0]);
+      mesh.fan(L.startPoint ? [side * L.startPoint[0], L.startPoint[1], L.startPoint[2]] : ringAvg(rings[0]),
+        rings[0], base, c);
+      for (let i = 0; i < rings.length - 1; i++) mesh.band(rings[i], rings[i + 1], bandMat, c);
+      mesh.fan(L.endPoint ? [side * L.endPoint[0], L.endPoint[1], L.endPoint[2]] : ringAvg(rings[rings.length - 1]),
+        rings[rings.length - 1], base, c);
+    }
+  }
+}
+
 // pods: octagonal prisms along an arbitrary axis, optional pointed tip.
 // Covers barrels, warheads, spikes, coils, towers, masts, lit strips.
 // def: { at:[x,y,z], axis:"x"|"y"|"z"|[dx,dy,dz], r, len, material,
@@ -289,7 +334,7 @@ function buildNavPods(mesh, def) {
 // ── ship assembly ────────────────────────────────────────────────────────────
 function buildShip(def) {
   const mesh = makeMesh();
-  const fst = def.fuselage.stations;
+  const fst = def.fuselage?.stations;
   const spineTopAt = (z) => { // linear interp over fuselage yT, clamped
     if (z >= fst[0].z) return fst[0].yT;
     for (let i = 0; i < fst.length - 1; i++) {
@@ -299,13 +344,18 @@ function buildShip(def) {
     return fst[fst.length - 1].yT;
   };
 
-  buildFuselage(mesh, def.fuselage);
+  if (def.fuselage) buildFuselage(mesh, def.fuselage);
   if (def.wing) buildWing(mesh, def.wing);
   if (def.vtails) buildVtails(mesh, def.vtails);
   for (const e of def.engines ?? []) buildEngine(mesh, e);
-  if (def.canopy) buildCanopy(mesh, def.canopy, spineTopAt);
+  if (def.canopy) {
+    if (!fst) throw new Error(`${def.name}: canopy requires a fuselage (spine interpolation)`);
+    buildCanopy(mesh, def.canopy, spineTopAt);
+  }
+  if (def.lofts) buildLofts(mesh, def.lofts);
   if (def.pods) buildPods(mesh, def.pods);
   if (def.navPods) buildNavPods(mesh, def.navPods);
+  if (!mesh.tris.length) throw new Error(`${def.name}: def produced no geometry`);
   return mesh.tris;
 }
 

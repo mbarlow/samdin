@@ -79,6 +79,7 @@ For sculpted continuous low-poly hulls the parts pipeline can't reach. Full sche
 - `node cli/hullgen.mjs` → `media/models/<name>-hull.gltf` (served at `/media/models/` in dev).
 - Review loop: `app.loader.loadFromURL(url)` → `app.setModel(m)`. **setModel resets lookdev** — after every load re-drive the panel selects (`lighting-select`=showcase, `env-map-select`=studio, `shadow-quality`=high, each with a `change` event) or the model renders dark with shadow-acne moiré. Judge from threeQuarter/back/top/left, never one angle.
 - Look rules: volume over plates; matte over chrome (metal ~0.2, rough ~0.5); recess emissive throats inside a rim (never glue glow blobs on); trim = narrow facet band, not a whole face; `canopy.material: "glow"` makes a monster eye instead of a cockpit.
+- **Not just ships.** The `lofts` component is fully generic — arbitrary profile points along an arbitrary curved path — and works with NO other components. Creatures, boats, organic volumes: see `cli/ships/whale.json` (a humpback from four lofts + eye pods, 248 tris). Dividing line: assembled → spec kitbash; grown/sculpted → loft. Anchor rule applies doubly: fins/appendages must bury their root ring inside the parent volume or they float (side view catches it).
 
 ## Non-Negotiable Authoring Rules
 
