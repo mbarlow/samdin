@@ -218,7 +218,18 @@ class LightingManager {
     }
 
     const ambientDef = config.ambient || preset?.ambient || { color: 0x404050, intensity: 0.4 };
-    const lightDefs = config.lights || preset?.lights || [];
+    // Accept the ergonomic per-type keys (directional/hemisphere/point) that
+    // scene specs author alongside `lights[]` (#74). Explicit keys replace the
+    // preset's light list, matching the authored intent of the landscape specs.
+    let lightDefs = config.lights;
+    if (!lightDefs) {
+      const mapped = [];
+      if (config.directional) mapped.push({ type: 'directional', shadow: true, ...config.directional });
+      if (config.hemisphere) mapped.push({ type: 'hemisphere', ...config.hemisphere });
+      if (config.point) mapped.push({ type: 'point', ...config.point });
+      if (mapped.length) lightDefs = mapped;
+    }
+    lightDefs = lightDefs || preset?.lights || [];
 
     this.clearLights();
     this.keyLight = null;

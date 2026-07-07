@@ -88,7 +88,7 @@ Every `scene.*` field is optional; omitted fields fall back to the viewer's curr
 | `postfx` | Post-processing stack (see below). |
 | `terrain` | Terrain compositor (see [Terrain compositor](#terrain-compositor)). |
 
-`scene.camera` supports `preset`, `fit`, `distanceMultiplier`, `scaleToModel`, `positionOffset`, and `targetOffset` — useful when a scene needs a specific gameplay or hero-shot framing without scaling the whole model. `positionOffset` and `targetOffset` are added to the resolved preset before the model-size scale; `scaleToModel` (default `true`) and `distanceMultiplier` (default `1`) control that scaling.
+`scene.camera` supports `preset`, `fit`, `distanceMultiplier`, `scaleToModel`, `positionOffset`, and `targetOffset` — useful when a scene needs a specific gameplay or hero-shot framing without scaling the whole model. **Units differ:** `positionOffset` is added to the preset position *before* the model-size scale, so it is in preset-space units that grow with the model — a `[2, 2, 3]` offset on a 25 m scene moves the camera tens of meters. `targetOffset` is plain world meters (never scaled). For large scenes, frame with `distanceMultiplier` + `targetOffset` and keep `positionOffset` small or zero. `scaleToModel` (default `true`) and `distanceMultiplier` (default `1`) control the scaling.
 
 ### Post-processing (`scene.postfx`)
 
