@@ -1,0 +1,30 @@
+{
+  "name": "arcwing-rammer",
+  "description": "Enemy rammer — a warhead with engines. Octahedral core, four radial glowing spikes (the sea-mine read), bright arming tip at the nose, single aft engine. Do-not-let-this-touch-you. Dark-red core, hot orange spikes.",
+  "palette": {
+    "hull": "#6a1515",
+    "panel": "#3a0c0c",
+    "trim": "#ff7a2f",
+    "glow": "#ff8c2f",
+    "glowStrength": 2.8
+  },
+  "fuselage": {
+    "noseTip": [0, 0.0, 0.62],
+    "tailCap": "panel",
+    "underside": "panel",
+    "stations": [
+      { "z": 0.3, "yT": 0.13, "wS": 0.1, "yS": 0.08, "wC": 0.17, "yC": 0.0, "wB": 0.1, "yL": -0.08, "yB": -0.13 },
+      { "z": 0.0, "yT": 0.27, "wS": 0.19, "yS": 0.17, "wC": 0.31, "yC": 0.0, "wB": 0.19, "yL": -0.17, "yB": -0.27 },
+      { "z": -0.32, "yT": 0.12, "wS": 0.09, "yS": 0.07, "wC": 0.16, "yC": 0.0, "wB": 0.09, "yL": -0.07, "yB": -0.12 }
+    ]
+  },
+  "engines": [
+    { "x": 0, "y": 0.0, "rOut": 0.09, "rIn": 0.065, "zFront": -0.25, "zBack": -0.52, "zThroat": -0.44, "mirror": false }
+  ],
+  "pods": [
+    { "at": [0.28, 0.0, 0.0], "axis": "x", "r": 0.07, "len": 0.3, "material": "panel", "tip": "glow", "tipLen": 0.16, "mirror": true },
+    { "at": [0, 0.24, 0.0], "axis": "y", "r": 0.07, "len": 0.28, "material": "panel", "tip": "glow", "tipLen": 0.16 },
+    { "at": [0, -0.24, 0.0], "axis": [0, -1, 0], "r": 0.07, "len": 0.28, "material": "panel", "tip": "glow", "tipLen": 0.16 },
+    { "at": [0, 0.0, 0.52], "axis": "z", "r": 0.05, "len": 0.1, "material": "panel", "tip": "glow", "tipLen": 0.12 }
+  ]
+}

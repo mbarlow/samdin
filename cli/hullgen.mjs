@@ -225,6 +225,55 @@ function buildCanopy(mesh, def, spineTopAt) {
   mesh.fan([0, spineTopAt(def.rearPoint.z) + def.rearPoint.lift, def.rearPoint.z], rings[rings.length - 1], matId, c);
 }
 
+// pods: octagonal prisms along an arbitrary axis, optional pointed tip.
+// Covers barrels, warheads, spikes, coils, towers, masts, lit strips.
+// def: { at:[x,y,z], axis:"x"|"y"|"z"|[dx,dy,dz], r, len, material,
+//        tip?: material (pointed tip; length ~1.6r), mirror?: bool }
+const AXES = { x: [1, 0, 0], y: [0, 1, 0], z: [0, 0, 1] };
+
+function ringAt(center, dir, r) {
+  const up = Math.abs(dir[1]) > 0.9 ? [0, 0, 1] : [0, 1, 0];
+  let u = cross(dir, up);
+  const ul = Math.hypot(...u); u = u.map((c) => c / ul);
+  const v = cross(dir, u);
+  const ring = [];
+  for (let i = 0; i < 8; i++) {
+    const a = (i / 8) * Math.PI * 2 + Math.PI / 8;
+    const cu = Math.cos(a) * r, cv = Math.sin(a) * r;
+    ring.push([center[0] + u[0] * cu + v[0] * cv,
+               center[1] + u[1] * cu + v[1] * cv,
+               center[2] + u[2] * cu + v[2] * cv]);
+  }
+  return ring;
+}
+
+function buildPods(mesh, defs) {
+  for (const p of defs) {
+    const dirRaw = Array.isArray(p.axis) ? p.axis : AXES[p.axis ?? 'z'];
+    const dl = Math.hypot(...dirRaw);
+    const dir = dirRaw.map((c) => c / dl);
+    const matId = slot(p.material, PANEL);
+    const sides = p.mirror ? [-1, 1] : [1];
+    for (const side of sides) {
+      const at = [side * p.at[0], p.at[1], p.at[2]];
+      const d = [side === -1 && Math.abs(dir[0]) > 0 ? -dir[0] : dir[0], dir[1], dir[2]];
+      const end = [at[0] + d[0] * p.len, at[1] + d[1] * p.len, at[2] + d[2] * p.len];
+      const c = [(at[0] + end[0]) / 2, (at[1] + end[1]) / 2, (at[2] + end[2]) / 2];
+      const base = ringAt(at, d, p.r);
+      const top = ringAt(end, d, p.r);
+      mesh.band(base, top, matId, c);
+      mesh.fan(at, base, matId, c);
+      if (p.tip) {
+        const tipLen = p.tipLen ?? p.r * 1.6;
+        mesh.fan([end[0] + d[0] * tipLen, end[1] + d[1] * tipLen, end[2] + d[2] * tipLen],
+          top, slot(p.tip, GLOW), c);
+      } else {
+        mesh.fan(end, top, matId, c);
+      }
+    }
+  }
+}
+
 // navPods: wingtip octahedra — green starboard (+x), red port (-x)
 function buildNavPods(mesh, def) {
   for (const side of [-1, 1]) {
@@ -255,6 +304,7 @@ function buildShip(def) {
   if (def.vtails) buildVtails(mesh, def.vtails);
   for (const e of def.engines ?? []) buildEngine(mesh, e);
   if (def.canopy) buildCanopy(mesh, def.canopy, spineTopAt);
+  if (def.pods) buildPods(mesh, def.pods);
   if (def.navPods) buildNavPods(mesh, def.navPods);
   return mesh.tris;
 }
