@@ -17,6 +17,7 @@ CLI scripts in `cli/` (run with `node` from inside `cli/`, paths are relative to
 - `node cli/inspect-model.js <spec.json> [out-dir]` — Spins up its own local HTTP server, loads the spec in headless Chromium (via Playwright), and captures a preset sweep of screenshots + a review template. Defaults output to `/tmp/samdin-inspect`.
 - `node cli/export-playwright.js <spec.json> [out.glb]` — Automates the viewer to export a spec as GLB with materials preserved.
 - `node cli/index.js <spec.json> [out]` — Convert spec to OBJ (or GLB via Blender with `--glb`, batch with `--batch`).
+- `node cli/hullgen.mjs [shipdef.json ...]` — Procedural low-poly hull generator: lofts faceted cross-sections into ONE continuous flat-shaded mesh, writes self-contained `.gltf` to `media/models/`. No args = build every def in `cli/ships/`. Use for sculpted hulls the parts pipeline can't reach (see `docs/hullgen.md`); load output via `app.loader.loadFromURL('/media/models/<name>-hull.gltf')` + `app.setModel(m)` — **setModel resets lookdev; re-apply lighting/env/shadow selects after every load** or the model renders dark with shadow-acne moiré.
 
 Install CLI deps once with `cd cli && npm install` (Playwright is a dep of `cli/`, not the app).
 

@@ -1,0 +1,19 @@
+Concept image prompt — arcwing-interceptor-concept-v1.png
+Generated 2026-07-07 via `codex exec` (OpenAI Codex image_gen, gpt-image-2).
+This image is the art target for cli/hullgen.mjs.
+
+PROMPT:
+Generate ONE concept image using your image generation tool and print the
+saved file path. Concept: a single low-poly video-game starfighter in the
+No Man's Sky art style — chunky sculpted continuous hull with hard
+flat-shaded facets and clean beveled edges, stylized low-poly, NOT
+photoreal, NOT boxy blocks bolted together. Aggressive delta/arrowhead
+silhouette: pointed prow, bubble cockpit canopy set into the spine, thick
+swept wings that flow smoothly out of the fuselage, a raked V-tail at the
+rear, twin recessed engine nozzles glowing cyan. Bold matte saturated blue
+hull with darker navy panels and orange trim accent stripes, green and red
+wingtip nav lights. Studio product shot on a dark blue gradient background,
+low three-quarter hero angle, clean cyan rim light and soft key light,
+subtle bloom on engine glow. Centered, full ship in frame, crisp facets,
+no clutter. Avoid photorealism, realistic military jet, busy greebles,
+text, watermark, humans.
