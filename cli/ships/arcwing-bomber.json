@@ -1,6 +1,6 @@
 {
   "name": "arcwing-bomber",
-  "description": "Enemy bomber — heavy slab fuselage, tapered nose, cockpit slit, underslung warhead row, twin fat engine pods, stub wings, dorsal fins. Reads slow and pregnant with ordnance. Dark-red hull, orange glow.",
+  "description": "Enemy bomber \u2014 heavy slab fuselage, tapered nose, cockpit slit, underslung warhead row, twin fat engine pods, stub wings, dorsal fins. Reads slow and pregnant with ordnance. Dark-red hull, orange glow.",
   "palette": {
     "hull": "#6e1a1a",
     "panel": "#3d0e0e",
@@ -11,14 +11,58 @@
     "glowStrength": 2.6
   },
   "fuselage": {
-    "noseTip": [0, -0.02, 1.25],
+    "noseTip": [
+      0,
+      -0.02,
+      1.25
+    ],
     "tailCap": "panel",
     "underside": "panel",
     "stations": [
-      { "z": 0.85, "yT": 0.16, "wS": 0.14, "yS": 0.11, "wC": 0.24, "yC": -0.02, "wB": 0.15, "yL": -0.14, "yB": -0.20 },
-      { "z": 0.3, "yT": 0.26, "wS": 0.22, "yS": 0.20, "wC": 0.40, "yC": -0.02, "wB": 0.26, "yL": -0.22, "yB": -0.30 },
-      { "z": -0.45, "yT": 0.27, "wS": 0.23, "yS": 0.21, "wC": 0.42, "yC": -0.02, "wB": 0.27, "yL": -0.23, "yB": -0.31 },
-      { "z": -1.1, "yT": 0.18, "wS": 0.15, "yS": 0.13, "wC": 0.28, "yC": -0.01, "wB": 0.17, "yL": -0.14, "yB": -0.20 }
+      {
+        "z": 0.85,
+        "yT": 0.16,
+        "wS": 0.14,
+        "yS": 0.11,
+        "wC": 0.24,
+        "yC": -0.02,
+        "wB": 0.15,
+        "yL": -0.14,
+        "yB": -0.2
+      },
+      {
+        "z": 0.3,
+        "yT": 0.26,
+        "wS": 0.22,
+        "yS": 0.2,
+        "wC": 0.4,
+        "yC": -0.02,
+        "wB": 0.26,
+        "yL": -0.22,
+        "yB": -0.3
+      },
+      {
+        "z": -0.45,
+        "yT": 0.27,
+        "wS": 0.23,
+        "yS": 0.21,
+        "wC": 0.42,
+        "yC": -0.02,
+        "wB": 0.27,
+        "yL": -0.23,
+        "yB": -0.31
+      },
+      {
+        "z": -1.1,
+        "yT": 0.18,
+        "wS": 0.15,
+        "yS": 0.13,
+        "wC": 0.28,
+        "yC": -0.01,
+        "wB": 0.17,
+        "yL": -0.14,
+        "yB": -0.2
+      }
     ]
   },
   "wing": {
@@ -26,36 +70,137 @@
     "underside": "panel",
     "leTrim": true,
     "stations": [
-      { "x": -0.95, "zLE": -0.35, "zTE": -0.95, "yMid": 0.03, "th": 0.05 },
-      { "x": -0.5, "zLE": -0.1, "zTE": -1.0, "yMid": 0.0, "th": 0.1 },
-      { "x": 0.0, "zLE": 0.05, "zTE": -1.0, "yMid": -0.01, "th": 0.13 },
-      { "x": 0.5, "zLE": -0.1, "zTE": -1.0, "yMid": 0.0, "th": 0.1 },
-      { "x": 0.95, "zLE": -0.35, "zTE": -0.95, "yMid": 0.03, "th": 0.05 }
+      {
+        "x": -0.95,
+        "zLE": -0.35,
+        "zTE": -0.95,
+        "yMid": 0.03,
+        "th": 0.05
+      },
+      {
+        "x": -0.5,
+        "zLE": -0.1,
+        "zTE": -1.0,
+        "yMid": 0.0,
+        "th": 0.1
+      },
+      {
+        "x": 0.0,
+        "zLE": 0.05,
+        "zTE": -1.0,
+        "yMid": -0.01,
+        "th": 0.13
+      },
+      {
+        "x": 0.5,
+        "zLE": -0.1,
+        "zTE": -1.0,
+        "yMid": 0.0,
+        "th": 0.1
+      },
+      {
+        "x": 0.95,
+        "zLE": -0.35,
+        "zTE": -0.95,
+        "yMid": 0.03,
+        "th": 0.05
+      }
     ]
   },
   "vtails": {
     "tipColor": "trim",
     "stations": [
-      { "x": 0.08, "y": 0.26, "zLE": -0.55, "zTE": -1.1, "th": 0.06 },
-      { "x": 0.16, "y": 0.62, "zLE": -0.75, "zTE": -1.12, "th": 0.04 }
+      {
+        "x": 0.08,
+        "y": 0.26,
+        "zLE": -0.55,
+        "zTE": -1.1,
+        "th": 0.06
+      },
+      {
+        "x": 0.16,
+        "y": 0.62,
+        "zLE": -0.75,
+        "zTE": -1.12,
+        "th": 0.04
+      }
     ]
   },
   "engines": [
-    { "x": 0.52, "y": -0.04, "rOut": 0.19, "rIn": 0.14, "zFront": -0.15, "zBack": -1.3, "zThroat": -1.16, "mirror": true }
+    {
+      "x": 0.52,
+      "y": -0.04,
+      "rOut": 0.19,
+      "rIn": 0.14,
+      "zFront": -0.15,
+      "zBack": -1.3,
+      "zThroat": -1.16,
+      "mirror": true
+    }
   ],
   "canopy": {
     "material": "glass",
     "sink": 0.02,
-    "frontPoint": { "z": 0.75, "lift": 0.0 },
-    "rearPoint": { "z": 0.25, "lift": 0.03 },
+    "frontPoint": {
+      "z": 0.75,
+      "lift": 0.0
+    },
+    "rearPoint": {
+      "z": 0.25,
+      "lift": 0.03
+    },
     "rings": [
-      { "z": 0.62, "w": 0.13, "h": 0.06 },
-      { "z": 0.4, "w": 0.15, "h": 0.08 }
+      {
+        "z": 0.62,
+        "w": 0.13,
+        "h": 0.06
+      },
+      {
+        "z": 0.4,
+        "w": 0.15,
+        "h": 0.08
+      }
     ]
   },
   "pods": [
-    { "at": [0.15, -0.36, 0.45], "axis": "z", "r": 0.06, "len": 0.3, "material": "panel", "tip": "glow", "mirror": true },
-    { "at": [0.15, -0.36, 0.0], "axis": "z", "r": 0.06, "len": 0.3, "material": "panel", "tip": "glow", "mirror": true },
-    { "at": [0.15, -0.36, -0.45], "axis": "z", "r": 0.06, "len": 0.3, "material": "panel", "tip": "glow", "mirror": true }
+    {
+      "at": [
+        0.15,
+        -0.27,
+        0.45
+      ],
+      "axis": "z",
+      "r": 0.06,
+      "len": 0.3,
+      "material": "panel",
+      "tip": "glow",
+      "mirror": true
+    },
+    {
+      "at": [
+        0.15,
+        -0.27,
+        0.0
+      ],
+      "axis": "z",
+      "r": 0.06,
+      "len": 0.3,
+      "material": "panel",
+      "tip": "glow",
+      "mirror": true
+    },
+    {
+      "at": [
+        0.15,
+        -0.27,
+        -0.45
+      ],
+      "axis": "z",
+      "r": 0.06,
+      "len": 0.3,
+      "material": "panel",
+      "tip": "glow",
+      "mirror": true
+    }
   ]
 }
