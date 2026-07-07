@@ -80,6 +80,21 @@ A ship is a JSON def: a `palette` plus optional lofted components. Only
     "rings": [ { "z": 0.6, "w": 0.12, "h": 0.11 } ]
   },
 
+  // octagonal prisms along any axis, optional pointed tip. The utility
+  // component: barrels (gunship), warheads (bomber), radial spikes (rammer),
+  // rail + coils (sniper), towers/masts/lit window strips (carrier),
+  // mandible prongs (enemy-interceptor). Bases must anchor INSIDE the hull
+  // or wing — a floating pod is the fleet's most common first-pass bug.
+  "pods": [
+    { "at": [0.3, 0.0, 0.42],   // position; mirrored across x when mirror:true
+      "axis": "z",               // "x"|"y"|"z" or [dx,dy,dz] (e.g. [0,-1,0] spike)
+      "r": 0.05, "len": 0.85,
+      "material": "panel",       // "glow" makes the whole pod a lit strip/coil
+      "tip": "glow",             // optional pointed tip (default len 1.6r)
+      "tipLen": 0.16,            // optional tip length override
+      "mirror": true }
+  ],
+
   // wingtip octahedra — green starboard, red port
   "navPods": { "x": 1.68, "y": 0.07, "z": -1.0, "r": 0.05 }
 }

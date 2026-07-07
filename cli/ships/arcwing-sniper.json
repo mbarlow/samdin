@@ -1,0 +1,62 @@
+{
+  "name": "arcwing-sniper",
+  "description": "Enemy sniper — a gun with a ship attached. Long rail barrel with charge coils and a hot emitter tip, slim fuselage, narrow swept wings, low canopy, raised sensor mast (the aiming eye). Dark-red hull, orange charge glow.",
+  "palette": {
+    "hull": "#7e1d24",
+    "panel": "#421014",
+    "trim": "#ff7a2f",
+    "glass": "#2a1408",
+    "glassGlow": "#b0561f",
+    "glow": "#ff8c2f",
+    "glowStrength": 2.7
+  },
+  "fuselage": {
+    "noseTip": [0, -0.01, 1.15],
+    "tailCap": "panel",
+    "underside": "panel",
+    "stations": [
+      { "z": 0.8, "yT": 0.09, "wS": 0.07, "yS": 0.06, "wC": 0.12, "yC": 0.0, "wB": 0.07, "yL": -0.05, "yB": -0.08 },
+      { "z": 0.2, "yT": 0.16, "wS": 0.11, "yS": 0.11, "wC": 0.2, "yC": 0.0, "wB": 0.11, "yL": -0.08, "yB": -0.13 },
+      { "z": -0.6, "yT": 0.17, "wS": 0.12, "yS": 0.12, "wC": 0.19, "yC": 0.0, "wB": 0.11, "yL": -0.08, "yB": -0.13 },
+      { "z": -1.3, "yT": 0.12, "wS": 0.08, "yS": 0.08, "wC": 0.13, "yC": 0.0, "wB": 0.07, "yL": -0.05, "yB": -0.09 }
+    ]
+  },
+  "wing": {
+    "color": "hull",
+    "underside": "panel",
+    "leTrim": true,
+    "stations": [
+      { "x": -1.1, "zLE": -0.85, "zTE": -1.15, "yMid": 0.05, "th": 0.03 },
+      { "x": -0.55, "zLE": -0.45, "zTE": -1.2, "yMid": 0.01, "th": 0.06 },
+      { "x": 0.0, "zLE": -0.25, "zTE": -1.2, "yMid": 0.0, "th": 0.08 },
+      { "x": 0.55, "zLE": -0.45, "zTE": -1.2, "yMid": 0.01, "th": 0.06 },
+      { "x": 1.1, "zLE": -0.85, "zTE": -1.15, "yMid": 0.05, "th": 0.03 }
+    ]
+  },
+  "vtails": {
+    "tipColor": "trim",
+    "stations": [
+      { "x": 0.12, "y": 0.15, "zLE": -0.95, "zTE": -1.35, "th": 0.05 },
+      { "x": 0.3, "y": 0.42, "zLE": -1.1, "zTE": -1.38, "th": 0.035 }
+    ]
+  },
+  "engines": [
+    { "x": 0.14, "y": 0.0, "rOut": 0.1, "rIn": 0.075, "zFront": -0.7, "zBack": -1.4, "zThroat": -1.28, "mirror": true }
+  ],
+  "canopy": {
+    "material": "glass",
+    "sink": 0.02,
+    "frontPoint": { "z": 0.45, "lift": 0.0 },
+    "rearPoint": { "z": 0.0, "lift": 0.03 },
+    "rings": [
+      { "z": 0.33, "w": 0.09, "h": 0.06 },
+      { "z": 0.12, "w": 0.11, "h": 0.08 }
+    ]
+  },
+  "pods": [
+    { "at": [0, 0.17, 0.7], "axis": "z", "r": 0.055, "len": 1.7, "material": "panel", "tip": "glow", "tipLen": 0.18 },
+    { "at": [0, 0.17, 1.15], "axis": "z", "r": 0.1, "len": 0.12, "material": "glow" },
+    { "at": [0, 0.17, 1.65], "axis": "z", "r": 0.1, "len": 0.12, "material": "glow" },
+    { "at": [0, 0.19, -0.35], "axis": "y", "r": 0.035, "len": 0.24, "material": "panel", "tip": "glow" }
+  ]
+}

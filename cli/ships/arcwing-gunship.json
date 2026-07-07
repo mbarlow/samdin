@@ -1,0 +1,61 @@
+{
+  "name": "arcwing-gunship",
+  "description": "Enemy gunship — broad flat hull, chamfered nose, twin cheek cannon pods with paired barrels (the twin-bolt read), slit canopy, quad engine block, low fins. Heavy weapons platform. Dark-red hull, orange glow.",
+  "palette": {
+    "hull": "#7e2020",
+    "panel": "#451010",
+    "trim": "#ff7a2f",
+    "glass": "#2a1408",
+    "glassGlow": "#b0561f",
+    "glow": "#ff8c2f",
+    "glowStrength": 2.6
+  },
+  "fuselage": {
+    "noseTip": [0, -0.03, 1.35],
+    "tailCap": "panel",
+    "underside": "panel",
+    "stations": [
+      { "z": 0.95, "yT": 0.13, "wS": 0.16, "yS": 0.09, "wC": 0.26, "yC": -0.02, "wB": 0.16, "yL": -0.10, "yB": -0.14 },
+      { "z": 0.35, "yT": 0.20, "wS": 0.26, "yS": 0.16, "wC": 0.44, "yC": -0.02, "wB": 0.28, "yL": -0.13, "yB": -0.17 },
+      { "z": -0.5, "yT": 0.21, "wS": 0.27, "yS": 0.17, "wC": 0.45, "yC": -0.02, "wB": 0.28, "yL": -0.13, "yB": -0.17 },
+      { "z": -1.2, "yT": 0.16, "wS": 0.18, "yS": 0.13, "wC": 0.3, "yC": -0.01, "wB": 0.18, "yL": -0.1, "yB": -0.14 }
+    ]
+  },
+  "wing": {
+    "color": "hull",
+    "underside": "panel",
+    "leTrim": true,
+    "stations": [
+      { "x": -1.05, "zLE": -0.55, "zTE": -1.05, "yMid": 0.04, "th": 0.04 },
+      { "x": -0.55, "zLE": -0.25, "zTE": -1.1, "yMid": 0.01, "th": 0.08 },
+      { "x": 0.0, "zLE": -0.1, "zTE": -1.1, "yMid": 0.0, "th": 0.11 },
+      { "x": 0.55, "zLE": -0.25, "zTE": -1.1, "yMid": 0.01, "th": 0.08 },
+      { "x": 1.05, "zLE": -0.55, "zTE": -1.05, "yMid": 0.04, "th": 0.04 }
+    ]
+  },
+  "vtails": {
+    "tipColor": "trim",
+    "stations": [
+      { "x": 0.2, "y": 0.19, "zLE": -0.7, "zTE": -1.2, "th": 0.06 },
+      { "x": 0.42, "y": 0.42, "zLE": -0.85, "zTE": -1.22, "th": 0.04 }
+    ]
+  },
+  "engines": [
+    { "x": 0.17, "y": 0.09, "rOut": 0.115, "rIn": 0.085, "zFront": -0.6, "zBack": -1.32, "zThroat": -1.2, "mirror": true },
+    { "x": 0.17, "y": -0.13, "rOut": 0.115, "rIn": 0.085, "zFront": -0.6, "zBack": -1.32, "zThroat": -1.2, "mirror": true }
+  ],
+  "canopy": {
+    "material": "glass",
+    "sink": 0.02,
+    "frontPoint": { "z": 0.85, "lift": 0.0 },
+    "rearPoint": { "z": 0.35, "lift": 0.03 },
+    "rings": [
+      { "z": 0.72, "w": 0.13, "h": 0.06 },
+      { "z": 0.5, "w": 0.15, "h": 0.08 }
+    ]
+  },
+  "pods": [
+    { "at": [0.3, 0.0, 0.42], "axis": "z", "r": 0.05, "len": 0.85, "material": "panel", "mirror": true },
+    { "at": [0.41, -0.03, 0.35], "axis": "z", "r": 0.05, "len": 0.85, "material": "panel", "mirror": true }
+  ]
+}
