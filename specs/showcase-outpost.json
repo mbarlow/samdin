@@ -1,0 +1,1417 @@
+{
+  "name": "showcase-outpost",
+  "description": "Capability showcase \u2014 dusk survey outpost. Demonstrates the scene.terrain heightfield compositor (category-tagged ground, cliffs, and seeded scatter mounds drape into one mesh), procedural modifiers (scatter with fixed seeds, an array applied to a module placement, mirror axis 'xz'), a spec-local module reused along the path, an embedded CSG radar dish, industrial prefabs (hazard-gate, machine-altar), and scene-owned lookdev: decals, emissive strips, sunset environment lighting, fog, and postfx.",
+  "root": "scene_root",
+  "scene": {
+    "quality": "high",
+    "background": {
+      "type": "gradient",
+      "top": "#3a2f4e",
+      "bottom": "#c9713a"
+    },
+    "fog": {
+      "type": "exp2",
+      "color": "#4a4258",
+      "density": 0.011
+    },
+    "lighting": {
+      "preset": "sunset",
+      "environment": "studio",
+      "envMapIntensity": 0.9,
+      "shadowQuality": "high",
+      "intensity": 1.0,
+      "ambient": {
+        "color": "#5c5670",
+        "intensity": 0.7
+      },
+      "lights": [
+        {
+          "type": "directional",
+          "color": "#ffd2a8",
+          "intensity": 2.2,
+          "position": [
+            6,
+            9,
+            5
+          ],
+          "shadow": true
+        },
+        {
+          "type": "directional",
+          "color": "#8090cc",
+          "intensity": 0.8,
+          "position": [
+            -6,
+            4,
+            -4
+          ],
+          "shadow": false
+        },
+        {
+          "type": "hemisphere",
+          "skyColor": "#c08a60",
+          "groundColor": "#3e3a42",
+          "intensity": 0.8
+        }
+      ]
+    },
+    "ground": {
+      "reflective": false
+    },
+    "exposure": 1.3,
+    "toneMapping": "ACESFilmic",
+    "camera": {
+      "preset": "threeQuarter",
+      "fov": 34,
+      "distanceMultiplier": 0.46,
+      "positionOffset": [
+        0,
+        0,
+        0
+      ],
+      "targetOffset": [
+        -0.3,
+        0.8,
+        0
+      ]
+    },
+    "postfx": {
+      "bloom": {
+        "enabled": true,
+        "strength": 0.5,
+        "radius": 0.6,
+        "threshold": 0.85
+      },
+      "vignette": {
+        "enabled": true,
+        "intensity": 0.18,
+        "softness": 0.7
+      },
+      "colorGrade": {
+        "enabled": true,
+        "saturation": 0.95,
+        "brightness": 1.02,
+        "contrast": 1.05
+      },
+      "fxaa": true
+    },
+    "terrain": {
+      "enabled": true,
+      "method": "heightfield",
+      "display": "terrain",
+      "bounds": "auto",
+      "resolution": 120,
+      "smoothing": 0.3,
+      "material": {
+        "color": "#6d6055",
+        "metalness": 0.0,
+        "roughness": 0.95,
+        "flatShading": true
+      },
+      "methodOptions": {
+        "heightfield": {
+          "padding": 0.6,
+          "skirt": 1.2
+        }
+      }
+    }
+  },
+  "modules": {
+    "path-marker": {
+      "root": "marker_root",
+      "parts": [
+        {
+          "name": "marker_root",
+          "type": "group"
+        },
+        {
+          "name": "post",
+          "type": "box",
+          "params": [
+            0.17,
+            0.95,
+            0.17
+          ],
+          "material": {
+            "preset": "painted-metal",
+            "color": "#9d9890",
+            "breakup": {
+              "noise": {
+                "amount": 0.06,
+                "scale": 4
+              },
+              "roughnessVariation": 0.06
+            },
+            "edgeWear": {
+              "amount": 0.12,
+              "color": "#9a8a76"
+            },
+            "decals": [
+              {
+                "face": "front",
+                "size": [
+                  0.12,
+                  0.16
+                ],
+                "offset": [
+                  0,
+                  0.3
+                ],
+                "material": {
+                  "preset": "glow",
+                  "color": "#ffab4a",
+                  "emissiveIntensity": 1.5,
+                  "opacity": 0.85
+                }
+              }
+            ]
+          },
+          "position": [
+            0,
+            0.475,
+            0
+          ],
+          "parent": "marker_root",
+          "castShadow": true
+        },
+        {
+          "name": "cap",
+          "type": "pyramid",
+          "params": [
+            0.13,
+            0.11
+          ],
+          "material": {
+            "preset": "rusted-metal",
+            "color": "#7c6353"
+          },
+          "position": [
+            0,
+            1.0,
+            0
+          ],
+          "parent": "marker_root"
+        }
+      ]
+    },
+    "survey-beacon": {
+      "root": "beacon_root",
+      "parts": [
+        {
+          "name": "beacon_root",
+          "type": "group"
+        },
+        {
+          "name": "leg_a",
+          "type": "cylinder",
+          "params": [
+            0.03,
+            0.045,
+            1.0,
+            6
+          ],
+          "material": {
+            "preset": "painted-metal",
+            "color": "#a7a7a0",
+            "breakup": {
+              "noise": {
+                "amount": 0.05,
+                "scale": 5
+              },
+              "roughnessVariation": 0.05
+            }
+          },
+          "position": [
+            0.26,
+            0.48,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            -30
+          ],
+          "parent": "beacon_root",
+          "castShadow": true
+        },
+        {
+          "name": "leg_b",
+          "type": "cylinder",
+          "params": [
+            0.03,
+            0.045,
+            1.0,
+            6
+          ],
+          "material": {
+            "preset": "painted-metal",
+            "color": "#6c6c62"
+          },
+          "position": [
+            -0.13,
+            0.48,
+            0.225
+          ],
+          "rotation": [
+            -26,
+            0,
+            15
+          ],
+          "parent": "beacon_root",
+          "castShadow": true
+        },
+        {
+          "name": "leg_c",
+          "type": "cylinder",
+          "params": [
+            0.03,
+            0.045,
+            1.0,
+            6
+          ],
+          "material": {
+            "preset": "painted-metal",
+            "color": "#6c6c62"
+          },
+          "position": [
+            -0.13,
+            0.48,
+            -0.225
+          ],
+          "rotation": [
+            26,
+            0,
+            15
+          ],
+          "parent": "beacon_root",
+          "castShadow": true
+        },
+        {
+          "name": "head",
+          "type": "roundedBox",
+          "params": [
+            0.3,
+            0.22,
+            0.24,
+            0.02,
+            2
+          ],
+          "material": {
+            "preset": "painted-metal",
+            "color": "#d9ba71",
+            "breakup": {
+              "noise": {
+                "amount": 0.07,
+                "scale": 5
+              },
+              "roughnessVariation": 0.07
+            },
+            "edgeWear": {
+              "amount": 0.15,
+              "color": "#d9c9a0"
+            },
+            "decals": [
+              {
+                "face": "front",
+                "size": [
+                  0.16,
+                  0.05
+                ],
+                "offset": [
+                  0,
+                  -0.03
+                ],
+                "material": {
+                  "preset": "glow",
+                  "color": "#7ae8ff",
+                  "emissiveIntensity": 1.6,
+                  "opacity": 0.85
+                }
+              }
+            ]
+          },
+          "position": [
+            0,
+            1.05,
+            0
+          ],
+          "parent": "beacon_root",
+          "castShadow": true
+        },
+        {
+          "name": "antenna",
+          "type": "cylinder",
+          "params": [
+            0.008,
+            0.012,
+            0.5,
+            5
+          ],
+          "material": {
+            "preset": "steel",
+            "color": "#8a8a88"
+          },
+          "position": [
+            0.08,
+            1.4,
+            0
+          ],
+          "parent": "beacon_root"
+        },
+        {
+          "name": "antenna_tip",
+          "type": "sphere",
+          "params": [
+            0.025,
+            8
+          ],
+          "material": {
+            "preset": "glow",
+            "color": "#ff5a3a",
+            "emissiveIntensity": 2.0
+          },
+          "position": [
+            0.08,
+            1.66,
+            0
+          ],
+          "parent": "beacon_root"
+        }
+      ]
+    }
+  },
+  "parts": [
+    {
+      "name": "scene_root",
+      "type": "group",
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "env",
+      "type": "group",
+      "parent": "scene_root",
+      "category": "environment"
+    },
+    {
+      "name": "ground_plate_center",
+      "type": "box",
+      "params": [
+        19,
+        0.24,
+        19
+      ],
+      "material": {
+        "color": "#6d6055",
+        "roughness": 0.95,
+        "flatShading": true,
+        "breakup": {
+          "noise": {
+            "amount": 0.05,
+            "scale": 8
+          },
+          "roughnessVariation": 0.06
+        }
+      },
+      "position": [
+        0,
+        -0.12,
+        -0.5
+      ],
+      "parent": "env",
+      "category": "environment",
+      "receiveShadow": true
+    },
+    {
+      "name": "ground_plate_front",
+      "type": "box",
+      "params": [
+        14,
+        0.24,
+        6
+      ],
+      "material": {
+        "color": "#b1a390",
+        "roughness": 0.95,
+        "flatShading": true,
+        "breakup": {
+          "noise": {
+            "amount": 0.05,
+            "scale": 8
+          },
+          "roughnessVariation": 0.06
+        }
+      },
+      "position": [
+        0.8,
+        -0.16,
+        8.2
+      ],
+      "rotation": [
+        -1.5,
+        4,
+        1
+      ],
+      "parent": "env",
+      "category": "environment",
+      "receiveShadow": true
+    },
+    {
+      "name": "ground_plate_left",
+      "type": "box",
+      "params": [
+        6,
+        0.24,
+        12
+      ],
+      "material": {
+        "color": "#a99b8b",
+        "roughness": 0.95,
+        "flatShading": true,
+        "breakup": {
+          "noise": {
+            "amount": 0.05,
+            "scale": 8
+          },
+          "roughnessVariation": 0.06
+        }
+      },
+      "position": [
+        -10.2,
+        -0.1,
+        -1
+      ],
+      "rotation": [
+        1,
+        -3,
+        2.5
+      ],
+      "parent": "env",
+      "category": "environment",
+      "receiveShadow": true
+    },
+    {
+      "name": "ground_plate_right",
+      "type": "box",
+      "params": [
+        6,
+        0.24,
+        13
+      ],
+      "material": {
+        "color": "#ae9e8d",
+        "roughness": 0.95,
+        "flatShading": true,
+        "breakup": {
+          "noise": {
+            "amount": 0.05,
+            "scale": 8
+          },
+          "roughnessVariation": 0.06
+        }
+      },
+      "position": [
+        10.4,
+        -0.14,
+        -2
+      ],
+      "rotation": [
+        -1.2,
+        5,
+        -2.2
+      ],
+      "parent": "env",
+      "category": "environment",
+      "receiveShadow": true
+    },
+    {
+      "name": "tower_knoll",
+      "type": "sphere",
+      "params": [
+        2.9,
+        10
+      ],
+      "material": {
+        "color": "#6f5c49",
+        "roughness": 0.95,
+        "flatShading": true
+      },
+      "position": [
+        -5.6,
+        -0.5,
+        -4.4
+      ],
+      "scale": [
+        1,
+        0.42,
+        1
+      ],
+      "parent": "env",
+      "category": "environment"
+    },
+    {
+      "name": "ridge_spike_a",
+      "type": "cone",
+      "params": [
+        2.2,
+        6.5,
+        6
+      ],
+      "material": {
+        "color": "#54453c",
+        "roughness": 0.95,
+        "flatShading": true
+      },
+      "position": [
+        -3.5,
+        3.0,
+        -10.5
+      ],
+      "rotation": [
+        4,
+        20,
+        -3
+      ],
+      "parent": "env",
+      "category": "environment",
+      "castShadow": true
+    },
+    {
+      "name": "ridge_spike_b",
+      "type": "cone",
+      "params": [
+        1.7,
+        5.0,
+        6
+      ],
+      "material": {
+        "color": "#5a4a40",
+        "roughness": 0.95,
+        "flatShading": true
+      },
+      "position": [
+        1.8,
+        2.3,
+        -11.0
+      ],
+      "rotation": [
+        -3,
+        -35,
+        4
+      ],
+      "parent": "env",
+      "category": "environment",
+      "castShadow": true
+    },
+    {
+      "name": "ridge_spike_c",
+      "type": "cone",
+      "params": [
+        2.6,
+        4.2,
+        6
+      ],
+      "material": {
+        "color": "#514339",
+        "roughness": 0.95,
+        "flatShading": true
+      },
+      "position": [
+        7.5,
+        1.8,
+        -9.5
+      ],
+      "rotation": [
+        5,
+        60,
+        -6
+      ],
+      "parent": "env",
+      "category": "environment",
+      "castShadow": true
+    },
+    {
+      "name": "cliff_right",
+      "type": "cone",
+      "params": [
+        2.4,
+        3.6,
+        7
+      ],
+      "material": {
+        "color": "#5e4e42",
+        "roughness": 0.95,
+        "flatShading": true
+      },
+      "position": [
+        11.5,
+        1.4,
+        -6.0
+      ],
+      "rotation": [
+        0,
+        15,
+        -8
+      ],
+      "parent": "env",
+      "category": "environment",
+      "castShadow": true
+    },
+    {
+      "name": "terrain_mound_west",
+      "type": "sphere",
+      "params": [
+        1.15,
+        9
+      ],
+      "material": {
+        "color": "#73604c",
+        "roughness": 0.95,
+        "flatShading": true
+      },
+      "position": [
+        0,
+        -0.35,
+        0
+      ],
+      "scale": [
+        1,
+        0.38,
+        1
+      ],
+      "parent": "env",
+      "category": "environment",
+      "comment": "Seeded scatter of environment-tagged mounds \u2014 these sculpt bumps into the draped terrain mesh",
+      "modifiers": {
+        "scatter": {
+          "count": 4,
+          "bounds": [
+            [
+              -10,
+              -4.2
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              -9,
+              9
+            ]
+          ],
+          "scaleVariation": 0.45,
+          "randomRotation": true,
+          "seed": 7
+        }
+      }
+    },
+    {
+      "name": "terrain_mound_east",
+      "type": "sphere",
+      "params": [
+        1.15,
+        9
+      ],
+      "material": {
+        "color": "#73604c",
+        "roughness": 0.95,
+        "flatShading": true
+      },
+      "position": [
+        0,
+        -0.35,
+        0
+      ],
+      "scale": [
+        1,
+        0.38,
+        1
+      ],
+      "parent": "env",
+      "category": "environment",
+      "comment": "Seeded scatter of environment-tagged mounds \u2014 these sculpt bumps into the draped terrain mesh",
+      "modifiers": {
+        "scatter": {
+          "count": 4,
+          "bounds": [
+            [
+              4.2,
+              10
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              -9,
+              8
+            ]
+          ],
+          "scaleVariation": 0.45,
+          "randomRotation": true,
+          "seed": 11
+        }
+      }
+    },
+    {
+      "name": "entry_gate",
+      "type": "prefab",
+      "src": "hazard-gate",
+      "position": [
+        0,
+        0.18,
+        4.5
+      ],
+      "parent": "scene_root"
+    },
+    {
+      "name": "altar",
+      "type": "prefab",
+      "src": "machine-altar",
+      "position": [
+        0,
+        0.25,
+        -3.2
+      ],
+      "rotation": [
+        0,
+        15,
+        0
+      ],
+      "parent": "scene_root"
+    },
+    {
+      "name": "dead_tree_left",
+      "type": "prefab",
+      "src": "dead-tree",
+      "position": [
+        -8.2,
+        0.2,
+        2.8
+      ],
+      "rotation": [
+        0,
+        70,
+        0
+      ],
+      "scale": [
+        1.15,
+        1.15,
+        1.15
+      ],
+      "parent": "scene_root"
+    },
+    {
+      "name": "dead_tree_right",
+      "type": "prefab",
+      "src": "dead-tree",
+      "position": [
+        6.2,
+        0.2,
+        -3.6
+      ],
+      "rotation": [
+        0,
+        210,
+        0
+      ],
+      "scale": [
+        0.85,
+        0.9,
+        0.85
+      ],
+      "parent": "scene_root"
+    },
+    {
+      "name": "marker_row_left",
+      "type": "module",
+      "src": "path-marker",
+      "position": [
+        -1.6,
+        0.22,
+        7.5
+      ],
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "parent": "scene_root",
+      "comment": "Array modifier applied to a module placement \u2014 expands before module instantiation",
+      "modifiers": {
+        "array": {
+          "count": 5,
+          "offset": [
+            0,
+            0,
+            -2.3
+          ]
+        }
+      }
+    },
+    {
+      "name": "marker_row_right",
+      "type": "module",
+      "src": "path-marker",
+      "position": [
+        1.6,
+        0.22,
+        6.4
+      ],
+      "rotation": [
+        0,
+        -90,
+        0
+      ],
+      "parent": "scene_root",
+      "modifiers": {
+        "array": {
+          "count": 4,
+          "offset": [
+            0,
+            0,
+            -2.3
+          ]
+        }
+      }
+    },
+    {
+      "name": "beacon_near",
+      "type": "module",
+      "src": "survey-beacon",
+      "position": [
+        3.6,
+        0.25,
+        2.0
+      ],
+      "rotation": [
+        0,
+        -35,
+        0
+      ],
+      "parent": "scene_root"
+    },
+    {
+      "name": "beacon_far",
+      "type": "module",
+      "src": "survey-beacon",
+      "position": [
+        -3.4,
+        0.25,
+        -0.8
+      ],
+      "rotation": [
+        0,
+        140,
+        0
+      ],
+      "scale": [
+        0.9,
+        0.9,
+        0.9
+      ],
+      "parent": "scene_root"
+    },
+    {
+      "name": "comm_tower",
+      "type": "group",
+      "position": [
+        -5.6,
+        0.72,
+        -4.4
+      ],
+      "parent": "scene_root"
+    },
+    {
+      "name": "tower_base",
+      "type": "steppedPyramid",
+      "params": [
+        1.5,
+        0.55,
+        3
+      ],
+      "material": {
+        "preset": "concrete",
+        "color": "#bcb3a7",
+        "breakup": {
+          "noise": {
+            "amount": 0.07,
+            "scale": 4
+          },
+          "roughnessVariation": 0.08
+        },
+        "edgeWear": {
+          "amount": 0.1,
+          "color": "#a89880"
+        }
+      },
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "parent": "comm_tower",
+      "castShadow": true,
+      "receiveShadow": true
+    },
+    {
+      "name": "tower_mast",
+      "type": "cylinder",
+      "params": [
+        0.11,
+        0.16,
+        4.4,
+        8
+      ],
+      "material": {
+        "preset": "painted-metal",
+        "color": "#a9a59e",
+        "breakup": {
+          "noise": {
+            "amount": 0.06,
+            "scale": 6
+          },
+          "roughnessVariation": 0.06
+        },
+        "edgeWear": {
+          "amount": 0.1,
+          "color": "#8a7d68"
+        }
+      },
+      "position": [
+        0,
+        2.75,
+        0
+      ],
+      "parent": "comm_tower",
+      "castShadow": true
+    },
+    {
+      "name": "tower_strut",
+      "type": "box",
+      "params": [
+        0.09,
+        1.6,
+        0.09
+      ],
+      "material": {
+        "preset": "rusted-metal",
+        "color": "#8a6a52"
+      },
+      "position": [
+        0.52,
+        1.15,
+        0.52
+      ],
+      "rotation": [
+        -24,
+        0,
+        24
+      ],
+      "parent": "comm_tower",
+      "comment": "Mirror axis 'xz' \u2014 one authored strut becomes four",
+      "modifiers": {
+        "mirror": {
+          "axis": "xz"
+        }
+      },
+      "castShadow": true
+    },
+    {
+      "name": "tower_housing",
+      "type": "roundedBox",
+      "params": [
+        0.55,
+        0.75,
+        0.55,
+        0.03,
+        2
+      ],
+      "material": {
+        "preset": "painted-metal",
+        "color": "#99968e",
+        "breakup": {
+          "noise": {
+            "amount": 0.06,
+            "scale": 5
+          },
+          "roughnessVariation": 0.06
+        },
+        "edgeWear": {
+          "amount": 0.14,
+          "color": "#8a7d68"
+        },
+        "emissiveStrips": [
+          {
+            "face": "front",
+            "axis": "y",
+            "count": 3,
+            "spacing": 0.2,
+            "width": 0.05,
+            "length": 0.34,
+            "color": "#ff8c3a",
+            "intensity": 1.5
+          },
+          {
+            "face": "right",
+            "axis": "y",
+            "count": 2,
+            "spacing": 0.26,
+            "width": 0.05,
+            "length": 0.34,
+            "color": "#7ae8ff",
+            "intensity": 1.4
+          }
+        ]
+      },
+      "position": [
+        0,
+        3.4,
+        0
+      ],
+      "parent": "comm_tower",
+      "castShadow": true
+    },
+    {
+      "name": "tower_dish",
+      "type": "csg",
+      "output": "bowl",
+      "comment": "Embedded CSG \u2014 hollow sphere shell cut in half makes the radar dish",
+      "shapes": {
+        "shell_outer": {
+          "type": "sphere",
+          "radius": 0.62,
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        "shell_inner": {
+          "type": "sphere",
+          "radius": 0.55,
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        "half_cutter": {
+          "type": "box",
+          "size": [
+            1.6,
+            1.6,
+            0.9
+          ],
+          "position": [
+            0,
+            0,
+            0.45
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "subtract",
+          "a": "shell_outer",
+          "b": "shell_inner",
+          "result": "shell"
+        },
+        {
+          "op": "subtract",
+          "a": "shell",
+          "b": "half_cutter",
+          "result": "bowl"
+        }
+      ],
+      "material": {
+        "preset": "painted-metal",
+        "color": "#e2ddcf",
+        "roughness": 0.55,
+        "metalness": 0.25,
+        "breakup": {
+          "noise": {
+            "amount": 0.05,
+            "scale": 6
+          },
+          "roughnessVariation": 0.06
+        }
+      },
+      "position": [
+        0,
+        4.35,
+        0.1
+      ],
+      "rotation": [
+        35,
+        0,
+        0
+      ],
+      "parent": "comm_tower",
+      "castShadow": true
+    },
+    {
+      "name": "dish_feed",
+      "type": "sphere",
+      "params": [
+        0.05,
+        8
+      ],
+      "material": {
+        "preset": "glow",
+        "color": "#7ae8ff",
+        "emissiveIntensity": 2.2
+      },
+      "position": [
+        0,
+        4.2,
+        0.42
+      ],
+      "parent": "comm_tower"
+    },
+    {
+      "name": "tower_beacon_light",
+      "type": "pointLight",
+      "params": [
+        0.9,
+        7,
+        1.6,
+        false
+      ],
+      "material": {
+        "color": "#ff6a3a"
+      },
+      "position": [
+        0,
+        5.1,
+        0
+      ],
+      "parent": "comm_tower"
+    },
+    {
+      "name": "tower_beacon_bulb",
+      "type": "sphere",
+      "params": [
+        0.07,
+        8
+      ],
+      "material": {
+        "preset": "glow",
+        "color": "#ff6a3a",
+        "emissiveIntensity": 2.5
+      },
+      "position": [
+        0,
+        5.1,
+        0
+      ],
+      "parent": "comm_tower"
+    },
+    {
+      "name": "supply_crate",
+      "type": "roundedBox",
+      "params": [
+        0.82,
+        0.82,
+        0.82,
+        0.04,
+        2
+      ],
+      "material": {
+        "preset": "painted-metal",
+        "color": "#c0b388",
+        "breakup": {
+          "noise": {
+            "amount": 0.08,
+            "scale": 4
+          },
+          "roughnessVariation": 0.08
+        },
+        "edgeWear": {
+          "amount": 0.16,
+          "color": "#b3a066"
+        },
+        "decals": [
+          {
+            "face": "front",
+            "size": [
+              0.4,
+              0.12
+            ],
+            "offset": [
+              0,
+              0.18
+            ],
+            "material": {
+              "preset": "glow",
+              "color": "#ffab4a",
+              "emissiveIntensity": 0.9,
+              "opacity": 0.7
+            }
+          }
+        ]
+      },
+      "position": [
+        4.6,
+        0.6,
+        -1.8
+      ],
+      "rotation": [
+        0,
+        8,
+        0
+      ],
+      "parent": "scene_root",
+      "comment": "3D grid array \u2014 count [x, y, z]",
+      "modifiers": {
+        "array": {
+          "count": [
+            3,
+            1,
+            2
+          ],
+          "offset": [
+            0.92,
+            0,
+            0.94
+          ]
+        }
+      },
+      "castShadow": true,
+      "receiveShadow": true
+    },
+    {
+      "name": "supply_crate_top",
+      "type": "roundedBox",
+      "params": [
+        0.82,
+        0.82,
+        0.82,
+        0.04,
+        2
+      ],
+      "material": {
+        "preset": "painted-metal",
+        "color": "#b3b399",
+        "breakup": {
+          "noise": {
+            "amount": 0.08,
+            "scale": 4
+          },
+          "roughnessVariation": 0.08
+        },
+        "edgeWear": {
+          "amount": 0.18,
+          "color": "#a8a070"
+        }
+      },
+      "position": [
+        5.1,
+        1.43,
+        -1.4
+      ],
+      "rotation": [
+        0,
+        -14,
+        0
+      ],
+      "parent": "scene_root",
+      "castShadow": true
+    },
+    {
+      "name": "prop_rock",
+      "type": "rock",
+      "params": [
+        0.34,
+        3,
+        0.4
+      ],
+      "material": {
+        "color": "#bcae9e",
+        "roughness": 0.9,
+        "flatShading": true,
+        "breakup": {
+          "noise": {
+            "amount": 0.06,
+            "scale": 3
+          }
+        }
+      },
+      "position": [
+        0,
+        0.28,
+        0
+      ],
+      "parent": "scene_root",
+      "comment": "Seeded scatter \u2014 same layout on every load",
+      "modifiers": {
+        "scatter": {
+          "count": 16,
+          "bounds": [
+            [
+              -9,
+              9
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              -8,
+              9
+            ]
+          ],
+          "scaleVariation": 0.5,
+          "randomRotation": true,
+          "seed": 42
+        }
+      },
+      "castShadow": true
+    },
+    {
+      "name": "grass_tuft",
+      "type": "cone",
+      "params": [
+        0.2,
+        0.42,
+        5
+      ],
+      "material": {
+        "color": "#66703f",
+        "roughness": 0.95,
+        "flatShading": true
+      },
+      "position": [
+        0,
+        0.3,
+        0
+      ],
+      "parent": "scene_root",
+      "modifiers": {
+        "scatter": {
+          "count": 30,
+          "bounds": [
+            [
+              -9,
+              9
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              -8,
+              9
+            ]
+          ],
+          "scaleVariation": 0.35,
+          "randomRotation": true,
+          "seed": 21
+        }
+      }
+    }
+  ]
+}
