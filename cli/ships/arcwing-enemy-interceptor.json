@@ -1,6 +1,6 @@
 {
   "name": "arcwing-enemy-interceptor",
-  "description": "Enemy interceptor — a forked, flat, predatory hull. Twin forward mandible prongs with glowing tips, wide swept delta, low red canopy, twin nozzles, wingtip blades, dorsal sensor. Dark-red hull, orange glow.",
+  "description": "Enemy interceptor \u2014 a forked, flat, predatory hull. Twin forward mandible prongs with glowing tips, wide swept delta, low red canopy, twin nozzles, wingtip blades, dorsal sensor. Dark-red hull, orange glow.",
   "palette": {
     "hull": "#8a1f1f",
     "panel": "#4a1010",
@@ -11,14 +11,58 @@
     "glowStrength": 2.6
   },
   "fuselage": {
-    "noseTip": [0, 0.0, 0.95],
+    "noseTip": [
+      0,
+      0.0,
+      0.95
+    ],
     "tailCap": "panel",
     "underside": "panel",
     "stations": [
-      { "z": 0.6, "yT": 0.1, "wS": 0.1, "yS": 0.07, "wC": 0.18, "yC": -0.01, "wB": 0.1, "yL": -0.07, "yB": -0.1 },
-      { "z": 0.05, "yT": 0.17, "wS": 0.15, "yS": 0.13, "wC": 0.28, "yC": -0.01, "wB": 0.15, "yL": -0.1, "yB": -0.14 },
-      { "z": -0.6, "yT": 0.18, "wS": 0.15, "yS": 0.13, "wC": 0.26, "yC": -0.01, "wB": 0.14, "yL": -0.09, "yB": -0.13 },
-      { "z": -1.1, "yT": 0.13, "wS": 0.1, "yS": 0.09, "wC": 0.18, "yC": 0.0, "wB": 0.09, "yL": -0.06, "yB": -0.1 }
+      {
+        "z": 0.6,
+        "yT": 0.1,
+        "wS": 0.1,
+        "yS": 0.07,
+        "wC": 0.18,
+        "yC": -0.01,
+        "wB": 0.1,
+        "yL": -0.07,
+        "yB": -0.1
+      },
+      {
+        "z": 0.05,
+        "yT": 0.17,
+        "wS": 0.15,
+        "yS": 0.13,
+        "wC": 0.28,
+        "yC": -0.01,
+        "wB": 0.15,
+        "yL": -0.1,
+        "yB": -0.14
+      },
+      {
+        "z": -0.6,
+        "yT": 0.18,
+        "wS": 0.15,
+        "yS": 0.13,
+        "wC": 0.26,
+        "yC": -0.01,
+        "wB": 0.14,
+        "yL": -0.09,
+        "yB": -0.13
+      },
+      {
+        "z": -1.1,
+        "yT": 0.13,
+        "wS": 0.1,
+        "yS": 0.09,
+        "wC": 0.18,
+        "yC": 0.0,
+        "wB": 0.09,
+        "yL": -0.06,
+        "yB": -0.1
+      }
     ]
   },
   "wing": {
@@ -26,35 +70,123 @@
     "underside": "panel",
     "leTrim": true,
     "stations": [
-      { "x": -1.45, "zLE": -0.65, "zTE": -1.05, "yMid": 0.06, "th": 0.04 },
-      { "x": -0.85, "zLE": -0.15, "zTE": -1.1, "yMid": 0.02, "th": 0.08 },
-      { "x": 0.0, "zLE": 0.45, "zTE": -1.12, "yMid": -0.01, "th": 0.12 },
-      { "x": 0.85, "zLE": -0.15, "zTE": -1.1, "yMid": 0.02, "th": 0.08 },
-      { "x": 1.45, "zLE": -0.65, "zTE": -1.05, "yMid": 0.06, "th": 0.04 }
+      {
+        "x": -1.45,
+        "zLE": -0.65,
+        "zTE": -1.05,
+        "yMid": 0.06,
+        "th": 0.04
+      },
+      {
+        "x": -0.85,
+        "zLE": -0.15,
+        "zTE": -1.1,
+        "yMid": 0.02,
+        "th": 0.08
+      },
+      {
+        "x": 0.0,
+        "zLE": 0.45,
+        "zTE": -1.12,
+        "yMid": -0.01,
+        "th": 0.12
+      },
+      {
+        "x": 0.85,
+        "zLE": -0.15,
+        "zTE": -1.1,
+        "yMid": 0.02,
+        "th": 0.08
+      },
+      {
+        "x": 1.45,
+        "zLE": -0.65,
+        "zTE": -1.05,
+        "yMid": 0.06,
+        "th": 0.04
+      }
     ]
   },
   "vtails": {
     "tipColor": "trim",
     "stations": [
-      { "x": 1.25, "y": 0.07, "zLE": -0.75, "zTE": -1.05, "th": 0.05 },
-      { "x": 1.5, "y": 0.38, "zLE": -0.85, "zTE": -1.08, "th": 0.035 }
+      {
+        "x": 1.25,
+        "y": 0.07,
+        "zLE": -0.75,
+        "zTE": -1.05,
+        "th": 0.05
+      },
+      {
+        "x": 1.5,
+        "y": 0.38,
+        "zLE": -0.85,
+        "zTE": -1.08,
+        "th": 0.035
+      }
     ]
   },
   "engines": [
-    { "x": 0.2, "y": 0.02, "rOut": 0.115, "rIn": 0.085, "zFront": -0.5, "zBack": -1.22, "zThroat": -1.1, "mirror": true }
+    {
+      "x": 0.2,
+      "y": 0.02,
+      "rOut": 0.115,
+      "rIn": 0.085,
+      "zFront": -0.5,
+      "zBack": -1.22,
+      "zThroat": -1.1,
+      "mirror": true
+    }
   ],
   "canopy": {
     "material": "glass",
     "sink": 0.02,
-    "frontPoint": { "z": 0.5, "lift": 0.0 },
-    "rearPoint": { "z": 0.02, "lift": 0.03 },
+    "frontPoint": {
+      "z": 0.5,
+      "lift": 0.0
+    },
+    "rearPoint": {
+      "z": 0.02,
+      "lift": 0.03
+    },
     "rings": [
-      { "z": 0.38, "w": 0.1, "h": 0.07 },
-      { "z": 0.15, "w": 0.12, "h": 0.09 }
+      {
+        "z": 0.38,
+        "w": 0.1,
+        "h": 0.07
+      },
+      {
+        "z": 0.15,
+        "w": 0.12,
+        "h": 0.09
+      }
     ]
   },
   "pods": [
-    { "at": [0.3, -0.02, 0.15], "axis": "z", "r": 0.07, "len": 1.0, "material": "hull", "tip": "glow", "mirror": true },
-    { "at": [0, 0.16, -0.55], "axis": "y", "r": 0.035, "len": 0.16, "material": "panel", "tip": "glow" }
+    {
+      "at": [
+        0.3,
+        -0.02,
+        0.2
+      ],
+      "axis": "z",
+      "r": 0.045,
+      "len": 0.75,
+      "material": "hull",
+      "tip": "glow",
+      "mirror": true
+    },
+    {
+      "at": [
+        0,
+        0.16,
+        -0.55
+      ],
+      "axis": "y",
+      "r": 0.035,
+      "len": 0.16,
+      "material": "panel",
+      "tip": "glow"
+    }
   ]
 }
