@@ -45,6 +45,7 @@ Use this default decision tree:
 - Terrain / landscape: `scene.terrain` block — `method` heightfield / marching-cubes / cloth-drape, `display` primitives|terrain|both. Normals flip by default now; only set `flipNormals: false` to opt out. See the four `specs/landscape-*.json` examples.
 - Repeated architecture: module definitions first, then `type: "module"` placements; or an `array`/`scatter` modifier for grids and fields
 - Repeated scatter (rocks, foliage, debris): a `scatter` modifier with a fixed `seed`
+- Sculpted continuous hull (starfighters, sleek vehicles — the No Man's Sky chunky-lowpoly look): **do NOT kitbash primitives** — bolted boxes read as RC drones and were rejected on sight. Use `cli/hullgen.mjs` + a JSON ship def in `cli/ships/` instead (see "Procedural hulls" below)
 - Broken existing spec: inspect first, then edit the failing hierarchy, scale, material, or camera
 
 ## Quality Modes
@@ -68,6 +69,16 @@ If the user does not specify, default to `standard` — this now matches the run
 7. Inspect with `node cli/inspect-model.js <spec.json> [out-dir] [port]` (out-dir defaults to `/tmp/samdin-inspect`; pass a `[port]` to run parallel inspections).
 8. Revise from concrete screenshot findings, not vague taste-only notes.
 9. If you touch the builder or a shared primitive, run `make golden` — it fingerprint-checks the quality-bar anchors so a change can't silently move their geometry. Rebless intended changes with `make golden-update`.
+
+## Procedural Hulls (hullgen)
+
+For sculpted continuous low-poly hulls the parts pipeline can't reach. Full schema + look rules: `docs/hullgen.md`. Reference ships: `cli/ships/arcwing-interceptor.json` (full anatomy), `cli/ships/arcwing-swarmling.json` (minimal — shows optional components).
+
+- **Concept first.** Generate/obtain a concept image before modeling; park it in `media/concepts/` with its prompt as `*.prompt.txt`. Compare screenshots against the concept, not taste.
+- Ship = JSON def: `palette` + optional lofted components (`fuselage` required; `wing`, `vtails`, `engines`, `canopy`, `navPods` optional). Anatomy varies per ship, generator code doesn't change.
+- `node cli/hullgen.mjs` → `media/models/<name>-hull.gltf` (served at `/media/models/` in dev).
+- Review loop: `app.loader.loadFromURL(url)` → `app.setModel(m)`. **setModel resets lookdev** — after every load re-drive the panel selects (`lighting-select`=showcase, `env-map-select`=studio, `shadow-quality`=high, each with a `change` event) or the model renders dark with shadow-acne moiré. Judge from threeQuarter/back/top/left, never one angle.
+- Look rules: volume over plates; matte over chrome (metal ~0.2, rough ~0.5); recess emissive throats inside a rim (never glue glow blobs on); trim = narrow facet band, not a whole face; `canopy.material: "glow"` makes a monster eye instead of a cockpit.
 
 ## Non-Negotiable Authoring Rules
 
