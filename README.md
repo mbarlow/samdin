@@ -44,7 +44,8 @@ Every gallery shot is one command: `node cli/hero.js specs/quality-bar-<name>.js
 | [Validation & inspection](docs/validation.md) | CLI validators, screenshot sweeps, example scenes |
 | [Quality bar prompts](docs/quality-bar.md) | The seven hero anchor prompts + the anchor rubric |
 | [Render tiers](docs/quality-tiers.md) | `scene.quality` = a performance knob (draft/standard/high), not a quality knob |
-| [CLI reference](cli/README.md) | `validate-spec`, `inspect-model`, `export-playwright`, `index` |
+| [hullgen](docs/hullgen.md) | Procedural low-poly hulls — lofted continuous meshes beyond the parts pipeline; ships as JSON defs |
+| [CLI reference](cli/README.md) | `validate-spec`, `inspect-model`, `export-playwright`, `index`, `hullgen` |
 | [Release notes](docs/RELEASE_NOTES.md) | Latest changes |
 
 ## Project layout
@@ -54,8 +55,8 @@ samdin/
 ├── src/                app entry: index.html + js/ + css/
 ├── specs/              scene specs (served at /specs)
 ├── prefabs/            reusable prefab JSON (served at /prefabs)
-├── media/              images + demo video
-├── cli/                validate / inspect / export tools
+├── media/              images + demo video, concept targets, generated hull models
+├── cli/                validate / inspect / export tools + hullgen (ships/ = hull defs)
 ├── docs/               reference docs + thumbnails
 └── scripts/dev.sh      browser-sync launcher
 ```

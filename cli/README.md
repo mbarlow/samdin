@@ -108,6 +108,19 @@ node index.js ../specs/sedan.json out.glb --glb    # → GLB via Blender
 node index.js --batch ../specs ./out               # convert all specs in a dir
 ```
 
+### `hullgen.mjs`
+
+Procedural low-poly hull generator — lofts faceted cross-sections into one
+continuous flat-shaded mesh and writes a self-contained `.gltf` (embedded
+buffer, flat normals, stdlib-only, no Playwright/Blender). Ships are JSON
+defs in `ships/`. Full schema + look rules: [docs/hullgen.md](../docs/hullgen.md).
+
+```bash
+node hullgen.mjs                              # build every def in ships/
+node hullgen.mjs ships/arcwing-swarmling.json
+# → ../media/models/<name>-hull.gltf  (served at /media/models/ in dev)
+```
+
 ## Notes
 
 - All scripts resolve paths relative to the `cli/` directory. Specs, prefabs, and media live in `../specs`, `../prefabs`, `../media`.
