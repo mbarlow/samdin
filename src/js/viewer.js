@@ -602,6 +602,10 @@ class Viewer {
     const endTarget = new THREE.Vector3(...preset.target);
     const positionOffset = config.positionOffset || [0, 0, 0];
     const targetOffset = config.targetOffset || [0, 0, 0];
+    // NOTE: positionOffset is applied BEFORE model-size scaling, so it is in
+    // preset-space units that grow with the model (all quality-bar anchors are
+    // framed against this). targetOffset stays in world meters. For big scenes
+    // prefer distanceMultiplier + targetOffset.
     endPos.add(new THREE.Vector3(...positionOffset));
     endTarget.add(new THREE.Vector3(...targetOffset));
 

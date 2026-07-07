@@ -1149,6 +1149,9 @@ class ModelBuilder {
     mesh.geometry = geometry;
     mesh.material = mesh.material.clone();
     mesh.material.vertexColors = true;
+    // Vertex colors already carry the base tint — leaving material.color at the
+    // base value would multiply the two and square the albedo (#73).
+    mesh.material.color.setHex(0xffffff);
 
     if (roughnessVariation > 0) {
       this.installRoughnessVariation(mesh.material, roughnessVariation);
