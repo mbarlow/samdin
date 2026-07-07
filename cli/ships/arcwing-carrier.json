@@ -1,6 +1,6 @@
 {
   "name": "arcwing-carrier",
-  "description": "Capital carrier — a long segmented spine keel. Stepped module stack, stern fin pair, side fins, comms towers with green beacons, lit window bands, recessed stern engine array, glowing bow hangar mouth, glass bridge band, bow antenna. Grey-green hull, green running lights.",
+  "description": "Capital carrier \u2014 a long segmented spine keel. Stepped module stack, comms towers with green beacons, lit window bands, recessed stern engine array, glowing bow hangar mouth, glass bridge band, bow antenna. Grey-green hull, green running lights.",
   "palette": {
     "hull": "#5c705f",
     "panel": "#39463c",
@@ -11,61 +11,244 @@
     "glowStrength": 2.4
   },
   "fuselage": {
-    "noseTip": [0, 0.05, 3.8],
+    "noseTip": [
+      0,
+      0.05,
+      3.8
+    ],
     "tailCap": "panel",
     "underside": "panel",
     "stations": [
-      { "z": 3.2, "yT": 0.22, "wS": 0.16, "yS": 0.15, "wC": 0.26, "yC": -0.02, "wB": 0.16, "yL": -0.16, "yB": -0.24 },
-      { "z": 2.4, "yT": 0.4, "wS": 0.3, "yS": 0.28, "wC": 0.5, "yC": -0.03, "wB": 0.3, "yL": -0.3, "yB": -0.42 },
-      { "z": 1.6, "yT": 0.42, "wS": 0.32, "yS": 0.3, "wC": 0.52, "yC": -0.03, "wB": 0.32, "yL": -0.32, "yB": -0.44 },
-      { "z": 1.4, "yT": 0.5, "wS": 0.4, "yS": 0.36, "wC": 0.62, "yC": -0.03, "wB": 0.38, "yL": -0.36, "yB": -0.5 },
-      { "z": 0.2, "yT": 0.5, "wS": 0.4, "yS": 0.36, "wC": 0.62, "yC": -0.03, "wB": 0.38, "yL": -0.36, "yB": -0.5 },
-      { "z": 0.0, "yT": 0.42, "wS": 0.32, "yS": 0.3, "wC": 0.52, "yC": -0.03, "wB": 0.32, "yL": -0.32, "yB": -0.44 },
-      { "z": -1.2, "yT": 0.44, "wS": 0.33, "yS": 0.31, "wC": 0.54, "yC": -0.03, "wB": 0.33, "yL": -0.33, "yB": -0.45 },
-      { "z": -1.4, "yT": 0.52, "wS": 0.41, "yS": 0.37, "wC": 0.64, "yC": -0.03, "wB": 0.39, "yL": -0.37, "yB": -0.52 },
-      { "z": -2.6, "yT": 0.52, "wS": 0.41, "yS": 0.37, "wC": 0.64, "yC": -0.03, "wB": 0.39, "yL": -0.37, "yB": -0.52 },
-      { "z": -3.4, "yT": 0.34, "wS": 0.25, "yS": 0.23, "wC": 0.4, "yC": -0.02, "wB": 0.24, "yL": -0.24, "yB": -0.34 }
-    ]
-  },
-  "wing": {
-    "color": "hull",
-    "underside": "panel",
-    "leTrim": false,
-    "stations": [
-      { "x": -1.15, "zLE": -2.4, "zTE": -2.9, "yMid": 0.0, "th": 0.05 },
-      { "x": -0.6, "zLE": -2.1, "zTE": -3.0, "yMid": -0.02, "th": 0.1 },
-      { "x": 0.0, "zLE": -1.9, "zTE": -3.0, "yMid": -0.03, "th": 0.14 },
-      { "x": 0.6, "zLE": -2.1, "zTE": -3.0, "yMid": -0.02, "th": 0.1 },
-      { "x": 1.15, "zLE": -2.4, "zTE": -2.9, "yMid": 0.0, "th": 0.05 }
-    ]
-  },
-  "vtails": {
-    "tipColor": "trim",
-    "stations": [
-      { "x": 0.12, "y": 0.5, "zLE": -2.2, "zTE": -3.2, "th": 0.08 },
-      { "x": 0.3, "y": 1.1, "zLE": -2.55, "zTE": -3.25, "th": 0.05 }
+      {
+        "z": 3.2,
+        "yT": 0.22,
+        "wS": 0.16,
+        "yS": 0.15,
+        "wC": 0.26,
+        "yC": -0.02,
+        "wB": 0.16,
+        "yL": -0.16,
+        "yB": -0.24
+      },
+      {
+        "z": 2.4,
+        "yT": 0.4,
+        "wS": 0.3,
+        "yS": 0.28,
+        "wC": 0.5,
+        "yC": -0.03,
+        "wB": 0.3,
+        "yL": -0.3,
+        "yB": -0.42
+      },
+      {
+        "z": 1.6,
+        "yT": 0.42,
+        "wS": 0.32,
+        "yS": 0.3,
+        "wC": 0.52,
+        "yC": -0.03,
+        "wB": 0.32,
+        "yL": -0.32,
+        "yB": -0.44
+      },
+      {
+        "z": 1.4,
+        "yT": 0.5,
+        "wS": 0.4,
+        "yS": 0.36,
+        "wC": 0.62,
+        "yC": -0.03,
+        "wB": 0.38,
+        "yL": -0.36,
+        "yB": -0.5
+      },
+      {
+        "z": 0.2,
+        "yT": 0.5,
+        "wS": 0.4,
+        "yS": 0.36,
+        "wC": 0.62,
+        "yC": -0.03,
+        "wB": 0.38,
+        "yL": -0.36,
+        "yB": -0.5
+      },
+      {
+        "z": 0.0,
+        "yT": 0.42,
+        "wS": 0.32,
+        "yS": 0.3,
+        "wC": 0.52,
+        "yC": -0.03,
+        "wB": 0.32,
+        "yL": -0.32,
+        "yB": -0.44
+      },
+      {
+        "z": -1.2,
+        "yT": 0.44,
+        "wS": 0.33,
+        "yS": 0.31,
+        "wC": 0.54,
+        "yC": -0.03,
+        "wB": 0.33,
+        "yL": -0.33,
+        "yB": -0.45
+      },
+      {
+        "z": -1.4,
+        "yT": 0.52,
+        "wS": 0.41,
+        "yS": 0.37,
+        "wC": 0.64,
+        "yC": -0.03,
+        "wB": 0.39,
+        "yL": -0.37,
+        "yB": -0.52
+      },
+      {
+        "z": -2.6,
+        "yT": 0.52,
+        "wS": 0.41,
+        "yS": 0.37,
+        "wC": 0.64,
+        "yC": -0.03,
+        "wB": 0.39,
+        "yL": -0.37,
+        "yB": -0.52
+      },
+      {
+        "z": -3.4,
+        "yT": 0.34,
+        "wS": 0.25,
+        "yS": 0.23,
+        "wC": 0.4,
+        "yC": -0.02,
+        "wB": 0.24,
+        "yL": -0.24,
+        "yB": -0.34
+      }
     ]
   },
   "engines": [
-    { "x": 0, "y": 0.02, "rOut": 0.24, "rIn": 0.18, "zFront": -2.7, "zBack": -3.55, "zThroat": -3.38, "mirror": false },
-    { "x": 0.42, "y": -0.05, "rOut": 0.16, "rIn": 0.12, "zFront": -2.7, "zBack": -3.5, "zThroat": -3.36, "mirror": true }
+    {
+      "x": 0,
+      "y": 0.02,
+      "rOut": 0.24,
+      "rIn": 0.18,
+      "zFront": -2.7,
+      "zBack": -3.55,
+      "zThroat": -3.38,
+      "mirror": false
+    },
+    {
+      "x": 0.42,
+      "y": -0.05,
+      "rOut": 0.16,
+      "rIn": 0.12,
+      "zFront": -2.7,
+      "zBack": -3.5,
+      "zThroat": -3.36,
+      "mirror": true
+    }
   ],
   "canopy": {
     "material": "glass",
     "sink": 0.03,
-    "frontPoint": { "z": 2.15, "lift": 0.01 },
-    "rearPoint": { "z": 1.45, "lift": 0.04 },
+    "frontPoint": {
+      "z": 2.15,
+      "lift": 0.01
+    },
+    "rearPoint": {
+      "z": 1.45,
+      "lift": 0.04
+    },
     "rings": [
-      { "z": 2.0, "w": 0.2, "h": 0.1 },
-      { "z": 1.65, "w": 0.24, "h": 0.13 }
+      {
+        "z": 2.0,
+        "w": 0.2,
+        "h": 0.1
+      },
+      {
+        "z": 1.65,
+        "w": 0.24,
+        "h": 0.13
+      }
     ]
   },
   "pods": [
-    { "at": [0.18, 0.45, 0.9], "axis": "y", "r": 0.05, "len": 0.5, "material": "panel", "tip": "glow", "mirror": true },
-    { "at": [0, 0.5, -0.4], "axis": "y", "r": 0.06, "len": 0.7, "material": "panel", "tip": "glow" },
-    { "at": [0.56, 0.12, -1.5], "axis": "z", "r": 0.03, "len": 1.9, "material": "glow", "mirror": true },
-    { "at": [0.45, 0.1, 1.5], "axis": "z", "r": 0.03, "len": 1.4, "material": "glow", "mirror": true },
-    { "at": [0, 0.28, 3.1], "axis": "z", "r": 0.03, "len": 0.5, "material": "panel", "tip": "glow" },
-    { "at": [0, -0.06, 3.55], "axis": "z", "r": 0.13, "len": 0.12, "material": "glow" }
+    {
+      "at": [
+        0.18,
+        0.45,
+        0.9
+      ],
+      "axis": "y",
+      "r": 0.05,
+      "len": 0.5,
+      "material": "panel",
+      "tip": "glow",
+      "mirror": true
+    },
+    {
+      "at": [
+        0,
+        0.5,
+        -0.4
+      ],
+      "axis": "y",
+      "r": 0.06,
+      "len": 0.7,
+      "material": "panel",
+      "tip": "glow"
+    },
+    {
+      "at": [
+        0.56,
+        0.12,
+        -1.5
+      ],
+      "axis": "z",
+      "r": 0.03,
+      "len": 1.9,
+      "material": "glow",
+      "mirror": true
+    },
+    {
+      "at": [
+        0.45,
+        0.1,
+        1.5
+      ],
+      "axis": "z",
+      "r": 0.03,
+      "len": 1.4,
+      "material": "glow",
+      "mirror": true
+    },
+    {
+      "at": [
+        0,
+        0.28,
+        3.1
+      ],
+      "axis": "z",
+      "r": 0.03,
+      "len": 0.5,
+      "material": "panel",
+      "tip": "glow"
+    },
+    {
+      "at": [
+        0,
+        -0.06,
+        3.55
+      ],
+      "axis": "z",
+      "r": 0.13,
+      "len": 0.12,
+      "material": "glow"
+    }
   ]
 }
