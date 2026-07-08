@@ -46,7 +46,7 @@ Use this default decision tree:
 - Hero prop: parts-based assembly with stronger material breakup and a presentation `scene` block
 - Vehicle or mechanical asset: parts-based assembly plus embedded CSG where cutouts, beams, brackets, or hollow sections matter
 - Character or creature: parts-based joint chains, not modifiers
-- Environment or room: scene root plus reusable modules, prefabs, and a full `scene` block; for large ground use the `scene.terrain` compositor (tag ground parts `category: "environment"`)
+- Environment or room: scene root plus reusable modules, prefabs, and a full `scene` block; for large ground use the `scene.terrain` compositor (tag ground parts `category: "environment"`). **Scenes are concept-gated** — see "Scene Concept Gate" below before placing the first part.
 - Terrain / landscape: `scene.terrain` block — `method` heightfield / marching-cubes / cloth-drape, `display` primitives|terrain|both. Normals flip by default now; only set `flipNormals: false` to opt out. See the four `specs/landscape-*.json` examples.
 - Repeated architecture: module definitions first, then `type: "module"` placements; or an `array`/`scatter` modifier for grids and fields
 - Repeated scatter (rocks, foliage, debris): a `scatter` modifier with a fixed `seed`
@@ -75,6 +75,16 @@ If the user does not specify, default to `standard` — this now matches the run
 8. Probe with `node cli/probe.js <spec.json>` (`make probe SPEC=...`) — rendered-space lint: ground-contact gaps, near-black/blown effective albedo, clone-read families, crushed/blown luma. Fix errors before judging screenshots; its findings are machine-precise where eyeballing fails (it caught a hidden double-darkened plate no screenshot pass saw).
 9. Revise from concrete screenshot + probe findings, not vague taste-only notes.
 10. If you touch the builder or a shared primitive, run `make golden` — it fingerprint-checks the quality-bar anchors so a change can't silently move their geometry. Rebless intended changes with `make golden-update`.
+
+## Scene Concept Gate
+
+Scenes (showcase/environment/landscape specs — anything whose subject is a composition, not a single asset) do not start in JSON. hullgen proved this: ships get compared against a reference and converge; showcase-cove skipped it, steered by taste for ten rounds, and shipped a feature checklist instead of a composition. The gate:
+
+1. **Concept image first.** Generate or obtain a reference image before modeling. Park it at `media/concepts/<scene>.png` with its prompt as `media/concepts/<scene>.prompt.txt` — the same convention ships use. No concept on disk → no scene build.
+2. **Composition thumbnail before detail.** Block the scene as ≤10 mass primitives — ground, dominant masses, focal object, nothing else. Inspect it and judge the *layout* from all four sweep angles (threeQuarter/front/left/top): focal hierarchy, negative space, silhouette. Only when the blocked layout matches the concept's composition do you start detailing.
+3. **Every review round opens with the concept.** The first question is "closer to or further from the concept?" — not "does it look good?". Findings that don't reference the concept or a probe/validator result are taste, and taste drifts.
+
+This is a process gate, not a runtime feature: the validator cannot check it, so the review loop must. When revising an existing scene that has no concept image, backfill one first (render the current state, decide what the composition *should* be, write the prompt) — otherwise every revision is another taste iteration.
 
 ## Procedural Hulls (hullgen)
 
@@ -130,6 +140,7 @@ Load these only when relevant:
 A solid Samdin result usually includes:
 
 - a saved JSON spec in `specs/` when creating a new asset or scene
+- for scenes: a concept image in `media/concepts/` that the shipped composition was judged against
 - believable scale and grounded hierarchy
 - a `scene` block when presentation matters
 - validation before handoff
