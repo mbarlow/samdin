@@ -511,6 +511,23 @@ function validatePartCollection(parts, issues, warnings, scopeLabel = 'spec') {
       validateDeform(part.deform, prefix, issues);
     }
 
+    const wearMode = part.material?.breakup?.edgeWear?.mode;
+    if (wearMode !== undefined && !['bbox', 'curvature'].includes(wearMode)) {
+      issues.push(`${prefix} edgeWear.mode must be "bbox" or "curvature"`);
+    }
+    const detail = part.material?.detail;
+    if (detail !== undefined) {
+      if (typeof detail !== 'object' || Array.isArray(detail)) {
+        issues.push(`${prefix} material.detail must be an object`);
+      } else {
+        for (const key of ['scale', 'amount']) {
+          if (detail[key] !== undefined && typeof detail[key] !== 'number') {
+            issues.push(`${prefix} material.detail.${key} must be a number`);
+          }
+        }
+      }
+    }
+
     if (part.snapToGround !== undefined && typeof part.snapToGround !== 'boolean') {
       issues.push(`${prefix} snapToGround must be a boolean`);
     }

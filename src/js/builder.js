@@ -1184,7 +1184,8 @@ class ModelBuilder {
     if (
       def.material?.breakup ||
       def.material?.decals ||
-      def.material?.emissiveStrips
+      def.material?.emissiveStrips ||
+      def.material?.detail
     ) {
       this.applySurfaceTreatments(object, def.material);
     }
@@ -1221,6 +1222,9 @@ class ModelBuilder {
     for (const mesh of meshes) {
       if (materialDef.breakup) {
         this.applyMaterialBreakup(mesh, materialDef.breakup);
+      }
+      if (materialDef.detail) {
+        this.installDetailShader(mesh, materialDef.detail);
       }
     }
 
@@ -1261,6 +1265,40 @@ class ModelBuilder {
     const wearAmount = breakupDef.edgeWear?.amount ?? 0;
     const wearColor = new THREE.Color(breakupDef.edgeWear?.color || '#d9d4cb');
     const wearContrast = breakupDef.edgeWear?.contrast ?? 3.5;
+    const wearMode = breakupDef.edgeWear?.mode || 'bbox';
+
+    // Curvature mode (#81): per-vertex crease measure — the max angle between
+    // normals sharing a position. Reads real edges on lathes, lofts, and CSG
+    // where the bbox mask can't.
+    let creaseOf = null;
+    if (wearAmount > 0 && wearMode === 'curvature') {
+      const buckets = new Map();
+      const keyOf = (i) =>
+        `${positions.getX(i).toFixed(3)},${positions.getY(i).toFixed(3)},${positions.getZ(i).toFixed(3)}`;
+      for (let i = 0; i < positions.count; i++) {
+        const key = keyOf(i);
+        let list = buckets.get(key);
+        if (!list) buckets.set(key, (list = []));
+        list.push(i);
+      }
+      creaseOf = new Float32Array(positions.count);
+      const nA = new THREE.Vector3();
+      const nB = new THREE.Vector3();
+      for (const list of buckets.values()) {
+        if (list.length < 2) continue;
+        for (const i of list) {
+          nA.set(normals.getX(i), normals.getY(i), normals.getZ(i));
+          let maxAngle = 0;
+          for (const j of list) {
+            if (j === i) continue;
+            nB.set(normals.getX(j), normals.getY(j), normals.getZ(j));
+            const angle = nA.angleTo(nB);
+            if (angle > maxAngle) maxAngle = angle;
+          }
+          creaseOf[i] = maxAngle;
+        }
+      }
+    }
 
     const roughnessVariation = breakupDef.roughnessVariation ?? 0;
 
@@ -1281,14 +1319,26 @@ class ModelBuilder {
       const axisValue = (axisComponent - minAxis) / sizeAxis;
       const grimeMask = THREE.MathUtils.clamp((1 - axisValue + grimeBias) * grimeAmount + noise * grimeAmount * 0.5, 0, 1);
 
-      const edgeX = 1 - Math.abs((px - (bbox.min.x + size.x * 0.5)) / Math.max(size.x * 0.5, 0.0001));
-      const edgeY = 1 - Math.abs((py - (bbox.min.y + size.y * 0.5)) / Math.max(size.y * 0.5, 0.0001));
-      const edgeZ = 1 - Math.abs((pz - (bbox.min.z + size.z * 0.5)) / Math.max(size.z * 0.5, 0.0001));
-      const edgeMask = THREE.MathUtils.clamp(
-        Math.pow(Math.max(nx * edgeY * edgeZ, ny * edgeX * edgeZ, nz * edgeX * edgeY), wearContrast) * wearAmount * 8,
-        0,
-        1
-      );
+      let edgeMask;
+      if (creaseOf) {
+        // Normalize: 90° crease (a box edge) → 1. Contrast suppresses the
+        // gentle facet-to-facet angles of lowpoly rounds.
+        const norm = Math.min(creaseOf[i] / (Math.PI / 2), 1);
+        edgeMask = THREE.MathUtils.clamp(
+          Math.pow(norm, Math.max(1.5, wearContrast * 0.6)) * wearAmount * 6,
+          0,
+          1
+        );
+      } else {
+        const edgeX = 1 - Math.abs((px - (bbox.min.x + size.x * 0.5)) / Math.max(size.x * 0.5, 0.0001));
+        const edgeY = 1 - Math.abs((py - (bbox.min.y + size.y * 0.5)) / Math.max(size.y * 0.5, 0.0001));
+        const edgeZ = 1 - Math.abs((pz - (bbox.min.z + size.z * 0.5)) / Math.max(size.z * 0.5, 0.0001));
+        edgeMask = THREE.MathUtils.clamp(
+          Math.pow(Math.max(nx * edgeY * edgeZ, ny * edgeX * edgeZ, nz * edgeX * edgeY), wearContrast) * wearAmount * 8,
+          0,
+          1
+        );
+      }
 
       const color = baseColor.clone();
       if (noiseAmount > 0) {
@@ -1338,6 +1388,71 @@ class ModelBuilder {
         '#include <roughnessmap_fragment>',
         '#include <roughnessmap_fragment>\nroughnessFactor = clamp(roughnessFactor + vRoughnessShift, 0.04, 1.0);'
       );
+    };
+    material.needsUpdate = true;
+  }
+
+  /**
+   * Triplanar-style procedural detail (#81): world-space value noise modulating
+   * roughness (± amount) and albedo (± amount/2). No UVs, no textures. Chains
+   * with any existing onBeforeCompile (e.g. roughness variation).
+   *   material.detail: { scale: 2.0, amount: 0.15 }
+   */
+  installDetailShader(mesh, detailDef) {
+    const material = mesh.material;
+    if (!material) return;
+    const scale = detailDef.scale ?? 2.0;
+    const amount = detailDef.amount ?? 0.12;
+    const prevHook = material.onBeforeCompile;
+    const prevKey = material.customProgramCacheKey?.bind(material);
+
+    material.customProgramCacheKey = () =>
+      `${prevKey ? prevKey() : ''}|detail-${scale}-${amount}`;
+    material.onBeforeCompile = (shader) => {
+      if (prevHook) prevHook(shader);
+      shader.vertexShader = shader.vertexShader
+        .replace(
+          'void main() {',
+          'varying vec3 vDetailPos;\nvoid main() {'
+        )
+        .replace(
+          '#include <project_vertex>',
+          '#include <project_vertex>\n  vDetailPos = (modelMatrix * vec4(transformed, 1.0)).xyz;'
+        );
+      shader.fragmentShader = shader.fragmentShader
+        .replace(
+          'void main() {',
+          `varying vec3 vDetailPos;
+float samdinDetailHash(vec3 p) { return fract(sin(dot(p, vec3(127.1, 311.7, 74.7))) * 43758.5453); }
+float samdinDetailNoise(vec3 p) {
+  vec3 i = floor(p); vec3 f = fract(p); f = f * f * (3.0 - 2.0 * f);
+  return mix(
+    mix(mix(samdinDetailHash(i), samdinDetailHash(i + vec3(1.0, 0.0, 0.0)), f.x),
+        mix(samdinDetailHash(i + vec3(0.0, 1.0, 0.0)), samdinDetailHash(i + vec3(1.0, 1.0, 0.0)), f.x), f.y),
+    mix(mix(samdinDetailHash(i + vec3(0.0, 0.0, 1.0)), samdinDetailHash(i + vec3(1.0, 0.0, 1.0)), f.x),
+        mix(samdinDetailHash(i + vec3(0.0, 1.0, 1.0)), samdinDetailHash(i + vec3(1.0, 1.0, 1.0)), f.x), f.y),
+    f.z);
+}
+void main() {`
+        )
+        .replace(
+          '#include <color_fragment>',
+          `#include <color_fragment>
+  {
+    float dn = samdinDetailNoise(vDetailPos * ${scale.toFixed(4)});
+    dn += 0.5 * samdinDetailNoise(vDetailPos * ${(scale * 2.7).toFixed(4)});
+    dn /= 1.5;
+    diffuseColor.rgb *= 1.0 + (dn - 0.5) * ${(amount).toFixed(4)};
+  }`
+        )
+        .replace(
+          '#include <roughnessmap_fragment>',
+          `#include <roughnessmap_fragment>
+  {
+    float dnr = samdinDetailNoise(vDetailPos * ${(scale * 1.7).toFixed(4)});
+    roughnessFactor = clamp(roughnessFactor + (dnr - 0.5) * ${(amount * 2).toFixed(4)}, 0.04, 1.0);
+  }`
+        );
     };
     material.needsUpdate = true;
   }
