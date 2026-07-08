@@ -939,16 +939,14 @@
       "name": "lagoon",
       "type": "box",
       "params": [
-        8.4,
+        7.2,
         0.08,
-        6.9
+        5.9
       ],
       "material": {
-        "color": "#1f4e5e",
-        "roughness": 0.1,
-        "metalness": 0.15,
-        "opacity": 0.88,
-        "transparent": true,
+        "color": "#2a6270",
+        "roughness": 0.12,
+        "metalness": 0.1,
         "breakup": {
           "noise": {
             "amount": 0.04,
@@ -958,9 +956,9 @@
         }
       },
       "position": [
-        7.4,
+        7.0,
         0,
-        4.6
+        4.4
       ],
       "rotation": [
         0,
@@ -969,7 +967,7 @@
       ],
       "parent": "scene_root",
       "snapToGround": true,
-      "groundOffset": 0.32,
+      "groundOffset": 0.28,
       "castShadow": false,
       "receiveShadow": true
     },
