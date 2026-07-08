@@ -779,33 +779,82 @@
       "receiveShadow": true
     },
     {
-      "name": "bay_floor",
-      "type": "box",
+      "name": "bay_bowl_main",
+      "type": "sphere",
       "params": [
-        9.2,
-        0.24,
-        7.7
+        4.0,
+        10
       ],
       "material": {
         "color": "#9a8a6a",
         "roughness": 0.95,
-        "flatShading": true,
-        "breakup": {
-          "noise": {
-            "amount": 0.05,
-            "scale": 8
-          },
-          "roughnessVariation": 0.05
-        }
+        "flatShading": true
       },
       "position": [
-        7.4,
-        -0.55,
-        4.65
+        7.2,
+        -1.15,
+        4.0
       ],
       "parent": "env",
       "category": "environment",
-      "receiveShadow": true
+      "receiveShadow": true,
+      "scale": [
+        1.05,
+        0.26,
+        0.8
+      ]
+    },
+    {
+      "name": "bay_bowl_west",
+      "type": "sphere",
+      "params": [
+        2.6,
+        9
+      ],
+      "material": {
+        "color": "#9a8a6a",
+        "roughness": 0.95,
+        "flatShading": true
+      },
+      "position": [
+        4.6,
+        -0.85,
+        4.6
+      ],
+      "parent": "env",
+      "category": "environment",
+      "receiveShadow": true,
+      "scale": [
+        0.9,
+        0.28,
+        0.7
+      ]
+    },
+    {
+      "name": "bay_bowl_north",
+      "type": "sphere",
+      "params": [
+        2.4,
+        9
+      ],
+      "material": {
+        "color": "#9a8a6a",
+        "roughness": 0.95,
+        "flatShading": true
+      },
+      "position": [
+        8.4,
+        -0.75,
+        2.0
+      ],
+      "parent": "env",
+      "category": "environment",
+      "receiveShadow": true,
+      "scale": [
+        1.05,
+        0.26,
+        0.65
+      ]
     },
     {
       "name": "dune_back_left",
@@ -937,22 +986,23 @@
     },
     {
       "name": "lagoon",
-      "type": "box",
+      "type": "rock",
       "params": [
-        7.2,
-        0.08,
-        5.9
+        3.6,
+        8,
+        0.35
       ],
       "material": {
-        "color": "#2a6270",
-        "roughness": 0.12,
-        "metalness": 0.1,
+        "color": "#2a5f6d",
+        "roughness": 0.32,
+        "metalness": 0.05,
+        "flatShading": true,
         "breakup": {
           "noise": {
-            "amount": 0.04,
-            "scale": 6
+            "amount": 0.03,
+            "scale": 2
           },
-          "roughnessVariation": 0.08
+          "roughnessVariation": 0.06
         }
       },
       "position": [
@@ -960,16 +1010,16 @@
         0,
         4.4
       ],
-      "rotation": [
-        0,
-        0,
-        0
-      ],
       "parent": "scene_root",
       "snapToGround": true,
-      "groundOffset": 0.28,
+      "groundOffset": 0.42,
       "castShadow": false,
-      "receiveShadow": true
+      "receiveShadow": true,
+      "scale": [
+        1.42,
+        0.05,
+        1.12
+      ]
     },
     {
       "name": "boat",
@@ -1195,6 +1245,33 @@
       "castShadow": true
     },
     {
+      "name": "cockpit",
+      "type": "box",
+      "params": [
+        0.6,
+        0.16,
+        2.5
+      ],
+      "material": {
+        "color": "#2e241a",
+        "roughness": 0.9,
+        "flatShading": true,
+        "breakup": {
+          "noise": {
+            "amount": 0.06,
+            "scale": 4
+          },
+          "roughnessVariation": 0.05
+        }
+      },
+      "position": [
+        0,
+        0.34,
+        -0.05
+      ],
+      "parent": "boat"
+    },
+    {
       "name": "gunwale",
       "type": "box",
       "params": [
@@ -1247,7 +1324,7 @@
       },
       "position": [
         0,
-        0.4,
+        0.46,
         0
       ],
       "modifiers": {
@@ -1583,8 +1660,9 @@
       "name": "hut_roof",
       "type": "pyramid",
       "params": [
-        2.5,
-        1.0
+        3.2,
+        2.7,
+        0.95
       ],
       "material": {
         "preset": "wood",
@@ -1598,12 +1676,12 @@
       },
       "position": [
         0,
-        2.28,
+        1.86,
         0
       ],
       "rotation": [
         0,
-        45,
+        0,
         0
       ],
       "parent": "hut",
@@ -2168,7 +2246,7 @@
       "parent": "scene_root",
       "modifiers": {
         "scatter": {
-          "count": 13,
+          "count": 10,
           "bounds": [
             [
               -9,
@@ -2179,13 +2257,63 @@
               0
             ],
             [
-              -6,
-              4
+              -6.5,
+              -0.2
             ]
           ],
           "scaleVariation": 0.5,
           "randomRotation": true,
           "seed": 42,
+          "snapToGround": true
+        }
+      },
+      "castShadow": true
+    },
+    {
+      "name": "shore_rock_south",
+      "type": "rock",
+      "params": [
+        0.3,
+        3,
+        0.4
+      ],
+      "material": {
+        "color": "#97897a",
+        "roughness": 0.9,
+        "flatShading": true,
+        "breakup": {
+          "noise": {
+            "amount": 0.06,
+            "scale": 3
+          }
+        }
+      },
+      "position": [
+        0,
+        0.1,
+        0
+      ],
+      "parent": "scene_root",
+      "modifiers": {
+        "scatter": {
+          "count": 4,
+          "bounds": [
+            [
+              -9,
+              -4.5
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              1.5,
+              4.5
+            ]
+          ],
+          "scaleVariation": 0.5,
+          "randomRotation": true,
+          "seed": 17,
           "snapToGround": true
         }
       },
