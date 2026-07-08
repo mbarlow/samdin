@@ -22,6 +22,8 @@ build hero spec → spawn samdin-critic on it → structured verdict + score
 
 The verdict is a gate, not advice: a hero spec does not ship below 80. Background filler doesn't need it — validate + one render is enough there.
 
+Scenes are gated the same way with their own rubric (composition, silhouette & massing, terrain believability, palette cohesion, read-distance clarity — see the scene rubric in [docs/review-rubric.md](../docs/review-rubric.md)). The critic judges a scene against its **concept image** (`media/concepts/<scene>.png`, the concept gate) — a scene with no concept is not reviewable. **`showcase-*` specs require a critic pass (≥ 80) before merge**, the same convention as the quality-bar anchors.
+
 ## The gauge
 
 Every critic run appends to `reviews/scoreboard.json`. See movement over time:

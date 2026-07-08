@@ -29,7 +29,11 @@ You are given a spec path (e.g. `specs/foo.json` or `specs/quality-bar-espresso-
 
 3. **Read every shot.** Read each PNG in `reviews/<name>/shots/`. Do not skip the wireframes — floating parts and gross intersections only show there and from the top.
 
-4. **Score the six dimensions** from `docs/review-rubric.md`, each 0–100, judging from *all* angles:
+4. **Pick the rubric.** Assets get the asset dimensions; scenes (showcase/environment/landscape specs — the subject is a composition, not one object) get the **scene rubric** from `docs/review-rubric.md`. For scenes, first look for the concept image `media/concepts/<name>.png` (+ `.prompt.txt`) — it is the target for Concept match; a scene with no concept image gets that stated in the review and cannot ship (concept gate). Also run `node cli/probe.js specs/<name>.json` — overlap/contact findings are evidence for the terrain and silhouette dimensions.
+
+   **Score the six dimensions**, each 0–100, judging from *all* angles:
+
+   Asset rubric:
    | Dim | Weight |
    |---|---|
    | Concept match | 0.25 |
@@ -38,6 +42,16 @@ You are given a spec path (e.g. `specs/foo.json` or `specs/quality-bar-espresso-
    | Silhouette & readability | 0.15 |
    | Construction integrity | 0.10 |
    | Material & colour | 0.10 |
+
+   Scene rubric:
+   | Dim | Weight |
+   |---|---|
+   | Concept match | 0.25 |
+   | Composition | 0.25 |
+   | Silhouette & massing | 0.15 |
+   | Terrain believability | 0.15 |
+   | Palette cohesion | 0.10 |
+   | Read-distance clarity | 0.10 |
 
    `score = round(Σ dᵢ·wᵢ)`. **Hard floor: any single dimension < 40 fails regardless of total.** A truck with no wheels does not pass on nice paint.
 
@@ -57,6 +71,7 @@ You are given a spec path (e.g. `specs/foo.json` or `specs/quality-bar-espresso-
    ```
    node cli/scoreboard.cjs record <name> <score> <verdict> --dims concept=NN,proportion=NN,feature=NN,silhouette=NN,construction=NN,material=NN --note "<one line>"
    ```
+   Scenes record their rubric's dims instead: `--dims concept=NN,composition=NN,silhouette=NN,terrain=NN,palette=NN,clarity=NN`.
 
 7. **Update the worklog** `reviews/<name>.md` if it exists: append a dated review entry (score + per-dim breakdown + findings) and refresh the open fix list. If it does not exist and this is a hero/anchor spec, create it from the template in the rubric.
 
@@ -67,8 +82,9 @@ Return exactly this block as your final message (it is consumed by the builder, 
 ```
 SPEC: <name>
 SCORE: <n>/100   VERDICT: <ship|revise|rework|reject>
-DIMS: concept <n> · proportion <n> · feature <n> · silhouette <n> · construction <n> · material <n>
+DIMS: <the six dims of the rubric used, each `name <n>`>
 HARD-FLOOR: <none | dimension X = n>
+CONCEPT: <path of the concept image judged against | none — scene not shippable>
 
 WHAT READS:
 - <the things that genuinely work, with the angle that shows it>

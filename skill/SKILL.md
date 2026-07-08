@@ -86,6 +86,8 @@ Scenes (showcase/environment/landscape specs — anything whose subject is a com
 
 This is a process gate, not a runtime feature: the validator cannot check it, so the review loop must. When revising an existing scene that has no concept image, backfill one first (render the current state, decide what the composition *should* be, write the prompt) — otherwise every revision is another taste iteration.
 
+Scenes are also critic-gated: the `samdin-critic` agent grades scenes with the scene rubric (`docs/review-rubric.md` — composition, silhouette & massing, terrain believability, palette cohesion, read-distance clarity) against the concept image, and `showcase-*` specs require a ship verdict (≥ 80) before merge — the same convention as the quality-bar anchors.
+
 ## Procedural Hulls (hullgen)
 
 For sculpted continuous low-poly hulls. The same loft math is now a spec part type (`type: "loft"`, see Runtime Truth above) — prefer that inside scenes; hullgen remains the path to standalone `.gltf` output and the `--lua` arcwing emitter. Full schema + look rules: `docs/hullgen.md`. Reference ships: `cli/ships/arcwing-interceptor.json` (full anatomy), `cli/ships/arcwing-swarmling.json` (minimal — shows optional components).
