@@ -387,6 +387,20 @@ class ModelBuilder {
   }
 
   /**
+   * Carry a module/prefab placement's snapToGround/groundOffset onto the
+   * instantiated composite root, so placements ground-snap like plain parts.
+   */
+  propagatePlacementGrounding(placement, compositeDef, expandedParts) {
+    if (placement.snapToGround === undefined || !compositeDef?.root) return;
+    const rootName = `${placement.name}_${compositeDef.root}`;
+    const rootPart = expandedParts.find((p) => p.name === rootName);
+    if (rootPart) {
+      rootPart.snapToGround = placement.snapToGround;
+      if (placement.groundOffset !== undefined) rootPart.groundOffset = placement.groundOffset;
+    }
+  }
+
+  /**
    * Snap flagged parts onto the ground (#79). Ground preference: the generated
    * __terrain__ mesh → category:"environment" meshes (raycast works even when
    * display:"terrain" hides them) → world y=0. Moves each flagged object so
@@ -494,6 +508,7 @@ class ModelBuilder {
 
         if (part.pose) (this.pendingPoses ||= []).push({ prefix: part.name, pose: part.pose });
         const moduleParts = this.instantiateComposite(part, moduleDef, part.parent);
+        this.propagatePlacementGrounding(part, moduleDef, moduleParts);
         const resolvedParts = await this.resolveParts(moduleParts, spec, depth + 1);
         expanded.push(...resolvedParts);
         continue;
@@ -504,6 +519,7 @@ class ModelBuilder {
         await this.loadPrefab(part.src);
         const prefab = this.prefabs.get(part.src);
         const prefabParts = this.instantiateComposite(part, prefab, part.parent);
+        this.propagatePlacementGrounding(part, prefab, prefabParts);
         const resolvedParts = await this.resolveParts(prefabParts, spec, depth + 1);
         expanded.push(...resolvedParts);
         continue;
