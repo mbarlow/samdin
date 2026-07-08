@@ -21,7 +21,12 @@ Current practical rules:
 
 - Prefer parts-based specs for almost everything.
 - Use top-level `type: "csg"` only when the asset is primarily boolean geometry.
-- For repetition, use the **procedural modifiers** — `array` (scalar or grid `count: [x,y,z]`), `mirror` (`{x,y,z}` or `{axis:"xz"}`), and `scatter` (with a fixed `seed` for a reproducible layout). These are stable and documented in `docs/modifiers.md`; reach for them before hand-copying `name_1..name_N` parts. (There is no top-level `type: "procedural"`.)
+- For repetition, use the **procedural modifiers** — `array` (scalar or grid `count: [x,y,z]`, a `path: [[x,y,z],...]` waypoint mode with tangent `orient`, and per-instance `jitter: {rotation, scale, offset, tone}` under a `seed`), `mirror` (`{x,y,z}` or `{axis:"xz"}`), and `scatter` (with a fixed `seed`). Documented in `docs/modifiers.md`; reach for them before hand-copying `name_1..name_N` parts. (There is no top-level `type: "procedural"`.)
+- **Ground contact is solved, not guessed**: `snapToGround: true` on any part (plus `groundOffset`), and inside `scatter`/`array` for per-instance snapping onto the terrain drape. Never hand-tune y offsets against terrain again.
+- **Deformers**: per-part `deform: {taper, twist, bend}` for gestural shapes (tree trunks, bent pipes, hull wedges). Needs along-axis resolution: `options.segments: [sx,sy,sz]` on box, `options.heightSegments` on cylinder/cone. See `specs/deform-test.json`.
+- **Lofts are in-spec now**: `type: "loft"` with `loft: {stations, startPoint?, endPoint?, mirror?}` — the hullgen math as a standard part that composes with materials/breakup/terrain (see `specs/loft-test.json`, the whale). Use `cli/hullgen.mjs` only when you need gltf/--lua export output.
+- **Poses**: spec-level `poses: {name: {joint: [rx,ry,rz]}}` + `pose` on the spec or a module/prefab placement (joints resolve with the placement prefix). Reference articulated figure: `specs/pose-test.json`.
+- **Lookdev**: `edgeWear.mode: "curvature"` puts wear on real creases (lathes/lofts/CSG); `material.detail: {scale, amount}` adds UV-free triplanar noise on large faces.
 - The runtime supports more than the older docs emphasize, including nested `children`, `pivot` or `options.pivot`, material breakup, `decals`, emissive strips, `wire-mesh`, the `scene.terrain` compositor, category-driven regions, and scene-owned camera/lookdev settings.
 - The `animations` spec block exists but is unvalidated and unused by any shipped spec — treat as experimental; verify in the runtime before relying on it.
 - Trust the actual `prefabs/` directory over hard-coded prefab counts in docs.
@@ -45,7 +50,7 @@ Use this default decision tree:
 - Terrain / landscape: `scene.terrain` block — `method` heightfield / marching-cubes / cloth-drape, `display` primitives|terrain|both. Normals flip by default now; only set `flipNormals: false` to opt out. See the four `specs/landscape-*.json` examples.
 - Repeated architecture: module definitions first, then `type: "module"` placements; or an `array`/`scatter` modifier for grids and fields
 - Repeated scatter (rocks, foliage, debris): a `scatter` modifier with a fixed `seed`
-- Sculpted continuous hull (starfighters, sleek vehicles — the No Man's Sky chunky-lowpoly look): **do NOT kitbash primitives** — bolted boxes read as RC drones and were rejected on sight. Use `cli/hullgen.mjs` + a JSON ship def in `cli/ships/` instead (see "Procedural hulls" below)
+- Sculpted continuous hull (starfighters, sleek vehicles — the No Man's Sky chunky-lowpoly look): **do NOT kitbash primitives** — bolted boxes read as RC drones and were rejected on sight. Use in-spec `type: "loft"` parts when the result lives in a scene spec, or `cli/hullgen.mjs` + a `cli/ships/` def when you need gltf/--lua export (see "Procedural hulls" below)
 - Broken existing spec: inspect first, then edit the failing hierarchy, scale, material, or camera
 
 ## Quality Modes
@@ -67,12 +72,13 @@ If the user does not specify, default to `standard` — this now matches the run
 5. Add material contrast and a `scene` block early enough to judge the asset in context.
 6. Validate with `node cli/validate-spec.cjs <spec.json>`. Run `node cli/validate-spec.cjs --strict <spec.json>` (or `make lint`) to surface quality-rule gaps — missing scene block, metals without environment lighting, un-varied clones, floating geometry, preset typos.
 7. Inspect with `node cli/inspect-model.js <spec.json> [out-dir] [port]` (out-dir defaults to `/tmp/samdin-inspect`; pass a `[port]` to run parallel inspections).
-8. Revise from concrete screenshot findings, not vague taste-only notes.
-9. If you touch the builder or a shared primitive, run `make golden` — it fingerprint-checks the quality-bar anchors so a change can't silently move their geometry. Rebless intended changes with `make golden-update`.
+8. Probe with `node cli/probe.js <spec.json>` (`make probe SPEC=...`) — rendered-space lint: ground-contact gaps, near-black/blown effective albedo, clone-read families, crushed/blown luma. Fix errors before judging screenshots; its findings are machine-precise where eyeballing fails (it caught a hidden double-darkened plate no screenshot pass saw).
+9. Revise from concrete screenshot + probe findings, not vague taste-only notes.
+10. If you touch the builder or a shared primitive, run `make golden` — it fingerprint-checks the quality-bar anchors so a change can't silently move their geometry. Rebless intended changes with `make golden-update`.
 
 ## Procedural Hulls (hullgen)
 
-For sculpted continuous low-poly hulls the parts pipeline can't reach. Full schema + look rules: `docs/hullgen.md`. Reference ships: `cli/ships/arcwing-interceptor.json` (full anatomy), `cli/ships/arcwing-swarmling.json` (minimal — shows optional components).
+For sculpted continuous low-poly hulls. The same loft math is now a spec part type (`type: "loft"`, see Runtime Truth above) — prefer that inside scenes; hullgen remains the path to standalone `.gltf` output and the `--lua` arcwing emitter. Full schema + look rules: `docs/hullgen.md`. Reference ships: `cli/ships/arcwing-interceptor.json` (full anatomy), `cli/ships/arcwing-swarmling.json` (minimal — shows optional components).
 
 - **Concept first.** Generate/obtain a concept image before modeling; park it in `media/concepts/` with its prompt as `*.prompt.txt`. Compare screenshots against the concept, not taste.
 - Ship = JSON def: `palette` + optional lofted components (`fuselage` required; `wing`, `vtails`, `engines`, `canopy`, `navPods` optional). Anatomy varies per ship, generator code doesn't change.
@@ -88,8 +94,8 @@ For sculpted continuous low-poly hulls the parts pipeline can't reach. Full sche
 - Parents must resolve cleanly. Use nested `children` when it improves local clarity, but keep the parent-child logic obvious.
 - Use `pivot` or `options.pivot` for simple base or top pivots. Use dedicated joint groups for real hinges, lids, elbows, knees, doors, suspension, branch starts, and canopy tips.
 - Child meshes should be offset away from their joint node. If a moving part swings from its middle, the hierarchy is wrong.
-- Keep ground contact honest. Most planted assets should touch or slightly overlap the floor at `y = 0`.
-- Repetition needs variation. On arrays or modular placements, vary scale, rotation, tone, or dressing enough to avoid clone reads.
+- Keep ground contact honest. Most planted assets should touch or slightly overlap the floor at `y = 0` — on terrain scenes use `snapToGround` instead of guessing offsets, and verify with `cli/probe.js`.
+- Repetition needs variation. Use `array.jitter` / scatter `scaleVariation`+`randomRotation`; the probe's clone check flags families with zero variance.
 - Use prefabs aggressively for background dressing and commodity objects. Spend custom detail budget where the camera will care.
 - For symmetry, establish one side correctly, then mirror deliberately. Do not eyeball left and right independently.
 
