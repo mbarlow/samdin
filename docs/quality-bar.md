@@ -6,7 +6,7 @@ The [Anchor rubric](#anchor-rubric) at the bottom is the acceptance test — wha
 
 ## Field radio
 
-Spec: [`specs/quality-bar-field-radio.json`](../specs/quality-bar-field-radio.json)
+Spec: [`specs/anchors/quality-bar-field-radio.json`](../specs/anchors/quality-bar-field-radio.json)
 
 ![Samdin — mid-century field radio quality anchor](../media/hero-field-radio.png)
 
@@ -14,7 +14,7 @@ Spec: [`specs/quality-bar-field-radio.json`](../specs/quality-bar-field-radio.js
 
 ## Rangefinder camera
 
-Spec: [`specs/quality-bar-rangefinder-camera.json`](../specs/quality-bar-rangefinder-camera.json)
+Spec: [`specs/anchors/quality-bar-rangefinder-camera.json`](../specs/anchors/quality-bar-rangefinder-camera.json)
 
 ![Samdin — 1960s rangefinder camera quality anchor](../media/hero-rangefinder-camera.png)
 
@@ -22,7 +22,7 @@ Spec: [`specs/quality-bar-rangefinder-camera.json`](../specs/quality-bar-rangefi
 
 ## Espresso machine
 
-Spec: [`specs/quality-bar-espresso-machine.json`](../specs/quality-bar-espresso-machine.json)
+Spec: [`specs/anchors/quality-bar-espresso-machine.json`](../specs/anchors/quality-bar-espresso-machine.json)
 
 ![Samdin — prosumer espresso machine quality anchor](../media/hero-espresso-machine.png)
 
@@ -30,7 +30,7 @@ Spec: [`specs/quality-bar-espresso-machine.json`](../specs/quality-bar-espresso-
 
 ## Anglepoise desk lamp
 
-Spec: [`specs/quality-bar-anglepoise-lamp.json`](../specs/quality-bar-anglepoise-lamp.json)
+Spec: [`specs/anchors/quality-bar-anglepoise-lamp.json`](../specs/anchors/quality-bar-anglepoise-lamp.json)
 
 ![Samdin — 1950s Anglepoise desk lamp quality anchor](../media/hero-anglepoise-lamp.png)
 
@@ -38,7 +38,7 @@ Spec: [`specs/quality-bar-anglepoise-lamp.json`](../specs/quality-bar-anglepoise
 
 ## Olivetti typewriter
 
-Spec: [`specs/quality-bar-typewriter.json`](../specs/quality-bar-typewriter.json)
+Spec: [`specs/anchors/quality-bar-typewriter.json`](../specs/anchors/quality-bar-typewriter.json)
 
 ![Samdin — 1963 Olivetti Lettera 32 typewriter quality anchor](../media/hero-typewriter.png)
 
@@ -46,7 +46,7 @@ Spec: [`specs/quality-bar-typewriter.json`](../specs/quality-bar-typewriter.json
 
 ## Sony minidisc
 
-Spec: [`specs/quality-bar-minidisc.json`](../specs/quality-bar-minidisc.json)
+Spec: [`specs/anchors/quality-bar-minidisc.json`](../specs/anchors/quality-bar-minidisc.json)
 
 ![Samdin — Sony minidisc quality anchor](../media/hero-minidisc.png)
 
@@ -54,7 +54,7 @@ Spec: [`specs/quality-bar-minidisc.json`](../specs/quality-bar-minidisc.json)
 
 ## Courier pickup
 
-Spec: [`specs/quality-bar-courier-pickup.json`](../specs/quality-bar-courier-pickup.json)
+Spec: [`specs/anchors/quality-bar-courier-pickup.json`](../specs/anchors/quality-bar-courier-pickup.json)
 
 ![Samdin — compact courier pickup quality anchor](../media/hero-courier-pickup.png)
 

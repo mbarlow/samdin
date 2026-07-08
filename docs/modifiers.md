@@ -131,7 +131,7 @@ Scatter fields:
 { "type": "roundedBox", "params": [0.7, 0.7, 0.7], "position": [-4.5, 0, -1.5], "snapToGround": true }
 ```
 
-This removes the float/bury class of defects on terrain scenes — see `specs/surface-test.json`.
+This removes the float/bury class of defects on terrain scenes — see `specs/fixtures/surface-test.json`.
 
 ## Deformers
 
@@ -156,7 +156,7 @@ Opt-in per-part `deform` block — gestural vertex deforms applied after geometr
 | `twist` | degrees or `{ angle, axis }` | Rotation about the along axis runs 0 → angle base-to-top |
 | `bend` | `{ angle, axis }` | The Y axis arcs by angle about the given rotation axis, pivoting at the base |
 
-Deformers are pure vertex transforms — the primitive must have enough along-axis resolution to show the curve. `box` takes `options.segments: [sx, sy, sz]`; `cylinder`/`cone` take `options.heightSegments`. A bend on a 1-segment box just tilts the top face. See `specs/deform-test.json`.
+Deformers are pure vertex transforms — the primitive must have enough along-axis resolution to show the curve. `box` takes `options.segments: [sx, sy, sz]`; `cylinder`/`cone` take `options.heightSegments`. A bend on a 1-segment box just tilts the top face. See `specs/fixtures/deform-test.json`.
 
 ## Part properties
 

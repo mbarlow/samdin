@@ -43,7 +43,7 @@ Notes:
 - Spec-local `modules` are supported.
 - Nested `children` arrays are supported and flattened by the builder and validator.
 - Procedural **modifiers** — `array` (scalar or grid `count:[x,y,z]`), `mirror` (`{x,y,z}` or `{axis:"xz"}`), `scatter` (with `seed` for reproducibility) — are stable and documented in `docs/modifiers.md`. There is no top-level `type: "procedural"`.
-- The `scene.terrain` compositor (heightfield / marching-cubes / cloth-drape; normals flip by default) turns `category: "environment"` parts into ground. See `specs/landscape-*.json`.
+- The `scene.terrain` compositor (heightfield / marching-cubes / cloth-drape; normals flip by default) turns `category: "environment"` parts into ground. See `specs/examples/landscape-*.json`.
 - The `animations` block exists but is unvalidated and used by no shipped spec — experimental.
 
 ## Frequently Missed Runtime Features
@@ -56,9 +56,9 @@ Notes:
 
 ## Files Worth Sampling Before Authoring
 
-- `specs/showcase.json`
-- `specs/clinic.json`
-- `specs/motorcycle-street.json`
+- `specs/examples/showcase.json`
+- `specs/examples/clinic.json`
+- `specs/examples/motorcycle-street.json`
 - `prefabs/sedan.json`
 - `prefabs/human-figure.json`
 - `prefabs/oak-tree.json`

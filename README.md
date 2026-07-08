@@ -17,7 +17,7 @@ make dev              # starts browser-sync on http://localhost:7777
 make dev PORT=8888    # or pick your own port
 ```
 
-Then open the URL, pick a spec from the **Built-in specs** dropdown or drop your own JSON into the editor. `make smoke` runs the CLI validator against `specs/showcase.json` as a health check.
+Then open the URL, pick a spec from the **Built-in specs** dropdown or drop your own JSON into the editor. `make smoke` runs the CLI validator against `specs/examples/showcase.json` as a health check.
 
 ## Gallery — the quality bar
 
@@ -29,7 +29,7 @@ Seven hero specs anchor the current output ceiling — all graded to *ship* agai
 | [![Anglepoise lamp](media/hero-anglepoise-lamp.png)](docs/quality-bar.md#anglepoise-desk-lamp) | [![Olivetti typewriter](media/hero-typewriter.png)](docs/quality-bar.md#olivetti-typewriter) | [![Sony minidisc](media/hero-minidisc.png)](docs/quality-bar.md#sony-minidisc) |
 | [![Courier pickup](media/hero-courier-pickup.png)](docs/quality-bar.md#courier-pickup) | | |
 
-Every gallery shot is one command: `node cli/hero.js specs/quality-bar-<name>.json` — centered, 3-point front lighting, fully framed. The review harness (`make review`) grades them.
+Every gallery shot is one command: `node cli/hero.js specs/anchors/quality-bar-<name>.json` — centered, 3-point front lighting, fully framed. The review harness (`make review`) grades them.
 
 ## Docs
 
