@@ -229,6 +229,33 @@ function validateParams(part, typeInfo, prefix, issues, warnings) {
   }
 }
 
+function validatePoses(spec, issues, warnings) {
+  if (spec.poses !== undefined) {
+    if (typeof spec.poses !== 'object' || Array.isArray(spec.poses)) {
+      issues.push('poses must be an object of { poseName: { jointName: [rx, ry, rz] } }');
+    } else {
+      for (const [poseName, jointMap] of Object.entries(spec.poses)) {
+        if (typeof jointMap !== 'object' || Array.isArray(jointMap)) {
+          issues.push(`poses.${poseName} must map joint names to [rx, ry, rz]`);
+          continue;
+        }
+        for (const [joint, rot] of Object.entries(jointMap)) {
+          if (!Array.isArray(rot) || rot.length !== 3 || rot.some((v) => typeof v !== 'number')) {
+            issues.push(`poses.${poseName}.${joint} must be [rx, ry, rz] degrees`);
+          }
+        }
+      }
+    }
+  }
+  if (spec.pose !== undefined) {
+    if (typeof spec.pose !== 'string') {
+      issues.push('pose must be a pose name string');
+    } else if (spec.poses && !spec.poses[spec.pose]) {
+      warnings.push(`pose "${spec.pose}" is not defined in poses`);
+    }
+  }
+}
+
 function validateSceneSettings(scene, issues, warnings) {
   if (!scene || typeof scene !== 'object') {
     issues.push('scene must be an object');
@@ -736,6 +763,8 @@ function validateSpec(specPath, strict = false) {
   if (spec.scene) {
     validateSceneSettings(spec.scene, issues, warnings);
   }
+
+  validatePoses(spec, issues, warnings);
 
   const strictFindings = [];
 
