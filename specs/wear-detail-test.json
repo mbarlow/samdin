@@ -1,0 +1,114 @@
+{
+  "name": "wear-detail-test",
+  "description": "Curvature wear + triplanar detail test (#81). Left: lathe urn with edgeWear mode 'curvature' — wear lands on the real profile creases, which the bbox mask can't find. Center-left: same urn with bbox wear (control — wear smears mid-surface). Center-right: CSG bracket with curvature wear picking out the boolean edges. Right: two large panels, with and without material.detail triplanar noise.",
+  "root": "row_root",
+  "scene": {
+    "quality": "standard",
+    "background": { "type": "gradient", "top": "#2c3440", "bottom": "#141920" },
+    "lighting": { "preset": "studio", "environment": "studio", "envMapIntensity": 0.9 },
+    "camera": { "preset": "threeQuarter", "distanceMultiplier": 0.7, "targetOffset": [0, 0.8, 0] },
+    "postfx": { "vignette": { "enabled": true, "intensity": 0.15, "softness": 0.7 }, "fxaa": true }
+  },
+  "parts": [
+    { "name": "row_root", "type": "group", "position": [0, 0, 0] },
+    {
+      "name": "floor",
+      "type": "box",
+      "params": [13, 0.1, 5],
+      "material": { "color": "#3a4148", "roughness": 0.9 },
+      "position": [0, -0.05, 0],
+      "parent": "row_root",
+      "receiveShadow": true
+    },
+    {
+      "name": "urn_curvature",
+      "type": "lathe",
+      "params": [
+        [[0.45, 0], [0.5, 0.08], [0.34, 0.35], [0.3, 0.8], [0.42, 1.2], [0.55, 1.45], [0.5, 1.55], [0.34, 1.6]],
+        10
+      ],
+      "material": {
+        "color": "#7a5b46",
+        "roughness": 0.7,
+        "flatShading": true,
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 4 },
+          "roughnessVariation": 0.06,
+          "edgeWear": { "amount": 0.3, "color": "#d9c9a8", "mode": "curvature" }
+        }
+      },
+      "position": [-4.6, 0, 0],
+      "parent": "row_root",
+      "castShadow": true
+    },
+    {
+      "name": "urn_bbox_control",
+      "type": "lathe",
+      "params": [
+        [[0.45, 0], [0.5, 0.08], [0.34, 0.35], [0.3, 0.8], [0.42, 1.2], [0.55, 1.45], [0.5, 1.55], [0.34, 1.6]],
+        10
+      ],
+      "material": {
+        "color": "#7a5b46",
+        "roughness": 0.7,
+        "flatShading": true,
+        "breakup": {
+          "noise": { "amount": 0.06, "scale": 4 },
+          "roughnessVariation": 0.06,
+          "edgeWear": { "amount": 0.3, "color": "#d9c9a8" }
+        }
+      },
+      "position": [-2.3, 0, 0],
+      "parent": "row_root",
+      "castShadow": true
+    },
+    {
+      "name": "bracket_curvature",
+      "type": "csg",
+      "output": "final",
+      "shapes": {
+        "body": { "type": "box", "size": [1.1, 1.4, 0.9], "position": [0, 0.7, 0] },
+        "notch": { "type": "box", "size": [0.7, 0.9, 1.2], "position": [0, 0.95, 0] },
+        "bore": { "type": "cylinder", "radius": 0.18, "height": 1.4, "position": [0, 0.35, 0], "rotation": [90, 0, 0] }
+      },
+      "operations": [
+        { "op": "subtract", "a": "body", "b": "notch", "result": "cut" },
+        { "op": "subtract", "a": "cut", "b": "bore", "result": "final" }
+      ],
+      "material": {
+        "preset": "painted-metal",
+        "color": "#5d7385",
+        "breakup": {
+          "noise": { "amount": 0.05, "scale": 4 },
+          "roughnessVariation": 0.06,
+          "edgeWear": { "amount": 0.28, "color": "#c8d2da", "mode": "curvature" }
+        }
+      },
+      "position": [0.2, 0, 0],
+      "parent": "row_root",
+      "castShadow": true
+    },
+    {
+      "name": "panel_detail",
+      "type": "box",
+      "params": [2.2, 2.0, 0.12],
+      "material": {
+        "color": "#8a6f50",
+        "roughness": 0.65,
+        "detail": { "scale": 2.2, "amount": 0.22 }
+      },
+      "position": [3.2, 1.0, 0],
+      "parent": "row_root",
+      "castShadow": true
+    },
+    {
+      "name": "panel_plain_control",
+      "type": "box",
+      "params": [2.2, 2.0, 0.12],
+      "material": { "color": "#8a6f50", "roughness": 0.65 },
+      "position": [5.6, 1.0, 0],
+      "parent": "row_root",
+      "castShadow": true
+    }
+  ]
+}

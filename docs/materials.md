@@ -188,3 +188,30 @@ Each entry: `face`, `axis` (`x`/`y`) for the repeat direction, `count`,
   ]
 }
 ```
+
+
+## Curvature edge wear
+
+`edgeWear` defaults to the bounding-box mask (`mode: "bbox"`), which only reads on boxy parts. `mode: "curvature"` measures real creases — the max angle between normals sharing a vertex position — so wear lands on lathe profiles, loft ridges, and CSG boolean edges:
+
+```json
+"breakup": {
+  "edgeWear": { "amount": 0.3, "color": "#d9c9a8", "mode": "curvature" }
+}
+```
+
+`contrast` still shapes the falloff (higher = tighter to hard edges). See `specs/wear-detail-test.json` for curvature vs bbox side by side.
+
+## Triplanar detail
+
+`material.detail` adds world-space procedural value-noise that modulates roughness (± `amount`) and albedo (± `amount`/2) — surface richness on large faces with no UVs and no textures. Chains cleanly with `roughnessVariation`:
+
+```json
+"material": {
+  "color": "#8a6f50",
+  "roughness": 0.65,
+  "detail": { "scale": 2.2, "amount": 0.22 }
+}
+```
+
+`scale` is noise cells per meter (higher = finer grain).
