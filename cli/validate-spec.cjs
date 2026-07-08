@@ -470,7 +470,9 @@ function validateCSGSpec(spec, issues, warnings) {
   }
 }
 
-function validatePartCollection(parts, issues, warnings, scopeLabel = 'spec') {
+const PREFABS_DIR = path.join(__dirname, '..', 'prefabs');
+
+function validatePartCollection(parts, issues, warnings, scopeLabel = 'spec', refs = null) {
   const flatParts = flattenParts(parts);
   const partNames = new Set();
   const duplicates = new Set();
@@ -509,6 +511,20 @@ function validatePartCollection(parts, issues, warnings, scopeLabel = 'spec') {
 
     if ((part.type === 'prefab' || part.type === 'module') && !(part.src || part.module || part.ref)) {
       issues.push(`${prefix} ${part.type} requires src/module/ref`);
+    }
+
+    // A dangling reference passes schema checks but 404s in the viewer —
+    // resolve against disk (prefabs) and the spec's modules, same as the builder.
+    if (part.type === 'prefab' && part.src) {
+      if (!fs.existsSync(path.join(PREFABS_DIR, `${part.src}.json`))) {
+        issues.push(`${prefix} prefab src not found: prefabs/${part.src}.json`);
+      }
+    }
+    if (part.type === 'module' && refs?.moduleNames) {
+      const moduleName = part.src || part.module || part.ref;
+      if (moduleName && !refs.moduleNames.has(moduleName)) {
+        issues.push(`${prefix} module ref not found in spec modules: ${moduleName}`);
+      }
     }
 
     if (part.material && typeof part.material !== 'object') {
@@ -779,9 +795,11 @@ function validateSpec(specPath, strict = false) {
     return { valid: false, issues, warnings, strict: strictFindings };
   }
 
-  validatePartCollection(spec.parts, issues, warnings);
-
   const modules = normalizeModules(spec.modules);
+  const refs = { moduleNames: new Set(modules.map((m) => m.name).filter(Boolean)) };
+
+  validatePartCollection(spec.parts, issues, warnings, 'spec', refs);
+
   for (const moduleDef of modules) {
     if (!moduleDef.name) {
       issues.push('Module missing name');
@@ -791,7 +809,7 @@ function validateSpec(specPath, strict = false) {
       issues.push(`[module:${moduleDef.name}] parts must be an array`);
       continue;
     }
-    validatePartCollection(moduleDef.parts, issues, warnings, `module:${moduleDef.name}`);
+    validatePartCollection(moduleDef.parts, issues, warnings, `module:${moduleDef.name}`, refs);
   }
 
   if (strict) runStrictLints(spec, flattenParts(spec.parts), strictFindings);
