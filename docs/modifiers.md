@@ -29,6 +29,22 @@ Duplicate parts in a pattern:
 }
 ```
 
+**Per-instance jitter** — seeded variation so array clones don't read as clones. Deterministic under `seed` (default `1`):
+
+```json
+{
+  "modifiers": {
+    "array": {
+      "count": [3, 1, 2], "offset": [0.92, 0, 0.94],
+      "jitter": { "rotation": [0, 15, 0], "scale": 0.12, "offset": [0.05, 0, 0.05], "tone": 0.1 },
+      "seed": 7
+    }
+  }
+}
+```
+
+`rotation` = ± degrees per axis, `scale` = ± uniform fraction, `offset` = ± meters per axis, `tone` = ± fractional color lighten/darken (needs a plain `material.color`).
+
 **Array along a path** — instead of `offset`, give waypoints; instances are sampled along a Catmull-Rom curve through them. `orient: true` (default) yaws each instance so its +Z faces along the local tangent:
 
 ```json

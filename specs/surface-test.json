@@ -1,6 +1,6 @@
 {
   "name": "surface-test",
-  "description": "Surface-aware placement test (#79) \u2014 a hilly heightfield with: rocks scattered with snapToGround (they land ON the slopes), fence posts arrayed along a curved path with tangent orientation and ground snap, and a supply crate snapped onto a mound it would otherwise float above. Toggle Terrain display to 'primitives' to see the env parts that shape the drape.",
+  "description": "Surface-aware placement test (#79) \u2014 a hilly heightfield with: rocks scattered with snapToGround (they land ON the slopes), fence posts arrayed along a curved path with tangent orientation and ground snap, and a supply crate snapped onto a mound it would otherwise float above. Toggle Terrain display to 'primitives' to see the env parts that shape the drape. A supply-crate grid uses array jitter (rotation/scale/offset/tone, seed 7) so the clones read as hand-stacked.",
   "root": "scene_root",
   "scene": {
     "quality": "standard",
@@ -407,6 +407,66 @@
       ],
       "parent": "scene_root",
       "comment": "Control: NOT snapped \u2014 authored at y=0.35, buried in the east hill",
+      "castShadow": true
+    },
+    {
+      "name": "supply_grid",
+      "type": "roundedBox",
+      "params": [
+        0.55,
+        0.55,
+        0.55,
+        0.03,
+        2
+      ],
+      "material": {
+        "preset": "painted-metal",
+        "color": "#7a7f52",
+        "breakup": {
+          "noise": {
+            "amount": 0.06,
+            "scale": 4
+          },
+          "roughnessVariation": 0.06
+        }
+      },
+      "position": [
+        -0.6,
+        0,
+        -1.6
+      ],
+      "parent": "scene_root",
+      "comment": "Array jitter (#80): rotation/scale/offset/tone variation, deterministic under seed",
+      "modifiers": {
+        "array": {
+          "count": [
+            3,
+            1,
+            2
+          ],
+          "offset": [
+            0.72,
+            0,
+            0.74
+          ],
+          "jitter": {
+            "rotation": [
+              0,
+              14,
+              0
+            ],
+            "scale": 0.12,
+            "offset": [
+              0.06,
+              0,
+              0.06
+            ],
+            "tone": 0.12
+          },
+          "seed": 7,
+          "snapToGround": true
+        }
+      },
       "castShadow": true
     }
   ]

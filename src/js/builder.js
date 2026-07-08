@@ -574,6 +574,50 @@ class ModelBuilder {
    * Usage: { ..., array: { count: 5, offset: [1, 0, 0] } }
    *    or: { ..., array: { count: [3, 2], offset: [1, 0, 2] } } for grid
    */
+  /**
+   * Per-instance jitter for array clones (#80): seeded rotation/scale/offset/
+   * tone variation so grids and rows don't read as clones.
+   *   jitter: { rotation: [x,y,z] ±deg, scale: ±fraction, offset: [x,y,z] ±m, tone: ±fraction }
+   */
+  applyArrayJitter(newPart, array, idx) {
+    const jitter = array.jitter;
+    if (!jitter) return;
+    const seed = array.seed ?? 1;
+    const rand = (k) => {
+      const x = Math.sin(seed + idx * 17.23 + k * 3.77) * 10000;
+      return (x - Math.floor(x)) * 2 - 1; // [-1, 1]
+    };
+
+    if (Array.isArray(jitter.offset)) {
+      for (let a = 0; a < 3; a++) {
+        newPart.position[a] += rand(a) * (jitter.offset[a] || 0);
+      }
+    }
+    if (Array.isArray(jitter.rotation)) {
+      newPart.rotation = newPart.rotation || [0, 0, 0];
+      for (let a = 0; a < 3; a++) {
+        newPart.rotation[a] = (newPart.rotation[a] || 0) + rand(3 + a) * (jitter.rotation[a] || 0);
+      }
+    }
+    if (typeof jitter.scale === 'number' && jitter.scale > 0) {
+      const f = 1 + rand(6) * jitter.scale;
+      const base = newPart.scale;
+      if (Array.isArray(base)) newPart.scale = base.map((v) => v * f);
+      else newPart.scale = (base || 1) * f;
+    }
+    if (typeof jitter.tone === 'number' && jitter.tone > 0 && newPart.material?.color) {
+      const hex = newPart.material.color.replace('#', '');
+      if (hex.length === 6) {
+        const f = 1 + rand(7) * jitter.tone;
+        const shifted = [0, 2, 4]
+          .map((i) => Math.round(Math.min(255, Math.max(0, parseInt(hex.slice(i, i + 2), 16) * f))))
+          .map((v) => v.toString(16).padStart(2, '0'))
+          .join('');
+        newPart.material.color = `#${shifted}`;
+      }
+    }
+  }
+
   expandArray(part) {
     const { array, modifiers, ...basePart } = part;
     if (Array.isArray(array.path) && array.path.length >= 2) {
@@ -596,6 +640,7 @@ class ModelBuilder {
             basePos[1] + y * offset[1],
             basePos[2] + z * offset[2]
           ];
+          this.applyArrayJitter(newPart, array, idx);
           if (array.snapToGround !== undefined) newPart.snapToGround = array.snapToGround;
           results.push(newPart);
         }
@@ -630,6 +675,7 @@ class ModelBuilder {
         newPart.rotation = newPart.rotation || [0, 0, 0];
         newPart.rotation[1] = (newPart.rotation[1] || 0) + yaw;
       }
+      this.applyArrayJitter(newPart, array, i);
       if (array.snapToGround !== undefined) newPart.snapToGround = array.snapToGround;
       results.push(newPart);
     }
