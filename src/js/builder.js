@@ -11,6 +11,7 @@ import { Primitives, Materials, ModelAssembler } from './primitives.js';
 import { buildCSG } from './CSGBuilder.js';
 import { CSGPrimitives, CSG_PRIMITIVE_TYPES } from './CSGPrimitives.js';
 import { applyTerrainCompositor } from './terrain-compositor.js';
+import { buildLoftGeometry } from './loft.js';
 import { flipNormalsOnObject } from './terrain/sampler.js';
 
 /**
@@ -911,6 +912,15 @@ class ModelBuilder {
         }
         const [width = 1, height = 0.5, intensity = 1, showPanel = true] = params;
         return this.finalizePart(Primitives.areaLight(width, height, intensity, showPanel, opts), def);
+      }
+
+      case 'loft': {
+        const geometry = buildLoftGeometry(def.loft || {});
+        const mesh = new THREE.Mesh(
+          geometry,
+          opts.material || Materials.create({ color: 0x888888, flatShading: true })
+        );
+        return this.finalizePart(mesh, def);
       }
 
       case 'csg': {
