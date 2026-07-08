@@ -186,7 +186,9 @@ const Primitives = {
    * @param {object} opts - { pivot: 'center'|'bottom'|'top', material }
    */
   box(w, h, d, opts = {}) {
-    const geo = new THREE.BoxGeometry(w, h, d);
+    // opts.segments: [sx, sy, sz] — along-axis resolution for deformers (#78)
+    const [sx = 1, sy = 1, sz = 1] = opts.segments || [];
+    const geo = new THREE.BoxGeometry(w, h, d, Math.round(sx), Math.round(sy), Math.round(sz));
     const mesh = new THREE.Mesh(geo, opts.material || Materials.matte(0x888888));
     
     // Adjust geometry for pivot point
@@ -215,7 +217,10 @@ const Primitives = {
    */
   cylinder(radiusTop, radiusBottom, height, segments = 8, opts = {}) {
     const segs = Math.round(segments * (opts.qualitySegMul || 1));
-    const geo = new THREE.CylinderGeometry(radiusTop, radiusBottom, height, segs);
+    const geo = new THREE.CylinderGeometry(
+      radiusTop, radiusBottom, height, segs,
+      Math.round(opts.heightSegments || 1)
+    );
     const mesh = new THREE.Mesh(geo, opts.material || Materials.matte(0x888888));
     
     switch (opts.pivot) {
@@ -262,7 +267,7 @@ const Primitives = {
    */
   cone(radius, height, segments = 6, opts = {}) {
     const segs = Math.round(segments * (opts.qualitySegMul || 1));
-    const geo = new THREE.ConeGeometry(radius, height, segs);
+    const geo = new THREE.ConeGeometry(radius, height, segs, Math.round(opts.heightSegments || 1));
     const mesh = new THREE.Mesh(geo, opts.material || Materials.matte(0x888888));
     
     switch (opts.pivot) {

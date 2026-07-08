@@ -12,6 +12,7 @@ import { buildCSG } from './CSGBuilder.js';
 import { CSGPrimitives, CSG_PRIMITIVE_TYPES } from './CSGPrimitives.js';
 import { applyTerrainCompositor } from './terrain-compositor.js';
 import { buildLoftGeometry } from './loft.js';
+import { applyDeform } from './deform.js';
 import { flipNormalsOnObject } from './terrain/sampler.js';
 
 /**
@@ -1026,6 +1027,12 @@ class ModelBuilder {
    */
   finalizePart(object, def) {
     if (!object) return null;
+
+    // Deform before surface treatments so breakup vertex colors follow the
+    // deformed shape (#78).
+    if (def.deform) {
+      applyDeform(object, def.deform);
+    }
 
     if (
       def.material?.breakup ||
