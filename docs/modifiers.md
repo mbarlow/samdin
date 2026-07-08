@@ -29,6 +29,21 @@ Duplicate parts in a pattern:
 }
 ```
 
+**Array along a path** — instead of `offset`, give waypoints; instances are sampled along a Catmull-Rom curve through them. `orient: true` (default) yaws each instance so its +Z faces along the local tangent:
+
+```json
+{
+  "modifiers": {
+    "array": {
+      "path": [[-6.5, 0, 4.2], [-3, 0, 2.6], [0.5, 0, 3.4], [3.8, 0, 2.2]],
+      "count": 10,
+      "orient": true,
+      "snapToGround": true
+    }
+  }
+}
+```
+
 ### Mirror modifier
 
 Mirror across axes:
@@ -75,6 +90,7 @@ Scatter fields:
 | `randomRotation` | boolean | Randomize Y rotation (default `true`) |
 | `scaleVariation` | number | Fractional random scale, e.g. `0.2` = ±20% |
 | `seed` | number | RNG seed — see below |
+| `snapToGround` | boolean | Snap each instance onto the ground after build (see Ground snapping) |
 
 **`seed` makes scatter deterministic.** Without it, the seed defaults to `Date.now()`, so every reload produces a different layout. Set an explicit `seed` to get the exact same placement every time — the difference between a reproducible scene and a random one:
 
@@ -90,6 +106,16 @@ Scatter fields:
   }
 }
 ```
+
+## Ground snapping
+
+`snapToGround: true` on any part (or inside a `scatter`/`array` modifier for per-instance snapping) drops the part onto the ground after the model builds: its bounding-box bottom is raycast down onto — in order of preference — the generated `__terrain__` mesh, `category: "environment"` meshes (they still raycast when `display: "terrain"` hides them), or world `y = 0`. `groundOffset` (meters) sinks or hovers relative to the hit point.
+
+```json
+{ "type": "roundedBox", "params": [0.7, 0.7, 0.7], "position": [-4.5, 0, -1.5], "snapToGround": true }
+```
+
+This removes the float/bury class of defects on terrain scenes — see `specs/surface-test.json`.
 
 ## Deformers
 

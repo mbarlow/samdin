@@ -343,8 +343,66 @@ class ModelBuilder {
     model.userData.parts = assembler.getAnimatableParts();
 
     applyTerrainCompositor(model, spec);
+    this.applyGroundSnap(model);
 
     return model;
+  }
+
+  /**
+   * Snap flagged parts onto the ground (#79). Ground preference: the generated
+   * __terrain__ mesh → category:"environment" meshes (raycast works even when
+   * display:"terrain" hides them) → world y=0. Moves each flagged object so
+   * its bounding-box bottom sits at the hit point plus groundOffset.
+   */
+  applyGroundSnap(model) {
+    const snappers = [];
+    model.traverse((o) => {
+      if (o.userData?.snapToGround) snappers.push(o);
+    });
+    if (!snappers.length) return;
+
+    model.updateMatrixWorld(true);
+
+    const terrain = [];
+    const env = [];
+    model.traverse((o) => {
+      if (!o.isMesh) return;
+      if (o.name === '__terrain__') terrain.push(o);
+      else if (o.userData?.category === 'environment') env.push(o);
+    });
+
+    const raycaster = new THREE.Raycaster();
+    const down = new THREE.Vector3(0, -1, 0);
+    const bbox = new THREE.Box3();
+
+    for (const object of snappers) {
+      bbox.setFromObject(object);
+      if (bbox.isEmpty()) continue;
+      const cx = (bbox.min.x + bbox.max.x) / 2;
+      const cz = (bbox.min.z + bbox.max.z) / 2;
+      raycaster.set(new THREE.Vector3(cx, bbox.max.y + 100, cz), down);
+
+      const inSelf = (obj) => {
+        for (let p = obj; p; p = p.parent) if (p === object) return true;
+        return false;
+      };
+      const hitsOf = (candidates) =>
+        raycaster.intersectObjects(candidates, false).filter((h) => !inSelf(h.object));
+
+      let groundY = 0;
+      const hits = hitsOf(terrain);
+      const envHits = hits.length ? [] : hitsOf(env);
+      if (hits.length) groundY = hits[0].point.y;
+      else if (envHits.length) groundY = envHits[0].point.y;
+
+      const offset = object.userData.groundOffset || 0;
+      const deltaWorld = groundY - bbox.min.y + offset;
+      const parentScaleY = object.parent
+        ? object.parent.getWorldScale(new THREE.Vector3()).y || 1
+        : 1;
+      object.position.y += deltaWorld / parentScaleY;
+      object.updateMatrixWorld(true);
+    }
   }
 
   /**
@@ -518,6 +576,9 @@ class ModelBuilder {
    */
   expandArray(part) {
     const { array, modifiers, ...basePart } = part;
+    if (Array.isArray(array.path) && array.path.length >= 2) {
+      return this.expandArrayAlongPath(part);
+    }
     const count = Array.isArray(array.count) ? array.count : [array.count, 1, 1];
     const offset = array.offset || [1, 0, 0];
     const results = [];
@@ -535,9 +596,42 @@ class ModelBuilder {
             basePos[1] + y * offset[1],
             basePos[2] + z * offset[2]
           ];
+          if (array.snapToGround !== undefined) newPart.snapToGround = array.snapToGround;
           results.push(newPart);
         }
       }
+    }
+    return results;
+  }
+
+  /**
+   * Array along a path (#79): sample `count` instances along a Catmull-Rom
+   * curve through the waypoints (parent-space coords). `orient: true`
+   * (default) yaws each instance to face along the local tangent.
+   * Usage: { array: { path: [[x,y,z], ...], count: 8, orient: true } }
+   */
+  expandArrayAlongPath(part) {
+    const { array, modifiers, ...basePart } = part;
+    const pts = array.path.map((p) => new THREE.Vector3(p[0], p[1] ?? 0, p[2]));
+    const curve = new THREE.CatmullRomCurve3(pts, false, 'catmullrom', 0.5);
+    const count = Math.max(2, Array.isArray(array.count) ? array.count[0] : (array.count || pts.length));
+    const orient = array.orient !== false;
+    const results = [];
+
+    for (let i = 0; i < count; i++) {
+      const t = i / (count - 1);
+      const pos = curve.getPoint(t);
+      const newPart = JSON.parse(JSON.stringify(basePart));
+      newPart.name = `${basePart.name}_${i}`;
+      newPart.position = [pos.x, pos.y, pos.z];
+      if (orient) {
+        const tan = curve.getTangent(t);
+        const yaw = Math.atan2(tan.x, tan.z) * (180 / Math.PI);
+        newPart.rotation = newPart.rotation || [0, 0, 0];
+        newPart.rotation[1] = (newPart.rotation[1] || 0) + yaw;
+      }
+      if (array.snapToGround !== undefined) newPart.snapToGround = array.snapToGround;
+      results.push(newPart);
     }
     return results;
   }
@@ -636,6 +730,8 @@ class ModelBuilder {
         const scaleFactor = 1 + (seededRandom(s + 4) - 0.5) * 2 * scaleVar;
         newPart.scale = (basePart.scale || 1) * scaleFactor;
       }
+
+      if (scatter.snapToGround !== undefined) newPart.snapToGround = scatter.snapToGround;
 
       results.push(newPart);
     }
@@ -1032,6 +1128,11 @@ class ModelBuilder {
     // deformed shape (#78).
     if (def.deform) {
       applyDeform(object, def.deform);
+    }
+
+    if (def.snapToGround) {
+      object.userData.snapToGround = true;
+      object.userData.groundOffset = def.groundOffset ?? 0;
     }
 
     if (
