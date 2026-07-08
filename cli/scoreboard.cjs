@@ -14,6 +14,9 @@
  *   node cli/scoreboard.cjs record <name> <score> <verdict> \
  *        [--dims concept=NN,proportion=NN,feature=NN,silhouette=NN,construction=NN,material=NN] \
  *        [--note "<one line>"]
+ *
+ * Scene reviews use the scene rubric's dims instead (docs/review-rubric.md):
+ *        --dims concept=NN,composition=NN,silhouette=NN,terrain=NN,palette=NN,clarity=NN
  */
 'use strict';
 const fs = require('fs');
@@ -21,7 +24,9 @@ const path = require('path');
 
 const REPO = path.resolve(__dirname, '..');
 const BOARD = path.join(REPO, 'reviews', 'scoreboard.json');
-const DIM_KEYS = ['concept', 'proportion', 'feature', 'silhouette', 'construction', 'material'];
+const PROP_DIMS = ['concept', 'proportion', 'feature', 'silhouette', 'construction', 'material'];
+const SCENE_DIMS = ['concept', 'composition', 'silhouette', 'terrain', 'palette', 'clarity'];
+const DIM_KEYS = [...new Set([...PROP_DIMS, ...SCENE_DIMS])];
 
 function load() {
   try {
@@ -125,7 +130,7 @@ function showSpec(board, spec) {
   }
   console.log(`\n  ${spec} — review history\n`);
   for (const e of hist) {
-    const d = e.dims ? '  (' + DIM_KEYS.filter((k) => e.dims[k] != null).map((k) => `${k[0]}:${e.dims[k]}`).join(' ') + ')' : '';
+    const d = e.dims ? '  (' + DIM_KEYS.filter((k) => e.dims[k] != null).map((k) => `${k.slice(0, 4)}:${e.dims[k]}`).join(' ') + ')' : '';
     console.log(`  ${e.date}  ${String(e.score).padStart(3)}/100  ${e.verdict.padEnd(7)}${d}`);
     if (e.note) console.log(`             ${e.note}`);
   }
