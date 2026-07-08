@@ -27,16 +27,16 @@ serve:
 	@bunx serve -s .
 
 smoke:
-	@node cli/validate-spec.cjs specs/quality-bar-field-radio.json
+	@node cli/validate-spec.cjs specs/anchors/quality-bar-field-radio.json
 
 test:
-	@node cli/validate-spec.cjs specs/*.json prefabs/*.json
+	@node cli/validate-spec.cjs specs/*/*.json prefabs/*.json
 
 lint:
-	@node cli/validate-spec.cjs --strict specs/*.json
+	@node cli/validate-spec.cjs --strict specs/*/*.json
 
 schema-check:
-	@node cli/schema-check.js specs/*.json
+	@node cli/schema-check.js specs/*/*.json
 
 OUT ?= /tmp/samdin-shot.png
 VIEW ?= threeQuarter

@@ -8,7 +8,7 @@ Development server and tooling go through the Makefile:
 
 - `make dev [PORT=7777]` — Start the dev server with hot reload via `browser-sync` (see `scripts/dev.sh`). Override the port with `PORT=...`.
 - `make serve` — Plain static server via `bunx serve -s .` (no hot reload).
-- `make smoke` — Run the CLI validator against `specs/showcase.json` as a smoke check.
+- `make smoke` — Run the CLI validator against `specs/anchors/quality-bar-field-radio.json` as a smoke check.
 - `make help` — List targets.
 
 CLI scripts in `cli/` (run with `node` from inside `cli/`, paths are relative to the project root):
@@ -56,7 +56,7 @@ The data model is a JSON "spec". `ModelBuilder.build(spec)` → Three.js `Group`
 
 ### Assets on disk
 
-- `specs/` — Scene specs (`*.json`). `make smoke` validates `specs/showcase.json`. Served at `/specs` via browser-sync routes.
+- `specs/` — Scene specs in three subdirs: `anchors/` (quality-bar-*), `examples/` (showcases, landscapes, scenes), `fixtures/` (*-test). `specs/index.json` is the viewer dropdown manifest (paths relative to `specs/`; regenerate with `make spec-index`). Served at `/specs` via browser-sync routes.
 - `prefabs/` — Reusable `type: "prefab"` JSON components loaded lazily by the builder (`prefabsBasePath = './prefabs/'`). `docs/prefabs.md` lists categories but may lag behind disk; trust the directory listing.
 - `media/` — Images and demo video for the README and docs.
 - `src/index.html` is the single HTML entry; all UI panels (`#model-section`, `#info`, `#camera`, etc.) are static markup wired up in `App.setupUI()`.

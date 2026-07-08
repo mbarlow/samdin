@@ -121,7 +121,7 @@ them for you.
 Per-surface procedural detail lives under `material` alongside the preset/color
 fields, and is applied after the mesh is built. These treatments are what
 separate `standard` / `high` renders from flat, toy-like output — the shipped
-`specs/quality-bar-*.json` anchors lean on them heavily. They are cheap enough
+`specs/anchors/quality-bar-*.json` anchors lean on them heavily. They are cheap enough
 to leave in draft but are the whole point of the quality bar.
 
 ### `material.breakup`
@@ -200,7 +200,7 @@ Each entry: `face`, `axis` (`x`/`y`) for the repeat direction, `count`,
 }
 ```
 
-`contrast` still shapes the falloff (higher = tighter to hard edges). See `specs/wear-detail-test.json` for curvature vs bbox side by side.
+`contrast` still shapes the falloff (higher = tighter to hard edges). See `specs/fixtures/wear-detail-test.json` for curvature vs bbox side by side.
 
 ## Triplanar detail
 

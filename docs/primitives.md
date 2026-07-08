@@ -60,7 +60,7 @@ Primitive types you can use as a part's `type`. `params` is type-specific.
 
 ### Loft
 
-`type: "loft"` lofts faceted cross-sections along an arbitrary (curved) path into one continuous flat-shaded mesh — the sculpted-hull look the primitive kitbash can't reach (creature bodies, boat hulls, fins, sleek fuselages). Same math as `cli/hullgen.mjs`; see `specs/loft-test.json` (the hullgen whale rebuilt as spec parts).
+`type: "loft"` lofts faceted cross-sections along an arbitrary (curved) path into one continuous flat-shaded mesh — the sculpted-hull look the primitive kitbash can't reach (creature bodies, boat hulls, fins, sleek fuselages). Same math as `cli/hullgen.mjs`; see `specs/fixtures/loft-test.json` (the hullgen whale rebuilt as spec parts).
 
 ```json
 {

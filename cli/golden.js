@@ -132,7 +132,7 @@ function pixelDiff(aPath, bPath) {
 
 async function main() {
   const update = process.argv.includes('--update');
-  const specDir = path.join(REPO_ROOT, 'specs');
+  const specDir = path.join(REPO_ROOT, 'specs', 'anchors');
   const anchors = fs.readdirSync(specDir)
     .filter((f) => f.startsWith('quality-bar-') && f.endsWith('.json'))
     .map((f) => path.join(specDir, f));

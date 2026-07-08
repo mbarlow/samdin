@@ -17,7 +17,7 @@ You are the gate the builder cannot argue past. Score honestly, cite the angle t
 
 ## Protocol
 
-You are given a spec path (e.g. `specs/foo.json` or `specs/quality-bar-espresso-machine.json`).
+You are given a spec path (e.g. `specs/foo.json` or `specs/anchors/quality-bar-espresso-machine.json`).
 
 1. **Read the target.** Open the spec's worklog `reviews/<name>.md` if it exists for the target prompt and prior review log. If there is no worklog, use the spec's `description` field as the target. The target is what the asset is *supposed to be* — you grade against it, not against a generic idea of the object.
 

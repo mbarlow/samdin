@@ -54,10 +54,10 @@ function createServer(roots, port) {
 }
 
 // Runs inside the page. Returns findings from scene-space analysis.
-async function analyzeInPage(specName) {
+async function analyzeInPage(specRel) {
   const THREE = await import('three');
   const app = window.app;
-  const spec = await (await fetch(`/specs/${specName}`)).json();
+  const spec = await (await fetch(`/${specRel}`)).json();
   app.builder.registerSpec(spec);
   await app.loadSpec(spec.name);
   await new Promise((r) => setTimeout(r, 1200));
@@ -300,6 +300,9 @@ async function main() {
   const jsonOut = args.includes('--json') ? args[args.indexOf('--json') + 1] : null;
   const port = args.includes('--port') ? parseInt(args[args.indexOf('--port') + 1], 10) : 8768;
   const specName = path.basename(specPath);
+  // Specs live in subdirs (specs/anchors|examples|fixtures) — fetch by the
+  // repo-relative path, which the probe server serves from REPO_ROOT.
+  const specRel = path.relative(REPO_ROOT, path.resolve(specPath)).split(path.sep).join('/');
 
   const server = await createServer(SERVE_ROOTS, port);
   const browser = await chromium.launch();
@@ -312,7 +315,7 @@ async function main() {
     await page.goto(`http://localhost:${port}/`, { waitUntil: 'networkidle' });
     await page.waitForFunction(() => window.app?.builder, { timeout: 15000 });
 
-    const result = await page.evaluate(analyzeInPage, specName);
+    const result = await page.evaluate(analyzeInPage, specRel);
     if (result.error) throw new Error(result.error);
     findings = result.findings;
 
