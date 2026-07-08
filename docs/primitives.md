@@ -58,6 +58,33 @@ Primitive types you can use as a part's `type`. `params` is type-specific.
 
 **ExtrudePath shapes**: `"circle"` `[radius]`, `"square"` `[size]`, `"rectangle"` `[width, height]`
 
+### Loft
+
+`type: "loft"` lofts faceted cross-sections along an arbitrary (curved) path into one continuous flat-shaded mesh — the sculpted-hull look the primitive kitbash can't reach (creature bodies, boat hulls, fins, sleek fuselages). Same math as `cli/hullgen.mjs`; see `specs/loft-test.json` (the hullgen whale rebuilt as spec parts).
+
+```json
+{
+  "name": "fin",
+  "type": "loft",
+  "loft": {
+    "mirror": true,
+    "startPoint": [0.1, -0.05, 0.7],
+    "stations": [
+      { "at": [0.2, -0.09, 0.6],  "points": [[0.11, 0.018], [0, 0.03], [-0.11, 0.018], [0, -0.03]] },
+      { "at": [0.58, -0.24, 0.38], "points": [[0.09, 0.014], [0, 0.024], [-0.09, 0.014], [0, -0.024]] },
+      { "at": [0.95, -0.34, 0.16], "points": [[0.05, 0.01],  [0, 0.016], [-0.05, 0.01],  [0, -0.016]] }
+    ]
+  },
+  "material": { "color": "#3a5a72", "flatShading": true }
+}
+```
+
+- `stations` (≥ 2): each is a ring — `points` (same count everywhere, ≥ 3) are `[px, py]` profile coordinates mapped onto a plane perpendicular to the local path tangent (px ≈ horizontal, py ≈ vertical).
+- `startPoint` / `endPoint`: optional pointed caps (noses, tails, fin tips); omitted ends get a flat centroid fan.
+- `mirror: true` duplicates the loft mirrored across X into the same mesh.
+- One material per part; where hullgen used per-band materials, use several loft parts.
+- Anchor rule from hullgen applies: appendages must bury their root ring inside the parent volume or they float.
+
 ## Cables & wires
 
 | Type | Params | Description |

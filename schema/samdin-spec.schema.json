@@ -48,7 +48,7 @@
     "primitiveType": {
       "enum": [
         "box", "cylinder", "sphere", "cone", "torus", "capsule", "roundedBox", "plane",
-        "group", "prefab", "module", "csg", "region",
+        "group", "prefab", "module", "csg", "loft", "region",
         "tetrahedron", "octahedron", "dodecahedron", "icosahedron", "prism", "pyramid",
         "wedge", "tube", "ring", "stairs", "arch", "lathe", "extrudePath", "cable",
         "catenary", "helix", "rock", "canopy",

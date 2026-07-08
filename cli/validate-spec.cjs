@@ -27,6 +27,7 @@ const PRIMITIVE_PARAMS = {
   prefab: { min: 0, max: 0, requiresSrc: true },
   module: { min: 0, max: 0, requiresSrc: true },
   csg: { min: 0, max: 0, validate: validateEmbeddedCSG },
+  loft: { min: 0, max: 0, validate: validateLoft },
 
   tetrahedron: { min: 0, max: 2 },
   octahedron: { min: 0, max: 2 },
@@ -322,6 +323,40 @@ function validateTerrainSettings(terrain, issues, warnings) {
   }
 }
 
+function validateLoft(part) {
+  const errors = [];
+  const loft = part.loft;
+  if (!loft || typeof loft !== 'object') {
+    errors.push('loft part requires a loft object');
+    return errors;
+  }
+  const stations = loft.stations;
+  if (!Array.isArray(stations) || stations.length < 2) {
+    errors.push('loft requires stations array with at least 2 stations');
+    return errors;
+  }
+  const count = Array.isArray(stations[0].points) ? stations[0].points.length : 0;
+  if (count < 3) {
+    errors.push('loft stations need at least 3 profile points');
+  }
+  stations.forEach((s, i) => {
+    if (!Array.isArray(s.at) || s.at.length !== 3) {
+      errors.push(`loft station ${i} needs at: [x, y, z]`);
+    }
+    if (!Array.isArray(s.points) || s.points.length !== count) {
+      errors.push(`loft station ${i} point count differs (all stations need ${count})`);
+    } else if (s.points.some((pt) => !Array.isArray(pt) || pt.length !== 2)) {
+      errors.push(`loft station ${i} points must be [px, py] pairs`);
+    }
+  });
+  for (const key of ['startPoint', 'endPoint']) {
+    if (loft[key] !== undefined && (!Array.isArray(loft[key]) || loft[key].length !== 3)) {
+      errors.push(`loft ${key} must be [x, y, z]`);
+    }
+  }
+  return errors;
+}
+
 function validateEmbeddedCSG(part) {
   const errors = [];
   if (!part.shapes || typeof part.shapes !== 'object') {
@@ -431,6 +466,11 @@ function validatePartCollection(parts, issues, warnings, scopeLabel = 'spec') {
 
     if (typeInfo) {
       validateParams(part, typeInfo, prefix, issues, warnings);
+      // Paramless structural types (csg, loft) validate the part itself —
+      // validateParams early-returns when there's no params array.
+      if (typeInfo.validate && !part.params) {
+        issues.push(...typeInfo.validate(part).map((issue) => `${prefix} ${issue}`));
+      }
     }
 
     if (part.modifiers && typeof part.modifiers !== 'object') {
