@@ -518,6 +518,23 @@ function validatePartCollection(parts, issues, warnings, scopeLabel = 'spec') {
       issues.push(`${prefix} groundOffset must be a number`);
     }
     const arrayMod = part.array || part.modifiers?.array;
+    if (arrayMod?.jitter !== undefined) {
+      const j = arrayMod.jitter;
+      if (typeof j !== 'object' || Array.isArray(j)) {
+        issues.push(`${prefix} array.jitter must be an object`);
+      } else {
+        for (const key of ['offset', 'rotation']) {
+          if (j[key] !== undefined && (!Array.isArray(j[key]) || j[key].length !== 3)) {
+            issues.push(`${prefix} array.jitter.${key} must be [x, y, z]`);
+          }
+        }
+        for (const key of ['scale', 'tone']) {
+          if (j[key] !== undefined && typeof j[key] !== 'number') {
+            issues.push(`${prefix} array.jitter.${key} must be a number`);
+          }
+        }
+      }
+    }
     if (arrayMod?.path !== undefined) {
       if (!Array.isArray(arrayMod.path) || arrayMod.path.length < 2 ||
           arrayMod.path.some((pt) => !Array.isArray(pt) || pt.length !== 3)) {
