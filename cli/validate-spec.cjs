@@ -323,6 +323,36 @@ function validateTerrainSettings(terrain, issues, warnings) {
   }
 }
 
+function validateDeform(deform, prefix, issues) {
+  if (!deform || typeof deform !== 'object' || Array.isArray(deform)) {
+    issues.push(`${prefix} deform should be an object`);
+    return;
+  }
+  const axes = new Set(['x', 'y', 'z']);
+  const known = new Set(['taper', 'twist', 'bend']);
+  for (const key of Object.keys(deform)) {
+    if (!known.has(key)) issues.push(`${prefix} deform.${key} is not a deformer (taper/twist/bend)`);
+  }
+  const checkAxis = (op, axis) => {
+    if (axis !== undefined && !axes.has(axis)) issues.push(`${prefix} deform.${op}.axis must be x, y, or z`);
+  };
+  if (deform.taper !== undefined && typeof deform.taper !== 'number') {
+    if (typeof deform.taper !== 'object' || typeof deform.taper.amount !== 'number') {
+      issues.push(`${prefix} deform.taper needs a number or { amount }`);
+    } else checkAxis('taper', deform.taper.axis);
+  }
+  if (deform.twist !== undefined && typeof deform.twist !== 'number') {
+    if (typeof deform.twist !== 'object' || typeof deform.twist.angle !== 'number') {
+      issues.push(`${prefix} deform.twist needs a number or { angle }`);
+    } else checkAxis('twist', deform.twist.axis);
+  }
+  if (deform.bend !== undefined && typeof deform.bend !== 'number') {
+    if (typeof deform.bend !== 'object' || typeof deform.bend.angle !== 'number') {
+      issues.push(`${prefix} deform.bend needs a number or { angle, axis }`);
+    } else checkAxis('bend', deform.bend.axis);
+  }
+}
+
 function validateLoft(part) {
   const errors = [];
   const loft = part.loft;
@@ -475,6 +505,10 @@ function validatePartCollection(parts, issues, warnings, scopeLabel = 'spec') {
 
     if (part.modifiers && typeof part.modifiers !== 'object') {
       issues.push(`${prefix} modifiers should be an object`);
+    }
+
+    if (part.deform !== undefined) {
+      validateDeform(part.deform, prefix, issues);
     }
   }
 

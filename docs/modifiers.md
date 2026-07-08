@@ -91,6 +91,31 @@ Scatter fields:
 }
 ```
 
+## Deformers
+
+Opt-in per-part `deform` block — gestural vertex deforms applied after geometry creation and before breakup (vertex colors follow the deformed shape). Order: taper → twist → bend.
+
+```json
+{
+  "type": "cylinder",
+  "params": [0.16, 0.3, 2.2, 7],
+  "options": { "heightSegments": 12 },
+  "deform": {
+    "taper": 0.55,
+    "twist": 25,
+    "bend": { "angle": 14, "axis": "z" }
+  }
+}
+```
+
+| Deformer | Value | Effect |
+|----------|-------|--------|
+| `taper` | number or `{ amount, axis }` | Cross-section scales 1 → amount from base to top of the along axis (default `y`) |
+| `twist` | degrees or `{ angle, axis }` | Rotation about the along axis runs 0 → angle base-to-top |
+| `bend` | `{ angle, axis }` | The Y axis arcs by angle about the given rotation axis, pivoting at the base |
+
+Deformers are pure vertex transforms — the primitive must have enough along-axis resolution to show the curve. `box` takes `options.segments: [sx, sy, sz]`; `cylinder`/`cone` take `options.heightSegments`. A bend on a 1-segment box just tilts the top face. See `specs/deform-test.json`.
+
 ## Part properties
 
 | Property | Type | Description |
