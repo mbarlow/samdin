@@ -1,0 +1,2247 @@
+{
+  "name": "showcase-cove",
+  "description": "Capability showcase two \u2014 dusk shoreline camp. Every 2026-07 feature is load-bearing: a lofted fishing boat (type: loft, curvature edge wear, mirrored oars), palm trunks and a stovepipe shaped by deformers, a boardwalk and lantern line arrayed along curved paths with per-instance jitter, cargo grids jittered out of clone reads, posed workers (sitting / waving) from one articulated module, a CSG hut with triplanar-detail walls, and everything snapToGround-ed onto a heightfield cove with seeded, snapped scatter. Probe-clean by construction.",
+  "root": "scene_root",
+  "poses": {
+    "sitting": {
+      "hip_l": [
+        -85,
+        0,
+        0
+      ],
+      "hip_r": [
+        -85,
+        0,
+        0
+      ],
+      "knee_l": [
+        85,
+        0,
+        0
+      ],
+      "knee_r": [
+        85,
+        0,
+        0
+      ],
+      "shoulder_l": [
+        -25,
+        0,
+        8
+      ],
+      "shoulder_r": [
+        -25,
+        0,
+        -8
+      ],
+      "elbow_l": [
+        -30,
+        0,
+        0
+      ],
+      "elbow_r": [
+        -30,
+        0,
+        0
+      ]
+    },
+    "waving": {
+      "shoulder_r": [
+        0,
+        0,
+        -150
+      ],
+      "elbow_r": [
+        0,
+        0,
+        -25
+      ],
+      "shoulder_l": [
+        8,
+        0,
+        12
+      ],
+      "head": [
+        0,
+        0,
+        10
+      ]
+    }
+  },
+  "scene": {
+    "quality": "high",
+    "background": {
+      "type": "gradient",
+      "top": "#3a2f4e",
+      "bottom": "#c9713a"
+    },
+    "fog": {
+      "type": "exp2",
+      "color": "#4a4258",
+      "density": 0.009
+    },
+    "lighting": {
+      "preset": "sunset",
+      "environment": "studio",
+      "envMapIntensity": 0.9,
+      "shadowQuality": "high",
+      "ambient": {
+        "color": "#5c5670",
+        "intensity": 0.55
+      },
+      "lights": [
+        {
+          "type": "directional",
+          "color": "#ffd9b0",
+          "intensity": 2.0,
+          "position": [
+            6,
+            9,
+            5
+          ],
+          "shadow": true
+        },
+        {
+          "type": "directional",
+          "color": "#8090cc",
+          "intensity": 0.7,
+          "position": [
+            -6,
+            4,
+            -4
+          ],
+          "shadow": false
+        },
+        {
+          "type": "hemisphere",
+          "skyColor": "#c08a60",
+          "groundColor": "#3e3a42",
+          "intensity": 0.8
+        }
+      ]
+    },
+    "ground": {
+      "reflective": false
+    },
+    "exposure": 1.3,
+    "toneMapping": "ACESFilmic",
+    "camera": {
+      "preset": "threeQuarter",
+      "fov": 34,
+      "distanceMultiplier": 0.38,
+      "targetOffset": [
+        -0.4,
+        0.5,
+        -0.4
+      ]
+    },
+    "postfx": {
+      "bloom": {
+        "enabled": true,
+        "strength": 0.5,
+        "radius": 0.6,
+        "threshold": 0.85
+      },
+      "vignette": {
+        "enabled": true,
+        "intensity": 0.17,
+        "softness": 0.7
+      },
+      "colorGrade": {
+        "enabled": true,
+        "saturation": 1.03,
+        "brightness": 1.02,
+        "contrast": 1.05
+      },
+      "fxaa": true
+    },
+    "terrain": {
+      "enabled": true,
+      "method": "heightfield",
+      "display": "terrain",
+      "bounds": "auto",
+      "resolution": 120,
+      "smoothing": 0.3,
+      "material": {
+        "color": "#b39a72",
+        "metalness": 0.0,
+        "roughness": 0.95,
+        "flatShading": true
+      },
+      "methodOptions": {
+        "heightfield": {
+          "padding": 0.6,
+          "skirt": 1.2
+        }
+      }
+    }
+  },
+  "modules": {
+    "lantern-post": {
+      "root": "lantern_root",
+      "parts": [
+        {
+          "name": "lantern_root",
+          "type": "group"
+        },
+        {
+          "name": "post",
+          "type": "cylinder",
+          "params": [
+            0.045,
+            0.06,
+            1.5,
+            7
+          ],
+          "options": {
+            "heightSegments": 8
+          },
+          "deform": {
+            "bend": {
+              "angle": 7,
+              "axis": "x"
+            }
+          },
+          "material": {
+            "preset": "wood",
+            "color": "#8a6a4c",
+            "breakup": {
+              "noise": {
+                "amount": 0.07,
+                "scale": 5
+              },
+              "roughnessVariation": 0.06
+            }
+          },
+          "position": [
+            0,
+            0.75,
+            0
+          ],
+          "parent": "lantern_root",
+          "castShadow": true
+        },
+        {
+          "name": "arm",
+          "type": "box",
+          "params": [
+            0.32,
+            0.05,
+            0.05
+          ],
+          "material": {
+            "preset": "wood",
+            "color": "#7c5f44"
+          },
+          "position": [
+            0.12,
+            1.46,
+            0
+          ],
+          "parent": "lantern_root"
+        },
+        {
+          "name": "cage",
+          "type": "box",
+          "params": [
+            0.14,
+            0.18,
+            0.14
+          ],
+          "material": {
+            "preset": "painted-metal",
+            "color": "#6e6055",
+            "breakup": {
+              "noise": {
+                "amount": 0.06,
+                "scale": 5
+              },
+              "edgeWear": {
+                "amount": 0.2,
+                "color": "#c9b896",
+                "mode": "curvature"
+              }
+            }
+          },
+          "position": [
+            0.26,
+            1.36,
+            0
+          ],
+          "parent": "lantern_root",
+          "castShadow": true
+        },
+        {
+          "name": "flame",
+          "type": "sphere",
+          "params": [
+            0.05,
+            8
+          ],
+          "material": {
+            "preset": "glow",
+            "color": "#ffb45a",
+            "emissiveIntensity": 3.2
+          },
+          "position": [
+            0.26,
+            1.36,
+            0
+          ],
+          "parent": "lantern_root"
+        }
+      ]
+    },
+    "worker": {
+      "root": "figure_root",
+      "parts": [
+        {
+          "name": "figure_root",
+          "type": "group"
+        },
+        {
+          "name": "torso",
+          "type": "roundedBox",
+          "params": [
+            0.38,
+            0.56,
+            0.2,
+            0.04,
+            2
+          ],
+          "material": {
+            "color": "#7a5b46",
+            "roughness": 0.7
+          },
+          "position": [
+            0,
+            1.18,
+            0
+          ],
+          "parent": "figure_root",
+          "castShadow": true
+        },
+        {
+          "name": "head",
+          "type": "group",
+          "position": [
+            0,
+            1.5,
+            0
+          ],
+          "parent": "figure_root"
+        },
+        {
+          "name": "head_mesh",
+          "type": "sphere",
+          "params": [
+            0.13,
+            10
+          ],
+          "material": {
+            "color": "#c9a184",
+            "roughness": 0.6,
+            "breakup": {
+              "noise": {
+                "amount": 0.06,
+                "scale": 5
+              },
+              "roughnessVariation": 0.06
+            }
+          },
+          "position": [
+            0,
+            0.17,
+            0
+          ],
+          "parent": "head",
+          "castShadow": true
+        },
+        {
+          "name": "shoulder_l",
+          "type": "group",
+          "position": [
+            0.24,
+            1.4,
+            0
+          ],
+          "parent": "figure_root"
+        },
+        {
+          "name": "upper_arm_l",
+          "type": "capsule",
+          "params": [
+            0.05,
+            0.26,
+            4,
+            8
+          ],
+          "material": {
+            "color": "#7a5b46",
+            "roughness": 0.7,
+            "breakup": {
+              "noise": {
+                "amount": 0.06,
+                "scale": 5
+              },
+              "roughnessVariation": 0.06
+            }
+          },
+          "position": [
+            0,
+            -0.16,
+            0
+          ],
+          "parent": "shoulder_l",
+          "castShadow": true
+        },
+        {
+          "name": "elbow_l",
+          "type": "group",
+          "position": [
+            0,
+            -0.34,
+            0
+          ],
+          "parent": "shoulder_l"
+        },
+        {
+          "name": "forearm_l",
+          "type": "capsule",
+          "params": [
+            0.045,
+            0.24,
+            4,
+            8
+          ],
+          "material": {
+            "color": "#c9a184",
+            "roughness": 0.6,
+            "breakup": {
+              "noise": {
+                "amount": 0.06,
+                "scale": 5
+              },
+              "roughnessVariation": 0.06
+            }
+          },
+          "position": [
+            0,
+            -0.15,
+            0
+          ],
+          "parent": "elbow_l",
+          "castShadow": true
+        },
+        {
+          "name": "shoulder_r",
+          "type": "group",
+          "position": [
+            -0.24,
+            1.4,
+            0
+          ],
+          "parent": "figure_root"
+        },
+        {
+          "name": "upper_arm_r",
+          "type": "capsule",
+          "params": [
+            0.05,
+            0.26,
+            4,
+            8
+          ],
+          "material": {
+            "color": "#7a5b46",
+            "roughness": 0.7,
+            "breakup": {
+              "noise": {
+                "amount": 0.06,
+                "scale": 5
+              },
+              "roughnessVariation": 0.06
+            }
+          },
+          "position": [
+            0,
+            -0.16,
+            0
+          ],
+          "parent": "shoulder_r",
+          "castShadow": true
+        },
+        {
+          "name": "elbow_r",
+          "type": "group",
+          "position": [
+            0,
+            -0.34,
+            0
+          ],
+          "parent": "shoulder_r"
+        },
+        {
+          "name": "forearm_r",
+          "type": "capsule",
+          "params": [
+            0.045,
+            0.24,
+            4,
+            8
+          ],
+          "material": {
+            "color": "#c9a184",
+            "roughness": 0.6,
+            "breakup": {
+              "noise": {
+                "amount": 0.06,
+                "scale": 5
+              },
+              "roughnessVariation": 0.06
+            }
+          },
+          "position": [
+            0,
+            -0.15,
+            0
+          ],
+          "parent": "elbow_r",
+          "castShadow": true
+        },
+        {
+          "name": "hip_l",
+          "type": "group",
+          "position": [
+            0.11,
+            0.9,
+            0
+          ],
+          "parent": "figure_root"
+        },
+        {
+          "name": "thigh_l",
+          "type": "capsule",
+          "params": [
+            0.065,
+            0.3,
+            4,
+            8
+          ],
+          "material": {
+            "color": "#4a5568",
+            "roughness": 0.75,
+            "breakup": {
+              "noise": {
+                "amount": 0.06,
+                "scale": 5
+              },
+              "roughnessVariation": 0.06
+            }
+          },
+          "position": [
+            0,
+            -0.19,
+            0
+          ],
+          "parent": "hip_l",
+          "castShadow": true
+        },
+        {
+          "name": "knee_l",
+          "type": "group",
+          "position": [
+            0,
+            -0.42,
+            0
+          ],
+          "parent": "hip_l"
+        },
+        {
+          "name": "shin_l",
+          "type": "capsule",
+          "params": [
+            0.055,
+            0.28,
+            4,
+            8
+          ],
+          "material": {
+            "color": "#4a5568",
+            "roughness": 0.75,
+            "breakup": {
+              "noise": {
+                "amount": 0.06,
+                "scale": 5
+              },
+              "roughnessVariation": 0.06
+            }
+          },
+          "position": [
+            0,
+            -0.17,
+            0
+          ],
+          "parent": "knee_l",
+          "castShadow": true
+        },
+        {
+          "name": "foot_l",
+          "type": "box",
+          "params": [
+            0.09,
+            0.06,
+            0.2
+          ],
+          "material": {
+            "color": "#33373e",
+            "roughness": 0.8
+          },
+          "position": [
+            0,
+            -0.36,
+            0.05
+          ],
+          "parent": "knee_l",
+          "castShadow": true
+        },
+        {
+          "name": "hip_r",
+          "type": "group",
+          "position": [
+            -0.11,
+            0.9,
+            0
+          ],
+          "parent": "figure_root"
+        },
+        {
+          "name": "thigh_r",
+          "type": "capsule",
+          "params": [
+            0.065,
+            0.3,
+            4,
+            8
+          ],
+          "material": {
+            "color": "#4a5568",
+            "roughness": 0.75,
+            "breakup": {
+              "noise": {
+                "amount": 0.06,
+                "scale": 5
+              },
+              "roughnessVariation": 0.06
+            }
+          },
+          "position": [
+            0,
+            -0.19,
+            0
+          ],
+          "parent": "hip_r",
+          "castShadow": true
+        },
+        {
+          "name": "knee_r",
+          "type": "group",
+          "position": [
+            0,
+            -0.42,
+            0
+          ],
+          "parent": "hip_r"
+        },
+        {
+          "name": "shin_r",
+          "type": "capsule",
+          "params": [
+            0.055,
+            0.28,
+            4,
+            8
+          ],
+          "material": {
+            "color": "#4a5568",
+            "roughness": 0.75,
+            "breakup": {
+              "noise": {
+                "amount": 0.06,
+                "scale": 5
+              },
+              "roughnessVariation": 0.06
+            }
+          },
+          "position": [
+            0,
+            -0.17,
+            0
+          ],
+          "parent": "knee_r",
+          "castShadow": true
+        },
+        {
+          "name": "foot_r",
+          "type": "box",
+          "params": [
+            0.09,
+            0.06,
+            0.2
+          ],
+          "material": {
+            "color": "#33373e",
+            "roughness": 0.8
+          },
+          "position": [
+            0,
+            -0.36,
+            0.05
+          ],
+          "parent": "knee_r",
+          "castShadow": true
+        }
+      ]
+    }
+  },
+  "parts": [
+    {
+      "name": "scene_root",
+      "type": "group",
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "env",
+      "type": "group",
+      "parent": "scene_root",
+      "category": "environment"
+    },
+    {
+      "name": "base_plate_main",
+      "type": "box",
+      "params": [
+        24,
+        0.24,
+        9.5
+      ],
+      "material": {
+        "color": "#b39a72",
+        "roughness": 0.95,
+        "flatShading": true,
+        "breakup": {
+          "noise": {
+            "amount": 0.05,
+            "scale": 8
+          },
+          "roughnessVariation": 0.05
+        }
+      },
+      "position": [
+        0,
+        -0.12,
+        -3.75
+      ],
+      "parent": "env",
+      "category": "environment",
+      "receiveShadow": true
+    },
+    {
+      "name": "base_plate_west",
+      "type": "box",
+      "params": [
+        15,
+        0.24,
+        7.5
+      ],
+      "material": {
+        "color": "#b39a72",
+        "roughness": 0.95,
+        "flatShading": true,
+        "breakup": {
+          "noise": {
+            "amount": 0.05,
+            "scale": 8
+          },
+          "roughnessVariation": 0.05
+        }
+      },
+      "position": [
+        -4.5,
+        -0.12,
+        4.75
+      ],
+      "parent": "env",
+      "category": "environment",
+      "receiveShadow": true
+    },
+    {
+      "name": "bay_floor",
+      "type": "box",
+      "params": [
+        9.2,
+        0.24,
+        7.7
+      ],
+      "material": {
+        "color": "#9a8a6a",
+        "roughness": 0.95,
+        "flatShading": true,
+        "breakup": {
+          "noise": {
+            "amount": 0.05,
+            "scale": 8
+          },
+          "roughnessVariation": 0.05
+        }
+      },
+      "position": [
+        7.4,
+        -0.55,
+        4.65
+      ],
+      "parent": "env",
+      "category": "environment",
+      "receiveShadow": true
+    },
+    {
+      "name": "dune_back_left",
+      "type": "sphere",
+      "params": [
+        3.4,
+        10
+      ],
+      "material": {
+        "color": "#a8906a",
+        "roughness": 0.95,
+        "flatShading": true,
+        "breakup": {
+          "noise": {
+            "amount": 0.06,
+            "scale": 5
+          },
+          "roughnessVariation": 0.06
+        }
+      },
+      "position": [
+        -6.5,
+        -0.7,
+        -5.5
+      ],
+      "scale": [
+        1.5,
+        0.5,
+        1
+      ],
+      "parent": "env",
+      "category": "environment"
+    },
+    {
+      "name": "dune_back_right",
+      "type": "sphere",
+      "params": [
+        2.8,
+        10
+      ],
+      "material": {
+        "color": "#ad9670",
+        "roughness": 0.95,
+        "flatShading": true,
+        "breakup": {
+          "noise": {
+            "amount": 0.06,
+            "scale": 5
+          },
+          "roughnessVariation": 0.06
+        }
+      },
+      "position": [
+        3.5,
+        -0.6,
+        -6.5
+      ],
+      "scale": [
+        1.6,
+        0.55,
+        1
+      ],
+      "parent": "env",
+      "category": "environment"
+    },
+    {
+      "name": "headland_left",
+      "type": "sphere",
+      "params": [
+        2.6,
+        9
+      ],
+      "material": {
+        "color": "#a08862",
+        "roughness": 0.95,
+        "flatShading": true,
+        "breakup": {
+          "noise": {
+            "amount": 0.06,
+            "scale": 5
+          },
+          "roughnessVariation": 0.06
+        }
+      },
+      "position": [
+        -9.5,
+        -0.5,
+        1.5
+      ],
+      "scale": [
+        1,
+        0.6,
+        1.5
+      ],
+      "parent": "env",
+      "category": "environment"
+    },
+    {
+      "name": "dune_mid",
+      "type": "sphere",
+      "params": [
+        1.8,
+        9
+      ],
+      "material": {
+        "color": "#b09468",
+        "roughness": 0.95,
+        "flatShading": true,
+        "breakup": {
+          "noise": {
+            "amount": 0.06,
+            "scale": 5
+          },
+          "roughnessVariation": 0.06
+        }
+      },
+      "position": [
+        0.5,
+        -0.55,
+        -3.0
+      ],
+      "scale": [
+        1.3,
+        0.45,
+        1
+      ],
+      "parent": "env",
+      "category": "environment"
+    },
+    {
+      "name": "lagoon",
+      "type": "box",
+      "params": [
+        8.4,
+        0.08,
+        6.9
+      ],
+      "material": {
+        "color": "#1f4e5e",
+        "roughness": 0.1,
+        "metalness": 0.15,
+        "opacity": 0.88,
+        "transparent": true,
+        "breakup": {
+          "noise": {
+            "amount": 0.04,
+            "scale": 6
+          },
+          "roughnessVariation": 0.08
+        }
+      },
+      "position": [
+        7.4,
+        0,
+        4.6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "parent": "scene_root",
+      "snapToGround": true,
+      "groundOffset": 0.32,
+      "castShadow": false,
+      "receiveShadow": true
+    },
+    {
+      "name": "boat",
+      "type": "group",
+      "position": [
+        3.3,
+        0,
+        0.4
+      ],
+      "rotation": [
+        0,
+        237,
+        8
+      ],
+      "parent": "scene_root",
+      "snapToGround": true,
+      "groundOffset": 0.14,
+      "scale": [
+        1.25,
+        1.25,
+        1.25
+      ]
+    },
+    {
+      "name": "hull",
+      "type": "loft",
+      "loft": {
+        "startPoint": [
+          0,
+          0.32,
+          1.9
+        ],
+        "stations": [
+          {
+            "at": [
+              0,
+              0.22,
+              1.45
+            ],
+            "points": [
+              [
+                0,
+                0.22
+              ],
+              [
+                0.2,
+                0.14
+              ],
+              [
+                0.28,
+                -0.02
+              ],
+              [
+                0.14,
+                -0.2
+              ],
+              [
+                0,
+                -0.26
+              ],
+              [
+                -0.14,
+                -0.2
+              ],
+              [
+                -0.28,
+                -0.02
+              ],
+              [
+                -0.2,
+                0.14
+              ]
+            ]
+          },
+          {
+            "at": [
+              0,
+              0.18,
+              0.4
+            ],
+            "points": [
+              [
+                0,
+                0.3
+              ],
+              [
+                0.32,
+                0.2
+              ],
+              [
+                0.44,
+                -0.02
+              ],
+              [
+                0.22,
+                -0.28
+              ],
+              [
+                0,
+                -0.36
+              ],
+              [
+                -0.22,
+                -0.28
+              ],
+              [
+                -0.44,
+                -0.02
+              ],
+              [
+                -0.32,
+                0.2
+              ]
+            ]
+          },
+          {
+            "at": [
+              0,
+              0.18,
+              -0.7
+            ],
+            "points": [
+              [
+                0,
+                0.3
+              ],
+              [
+                0.3,
+                0.2
+              ],
+              [
+                0.4,
+                -0.02
+              ],
+              [
+                0.2,
+                -0.26
+              ],
+              [
+                0,
+                -0.33
+              ],
+              [
+                -0.2,
+                -0.26
+              ],
+              [
+                -0.4,
+                -0.02
+              ],
+              [
+                -0.3,
+                0.2
+              ]
+            ]
+          },
+          {
+            "at": [
+              0,
+              0.22,
+              -1.5
+            ],
+            "points": [
+              [
+                0,
+                0.24
+              ],
+              [
+                0.2,
+                0.16
+              ],
+              [
+                0.26,
+                0
+              ],
+              [
+                0.13,
+                -0.16
+              ],
+              [
+                0,
+                -0.2
+              ],
+              [
+                -0.13,
+                -0.16
+              ],
+              [
+                -0.26,
+                0
+              ],
+              [
+                -0.2,
+                0.16
+              ]
+            ]
+          }
+        ]
+      },
+      "material": {
+        "color": "#8a5f42",
+        "roughness": 0.65,
+        "flatShading": true,
+        "breakup": {
+          "noise": {
+            "amount": 0.07,
+            "scale": 4
+          },
+          "roughnessVariation": 0.07,
+          "edgeWear": {
+            "amount": 0.26,
+            "color": "#d9c2a0",
+            "mode": "curvature"
+          }
+        }
+      },
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "parent": "boat",
+      "castShadow": true
+    },
+    {
+      "name": "gunwale",
+      "type": "box",
+      "params": [
+        0.08,
+        0.07,
+        3.1
+      ],
+      "material": {
+        "preset": "wood",
+        "color": "#6e4c36",
+        "breakup": {
+          "noise": {
+            "amount": 0.06,
+            "scale": 5
+          },
+          "roughnessVariation": 0.06
+        }
+      },
+      "position": [
+        0.36,
+        0.48,
+        -0.05
+      ],
+      "modifiers": {
+        "mirror": {
+          "x": true
+        }
+      },
+      "parent": "boat",
+      "castShadow": true
+    },
+    {
+      "name": "thwart",
+      "type": "box",
+      "params": [
+        0.72,
+        0.05,
+        0.2
+      ],
+      "material": {
+        "preset": "wood",
+        "color": "#7c5a40",
+        "breakup": {
+          "noise": {
+            "amount": 0.06,
+            "scale": 5
+          },
+          "roughnessVariation": 0.06
+        }
+      },
+      "position": [
+        0,
+        0.4,
+        0
+      ],
+      "modifiers": {
+        "array": {
+          "count": 2,
+          "offset": [
+            0,
+            0,
+            -1.0
+          ]
+        }
+      },
+      "parent": "boat"
+    },
+    {
+      "name": "oar",
+      "type": "box",
+      "params": [
+        0.05,
+        0.05,
+        1.7
+      ],
+      "material": {
+        "preset": "wood",
+        "color": "#95714e",
+        "breakup": {
+          "noise": {
+            "amount": 0.06,
+            "scale": 5
+          },
+          "roughnessVariation": 0.06
+        }
+      },
+      "position": [
+        0.42,
+        0.52,
+        0.3
+      ],
+      "rotation": [
+        8,
+        20,
+        4
+      ],
+      "modifiers": {
+        "mirror": {
+          "x": true
+        }
+      },
+      "parent": "boat",
+      "castShadow": true
+    },
+    {
+      "name": "mast_stub",
+      "type": "cylinder",
+      "params": [
+        0.05,
+        0.06,
+        1.3,
+        7
+      ],
+      "material": {
+        "preset": "wood",
+        "color": "#7c5a40",
+        "breakup": {
+          "noise": {
+            "amount": 0.06,
+            "scale": 5
+          },
+          "roughnessVariation": 0.06
+        }
+      },
+      "position": [
+        0,
+        0.9,
+        0.55
+      ],
+      "rotation": [
+        0,
+        0,
+        -4
+      ],
+      "parent": "boat",
+      "castShadow": true
+    },
+    {
+      "name": "boardwalk_plank",
+      "type": "box",
+      "params": [
+        0.85,
+        0.06,
+        0.34
+      ],
+      "material": {
+        "preset": "wood",
+        "color": "#9a7a54",
+        "breakup": {
+          "noise": {
+            "amount": 0.07,
+            "scale": 4
+          },
+          "roughnessVariation": 0.07
+        }
+      },
+      "position": [
+        0,
+        0.05,
+        0
+      ],
+      "parent": "scene_root",
+      "comment": "Path array + jitter + per-instance ground snap \u2014 the boardwalk hugs the dune",
+      "modifiers": {
+        "array": {
+          "path": [
+            [
+              -3.2,
+              0,
+              0.6
+            ],
+            [
+              -1.4,
+              0,
+              1.1
+            ],
+            [
+              0.6,
+              0,
+              1.3
+            ],
+            [
+              2.4,
+              0,
+              1.6
+            ],
+            [
+              3.6,
+              0,
+              1.9
+            ]
+          ],
+          "count": 12,
+          "orient": true,
+          "snapToGround": true,
+          "jitter": {
+            "rotation": [
+              0,
+              4,
+              0
+            ],
+            "offset": [
+              0.03,
+              0,
+              0.03
+            ],
+            "tone": 0.08
+          },
+          "seed": 11
+        }
+      },
+      "groundOffset": 0.02,
+      "castShadow": true
+    },
+    {
+      "name": "lantern_line",
+      "type": "module",
+      "src": "lantern-post",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "parent": "scene_root",
+      "modifiers": {
+        "array": {
+          "path": [
+            [
+              -3.9,
+              0,
+              -0.4
+            ],
+            [
+              -0.4,
+              0,
+              0.2
+            ],
+            [
+              3.1,
+              0,
+              0.7
+            ]
+          ],
+          "count": 3,
+          "orient": true,
+          "snapToGround": true,
+          "jitter": {
+            "rotation": [
+              0,
+              8,
+              0
+            ],
+            "scale": 0.06
+          },
+          "seed": 5
+        }
+      },
+      "castShadow": true
+    },
+    {
+      "name": "hut",
+      "type": "group",
+      "position": [
+        -5.2,
+        0,
+        -2.6
+      ],
+      "rotation": [
+        0,
+        32,
+        0
+      ],
+      "parent": "scene_root",
+      "snapToGround": true
+    },
+    {
+      "name": "hut_walls",
+      "type": "csg",
+      "output": "shell",
+      "comment": "CSG cutouts + triplanar detail + curvature wear on the cut edges",
+      "shapes": {
+        "block": {
+          "type": "box",
+          "size": [
+            2.6,
+            1.9,
+            2.1
+          ],
+          "position": [
+            0,
+            0.95,
+            0
+          ]
+        },
+        "cavity": {
+          "type": "box",
+          "size": [
+            2.3,
+            1.7,
+            1.8
+          ],
+          "position": [
+            0,
+            1.0,
+            0
+          ]
+        },
+        "door": {
+          "type": "box",
+          "size": [
+            0.75,
+            1.45,
+            0.5
+          ],
+          "position": [
+            0.6,
+            0.72,
+            1.0
+          ]
+        },
+        "window": {
+          "type": "box",
+          "size": [
+            0.6,
+            0.55,
+            0.5
+          ],
+          "position": [
+            -0.55,
+            1.15,
+            1.0
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "subtract",
+          "a": "block",
+          "b": "cavity",
+          "result": "hollow"
+        },
+        {
+          "op": "subtract",
+          "a": "hollow",
+          "b": "door",
+          "result": "cut"
+        },
+        {
+          "op": "subtract",
+          "a": "cut",
+          "b": "window",
+          "result": "shell"
+        }
+      ],
+      "material": {
+        "color": "#c2a883",
+        "roughness": 0.85,
+        "flatShading": true,
+        "detail": {
+          "scale": 1.8,
+          "amount": 0.2
+        },
+        "breakup": {
+          "noise": {
+            "amount": 0.06,
+            "scale": 3
+          },
+          "roughnessVariation": 0.07,
+          "edgeWear": {
+            "amount": 0.22,
+            "color": "#e2d2b0",
+            "mode": "curvature"
+          }
+        }
+      },
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "parent": "hut",
+      "castShadow": true,
+      "receiveShadow": true
+    },
+    {
+      "name": "hut_roof",
+      "type": "pyramid",
+      "params": [
+        2.5,
+        1.0
+      ],
+      "material": {
+        "preset": "wood",
+        "color": "#7a5b46",
+        "breakup": {
+          "noise": {
+            "amount": 0.07,
+            "scale": 4
+          }
+        }
+      },
+      "position": [
+        0,
+        2.28,
+        0
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "parent": "hut",
+      "castShadow": true
+    },
+    {
+      "name": "stovepipe",
+      "type": "cylinder",
+      "params": [
+        0.09,
+        0.09,
+        1.1,
+        8
+      ],
+      "options": {
+        "heightSegments": 10
+      },
+      "deform": {
+        "bend": {
+          "angle": 38,
+          "axis": "x"
+        }
+      },
+      "material": {
+        "preset": "painted-metal",
+        "color": "#5f5852",
+        "breakup": {
+          "noise": {
+            "amount": 0.06,
+            "scale": 5
+          },
+          "edgeWear": {
+            "amount": 0.16,
+            "color": "#a89478",
+            "mode": "curvature"
+          }
+        }
+      },
+      "position": [
+        -0.7,
+        2.5,
+        -0.4
+      ],
+      "parent": "hut",
+      "castShadow": true
+    },
+    {
+      "name": "palm_near",
+      "type": "group",
+      "position": [
+        -7.2,
+        0,
+        0.9
+      ],
+      "parent": "scene_root",
+      "snapToGround": true
+    },
+    {
+      "name": "palm_near_trunk",
+      "type": "cylinder",
+      "params": [
+        0.11,
+        0.2,
+        2.8,
+        7
+      ],
+      "options": {
+        "heightSegments": 12
+      },
+      "deform": {
+        "taper": 0.6,
+        "twist": 14,
+        "bend": {
+          "angle": 22,
+          "axis": "z"
+        }
+      },
+      "material": {
+        "color": "#7c5f44",
+        "roughness": 0.9,
+        "flatShading": true,
+        "breakup": {
+          "noise": {
+            "amount": 0.08,
+            "scale": 5
+          }
+        }
+      },
+      "position": [
+        0,
+        1.4,
+        0
+      ],
+      "parent": "palm_near",
+      "castShadow": true
+    },
+    {
+      "name": "palm_near_canopy",
+      "type": "canopy",
+      "params": [
+        1.15,
+        6,
+        4
+      ],
+      "material": {
+        "color": "#5f7a45",
+        "roughness": 0.9,
+        "flatShading": true,
+        "breakup": {
+          "noise": {
+            "amount": 0.06,
+            "scale": 5
+          },
+          "roughnessVariation": 0.06
+        }
+      },
+      "position": [
+        -0.55,
+        2.9,
+        0
+      ],
+      "parent": "palm_near",
+      "castShadow": true
+    },
+    {
+      "name": "palm_far",
+      "type": "group",
+      "position": [
+        1.8,
+        0,
+        -4.6
+      ],
+      "rotation": [
+        0,
+        140,
+        0
+      ],
+      "parent": "scene_root",
+      "snapToGround": true
+    },
+    {
+      "name": "palm_far_trunk",
+      "type": "cylinder",
+      "params": [
+        0.09,
+        0.17,
+        2.3,
+        7
+      ],
+      "options": {
+        "heightSegments": 12
+      },
+      "deform": {
+        "taper": 0.6,
+        "twist": -10,
+        "bend": {
+          "angle": 17,
+          "axis": "z"
+        }
+      },
+      "material": {
+        "color": "#84664a",
+        "roughness": 0.9,
+        "flatShading": true,
+        "breakup": {
+          "noise": {
+            "amount": 0.08,
+            "scale": 5
+          }
+        }
+      },
+      "position": [
+        0,
+        1.15,
+        0
+      ],
+      "parent": "palm_far",
+      "castShadow": true
+    },
+    {
+      "name": "palm_far_canopy",
+      "type": "canopy",
+      "params": [
+        0.95,
+        5,
+        7
+      ],
+      "material": {
+        "color": "#688348",
+        "roughness": 0.9,
+        "flatShading": true,
+        "breakup": {
+          "noise": {
+            "amount": 0.06,
+            "scale": 5
+          },
+          "roughnessVariation": 0.06
+        }
+      },
+      "position": [
+        -0.4,
+        2.35,
+        0
+      ],
+      "parent": "palm_far",
+      "castShadow": true
+    },
+    {
+      "name": "cargo",
+      "type": "roundedBox",
+      "params": [
+        0.62,
+        0.62,
+        0.62,
+        0.04,
+        2
+      ],
+      "material": {
+        "preset": "painted-metal",
+        "color": "#9a8348",
+        "breakup": {
+          "noise": {
+            "amount": 0.07,
+            "scale": 4
+          },
+          "roughnessVariation": 0.07
+        },
+        "edgeWear": {
+          "amount": 0.14,
+          "color": "#d0bd8c"
+        }
+      },
+      "position": [
+        -2.4,
+        0,
+        -1.3
+      ],
+      "parent": "scene_root",
+      "modifiers": {
+        "array": {
+          "count": [
+            3,
+            1,
+            2
+          ],
+          "offset": [
+            0.68,
+            0,
+            0.7
+          ],
+          "jitter": {
+            "rotation": [
+              0,
+              14,
+              0
+            ],
+            "scale": 0.1,
+            "offset": [
+              0.04,
+              0,
+              0.04
+            ],
+            "tone": 0.1
+          },
+          "seed": 7,
+          "snapToGround": true
+        }
+      },
+      "castShadow": true
+    },
+    {
+      "name": "barrel",
+      "type": "cylinder",
+      "params": [
+        0.26,
+        0.3,
+        0.6,
+        10
+      ],
+      "material": {
+        "preset": "wood",
+        "color": "#8a6748",
+        "breakup": {
+          "noise": {
+            "amount": 0.07,
+            "scale": 4
+          },
+          "roughnessVariation": 0.07
+        }
+      },
+      "position": [
+        -3.9,
+        0,
+        -0.9
+      ],
+      "parent": "scene_root",
+      "modifiers": {
+        "array": {
+          "count": 3,
+          "offset": [
+            0.62,
+            0,
+            0.2
+          ],
+          "jitter": {
+            "rotation": [
+              0,
+              30,
+              0
+            ],
+            "scale": 0.08,
+            "offset": [
+              0.05,
+              0,
+              0.08
+            ],
+            "tone": 0.08
+          },
+          "seed": 9,
+          "snapToGround": true
+        }
+      },
+      "castShadow": true
+    },
+    {
+      "name": "seat_crate",
+      "type": "roundedBox",
+      "params": [
+        0.6,
+        0.5,
+        0.6,
+        0.03,
+        2
+      ],
+      "material": {
+        "preset": "wood",
+        "color": "#84654a",
+        "breakup": {
+          "noise": {
+            "amount": 0.06,
+            "scale": 4
+          }
+        }
+      },
+      "position": [
+        -1.3,
+        0,
+        -0.5
+      ],
+      "rotation": [
+        0,
+        15,
+        0
+      ],
+      "parent": "scene_root",
+      "snapToGround": true,
+      "castShadow": true,
+      "receiveShadow": true
+    },
+    {
+      "name": "worker_sitting",
+      "type": "module",
+      "src": "worker",
+      "pose": "sitting",
+      "position": [
+        -1.3,
+        0,
+        -0.38
+      ],
+      "rotation": [
+        0,
+        12,
+        0
+      ],
+      "parent": "scene_root",
+      "snapToGround": true,
+      "groundOffset": 0.0
+    },
+    {
+      "name": "worker_waving",
+      "type": "module",
+      "src": "worker",
+      "pose": "waving",
+      "position": [
+        2.9,
+        0,
+        2.1
+      ],
+      "rotation": [
+        0,
+        -140,
+        0
+      ],
+      "parent": "scene_root",
+      "snapToGround": true
+    },
+    {
+      "name": "campfire",
+      "type": "group",
+      "position": [
+        -0.6,
+        0,
+        -1.7
+      ],
+      "parent": "scene_root",
+      "snapToGround": true
+    },
+    {
+      "name": "fire_stone",
+      "type": "rock",
+      "params": [
+        0.14,
+        2,
+        0.35
+      ],
+      "material": {
+        "color": "#8a7d6c",
+        "roughness": 0.9,
+        "flatShading": true,
+        "breakup": {
+          "noise": {
+            "amount": 0.06,
+            "scale": 5
+          },
+          "roughnessVariation": 0.06
+        }
+      },
+      "position": [
+        0.3,
+        0.06,
+        0
+      ],
+      "modifiers": {
+        "array": {
+          "count": 6,
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "path": [
+            [
+              0.3,
+              0.05,
+              0
+            ],
+            [
+              0.15,
+              0.05,
+              0.26
+            ],
+            [
+              -0.15,
+              0.05,
+              0.26
+            ],
+            [
+              -0.3,
+              0.05,
+              0
+            ],
+            [
+              -0.15,
+              0.05,
+              -0.26
+            ],
+            [
+              0.15,
+              0.05,
+              -0.26
+            ]
+          ],
+          "orient": false,
+          "jitter": {
+            "rotation": [
+              0,
+              60,
+              0
+            ],
+            "scale": 0.2
+          },
+          "seed": 4
+        }
+      },
+      "parent": "campfire",
+      "castShadow": true
+    },
+    {
+      "name": "embers",
+      "type": "sphere",
+      "params": [
+        0.12,
+        8
+      ],
+      "material": {
+        "preset": "glow",
+        "color": "#ff7a36",
+        "emissiveIntensity": 2.6
+      },
+      "position": [
+        0,
+        0.08,
+        0
+      ],
+      "scale": [
+        1,
+        0.5,
+        1
+      ],
+      "parent": "campfire"
+    },
+    {
+      "name": "fire_light",
+      "type": "pointLight",
+      "params": [
+        1.1,
+        6,
+        1.8,
+        false
+      ],
+      "material": {
+        "color": "#ff8a42",
+        "breakup": {
+          "noise": {
+            "amount": 0.06,
+            "scale": 5
+          },
+          "roughnessVariation": 0.06
+        }
+      },
+      "position": [
+        0,
+        0.5,
+        0
+      ],
+      "parent": "campfire"
+    },
+    {
+      "name": "shore_rock",
+      "type": "rock",
+      "params": [
+        0.3,
+        3,
+        0.4
+      ],
+      "material": {
+        "color": "#97897a",
+        "roughness": 0.9,
+        "flatShading": true,
+        "breakup": {
+          "noise": {
+            "amount": 0.06,
+            "scale": 3
+          }
+        }
+      },
+      "position": [
+        0,
+        0.1,
+        0
+      ],
+      "parent": "scene_root",
+      "modifiers": {
+        "scatter": {
+          "count": 13,
+          "bounds": [
+            [
+              -9,
+              7
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              -6,
+              4
+            ]
+          ],
+          "scaleVariation": 0.5,
+          "randomRotation": true,
+          "seed": 42,
+          "snapToGround": true
+        }
+      },
+      "castShadow": true
+    },
+    {
+      "name": "dune_grass",
+      "type": "cone",
+      "params": [
+        0.14,
+        0.4,
+        5
+      ],
+      "material": {
+        "color": "#8a8a52",
+        "roughness": 0.95,
+        "flatShading": true,
+        "breakup": {
+          "noise": {
+            "amount": 0.06,
+            "scale": 5
+          },
+          "roughnessVariation": 0.06
+        }
+      },
+      "position": [
+        0,
+        0.18,
+        0
+      ],
+      "parent": "scene_root",
+      "modifiers": {
+        "scatter": {
+          "count": 26,
+          "bounds": [
+            [
+              -9,
+              6
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              -6.5,
+              3
+            ]
+          ],
+          "scaleVariation": 0.35,
+          "randomRotation": true,
+          "seed": 21,
+          "snapToGround": true
+        }
+      }
+    }
+  ]
+}
