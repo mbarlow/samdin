@@ -18,8 +18,10 @@ import {
 import { buildHeightfield } from './terrain/heightfield.js';
 import { buildMarchingCubes } from './terrain/marching-cubes.js';
 import { buildClothDrape } from './terrain/cloth-drape.js';
+import { buildWaterLevel } from './terrain/water.js';
 
 const TERRAIN_MESH_NAME = '__terrain__';
+const WATER_MESH_NAME = '__water__';
 const ROLE_ENV = 'environment-primitive';
 const ROLE_TERRAIN = 'generated-terrain';
 
@@ -84,6 +86,18 @@ export function applyTerrainCompositor(model, spec) {
   }
 
   model.add(terrainMesh);
+
+  // Water rides the composited terrain: a level plane clipped to wherever
+  // the drape sits below it, with a shoreline tint band (#96).
+  if (terrainSpec.water) {
+    const waterMesh = buildWaterLevel(terrainMesh, terrainSpec);
+    if (waterMesh) {
+      waterMesh.name = WATER_MESH_NAME;
+      // Same role as the terrain so display-mode toggling treats them as one.
+      waterMesh.userData.role = ROLE_TERRAIN;
+      model.add(waterMesh);
+    }
+  }
 
   // Stash initial display mode on the model for the viewer to read.
   model.userData.terrainDisplay = terrainSpec.display || 'terrain';

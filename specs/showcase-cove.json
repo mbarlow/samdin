@@ -1,6 +1,6 @@
 {
   "name": "showcase-cove",
-  "description": "Capability showcase two \u2014 dusk shoreline camp. Every 2026-07 feature is load-bearing: a lofted fishing boat (type: loft, curvature edge wear, mirrored oars), palm trunks and a stovepipe shaped by deformers, a boardwalk and lantern line arrayed along curved paths with per-instance jitter, cargo grids jittered out of clone reads, posed workers (sitting / waving) from one articulated module, a CSG hut with triplanar-detail walls, and everything snapToGround-ed onto a heightfield cove with seeded, snapped scatter. Probe-clean by construction.",
+  "description": "Capability showcase two — dusk shoreline camp. Every 2026-07 feature is load-bearing: a lofted fishing boat (type: loft, curvature edge wear, mirrored oars), palm trunks and a stovepipe shaped by deformers, a boardwalk and lantern line arrayed along curved paths with per-instance jitter, cargo grids jittered out of clone reads, posed workers (sitting / waving) from one articulated module, a CSG hut with triplanar-detail walls, and everything snapToGround-ed onto a heightfield cove with seeded, snapped scatter. Probe-clean by construction.",
   "root": "scene_root",
   "poses": {
     "sitting": {
@@ -173,6 +173,16 @@
           "padding": 0.6,
           "skirt": 1.2
         }
+      },
+      "water": {
+        "level": -0.05,
+        "color": "#2a5f6d",
+        "shoreline": {
+          "width": 0.35,
+          "color": "#cfe4de"
+        },
+        "opacity": 0.92,
+        "resolution": 160
       }
     }
   },
@@ -985,43 +995,6 @@
       "category": "environment"
     },
     {
-      "name": "lagoon",
-      "type": "rock",
-      "params": [
-        3.6,
-        8,
-        0.35
-      ],
-      "material": {
-        "color": "#2a5f6d",
-        "roughness": 0.32,
-        "metalness": 0.05,
-        "flatShading": true,
-        "breakup": {
-          "noise": {
-            "amount": 0.03,
-            "scale": 2
-          },
-          "roughnessVariation": 0.06
-        }
-      },
-      "position": [
-        7.0,
-        0,
-        4.4
-      ],
-      "parent": "scene_root",
-      "snapToGround": true,
-      "groundOffset": 0.42,
-      "castShadow": false,
-      "receiveShadow": true,
-      "scale": [
-        1.42,
-        0.05,
-        1.12
-      ]
-    },
-    {
       "name": "boat",
       "type": "group",
       "position": [
@@ -1434,7 +1407,7 @@
         0
       ],
       "parent": "scene_root",
-      "comment": "Path array + jitter + per-instance ground snap \u2014 the boardwalk hugs the dune",
+      "comment": "Path array + jitter + per-instance ground snap — the boardwalk hugs the dune",
       "modifiers": {
         "array": {
           "path": [

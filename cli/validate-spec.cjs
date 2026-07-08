@@ -348,6 +348,44 @@ function validateTerrainSettings(terrain, issues, warnings) {
   if (terrain.methodOptions !== undefined && typeof terrain.methodOptions !== 'object') {
     issues.push('scene.terrain.methodOptions must be an object');
   }
+
+  if (terrain.water !== undefined) {
+    const water = terrain.water;
+    if (typeof water !== 'object' || water === null) {
+      issues.push('scene.terrain.water must be an object');
+      return;
+    }
+    if (typeof water.level !== 'number') {
+      issues.push('scene.terrain.water.level is required and must be a number');
+    }
+    if (water.color !== undefined && typeof water.color !== 'string') {
+      issues.push('scene.terrain.water.color must be a color string');
+    }
+    if (water.opacity !== undefined &&
+        (typeof water.opacity !== 'number' || water.opacity < 0 || water.opacity > 1)) {
+      issues.push('scene.terrain.water.opacity must be a number in [0, 1]');
+    }
+    if (water.roughness !== undefined && typeof water.roughness !== 'number') {
+      issues.push('scene.terrain.water.roughness must be a number');
+    }
+    if (water.resolution !== undefined &&
+        (typeof water.resolution !== 'number' || water.resolution < 8 || water.resolution > 512)) {
+      issues.push('scene.terrain.water.resolution must be a number in [8, 512]');
+    }
+    if (water.shoreline !== undefined) {
+      if (typeof water.shoreline !== 'object' || water.shoreline === null) {
+        issues.push('scene.terrain.water.shoreline must be an object');
+      } else {
+        if (water.shoreline.width !== undefined &&
+            (typeof water.shoreline.width !== 'number' || water.shoreline.width < 0)) {
+          issues.push('scene.terrain.water.shoreline.width must be a non-negative number');
+        }
+        if (water.shoreline.color !== undefined && typeof water.shoreline.color !== 'string') {
+          issues.push('scene.terrain.water.shoreline.color must be a color string');
+        }
+      }
+    }
+  }
 }
 
 function validateDeform(deform, prefix, issues) {
