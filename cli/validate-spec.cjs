@@ -510,6 +510,20 @@ function validatePartCollection(parts, issues, warnings, scopeLabel = 'spec') {
     if (part.deform !== undefined) {
       validateDeform(part.deform, prefix, issues);
     }
+
+    if (part.snapToGround !== undefined && typeof part.snapToGround !== 'boolean') {
+      issues.push(`${prefix} snapToGround must be a boolean`);
+    }
+    if (part.groundOffset !== undefined && typeof part.groundOffset !== 'number') {
+      issues.push(`${prefix} groundOffset must be a number`);
+    }
+    const arrayMod = part.array || part.modifiers?.array;
+    if (arrayMod?.path !== undefined) {
+      if (!Array.isArray(arrayMod.path) || arrayMod.path.length < 2 ||
+          arrayMod.path.some((pt) => !Array.isArray(pt) || pt.length !== 3)) {
+        issues.push(`${prefix} array.path must be an array of at least 2 [x, y, z] waypoints`);
+      }
+    }
   }
 
   return flatParts;

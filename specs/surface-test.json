@@ -1,0 +1,413 @@
+{
+  "name": "surface-test",
+  "description": "Surface-aware placement test (#79) \u2014 a hilly heightfield with: rocks scattered with snapToGround (they land ON the slopes), fence posts arrayed along a curved path with tangent orientation and ground snap, and a supply crate snapped onto a mound it would otherwise float above. Toggle Terrain display to 'primitives' to see the env parts that shape the drape.",
+  "root": "scene_root",
+  "scene": {
+    "quality": "standard",
+    "background": {
+      "type": "gradient",
+      "top": "#31404a",
+      "bottom": "#131a20"
+    },
+    "lighting": {
+      "preset": "studio",
+      "environment": "studio",
+      "envMapIntensity": 0.9
+    },
+    "camera": {
+      "preset": "threeQuarter",
+      "fov": 34,
+      "distanceMultiplier": 0.55,
+      "targetOffset": [
+        0,
+        0.5,
+        0
+      ]
+    },
+    "postfx": {
+      "vignette": {
+        "enabled": true,
+        "intensity": 0.15,
+        "softness": 0.7
+      },
+      "fxaa": true
+    },
+    "terrain": {
+      "enabled": true,
+      "method": "heightfield",
+      "display": "terrain",
+      "bounds": "auto",
+      "resolution": 96,
+      "smoothing": 0.3,
+      "material": {
+        "color": "#5e7052",
+        "metalness": 0.0,
+        "roughness": 0.95,
+        "flatShading": true
+      },
+      "methodOptions": {
+        "heightfield": {
+          "padding": 0.6,
+          "skirt": 1.0
+        }
+      }
+    }
+  },
+  "parts": [
+    {
+      "name": "scene_root",
+      "type": "group",
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "env",
+      "type": "group",
+      "parent": "scene_root",
+      "category": "environment"
+    },
+    {
+      "name": "ground_plate",
+      "type": "box",
+      "params": [
+        16,
+        0.2,
+        12
+      ],
+      "material": {
+        "color": "#5e7052",
+        "roughness": 0.95,
+        "flatShading": true,
+        "breakup": {
+          "noise": {
+            "amount": 0.05,
+            "scale": 8
+          }
+        }
+      },
+      "position": [
+        0,
+        -0.1,
+        0
+      ],
+      "parent": "env",
+      "category": "environment",
+      "receiveShadow": true
+    },
+    {
+      "name": "hill_west",
+      "type": "sphere",
+      "params": [
+        3.2,
+        10
+      ],
+      "material": {
+        "color": "#57694c",
+        "roughness": 0.95,
+        "flatShading": true
+      },
+      "position": [
+        -4.5,
+        -0.6,
+        -1.5
+      ],
+      "scale": [
+        1,
+        0.55,
+        1
+      ],
+      "parent": "env",
+      "category": "environment"
+    },
+    {
+      "name": "hill_east",
+      "type": "sphere",
+      "params": [
+        2.6,
+        10
+      ],
+      "material": {
+        "color": "#617355",
+        "roughness": 0.95,
+        "flatShading": true
+      },
+      "position": [
+        4.8,
+        -0.5,
+        1.8
+      ],
+      "scale": [
+        1,
+        0.5,
+        1
+      ],
+      "parent": "env",
+      "category": "environment"
+    },
+    {
+      "name": "ridge_back",
+      "type": "sphere",
+      "params": [
+        2.2,
+        9
+      ],
+      "material": {
+        "color": "#556748",
+        "roughness": 0.95,
+        "flatShading": true
+      },
+      "position": [
+        1.0,
+        -0.4,
+        -4.2
+      ],
+      "scale": [
+        1.4,
+        0.6,
+        1
+      ],
+      "parent": "env",
+      "category": "environment"
+    },
+    {
+      "name": "snapped_rock",
+      "type": "rock",
+      "params": [
+        0.32,
+        5,
+        0.4
+      ],
+      "material": {
+        "color": "#7d746a",
+        "roughness": 0.9,
+        "flatShading": true
+      },
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "parent": "scene_root",
+      "comment": "Seeded scatter + per-instance ground snap \u2014 rocks land on the hillsides",
+      "modifiers": {
+        "scatter": {
+          "count": 14,
+          "bounds": [
+            [
+              -7,
+              7
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              -5,
+              5
+            ]
+          ],
+          "scaleVariation": 0.45,
+          "randomRotation": true,
+          "seed": 12,
+          "snapToGround": true
+        }
+      },
+      "castShadow": true
+    },
+    {
+      "name": "fence_post",
+      "type": "box",
+      "params": [
+        0.1,
+        0.9,
+        0.1
+      ],
+      "material": {
+        "preset": "wood",
+        "color": "#6a5340",
+        "breakup": {
+          "noise": {
+            "amount": 0.07,
+            "scale": 5
+          }
+        }
+      },
+      "position": [
+        0,
+        0.45,
+        0
+      ],
+      "pivot": "bottom",
+      "parent": "scene_root",
+      "comment": "Array along a curved path, tangent-oriented, snapped to the terrain",
+      "modifiers": {
+        "array": {
+          "path": [
+            [
+              -6.5,
+              0,
+              4.2
+            ],
+            [
+              -3,
+              0,
+              2.6
+            ],
+            [
+              0.5,
+              0,
+              3.4
+            ],
+            [
+              3.8,
+              0,
+              2.2
+            ],
+            [
+              6.3,
+              0,
+              3.8
+            ]
+          ],
+          "count": 10,
+          "orient": true,
+          "snapToGround": true
+        }
+      },
+      "castShadow": true
+    },
+    {
+      "name": "fence_rail_hint",
+      "type": "box",
+      "params": [
+        0.06,
+        0.06,
+        1.55
+      ],
+      "material": {
+        "preset": "wood",
+        "color": "#7a6350"
+      },
+      "position": [
+        0,
+        0.72,
+        0
+      ],
+      "parent": "scene_root",
+      "modifiers": {
+        "array": {
+          "path": [
+            [
+              -6.5,
+              0,
+              4.2
+            ],
+            [
+              -3,
+              0,
+              2.6
+            ],
+            [
+              0.5,
+              0,
+              3.4
+            ],
+            [
+              3.8,
+              0,
+              2.2
+            ],
+            [
+              6.3,
+              0,
+              3.8
+            ]
+          ],
+          "count": 10,
+          "orient": true,
+          "snapToGround": true
+        }
+      },
+      "groundOffset": 0.62,
+      "castShadow": true
+    },
+    {
+      "name": "hero_crate",
+      "type": "roundedBox",
+      "params": [
+        0.7,
+        0.7,
+        0.7,
+        0.04,
+        2
+      ],
+      "material": {
+        "preset": "painted-metal",
+        "color": "#a8862e",
+        "breakup": {
+          "noise": {
+            "amount": 0.07,
+            "scale": 4
+          },
+          "roughnessVariation": 0.07
+        },
+        "edgeWear": {
+          "amount": 0.14,
+          "color": "#d9c9a0"
+        }
+      },
+      "position": [
+        -4.5,
+        0,
+        -1.5
+      ],
+      "rotation": [
+        0,
+        20,
+        0
+      ],
+      "parent": "scene_root",
+      "comment": "Sits on the west hill crest \u2014 snapToGround lifts it out of the slope",
+      "snapToGround": true,
+      "castShadow": true
+    },
+    {
+      "name": "unsnapped_crate",
+      "type": "roundedBox",
+      "params": [
+        0.7,
+        0.7,
+        0.7,
+        0.04,
+        2
+      ],
+      "material": {
+        "preset": "painted-metal",
+        "color": "#8f3e36",
+        "breakup": {
+          "noise": {
+            "amount": 0.07,
+            "scale": 4
+          },
+          "roughnessVariation": 0.07
+        }
+      },
+      "position": [
+        4.8,
+        0.35,
+        1.8
+      ],
+      "rotation": [
+        0,
+        -15,
+        0
+      ],
+      "parent": "scene_root",
+      "comment": "Control: NOT snapped \u2014 authored at y=0.35, buried in the east hill",
+      "castShadow": true
+    }
+  ]
+}
