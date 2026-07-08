@@ -310,6 +310,7 @@ class ModelBuilder {
    */
   async buildParts(spec) {
     const assembler = new ModelAssembler();
+    this.pendingPoses = [];
 
     if (!Array.isArray(spec.parts)) {
       console.error('[Builder] Parts-based spec is missing a parts array:', spec.name);
@@ -342,10 +343,47 @@ class ModelBuilder {
     model.userData.spec = spec;
     model.userData.parts = assembler.getAnimatableParts();
 
+    this.applyPoses(model, spec);
     applyTerrainCompositor(model, spec);
     this.applyGroundSnap(model);
 
     return model;
+  }
+
+  /**
+   * Named poses (#82): spec-level `poses: { name: { jointName: [rx,ry,rz] } }`
+   * with degrees applied ADDITIVELY to the joint group's authored rotation.
+   * Activate with spec-level `pose: "name"`, or per module/prefab placement
+   * (`pose` on the placement; joint names are then resolved with the
+   * placement's name prefix). Unknown joints warn, don't fail.
+   */
+  applyPoses(model, spec) {
+    const poses = spec.poses || {};
+    const jobs = [];
+    if (spec.pose) {
+      if (poses[spec.pose]) jobs.push({ prefix: '', def: poses[spec.pose] });
+      else console.warn(`[pose] unknown spec pose: ${spec.pose}`);
+    }
+    for (const pending of this.pendingPoses || []) {
+      if (poses[pending.pose]) jobs.push({ prefix: pending.prefix, def: poses[pending.pose] });
+      else console.warn(`[pose] unknown pose "${pending.pose}" on placement ${pending.prefix}`);
+    }
+    if (!jobs.length) return;
+
+    for (const job of jobs) {
+      for (const [joint, rot] of Object.entries(job.def)) {
+        const nodeName = job.prefix ? `${job.prefix}_${joint}` : joint;
+        const node = model.getObjectByName(nodeName);
+        if (!node) {
+          console.warn(`[pose] joint not found: ${nodeName}`);
+          continue;
+        }
+        node.rotation.x += THREE.MathUtils.degToRad(rot[0] || 0);
+        node.rotation.y += THREE.MathUtils.degToRad(rot[1] || 0);
+        node.rotation.z += THREE.MathUtils.degToRad(rot[2] || 0);
+      }
+    }
+    model.updateMatrixWorld(true);
   }
 
   /**
@@ -454,6 +492,7 @@ class ModelBuilder {
           continue;
         }
 
+        if (part.pose) (this.pendingPoses ||= []).push({ prefix: part.name, pose: part.pose });
         const moduleParts = this.instantiateComposite(part, moduleDef, part.parent);
         const resolvedParts = await this.resolveParts(moduleParts, spec, depth + 1);
         expanded.push(...resolvedParts);
@@ -461,6 +500,7 @@ class ModelBuilder {
       }
 
       if (part.type === 'prefab') {
+        if (part.pose) (this.pendingPoses ||= []).push({ prefix: part.name, pose: part.pose });
         await this.loadPrefab(part.src);
         const prefab = this.prefabs.get(part.src);
         const prefabParts = this.instantiateComposite(part, prefab, part.parent);
