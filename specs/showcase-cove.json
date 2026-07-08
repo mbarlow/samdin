@@ -1253,7 +1253,7 @@
         2.5
       ],
       "material": {
-        "color": "#2e241a",
+        "color": "#4a3b28",
         "roughness": 0.9,
         "flatShading": true,
         "breakup": {
