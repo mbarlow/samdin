@@ -35,3 +35,22 @@ The inspector captures the spec-defined first camera as `*-specCamera.png` befor
 - [`specs/clinic.json`](../specs/clinic.json) — Clinic interior scene
 - [`specs/motorcycle-street.json`](../specs/motorcycle-street.json) — Motorcycle on a street scene
 - [`prefabs/prefab-test.json`](../prefabs/prefab-test.json) — Street scene with prefabs
+
+
+## Rendered-space linting (`cli/probe.js`)
+
+`validate-spec.cjs` checks spec-space; the probe checks what actually builds and renders. It loads the spec headless and emits machine-readable findings:
+
+```bash
+node cli/probe.js specs/my-scene.json [--json findings.json]
+# or: make probe SPEC=specs/my-scene.json
+```
+
+| Check | Finds | Severity |
+|-------|-------|----------|
+| `contact` | root-level parts / modifier instances floating above or buried in the ground (terrain → env meshes → y=0); parts with authored `snapToGround` are skipped | warning |
+| `albedo` | materials whose effective albedo (`color × mean vertex color`) renders near-black or blown | error / warning |
+| `clones` | instance families (≥ 4) with zero rotation and scale variance — clone read | warning |
+| `luma` | render histogram: crushed-shadow / blown-highlight pixel share | warning |
+
+Findings are `{ severity, check, part, value, hint }`; exit code 1 on errors so it can gate CI. First run caught a real latent bug: a hidden env plate whose color had been double-darkened by an authoring workaround — invisible in every screenshot pass.
