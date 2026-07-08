@@ -1,0 +1,68 @@
+{
+  "name": "overlap-test",
+  "description": "Probe fixture for the overlap check: crate_a × crate_b interpenetrate (expected finding); the lamp assembly's internal containment, the plank array family, and the clear crate must stay silent.",
+  "root": "overlap_root",
+  "parts": [
+    {
+      "name": "overlap_root",
+      "type": "group",
+      "position": [0, 0, 0]
+    },
+    {
+      "name": "crate_a",
+      "type": "box",
+      "params": [1, 1, 1],
+      "material": { "color": "#8a6f4d", "roughness": 0.8 },
+      "position": [0, 0.5, 0],
+      "parent": "overlap_root"
+    },
+    {
+      "name": "crate_b",
+      "type": "box",
+      "params": [1, 1, 1],
+      "material": { "color": "#6d7a5a", "roughness": 0.8 },
+      "position": [0.4, 0.5, 0.3],
+      "parent": "overlap_root"
+    },
+    {
+      "name": "crate_clear",
+      "type": "box",
+      "params": [1, 1, 1],
+      "material": { "color": "#5a6d7a", "roughness": 0.8 },
+      "position": [3, 0.5, 0],
+      "parent": "overlap_root"
+    },
+    {
+      "name": "lamp",
+      "type": "group",
+      "position": [-3, 0, 0],
+      "parent": "overlap_root"
+    },
+    {
+      "name": "lamp_post",
+      "type": "cylinder",
+      "params": [0.06, 0.08, 2, 8],
+      "material": { "color": "#4a4f57", "metalness": 0.6, "roughness": 0.5 },
+      "position": [0, 1, 0],
+      "parent": "lamp"
+    },
+    {
+      "name": "lamp_cage",
+      "type": "box",
+      "params": [0.4, 0.5, 0.4],
+      "material": { "color": "#5c626b", "metalness": 0.5, "roughness": 0.5 },
+      "position": [0, 1.8, 0],
+      "parent": "lamp",
+      "comment": "Interpenetrates the post on purpose — same assembly, must not flag"
+    },
+    {
+      "name": "plank",
+      "type": "box",
+      "params": [1, 0.06, 0.3],
+      "material": { "color": "#7a6248", "roughness": 0.85 },
+      "position": [0, 0.03, 3],
+      "parent": "overlap_root",
+      "modifiers": { "array": { "count": 3, "offset": [1.1, 0, 0], "jitter": { "rotation": [0, 4, 0], "scale": 0.05, "seed": 7 } } }
+    }
+  ]
+}

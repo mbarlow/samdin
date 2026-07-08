@@ -72,7 +72,7 @@ If the user does not specify, default to `standard` — this now matches the run
 5. Add material contrast and a `scene` block early enough to judge the asset in context.
 6. Validate with `node cli/validate-spec.cjs <spec.json>`. Run `node cli/validate-spec.cjs --strict <spec.json>` (or `make lint`) to surface quality-rule gaps — missing scene block, metals without environment lighting, un-varied clones, floating geometry, preset typos.
 7. Inspect with `node cli/inspect-model.js <spec.json> [out-dir] [port]` (out-dir defaults to `/tmp/samdin-inspect`; pass a `[port]` to run parallel inspections).
-8. Probe with `node cli/probe.js <spec.json>` (`make probe SPEC=...`) — rendered-space lint: ground-contact gaps, near-black/blown effective albedo, clone-read families, crushed/blown luma. Fix errors before judging screenshots; its findings are machine-precise where eyeballing fails (it caught a hidden double-darkened plate no screenshot pass saw).
+8. Probe with `node cli/probe.js <spec.json>` (`make probe SPEC=...`) — rendered-space lint: ground-contact gaps, near-black/blown effective albedo, clone-read families, crushed/blown luma, prop-vs-prop mesh interpenetration (overlap). Fix errors before judging screenshots; its findings are machine-precise where eyeballing fails (it caught a hidden double-darkened plate no screenshot pass saw).
 9. Revise from concrete screenshot + probe findings, not vague taste-only notes.
 10. If you touch the builder or a shared primitive, run `make golden` — it fingerprint-checks the quality-bar anchors so a change can't silently move their geometry. Rebless intended changes with `make golden-update`.
 

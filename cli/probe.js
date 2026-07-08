@@ -13,6 +13,9 @@
  *               zero scale variance → clone read
  *   luma      — specCamera render histogram: crushed-shadow / blown-highlight
  *               pixel share
+ *   overlap   — pairwise world-bbox interpenetration between prop-tier units
+ *               (root-level parts + modifier instances); intended containment
+ *               (same assembly / same instance family, env/terrain) is skipped
  *
  * Usage: node cli/probe.js <spec.json> [--json out.json] [--port 8768]
  * Exit codes: 0 clean/warnings only, 1 errors found, 2 harness failure.
@@ -196,6 +199,91 @@ async function analyzeInPage(specName) {
         value: members.length,
         hint: `${members.length} identical instances — add array jitter or scatter randomRotation/scaleVariation`
       });
+    }
+  }
+
+  // ── overlap: pairwise bbox interpenetration between prop units ──────
+  // Units are the root group's children: after modifier expansion, array/
+  // scatter instances land there as siblings (name_N / name_scatter_N), so
+  // one level covers root parts and instances alike. Parts inside the same
+  // assembly (a lantern's cage in its post) are never units, and instances
+  // of one family share a key — both "intended containment" skips for free.
+  //
+  // Broad phase compares unit union-boxes; the narrow phase compares the
+  // units' individual MESH boxes, because an assembly's union box is mostly
+  // empty space (a hut's bbox "contains" every rock near its porch). Emissive
+  // meshes don't count as solid — fog volumes, glow strips, and lamp discs
+  // interpenetrate by design. Mesh-bbox level is still deliberately coarse:
+  // lowpoly props ≈ their boxes; a tri-level phase can come later.
+  const famKey = (name) => {
+    const m = name.match(/^(.*?)(?:_scatter)?_(\d+)(?:_|$)/);
+    return m ? m[1] : name;
+  };
+  const solidMeshBoxes = (unitRoot) => {
+    const boxes = [];
+    unitRoot.traverse((o) => {
+      if (!o.isMesh || !o.geometry) return;
+      const mats = Array.isArray(o.material) ? o.material : [o.material];
+      if (mats.some((m) => m?.emissive && m.emissive.getHex() !== 0)) return;
+      o.geometry.computeBoundingBox();
+      if (!o.geometry.boundingBox || o.geometry.boundingBox.isEmpty()) return;
+      const box = o.geometry.boundingBox.clone().applyMatrix4(o.matrixWorld);
+      box.meshName = o.name || '(mesh)';
+      boxes.push(box);
+    });
+    return boxes;
+  };
+  const units = [];
+  for (const child of rootGroup.children) {
+    if (!child.name || child.name === '__terrain__') continue;
+    if (child.userData?.category === 'environment') continue;
+    const meshBoxes = solidMeshBoxes(child);
+    if (!meshBoxes.length) continue;
+    const union = meshBoxes.reduce((acc, b) => acc.union(b), meshBoxes[0].clone());
+    units.push({ name: child.name, fam: famKey(child.name), union, meshBoxes });
+  }
+  // Floor extents so flat props (planks, plates) don't divide by ~zero.
+  const volOf = (b) => Math.max(b.max.x - b.min.x, 0.02) *
+    Math.max(b.max.y - b.min.y, 0.02) * Math.max(b.max.z - b.min.z, 0.02);
+  const overlapFrac = (a, b) => {
+    const ox = Math.min(a.max.x, b.max.x) - Math.max(a.min.x, b.min.x);
+    const oy = Math.min(a.max.y, b.max.y) - Math.max(a.min.y, b.min.y);
+    const oz = Math.min(a.max.z, b.max.z) - Math.max(a.min.z, b.min.z);
+    if (ox <= 0 || oy <= 0 || oz <= 0) return 0;
+    return (ox * oy * oz) / Math.min(volOf(a), volOf(b));
+  };
+  const EPS = 0.01;
+  const swallows = (outer, inner) =>
+    outer.min.x - EPS <= inner.min.x && inner.max.x <= outer.max.x + EPS &&
+    outer.min.y - EPS <= inner.min.y && inner.max.y <= outer.max.y + EPS &&
+    outer.min.z - EPS <= inner.min.z && inner.max.z <= outer.max.z + EPS;
+  for (let i = 0; i < units.length; i++) {
+    for (let j = i + 1; j < units.length; j++) {
+      const a = units[i];
+      const b = units[j];
+      if (a.fam === b.fam) continue;
+      if (overlapFrac(a.union, b.union) === 0) continue;
+      let worst = 0;
+      let worstPair = null;
+      for (const ma of a.meshBoxes) {
+        for (const mb of b.meshBoxes) {
+          // A mesh fully swallowed by another (±1cm — flush mounts land on
+          // the host surface to float precision) is a mount or a seat: lamp
+          // base plate in a sidewalk, spot disc in a ceiling slab. Invisible
+          // at bbox level, not a visual defect. Pass-throughs still flag:
+          // they stick out both sides, so neither box swallows the other.
+          if (swallows(ma, mb) || swallows(mb, ma)) continue;
+          const f = overlapFrac(ma, mb);
+          if (f > worst) { worst = f; worstPair = [ma.meshName, mb.meshName]; }
+        }
+      }
+      if (worst > 0.2) {
+        findings.push({
+          severity: 'warning', check: 'overlap', part: `${a.name} × ${b.name}`,
+          parts: [a.name, b.name], meshes: worstPair, value: +worst.toFixed(2),
+          hint: `${worstPair[0]} × ${worstPair[1]} interpenetrate ${(worst * 100).toFixed(0)}% of the smaller — reposition, or nest one under the other if containment is intended`
+        });
+      }
     }
   }
 
