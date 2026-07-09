@@ -4,6 +4,14 @@
  * Loads a spec, takes screenshots from multiple angles, with various modes
  *
  * Usage: node inspect-model.js <spec.json> [output-dir] [port]
+ *        node inspect-model.js <spec.json> [output-dir] [port] --target <part> [--pad <mult>]
+ *
+ * --target frames a named part (exact name, else prefix, else substring —
+ * every match gets its own shot set) close up from five angles plus a
+ * wireframe, instead of the full-model sweep. Review at the distance the
+ * defect lives: sweeps catch stance and proportion; joint- and face-scale
+ * work needs its own framing. --pad scales the orbit distance (default 2.2
+ * bbox radii).
  */
 import { chromium } from 'playwright';
 import fs from 'fs';
@@ -107,7 +115,85 @@ function buildReviewTemplate(specName, modelInfo, summary) {
 `;
 }
 
-async function inspectModel(specPath, outputDir, requestedPort) {
+// Runs inside the page: frame `matchName` objects and shoot nothing — just
+// position camera/controls; the node side takes the screenshots.
+async function frameTargetInPage([matchName, angle, pad]) {
+  const THREE = await import('three');
+  const viewer = window.app.viewer;
+  const scene = viewer.getScene ? viewer.getScene() : viewer.scene;
+  const camera = viewer.getCamera ? viewer.getCamera() : viewer.camera;
+  const controls = viewer.controls;
+
+  let obj = null;
+  scene.traverse((o) => { if (!obj && o.name === matchName) obj = o; });
+  if (!obj) return { error: `target object not found: ${matchName}` };
+  obj.updateWorldMatrix(true, true);
+
+  const box = new THREE.Box3().setFromObject(obj);
+  if (box.isEmpty()) return { error: `target has empty bounds: ${matchName}` };
+  const center = box.getCenter(new THREE.Vector3());
+  const radius = Math.max(box.getSize(new THREE.Vector3()).length() / 2, 0.05);
+  const dist = Math.max(radius * pad, 0.3);
+
+  const DIRS = {
+    threeQuarter: [1, 0.45, 1],
+    front: [0, 0.12, 1],
+    side: [1, 0.08, 0.08],
+    back: [0, 0.12, -1],
+    top: [0.15, 1, 0.15]
+  };
+  const d = new THREE.Vector3(...DIRS[angle]).normalize().multiplyScalar(dist);
+  controls.target.copy(center);
+  camera.position.copy(center).add(d);
+  controls.update();
+  return { center: center.toArray(), radius: +radius.toFixed(3) };
+}
+
+// Collect scene object names matching a target string: exact, else prefix,
+// else substring. Groups and meshes both count; instances each match.
+async function matchTargetsInPage(target) {
+  const scene = window.app.viewer.getScene ? window.app.viewer.getScene() : window.app.viewer.scene;
+  const names = [];
+  scene.traverse((o) => { if (o.name) names.push(o.name); });
+  const exact = names.filter((n) => n === target);
+  if (exact.length) return exact;
+  const prefix = names.filter((n) => n.startsWith(target));
+  if (prefix.length) return [...new Set(prefix)];
+  return [...new Set(names.filter((n) => n.includes(target)))];
+}
+
+async function inspectTarget(page, outputDir, specName, target, pad) {
+  const matches = await page.evaluate(matchTargetsInPage, target);
+  if (!matches.length) {
+    throw new Error(`--target "${target}" matched no scene objects`);
+  }
+  const capped = matches.slice(0, 8);
+  if (matches.length > capped.length) {
+    console.log(`  (${matches.length} matches; shooting the first ${capped.length})`);
+  }
+  const angles = ['threeQuarter', 'front', 'side', 'back', 'top'];
+  for (const name of capped) {
+    console.log(`\n--- Target: ${name} ---`);
+    for (const angle of angles) {
+      const framed = await page.evaluate(frameTargetInPage, [name, angle, pad]);
+      if (framed.error) throw new Error(framed.error);
+      await page.waitForTimeout(250);
+      const filename = `${specName}-target-${name}-${angle}.png`;
+      await (await page.$('canvas')).screenshot({ path: path.join(outputDir, filename) });
+      console.log(`  Saved: ${filename}`);
+    }
+    await page.click('#cam-wireframe');
+    await page.evaluate(frameTargetInPage, [name, 'threeQuarter', pad]);
+    await page.waitForTimeout(250);
+    const wf = `${specName}-target-${name}-wireframe.png`;
+    await (await page.$('canvas')).screenshot({ path: path.join(outputDir, wf) });
+    console.log(`  Saved: ${wf}`);
+    await page.click('#cam-wireframe');
+    await page.waitForTimeout(200);
+  }
+}
+
+async function inspectModel(specPath, outputDir, requestedPort, target, pad) {
   console.log('Loading spec:', specPath);
   const spec = JSON.parse(fs.readFileSync(specPath, 'utf-8'));
   const specName = spec.name || path.basename(specPath, '.json');
@@ -181,6 +267,14 @@ async function inspectModel(specPath, outputDir, requestedPort) {
       return modal && modal.classList.contains('hidden');
     }, { timeout: 10000 });
     await page.waitForTimeout(2000);
+
+    // Target mode: close-up orbit sets around matched parts, then done —
+    // the full sweep is the default mode's job.
+    if (target) {
+      await inspectTarget(page, outputDir, specName, target, pad);
+      console.log(`\n✓ Target inspection complete. Screenshots saved to: ${outputDir}`);
+      return;
+    }
 
     // Capture the camera view defined by the spec before overriding it with preset sweeps.
     const specCameraFilename = `${specName}-specCamera.png`;
@@ -273,17 +367,28 @@ async function inspectModel(specPath, outputDir, requestedPort) {
 }
 
 // Main
-const args = process.argv.slice(2);
+const argv = process.argv.slice(2);
+let target = null;
+let pad = 2.2;
+const args = [];
+for (let i = 0; i < argv.length; i++) {
+  if (argv[i] === '--target') target = argv[++i];
+  else if (argv[i] === '--pad') pad = Number.parseFloat(argv[++i]) || 2.2;
+  else args.push(argv[i]);
+}
 if (args.length === 0) {
   console.log('Samdin Inspector');
   console.log('Usage: node inspect-model.js <spec.json> [output-dir] [port]');
+  console.log('       node inspect-model.js <spec.json> [output-dir] [port] --target <part> [--pad <mult>]');
   console.log('');
   console.log('Takes screenshots of a model from multiple camera angles');
   console.log('with normal, wireframe, and design grid modes.');
+  console.log('--target frames a named part (exact/prefix/substring match) close up');
+  console.log('from five angles + wireframe instead of the full sweep.');
   process.exit(0);
 }
 
-inspectModel(args[0], args[1], args[2]).catch(err => {
+inspectModel(args[0], args[1], args[2], target, pad).catch(err => {
   console.error('Error:', err);
   process.exit(1);
 });
