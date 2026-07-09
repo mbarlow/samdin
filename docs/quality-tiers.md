@@ -35,3 +35,7 @@ Tris are cheap and measurable, so they are easy to mistake for quality. They are
 - Default is `standard`.
 - Pin `high` on final specs; iterate at `draft` or `standard`.
 - Box shapes have no segments to scale — the tier is a no-op for them.
+
+## Opting out per part
+
+Segment counts that are *identity* rather than tessellation — a hex limb IS 6-sided — set `options: { "exactSegments": true }` on the part. Quality tiers then leave its segments and sphere detail untouched at every tier. `prism.sides` and `stairs.steps` are always exempt; `exactSegments` extends the same rule to cylinders, capsules, spheres, and the rest. Reference: `specs/examples/segmented-figures.json` (deliberately faceted md2 figures).

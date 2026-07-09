@@ -150,7 +150,10 @@
             1,
             1,
             0.62
-          ]
+          ],
+          "options": {
+            "exactSegments": true
+          }
         },
         {
           "name": "belt",
@@ -207,7 +210,10 @@
             1,
             1,
             0.62
-          ]
+          ],
+          "options": {
+            "exactSegments": true
+          }
         },
         {
           "name": "chest",
@@ -242,7 +248,10 @@
             1,
             1,
             0.62
-          ]
+          ],
+          "options": {
+            "exactSegments": true
+          }
         },
         {
           "name": "chest_plate",
@@ -312,7 +321,10 @@
             0
           ],
           "parent": "figure_root",
-          "castShadow": true
+          "castShadow": true,
+          "options": {
+            "exactSegments": true
+          }
         },
         {
           "name": "head",
@@ -350,7 +362,10 @@
             1,
             1,
             0.9
-          ]
+          ],
+          "options": {
+            "exactSegments": true
+          }
         },
         {
           "name": "jaw",
@@ -470,7 +485,10 @@
             1,
             1,
             0.85
-          ]
+          ],
+          "options": {
+            "exactSegments": true
+          }
         },
         {
           "name": "elbow_l",
@@ -508,7 +526,10 @@
             1,
             1,
             0.85
-          ]
+          ],
+          "options": {
+            "exactSegments": true
+          }
         },
         {
           "name": "fist_l",
@@ -600,7 +621,10 @@
             1,
             1,
             0.85
-          ]
+          ],
+          "options": {
+            "exactSegments": true
+          }
         },
         {
           "name": "elbow_r",
@@ -638,7 +662,10 @@
             1,
             1,
             0.85
-          ]
+          ],
+          "options": {
+            "exactSegments": true
+          }
         },
         {
           "name": "fist_r",
@@ -705,7 +732,10 @@
             1,
             1,
             0.85
-          ]
+          ],
+          "options": {
+            "exactSegments": true
+          }
         },
         {
           "name": "knee_l",
@@ -750,7 +780,10 @@
             1,
             1,
             0.85
-          ]
+          ],
+          "options": {
+            "exactSegments": true
+          }
         },
         {
           "name": "boot_l",
@@ -823,7 +856,10 @@
             1,
             1,
             0.85
-          ]
+          ],
+          "options": {
+            "exactSegments": true
+          }
         },
         {
           "name": "knee_r",
@@ -868,7 +904,10 @@
             1,
             1,
             0.85
-          ]
+          ],
+          "options": {
+            "exactSegments": true
+          }
         },
         {
           "name": "boot_r",
@@ -940,7 +979,10 @@
             1,
             1,
             0.6
-          ]
+          ],
+          "options": {
+            "exactSegments": true
+          }
         },
         {
           "name": "belt",
@@ -997,7 +1039,10 @@
             1,
             1,
             0.6
-          ]
+          ],
+          "options": {
+            "exactSegments": true
+          }
         },
         {
           "name": "chest",
@@ -1032,7 +1077,10 @@
             1,
             1,
             0.6
-          ]
+          ],
+          "options": {
+            "exactSegments": true
+          }
         },
         {
           "name": "chest_plate",
@@ -1080,7 +1128,10 @@
             0
           ],
           "parent": "figure_root",
-          "castShadow": true
+          "castShadow": true,
+          "options": {
+            "exactSegments": true
+          }
         },
         {
           "name": "head",
@@ -1118,7 +1169,10 @@
             1,
             1,
             0.9
-          ]
+          ],
+          "options": {
+            "exactSegments": true
+          }
         },
         {
           "name": "jaw",
@@ -1243,7 +1297,10 @@
             1,
             1,
             0.85
-          ]
+          ],
+          "options": {
+            "exactSegments": true
+          }
         },
         {
           "name": "elbow_l",
@@ -1281,7 +1338,10 @@
             1,
             1,
             0.85
-          ]
+          ],
+          "options": {
+            "exactSegments": true
+          }
         },
         {
           "name": "fist_l",
@@ -1348,7 +1408,10 @@
             1,
             1,
             0.85
-          ]
+          ],
+          "options": {
+            "exactSegments": true
+          }
         },
         {
           "name": "elbow_r",
@@ -1386,7 +1449,10 @@
             1,
             1,
             0.85
-          ]
+          ],
+          "options": {
+            "exactSegments": true
+          }
         },
         {
           "name": "fist_r",
@@ -1453,7 +1519,10 @@
             1,
             1,
             0.85
-          ]
+          ],
+          "options": {
+            "exactSegments": true
+          }
         },
         {
           "name": "knee_l",
@@ -1498,7 +1567,10 @@
             1,
             1,
             0.85
-          ]
+          ],
+          "options": {
+            "exactSegments": true
+          }
         },
         {
           "name": "boot_l",
@@ -1571,7 +1643,10 @@
             1,
             1,
             0.85
-          ]
+          ],
+          "options": {
+            "exactSegments": true
+          }
         },
         {
           "name": "knee_r",
@@ -1616,7 +1691,10 @@
             1,
             1,
             0.85
-          ]
+          ],
+          "options": {
+            "exactSegments": true
+          }
         },
         {
           "name": "boot_r",
