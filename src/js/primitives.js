@@ -5,6 +5,17 @@
 import * as THREE from 'three';
 
 // Material factory - consistent material creation
+
+// `options.exactSegments: true` declares a part's segment counts as identity
+// (a hex limb IS 6-sided), not tessellation — quality tiers must not scale
+// them. Same rule prism.sides and stairs.steps already follow.
+function qualityMul(opts) {
+  return opts.exactSegments ? 1 : (opts.qualitySegMul || 1);
+}
+function qualityDetail(detail, opts) {
+  return opts.exactSegments ? detail : Math.max(detail, opts.qualitySphereDetail || 0);
+}
+
 const Materials = {
   cache: new Map(),
   
@@ -216,7 +227,7 @@ const Primitives = {
    * @param {object} opts
    */
   cylinder(radiusTop, radiusBottom, height, segments = 8, opts = {}) {
-    const segs = Math.round(segments * (opts.qualitySegMul || 1));
+    const segs = Math.round(segments * qualityMul(opts));
     const geo = new THREE.CylinderGeometry(
       radiusTop, radiusBottom, height, segs,
       Math.round(opts.heightSegments || 1)
@@ -244,7 +255,7 @@ const Primitives = {
    * @param {object} opts
    */
   sphere(radius, detail = 1, opts = {}) {
-    const d = Math.max(detail, opts.qualitySphereDetail || 0);
+    const d = qualityDetail(detail, opts);
     const geo = new THREE.IcosahedronGeometry(radius, d);
     const mesh = new THREE.Mesh(geo, opts.material || Materials.matte(0x888888));
     
@@ -266,7 +277,7 @@ const Primitives = {
    * Cone
    */
   cone(radius, height, segments = 6, opts = {}) {
-    const segs = Math.round(segments * (opts.qualitySegMul || 1));
+    const segs = Math.round(segments * qualityMul(opts));
     const geo = new THREE.ConeGeometry(radius, height, segs, Math.round(opts.heightSegments || 1));
     const mesh = new THREE.Mesh(geo, opts.material || Materials.matte(0x888888));
     
@@ -288,7 +299,7 @@ const Primitives = {
    * Torus (ring)
    */
   torus(radius, tube, radialSegs = 8, tubularSegs = 6, opts = {}) {
-    const mul = opts.qualitySegMul || 1;
+    const mul = qualityMul(opts);
     const geo = new THREE.TorusGeometry(radius, tube, Math.round(radialSegs * mul), Math.round(tubularSegs * mul));
     const mesh = new THREE.Mesh(geo, opts.material || Materials.matte(0x888888));
     mesh.castShadow = true;
@@ -300,7 +311,7 @@ const Primitives = {
    * Capsule (pill shape) - useful for limbs
    */
   capsule(radius, length, capSegs = 4, radialSegs = 8, opts = {}) {
-    const mul = opts.qualitySegMul || 1;
+    const mul = qualityMul(opts);
     const geo = new THREE.CapsuleGeometry(radius, length, Math.round(capSegs * mul), Math.round(radialSegs * mul));
     const mesh = new THREE.Mesh(geo, opts.material || Materials.matte(0x888888));
     
@@ -322,7 +333,7 @@ const Primitives = {
    * Octahedron - good for gems, indicators
    */
   octahedron(radius, detail = 0, opts = {}) {
-    const geo = new THREE.OctahedronGeometry(radius, Math.max(detail, opts.qualitySphereDetail || 0));
+    const geo = new THREE.OctahedronGeometry(radius, qualityDetail(detail, opts));
     const mesh = new THREE.Mesh(geo, opts.material || Materials.matte(0x888888));
     mesh.castShadow = true;
     mesh.receiveShadow = true;
@@ -456,7 +467,7 @@ const Primitives = {
    * Tetrahedron - 4-faced triangular pyramid
    */
   tetrahedron(radius, detail = 0, opts = {}) {
-    const geo = new THREE.TetrahedronGeometry(radius, Math.max(detail, opts.qualitySphereDetail || 0));
+    const geo = new THREE.TetrahedronGeometry(radius, qualityDetail(detail, opts));
     const mesh = new THREE.Mesh(geo, opts.material || Materials.matte(0x888888));
 
     switch (opts.pivot) {
@@ -478,7 +489,7 @@ const Primitives = {
    * @param {number} segments
    */
   tube(outerRadius, innerRadius, height, segments = 8, opts = {}) {
-    segments = Math.round(segments * (opts.qualitySegMul || 1));
+    segments = Math.round(segments * qualityMul(opts));
     const shape = new THREE.Shape();
     shape.absarc(0, 0, outerRadius, 0, Math.PI * 2, false);
 
@@ -518,7 +529,7 @@ const Primitives = {
    * @param {number} segments
    */
   ring(outerRadius, innerRadius, segments = 16, opts = {}) {
-    const segs = Math.round(segments * (opts.qualitySegMul || 1));
+    const segs = Math.round(segments * qualityMul(opts));
     const geo = new THREE.RingGeometry(innerRadius, outerRadius, segs);
     geo.rotateX(-Math.PI / 2); // Make it horizontal
 
@@ -590,7 +601,7 @@ const Primitives = {
    * @param {number} segments - curve smoothness
    */
   arch(w, h, d, segments = 8, opts = {}) {
-    segments = Math.round(segments * (opts.qualitySegMul || 1));
+    segments = Math.round(segments * qualityMul(opts));
     const thickness = opts.thickness || w * 0.15;
 
     // Create arch as two vertical pillars + a curved top section
@@ -653,7 +664,7 @@ const Primitives = {
    * @param {number} segments - smoothness
    */
   roundedBox(w, h, d, radius = 0.1, segments = 2, opts = {}) {
-    segments = Math.round(segments * (opts.qualitySegMul || 1));
+    segments = Math.round(segments * qualityMul(opts));
     // Use a simplified approach - create box with chamfered edges via shape extrusion
     // Clamp radius to avoid zero/negative dimensions
     const maxRadius = Math.min(w/2, h/2, d/2) * 0.49; // Leave room for extrusion depth
@@ -751,7 +762,7 @@ const Primitives = {
    * Dodecahedron - 12-faced polyhedron
    */
   dodecahedron(radius, detail = 0, opts = {}) {
-    const geo = new THREE.DodecahedronGeometry(radius, Math.max(detail, opts.qualitySphereDetail || 0));
+    const geo = new THREE.DodecahedronGeometry(radius, qualityDetail(detail, opts));
     const mesh = new THREE.Mesh(geo, opts.material || Materials.matte(0x888888));
     mesh.castShadow = true;
     mesh.receiveShadow = true;
@@ -762,7 +773,7 @@ const Primitives = {
    * Icosahedron - 20-faced polyhedron
    */
   icosahedron(radius, detail = 0, opts = {}) {
-    const geo = new THREE.IcosahedronGeometry(radius, Math.max(detail, opts.qualitySphereDetail || 0));
+    const geo = new THREE.IcosahedronGeometry(radius, qualityDetail(detail, opts));
     const mesh = new THREE.Mesh(geo, opts.material || Materials.matte(0x888888));
     mesh.castShadow = true;
     mesh.receiveShadow = true;
@@ -777,7 +788,7 @@ const Primitives = {
    * @param {number} phiLength - Sweep angle in degrees (360 for full revolution)
    */
   lathe(points, segments = 12, phiStart = 0, phiLength = 360, opts = {}) {
-    segments = Math.round(segments * (opts.qualitySegMul || 1));
+    segments = Math.round(segments * qualityMul(opts));
     // Convert [x,y] arrays to Vector2
     const profile = points.map(p => new THREE.Vector2(p[0], p[1]));
 
@@ -816,7 +827,7 @@ const Primitives = {
    * @param {boolean} closed - Whether the path is closed
    */
   extrudePath(shape, shapeParams, waypoints, segments = 64, closed = false, opts = {}) {
-    segments = Math.round(segments * (opts.qualitySegMul || 1));
+    segments = Math.round(segments * qualityMul(opts));
     // Create the path from waypoints using CatmullRom spline
     const pathPoints = waypoints.map(p => new THREE.Vector3(p[0], p[1], p[2]));
     const curve = new THREE.CatmullRomCurve3(pathPoints, closed, 'catmullrom', 0.5);
@@ -825,7 +836,7 @@ const Primitives = {
     if (shape === 'circle') {
       // Use TubeGeometry for circular cross-section
       const radius = shapeParams[0] || 0.1;
-      const radialSegments = Math.round((shapeParams[1] || 8) * (opts.qualitySegMul || 1));
+      const radialSegments = Math.round((shapeParams[1] || 8) * qualityMul(opts));
       geo = new THREE.TubeGeometry(curve, segments, radius, radialSegments, closed);
     } else {
       // For other shapes, use ExtrudeGeometry along the path
@@ -869,7 +880,7 @@ const Primitives = {
    * @param {string} tension - 'tight' (0.5), 'normal' (0.25), 'loose' (0)
    */
   cable(waypoints, radius = 0.02, segments = 32, radialSegments = 8, tension = 'normal', opts = {}) {
-    const mul = opts.qualitySegMul || 1;
+    const mul = qualityMul(opts);
     segments = Math.round(segments * mul);
     radialSegments = Math.round(radialSegments * mul);
     const tensionValues = { tight: 0.5, normal: 0.25, loose: 0 };
@@ -896,7 +907,7 @@ const Primitives = {
    * @param {number} radialSegments - Segments around the cable
    */
   catenary(start, end, sag = 0.2, radius = 0.02, segments = 32, radialSegments = 8, opts = {}) {
-    const mul = opts.qualitySegMul || 1;
+    const mul = qualityMul(opts);
     segments = Math.round(segments * mul);
     radialSegments = Math.round(radialSegments * mul);
     const p1 = new THREE.Vector3(start[0], start[1], start[2]);
@@ -954,7 +965,7 @@ const Primitives = {
    * @param {number} height - total rise along +Y
    */
   helix(radius = 0.3, tubeRadius = 0.04, coils = 5, height = 0.5, opts = {}) {
-    const mul = opts.qualitySegMul || 1;
+    const mul = qualityMul(opts);
     const steps = Math.max(24, Math.round(Math.max(coils, 0.25) * 32 * mul));
     const radialSegments = Math.max(4, Math.round(6 * mul));
     const turns = Math.max(coils, 0.1);
@@ -981,7 +992,7 @@ const Primitives = {
    * @param {number} roughness - 0..1 displacement amount
    */
   rock(radius = 0.5, seed = 1, roughness = 0.35, opts = {}) {
-    const detail = 1 + (opts.qualitySphereDetail || 0);
+    const detail = 1 + (opts.exactSegments ? 0 : (opts.qualitySphereDetail || 0));
     const geo = new THREE.IcosahedronGeometry(radius, detail);
     Primitives._displace(geo, seed, roughness, 3.2);
     const mesh = new THREE.Mesh(
@@ -1001,7 +1012,7 @@ const Primitives = {
    * @param {number} seed
    */
   canopy(radius = 0.6, lobes = 4, seed = 1, opts = {}) {
-    const detail = 2 + (opts.qualitySphereDetail || 0);
+    const detail = 2 + (opts.exactSegments ? 0 : (opts.qualitySphereDetail || 0));
     const geo = new THREE.IcosahedronGeometry(radius, detail);
     Primitives._displace(geo, seed, 0.22, Math.max(lobes, 1) * 0.8);
     const mesh = new THREE.Mesh(

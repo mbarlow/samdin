@@ -29,6 +29,7 @@ Current practical rules:
 - **Lookdev**: `edgeWear.mode: "curvature"` puts wear on real creases (lathes/lofts/CSG); `material.detail: {scale, amount}` adds UV-free triplanar noise on large faces.
 - The runtime supports more than the older docs emphasize, including nested `children`, `pivot` or `options.pivot`, material breakup, `decals`, emissive strips, `wire-mesh`, the `scene.terrain` compositor, category-driven regions, and scene-owned camera/lookdev settings.
 - The `animations` spec block exists but is unvalidated and unused by any shipped spec — treat as experimental; verify in the runtime before relying on it.
+- **Deliberate facet counts survive quality tiers** with `options: {exactSegments: true}` — a hex-prism limb stays 6-sided at `high` instead of being segment-multiplied into an 18-gon. Use it on every intentionally-faceted part (see `specs/examples/segmented-figures.json`).
 - Trust the actual `prefabs/` directory over hard-coded prefab counts in docs.
 
 ## Use This Skill For
