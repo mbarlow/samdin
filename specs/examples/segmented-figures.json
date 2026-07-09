@@ -1,0 +1,1502 @@
+{
+  "name": "segmented-figures",
+  "description": "Quake 2 / md2-style segmented humanoids: a man and a woman built as rigid primitive segments hung off real joint groups (shoulder/elbow/hip/knee/head), segments deliberately interpenetrating at the joints. Flat-shaded, chunky, animation-ready.",
+  "root": "scene_root",
+  "poses": {
+    "guard": {
+      "shoulder_l": [
+        0,
+        0,
+        8
+      ],
+      "shoulder_r": [
+        0,
+        0,
+        -8
+      ],
+      "elbow_l": [
+        -14,
+        0,
+        0
+      ],
+      "elbow_r": [
+        -18,
+        0,
+        0
+      ],
+      "head": [
+        0,
+        -6,
+        0
+      ],
+      "hip_l": [
+        0,
+        7,
+        0
+      ],
+      "hip_r": [
+        0,
+        -7,
+        0
+      ]
+    },
+    "stand-easy": {
+      "shoulder_l": [
+        0,
+        0,
+        6
+      ],
+      "shoulder_r": [
+        -12,
+        0,
+        -12
+      ],
+      "elbow_r": [
+        -38,
+        0,
+        0
+      ],
+      "elbow_l": [
+        -6,
+        0,
+        0
+      ],
+      "head": [
+        0,
+        9,
+        3
+      ],
+      "hip_l": [
+        0,
+        5,
+        0
+      ],
+      "hip_r": [
+        -4,
+        -5,
+        0
+      ]
+    }
+  },
+  "scene": {
+    "quality": "high",
+    "background": {
+      "type": "gradient",
+      "top": "#2b3038",
+      "bottom": "#121519"
+    },
+    "lighting": {
+      "preset": "studio",
+      "environment": "studio",
+      "envMapIntensity": 0.9,
+      "shadowQuality": "high"
+    },
+    "camera": {
+      "preset": "threeQuarter",
+      "distanceMultiplier": 0.72,
+      "targetOffset": [
+        0,
+        0.95,
+        0
+      ]
+    },
+    "postfx": {
+      "vignette": {
+        "enabled": true,
+        "intensity": 0.18,
+        "softness": 0.7
+      },
+      "fxaa": true
+    }
+  },
+  "modules": {
+    "seg-man": {
+      "root": "figure_root",
+      "parts": [
+        {
+          "name": "figure_root",
+          "type": "group"
+        },
+        {
+          "name": "pelvis",
+          "type": "box",
+          "params": [
+            0.3,
+            0.16,
+            0.18
+          ],
+          "material": {
+            "color": "#6b5f4a",
+            "roughness": 0.75,
+            "metalness": 0.0,
+            "flatShading": true,
+            "breakup": {
+              "noise": {
+                "amount": 0.05,
+                "scale": 6
+              },
+              "roughnessVariation": 0.08
+            }
+          },
+          "position": [
+            0,
+            0.99,
+            0
+          ],
+          "parent": "figure_root",
+          "castShadow": true
+        },
+        {
+          "name": "belt",
+          "type": "box",
+          "params": [
+            0.32,
+            0.05,
+            0.2
+          ],
+          "material": {
+            "color": "#3a332c",
+            "roughness": 0.5,
+            "metalness": 0.2,
+            "flatShading": true
+          },
+          "position": [
+            0,
+            1.095,
+            0
+          ],
+          "parent": "figure_root",
+          "castShadow": true
+        },
+        {
+          "name": "waist",
+          "type": "box",
+          "params": [
+            0.26,
+            0.12,
+            0.16
+          ],
+          "material": {
+            "color": "#55503f",
+            "roughness": 0.75,
+            "metalness": 0.0,
+            "flatShading": true,
+            "breakup": {
+              "noise": {
+                "amount": 0.05,
+                "scale": 6
+              },
+              "roughnessVariation": 0.08
+            }
+          },
+          "position": [
+            0,
+            1.16,
+            0
+          ],
+          "parent": "figure_root",
+          "castShadow": true
+        },
+        {
+          "name": "chest",
+          "type": "box",
+          "params": [
+            0.36,
+            0.26,
+            0.2
+          ],
+          "material": {
+            "color": "#5a6248",
+            "roughness": 0.75,
+            "metalness": 0.0,
+            "flatShading": true,
+            "breakup": {
+              "noise": {
+                "amount": 0.05,
+                "scale": 6
+              },
+              "roughnessVariation": 0.08
+            }
+          },
+          "position": [
+            0,
+            1.335,
+            0
+          ],
+          "parent": "figure_root",
+          "castShadow": true
+        },
+        {
+          "name": "chest_plate",
+          "type": "box",
+          "params": [
+            0.3,
+            0.18,
+            0.05
+          ],
+          "material": {
+            "color": "#464f38",
+            "roughness": 0.55,
+            "metalness": 0.35,
+            "flatShading": true
+          },
+          "position": [
+            0,
+            1.36,
+            0.115
+          ],
+          "parent": "figure_root",
+          "castShadow": true
+        },
+        {
+          "name": "backpack",
+          "type": "box",
+          "params": [
+            0.22,
+            0.2,
+            0.08
+          ],
+          "material": {
+            "color": "#464f38",
+            "roughness": 0.7,
+            "metalness": 0.1,
+            "flatShading": true
+          },
+          "position": [
+            0,
+            1.315,
+            -0.13
+          ],
+          "parent": "figure_root",
+          "castShadow": true
+        },
+        {
+          "name": "neck",
+          "type": "cylinder",
+          "params": [
+            0.05,
+            0.055,
+            0.09,
+            8
+          ],
+          "material": {
+            "color": "#c49a7a",
+            "roughness": 0.6,
+            "metalness": 0.0,
+            "flatShading": true
+          },
+          "position": [
+            0,
+            1.515,
+            0
+          ],
+          "parent": "figure_root",
+          "castShadow": true
+        },
+        {
+          "name": "head",
+          "type": "group",
+          "position": [
+            0,
+            1.555,
+            0
+          ],
+          "parent": "figure_root"
+        },
+        {
+          "name": "skull",
+          "type": "box",
+          "params": [
+            0.2,
+            0.23,
+            0.22
+          ],
+          "material": {
+            "color": "#c49a7a",
+            "roughness": 0.6,
+            "metalness": 0.0,
+            "flatShading": true
+          },
+          "position": [
+            0,
+            0.115,
+            0
+          ],
+          "parent": "head",
+          "castShadow": true
+        },
+        {
+          "name": "jaw",
+          "type": "box",
+          "params": [
+            0.15,
+            0.06,
+            0.09
+          ],
+          "material": {
+            "color": "#c49a7a",
+            "roughness": 0.6,
+            "metalness": 0.0,
+            "flatShading": true
+          },
+          "position": [
+            0,
+            0.024999999999999998,
+            0.085
+          ],
+          "parent": "head",
+          "castShadow": true
+        },
+        {
+          "name": "hair",
+          "type": "box",
+          "params": [
+            0.21,
+            0.06,
+            0.23
+          ],
+          "material": {
+            "color": "#4a3b2a",
+            "roughness": 0.85,
+            "metalness": 0.0,
+            "flatShading": true
+          },
+          "position": [
+            0,
+            0.24000000000000002,
+            -0.01
+          ],
+          "parent": "head",
+          "castShadow": true
+        },
+        {
+          "name": "shoulder_l",
+          "type": "group",
+          "position": [
+            -0.235,
+            1.44,
+            0
+          ],
+          "parent": "figure_root"
+        },
+        {
+          "name": "pauldron_l",
+          "type": "box",
+          "params": [
+            0.13,
+            0.1,
+            0.15
+          ],
+          "material": {
+            "color": "#464f38",
+            "roughness": 0.55,
+            "metalness": 0.35,
+            "flatShading": true
+          },
+          "position": [
+            -0.015,
+            0.02,
+            0
+          ],
+          "parent": "shoulder_l",
+          "castShadow": true
+        },
+        {
+          "name": "upperarm_l",
+          "type": "box",
+          "params": [
+            0.095,
+            0.26,
+            0.105
+          ],
+          "material": {
+            "color": "#5a6248",
+            "roughness": 0.75,
+            "metalness": 0.0,
+            "flatShading": true,
+            "breakup": {
+              "noise": {
+                "amount": 0.05,
+                "scale": 6
+              },
+              "roughnessVariation": 0.08
+            }
+          },
+          "position": [
+            0,
+            -0.15,
+            0
+          ],
+          "parent": "shoulder_l",
+          "castShadow": true
+        },
+        {
+          "name": "elbow_l",
+          "type": "group",
+          "position": [
+            0,
+            -0.3,
+            0
+          ],
+          "parent": "shoulder_l"
+        },
+        {
+          "name": "forearm_l",
+          "type": "box",
+          "params": [
+            0.085,
+            0.24,
+            0.09
+          ],
+          "material": {
+            "color": "#c49a7a",
+            "roughness": 0.6,
+            "metalness": 0.0,
+            "flatShading": true
+          },
+          "position": [
+            0,
+            -0.07999999999999999,
+            0
+          ],
+          "parent": "elbow_l",
+          "castShadow": true
+        },
+        {
+          "name": "fist_l",
+          "type": "box",
+          "params": [
+            0.09,
+            0.09,
+            0.1
+          ],
+          "material": {
+            "color": "#c49a7a",
+            "roughness": 0.6,
+            "metalness": 0.0,
+            "flatShading": true
+          },
+          "position": [
+            0,
+            -0.215,
+            0.01
+          ],
+          "parent": "elbow_l",
+          "castShadow": true
+        },
+        {
+          "name": "shoulder_r",
+          "type": "group",
+          "position": [
+            0.235,
+            1.44,
+            0
+          ],
+          "parent": "figure_root"
+        },
+        {
+          "name": "pauldron_r",
+          "type": "box",
+          "params": [
+            0.13,
+            0.1,
+            0.15
+          ],
+          "material": {
+            "color": "#464f38",
+            "roughness": 0.55,
+            "metalness": 0.35,
+            "flatShading": true
+          },
+          "position": [
+            0.015,
+            0.02,
+            0
+          ],
+          "parent": "shoulder_r",
+          "castShadow": true
+        },
+        {
+          "name": "upperarm_r",
+          "type": "box",
+          "params": [
+            0.095,
+            0.26,
+            0.105
+          ],
+          "material": {
+            "color": "#5a6248",
+            "roughness": 0.75,
+            "metalness": 0.0,
+            "flatShading": true,
+            "breakup": {
+              "noise": {
+                "amount": 0.05,
+                "scale": 6
+              },
+              "roughnessVariation": 0.08
+            }
+          },
+          "position": [
+            0,
+            -0.15,
+            0
+          ],
+          "parent": "shoulder_r",
+          "castShadow": true
+        },
+        {
+          "name": "elbow_r",
+          "type": "group",
+          "position": [
+            0,
+            -0.3,
+            0
+          ],
+          "parent": "shoulder_r"
+        },
+        {
+          "name": "forearm_r",
+          "type": "box",
+          "params": [
+            0.085,
+            0.24,
+            0.09
+          ],
+          "material": {
+            "color": "#c49a7a",
+            "roughness": 0.6,
+            "metalness": 0.0,
+            "flatShading": true
+          },
+          "position": [
+            0,
+            -0.07999999999999999,
+            0
+          ],
+          "parent": "elbow_r",
+          "castShadow": true
+        },
+        {
+          "name": "fist_r",
+          "type": "box",
+          "params": [
+            0.09,
+            0.09,
+            0.1
+          ],
+          "material": {
+            "color": "#c49a7a",
+            "roughness": 0.6,
+            "metalness": 0.0,
+            "flatShading": true
+          },
+          "position": [
+            0,
+            -0.215,
+            0.01
+          ],
+          "parent": "elbow_r",
+          "castShadow": true
+        },
+        {
+          "name": "hip_l",
+          "type": "group",
+          "position": [
+            -0.1,
+            0.95,
+            0
+          ],
+          "parent": "figure_root"
+        },
+        {
+          "name": "thigh_l",
+          "type": "box",
+          "params": [
+            0.12,
+            0.42,
+            0.13
+          ],
+          "material": {
+            "color": "#6b5f4a",
+            "roughness": 0.75,
+            "metalness": 0.0,
+            "flatShading": true,
+            "breakup": {
+              "noise": {
+                "amount": 0.05,
+                "scale": 6
+              },
+              "roughnessVariation": 0.08
+            }
+          },
+          "position": [
+            0,
+            -0.22999999999999998,
+            0
+          ],
+          "parent": "hip_l",
+          "castShadow": true
+        },
+        {
+          "name": "knee_l",
+          "type": "group",
+          "position": [
+            0,
+            -0.44999999999999996,
+            0
+          ],
+          "parent": "hip_l"
+        },
+        {
+          "name": "shin_l",
+          "type": "box",
+          "params": [
+            0.1,
+            0.46,
+            0.11
+          ],
+          "material": {
+            "color": "#5f5442",
+            "roughness": 0.75,
+            "metalness": 0.0,
+            "flatShading": true,
+            "breakup": {
+              "noise": {
+                "amount": 0.05,
+                "scale": 6
+              },
+              "roughnessVariation": 0.08
+            }
+          },
+          "position": [
+            0,
+            -0.18,
+            0
+          ],
+          "parent": "knee_l",
+          "castShadow": true
+        },
+        {
+          "name": "boot_l",
+          "type": "box",
+          "params": [
+            0.11,
+            0.1,
+            0.24
+          ],
+          "material": {
+            "color": "#35302a",
+            "roughness": 0.8,
+            "metalness": 0.0,
+            "flatShading": true
+          },
+          "position": [
+            0,
+            -0.45,
+            0.035
+          ],
+          "parent": "knee_l",
+          "castShadow": true
+        },
+        {
+          "name": "hip_r",
+          "type": "group",
+          "position": [
+            0.1,
+            0.95,
+            0
+          ],
+          "parent": "figure_root"
+        },
+        {
+          "name": "thigh_r",
+          "type": "box",
+          "params": [
+            0.12,
+            0.42,
+            0.13
+          ],
+          "material": {
+            "color": "#6b5f4a",
+            "roughness": 0.75,
+            "metalness": 0.0,
+            "flatShading": true,
+            "breakup": {
+              "noise": {
+                "amount": 0.05,
+                "scale": 6
+              },
+              "roughnessVariation": 0.08
+            }
+          },
+          "position": [
+            0,
+            -0.22999999999999998,
+            0
+          ],
+          "parent": "hip_r",
+          "castShadow": true
+        },
+        {
+          "name": "knee_r",
+          "type": "group",
+          "position": [
+            0,
+            -0.44999999999999996,
+            0
+          ],
+          "parent": "hip_r"
+        },
+        {
+          "name": "shin_r",
+          "type": "box",
+          "params": [
+            0.1,
+            0.46,
+            0.11
+          ],
+          "material": {
+            "color": "#5f5442",
+            "roughness": 0.75,
+            "metalness": 0.0,
+            "flatShading": true,
+            "breakup": {
+              "noise": {
+                "amount": 0.05,
+                "scale": 6
+              },
+              "roughnessVariation": 0.08
+            }
+          },
+          "position": [
+            0,
+            -0.18,
+            0
+          ],
+          "parent": "knee_r",
+          "castShadow": true
+        },
+        {
+          "name": "boot_r",
+          "type": "box",
+          "params": [
+            0.11,
+            0.1,
+            0.24
+          ],
+          "material": {
+            "color": "#35302a",
+            "roughness": 0.8,
+            "metalness": 0.0,
+            "flatShading": true
+          },
+          "position": [
+            0,
+            -0.45,
+            0.035
+          ],
+          "parent": "knee_r",
+          "castShadow": true
+        }
+      ]
+    },
+    "seg-woman": {
+      "root": "figure_root",
+      "parts": [
+        {
+          "name": "figure_root",
+          "type": "group"
+        },
+        {
+          "name": "pelvis",
+          "type": "box",
+          "params": [
+            0.27,
+            0.15,
+            0.165
+          ],
+          "material": {
+            "color": "#4e5766",
+            "roughness": 0.75,
+            "metalness": 0.0,
+            "flatShading": true,
+            "breakup": {
+              "noise": {
+                "amount": 0.05,
+                "scale": 6
+              },
+              "roughnessVariation": 0.08
+            }
+          },
+          "position": [
+            0,
+            0.985,
+            0
+          ],
+          "parent": "figure_root",
+          "castShadow": true
+        },
+        {
+          "name": "belt",
+          "type": "box",
+          "params": [
+            0.285,
+            0.04,
+            0.18
+          ],
+          "material": {
+            "color": "#3d3542",
+            "roughness": 0.5,
+            "metalness": 0.2,
+            "flatShading": true
+          },
+          "position": [
+            0,
+            1.08,
+            0
+          ],
+          "parent": "figure_root",
+          "castShadow": true
+        },
+        {
+          "name": "waist",
+          "type": "box",
+          "params": [
+            0.195,
+            0.12,
+            0.135
+          ],
+          "material": {
+            "color": "#7d4034",
+            "roughness": 0.75,
+            "metalness": 0.0,
+            "flatShading": true,
+            "breakup": {
+              "noise": {
+                "amount": 0.05,
+                "scale": 6
+              },
+              "roughnessVariation": 0.08
+            }
+          },
+          "position": [
+            0,
+            1.15,
+            0
+          ],
+          "parent": "figure_root",
+          "castShadow": true
+        },
+        {
+          "name": "chest",
+          "type": "box",
+          "params": [
+            0.28,
+            0.23,
+            0.165
+          ],
+          "material": {
+            "color": "#8a4538",
+            "roughness": 0.75,
+            "metalness": 0.0,
+            "flatShading": true,
+            "breakup": {
+              "noise": {
+                "amount": 0.05,
+                "scale": 6
+              },
+              "roughnessVariation": 0.08
+            }
+          },
+          "position": [
+            0,
+            1.315,
+            0
+          ],
+          "parent": "figure_root",
+          "castShadow": true
+        },
+        {
+          "name": "chest_plate",
+          "type": "box",
+          "params": [
+            0.235,
+            0.12,
+            0.05
+          ],
+          "material": {
+            "color": "#7a3c30",
+            "roughness": 0.55,
+            "metalness": 0.1,
+            "flatShading": true
+          },
+          "position": [
+            0,
+            1.325,
+            0.095
+          ],
+          "parent": "figure_root",
+          "castShadow": true
+        },
+        {
+          "name": "neck",
+          "type": "cylinder",
+          "params": [
+            0.04,
+            0.045,
+            0.09,
+            8
+          ],
+          "material": {
+            "color": "#c9a084",
+            "roughness": 0.6,
+            "metalness": 0.0,
+            "flatShading": true
+          },
+          "position": [
+            0,
+            1.475,
+            0
+          ],
+          "parent": "figure_root",
+          "castShadow": true
+        },
+        {
+          "name": "head",
+          "type": "group",
+          "position": [
+            0,
+            1.515,
+            0
+          ],
+          "parent": "figure_root"
+        },
+        {
+          "name": "skull",
+          "type": "box",
+          "params": [
+            0.18,
+            0.21,
+            0.2
+          ],
+          "material": {
+            "color": "#c9a084",
+            "roughness": 0.6,
+            "metalness": 0.0,
+            "flatShading": true
+          },
+          "position": [
+            0,
+            0.105,
+            0
+          ],
+          "parent": "head",
+          "castShadow": true
+        },
+        {
+          "name": "jaw",
+          "type": "box",
+          "params": [
+            0.13,
+            0.05,
+            0.08
+          ],
+          "material": {
+            "color": "#c9a084",
+            "roughness": 0.6,
+            "metalness": 0.0,
+            "flatShading": true
+          },
+          "position": [
+            0,
+            0.02,
+            0.08
+          ],
+          "parent": "head",
+          "castShadow": true
+        },
+        {
+          "name": "hair",
+          "type": "box",
+          "params": [
+            0.19,
+            0.07,
+            0.21
+          ],
+          "material": {
+            "color": "#453931",
+            "roughness": 0.85,
+            "metalness": 0.0,
+            "flatShading": true
+          },
+          "position": [
+            0,
+            0.225,
+            -0.01
+          ],
+          "parent": "head",
+          "castShadow": true
+        },
+        {
+          "name": "ponytail",
+          "type": "box",
+          "params": [
+            0.07,
+            0.3,
+            0.08
+          ],
+          "material": {
+            "color": "#453931",
+            "roughness": 0.85,
+            "metalness": 0.0,
+            "flatShading": true
+          },
+          "position": [
+            0,
+            0.06999999999999998,
+            -0.15000000000000002
+          ],
+          "parent": "head",
+          "castShadow": true,
+          "rotation": [
+            16,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "shoulder_l",
+          "type": "group",
+          "position": [
+            -0.185,
+            1.405,
+            0
+          ],
+          "parent": "figure_root"
+        },
+        {
+          "name": "upperarm_l",
+          "type": "box",
+          "params": [
+            0.08,
+            0.25,
+            0.09
+          ],
+          "material": {
+            "color": "#8a4538",
+            "roughness": 0.75,
+            "metalness": 0.0,
+            "flatShading": true,
+            "breakup": {
+              "noise": {
+                "amount": 0.05,
+                "scale": 6
+              },
+              "roughnessVariation": 0.08
+            }
+          },
+          "position": [
+            0,
+            -0.145,
+            0
+          ],
+          "parent": "shoulder_l",
+          "castShadow": true
+        },
+        {
+          "name": "elbow_l",
+          "type": "group",
+          "position": [
+            0,
+            -0.29,
+            0
+          ],
+          "parent": "shoulder_l"
+        },
+        {
+          "name": "forearm_l",
+          "type": "box",
+          "params": [
+            0.07,
+            0.23,
+            0.08
+          ],
+          "material": {
+            "color": "#c9a084",
+            "roughness": 0.6,
+            "metalness": 0.0,
+            "flatShading": true
+          },
+          "position": [
+            0,
+            -0.07500000000000001,
+            0
+          ],
+          "parent": "elbow_l",
+          "castShadow": true
+        },
+        {
+          "name": "fist_l",
+          "type": "box",
+          "params": [
+            0.075,
+            0.075,
+            0.085
+          ],
+          "material": {
+            "color": "#c9a084",
+            "roughness": 0.6,
+            "metalness": 0.0,
+            "flatShading": true
+          },
+          "position": [
+            0,
+            -0.1975,
+            0.01
+          ],
+          "parent": "elbow_l",
+          "castShadow": true
+        },
+        {
+          "name": "shoulder_r",
+          "type": "group",
+          "position": [
+            0.185,
+            1.405,
+            0
+          ],
+          "parent": "figure_root"
+        },
+        {
+          "name": "upperarm_r",
+          "type": "box",
+          "params": [
+            0.08,
+            0.25,
+            0.09
+          ],
+          "material": {
+            "color": "#8a4538",
+            "roughness": 0.75,
+            "metalness": 0.0,
+            "flatShading": true,
+            "breakup": {
+              "noise": {
+                "amount": 0.05,
+                "scale": 6
+              },
+              "roughnessVariation": 0.08
+            }
+          },
+          "position": [
+            0,
+            -0.145,
+            0
+          ],
+          "parent": "shoulder_r",
+          "castShadow": true
+        },
+        {
+          "name": "elbow_r",
+          "type": "group",
+          "position": [
+            0,
+            -0.29,
+            0
+          ],
+          "parent": "shoulder_r"
+        },
+        {
+          "name": "forearm_r",
+          "type": "box",
+          "params": [
+            0.07,
+            0.23,
+            0.08
+          ],
+          "material": {
+            "color": "#c9a084",
+            "roughness": 0.6,
+            "metalness": 0.0,
+            "flatShading": true
+          },
+          "position": [
+            0,
+            -0.07500000000000001,
+            0
+          ],
+          "parent": "elbow_r",
+          "castShadow": true
+        },
+        {
+          "name": "fist_r",
+          "type": "box",
+          "params": [
+            0.075,
+            0.075,
+            0.085
+          ],
+          "material": {
+            "color": "#c9a084",
+            "roughness": 0.6,
+            "metalness": 0.0,
+            "flatShading": true
+          },
+          "position": [
+            0,
+            -0.1975,
+            0.01
+          ],
+          "parent": "elbow_r",
+          "castShadow": true
+        },
+        {
+          "name": "hip_l",
+          "type": "group",
+          "position": [
+            -0.085,
+            0.945,
+            0
+          ],
+          "parent": "figure_root"
+        },
+        {
+          "name": "thigh_l",
+          "type": "box",
+          "params": [
+            0.105,
+            0.42,
+            0.115
+          ],
+          "material": {
+            "color": "#4e5766",
+            "roughness": 0.75,
+            "metalness": 0.0,
+            "flatShading": true,
+            "breakup": {
+              "noise": {
+                "amount": 0.05,
+                "scale": 6
+              },
+              "roughnessVariation": 0.08
+            }
+          },
+          "position": [
+            0,
+            -0.22999999999999998,
+            0
+          ],
+          "parent": "hip_l",
+          "castShadow": true
+        },
+        {
+          "name": "knee_l",
+          "type": "group",
+          "position": [
+            0,
+            -0.44999999999999996,
+            0
+          ],
+          "parent": "hip_l"
+        },
+        {
+          "name": "shin_l",
+          "type": "box",
+          "params": [
+            0.085,
+            0.45,
+            0.095
+          ],
+          "material": {
+            "color": "#454d5a",
+            "roughness": 0.75,
+            "metalness": 0.0,
+            "flatShading": true,
+            "breakup": {
+              "noise": {
+                "amount": 0.05,
+                "scale": 6
+              },
+              "roughnessVariation": 0.08
+            }
+          },
+          "position": [
+            0,
+            -0.175,
+            0
+          ],
+          "parent": "knee_l",
+          "castShadow": true
+        },
+        {
+          "name": "boot_l",
+          "type": "box",
+          "params": [
+            0.095,
+            0.09,
+            0.21
+          ],
+          "material": {
+            "color": "#3f3a47",
+            "roughness": 0.8,
+            "metalness": 0.0,
+            "flatShading": true
+          },
+          "position": [
+            0,
+            -0.45,
+            0.035
+          ],
+          "parent": "knee_l",
+          "castShadow": true
+        },
+        {
+          "name": "hip_r",
+          "type": "group",
+          "position": [
+            0.085,
+            0.945,
+            0
+          ],
+          "parent": "figure_root"
+        },
+        {
+          "name": "thigh_r",
+          "type": "box",
+          "params": [
+            0.105,
+            0.42,
+            0.115
+          ],
+          "material": {
+            "color": "#4e5766",
+            "roughness": 0.75,
+            "metalness": 0.0,
+            "flatShading": true,
+            "breakup": {
+              "noise": {
+                "amount": 0.05,
+                "scale": 6
+              },
+              "roughnessVariation": 0.08
+            }
+          },
+          "position": [
+            0,
+            -0.22999999999999998,
+            0
+          ],
+          "parent": "hip_r",
+          "castShadow": true
+        },
+        {
+          "name": "knee_r",
+          "type": "group",
+          "position": [
+            0,
+            -0.44999999999999996,
+            0
+          ],
+          "parent": "hip_r"
+        },
+        {
+          "name": "shin_r",
+          "type": "box",
+          "params": [
+            0.085,
+            0.45,
+            0.095
+          ],
+          "material": {
+            "color": "#454d5a",
+            "roughness": 0.75,
+            "metalness": 0.0,
+            "flatShading": true,
+            "breakup": {
+              "noise": {
+                "amount": 0.05,
+                "scale": 6
+              },
+              "roughnessVariation": 0.08
+            }
+          },
+          "position": [
+            0,
+            -0.175,
+            0
+          ],
+          "parent": "knee_r",
+          "castShadow": true
+        },
+        {
+          "name": "boot_r",
+          "type": "box",
+          "params": [
+            0.095,
+            0.09,
+            0.21
+          ],
+          "material": {
+            "color": "#3f3a47",
+            "roughness": 0.8,
+            "metalness": 0.0,
+            "flatShading": true
+          },
+          "position": [
+            0,
+            -0.45,
+            0.035
+          ],
+          "parent": "knee_r",
+          "castShadow": true
+        }
+      ]
+    }
+  },
+  "parts": [
+    {
+      "name": "scene_root",
+      "type": "group",
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "man",
+      "type": "module",
+      "src": "seg-man",
+      "position": [
+        -0.55,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        14,
+        0
+      ],
+      "pose": "guard",
+      "parent": "scene_root"
+    },
+    {
+      "name": "woman",
+      "type": "module",
+      "src": "seg-woman",
+      "position": [
+        0.55,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        -16,
+        0
+      ],
+      "pose": "stand-easy",
+      "parent": "scene_root"
+    }
+  ]
+}
