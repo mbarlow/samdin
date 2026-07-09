@@ -1,6 +1,6 @@
 {
   "name": "segmented-figures",
-  "description": "Quake 2 / md2-style segmented humanoids: a man and a woman built as rigid frustum segments hung off real joint groups (shoulder/elbow/hip/knee/head), segments deliberately interpenetrating at the joints. Every limb segment is a tapered box (narrow at the distal end), skulls are low-segment capsules, boots taper at the toe. Flat-shaded, chunky, animation-ready.",
+  "description": "Quake 2 / md2-style segmented humanoids: a man and a woman built from faceted frustum prisms on real joint groups (shoulder/elbow/hip/knee/head). Limbs are 6-sided tapered cylinders, torso 8-sided, neck 6-sided, skull a 6-radial capsule \u2014 all flat-shaded and z-squashed for elliptical cross-sections, segments buried inside each joint. Animation-ready.",
   "root": "scene_root",
   "poses": {
     "guard": {
@@ -119,11 +119,12 @@
         },
         {
           "name": "pelvis",
-          "type": "box",
+          "type": "cylinder",
           "params": [
-            0.3,
+            0.135,
+            0.155,
             0.16,
-            0.18
+            8
           ],
           "material": {
             "color": "#6b5f4a",
@@ -145,9 +146,11 @@
           ],
           "parent": "figure_root",
           "castShadow": true,
-          "deform": {
-            "taper": 0.86
-          }
+          "scale": [
+            1,
+            1,
+            0.62
+          ]
         },
         {
           "name": "belt",
@@ -173,11 +176,12 @@
         },
         {
           "name": "waist",
-          "type": "box",
+          "type": "cylinder",
           "params": [
-            0.25,
-            0.12,
-            0.155
+            0.14,
+            0.125,
+            0.13,
+            8
           ],
           "material": {
             "color": "#55503f",
@@ -199,17 +203,20 @@
           ],
           "parent": "figure_root",
           "castShadow": true,
-          "deform": {
-            "taper": 1.15
-          }
+          "scale": [
+            1,
+            1,
+            0.62
+          ]
         },
         {
           "name": "chest",
-          "type": "box",
+          "type": "cylinder",
           "params": [
-            0.3,
+            0.195,
+            0.15,
             0.26,
-            0.175
+            8
           ],
           "material": {
             "color": "#5a6248",
@@ -231,9 +238,11 @@
           ],
           "parent": "figure_root",
           "castShadow": true,
-          "deform": {
-            "taper": 1.3
-          }
+          "scale": [
+            1,
+            1,
+            0.62
+          ]
         },
         {
           "name": "chest_plate",
@@ -277,7 +286,7 @@
           "position": [
             0,
             1.315,
-            -0.11750000000000001
+            -0.113
           ],
           "parent": "figure_root",
           "castShadow": true
@@ -286,10 +295,10 @@
           "name": "neck",
           "type": "cylinder",
           "params": [
+            0.042,
             0.05,
-            0.055,
             0.09,
-            8
+            6
           ],
           "material": {
             "color": "#c49a7a",
@@ -319,10 +328,10 @@
           "name": "skull",
           "type": "capsule",
           "params": [
-            0.1,
-            0.06,
-            2,
-            8
+            0.105,
+            0.07,
+            1,
+            6
           ],
           "material": {
             "color": "#c49a7a",
@@ -332,11 +341,16 @@
           },
           "position": [
             0,
-            0.13,
+            0.14,
             0
           ],
           "parent": "head",
-          "castShadow": true
+          "castShadow": true,
+          "scale": [
+            1,
+            1,
+            0.9
+          ]
         },
         {
           "name": "jaw",
@@ -355,7 +369,7 @@
           "position": [
             0,
             0.04,
-            0.05000000000000001
+            0.055
           ],
           "parent": "head",
           "castShadow": true,
@@ -369,7 +383,7 @@
           "params": [
             0.21,
             0.07,
-            0.22
+            0.2
           ],
           "material": {
             "color": "#4a3b2a",
@@ -379,7 +393,7 @@
           },
           "position": [
             0,
-            0.213,
+            0.233,
             -0.015
           ],
           "parent": "head",
@@ -392,7 +406,7 @@
           "name": "shoulder_l",
           "type": "group",
           "position": [
-            -0.235,
+            -0.222,
             1.44,
             0
           ],
@@ -425,11 +439,12 @@
         },
         {
           "name": "upperarm_l",
-          "type": "box",
+          "type": "cylinder",
           "params": [
-            0.085,
+            0.058,
+            0.072,
             0.26,
-            0.09
+            6
           ],
           "material": {
             "color": "#5a6248",
@@ -451,9 +466,11 @@
           ],
           "parent": "shoulder_l",
           "castShadow": true,
-          "deform": {
-            "taper": 1.3
-          }
+          "scale": [
+            1,
+            1,
+            0.85
+          ]
         },
         {
           "name": "elbow_l",
@@ -467,11 +484,12 @@
         },
         {
           "name": "forearm_l",
-          "type": "box",
+          "type": "cylinder",
           "params": [
-            0.07,
+            0.046,
+            0.059,
             0.24,
-            0.075
+            6
           ],
           "material": {
             "color": "#c49a7a",
@@ -486,9 +504,11 @@
           ],
           "parent": "elbow_l",
           "castShadow": true,
-          "deform": {
-            "taper": 1.35
-          }
+          "scale": [
+            1,
+            1,
+            0.85
+          ]
         },
         {
           "name": "fist_l",
@@ -516,7 +536,7 @@
           "name": "shoulder_r",
           "type": "group",
           "position": [
-            0.235,
+            0.222,
             1.44,
             0
           ],
@@ -549,11 +569,12 @@
         },
         {
           "name": "upperarm_r",
-          "type": "box",
+          "type": "cylinder",
           "params": [
-            0.085,
+            0.058,
+            0.072,
             0.26,
-            0.09
+            6
           ],
           "material": {
             "color": "#5a6248",
@@ -575,9 +596,11 @@
           ],
           "parent": "shoulder_r",
           "castShadow": true,
-          "deform": {
-            "taper": 1.3
-          }
+          "scale": [
+            1,
+            1,
+            0.85
+          ]
         },
         {
           "name": "elbow_r",
@@ -591,11 +614,12 @@
         },
         {
           "name": "forearm_r",
-          "type": "box",
+          "type": "cylinder",
           "params": [
-            0.07,
+            0.046,
+            0.059,
             0.24,
-            0.075
+            6
           ],
           "material": {
             "color": "#c49a7a",
@@ -610,9 +634,11 @@
           ],
           "parent": "elbow_r",
           "castShadow": true,
-          "deform": {
-            "taper": 1.35
-          }
+          "scale": [
+            1,
+            1,
+            0.85
+          ]
         },
         {
           "name": "fist_r",
@@ -648,11 +674,12 @@
         },
         {
           "name": "thigh_l",
-          "type": "box",
+          "type": "cylinder",
           "params": [
-            0.1,
+            0.062,
+            0.08,
             0.42,
-            0.11
+            6
           ],
           "material": {
             "color": "#6b5f4a",
@@ -674,9 +701,11 @@
           ],
           "parent": "hip_l",
           "castShadow": true,
-          "deform": {
-            "taper": 1.35
-          }
+          "scale": [
+            1,
+            1,
+            0.85
+          ]
         },
         {
           "name": "knee_l",
@@ -690,11 +719,12 @@
         },
         {
           "name": "shin_l",
-          "type": "box",
+          "type": "cylinder",
           "params": [
-            0.082,
+            0.05,
+            0.068,
             0.46,
-            0.09
+            6
           ],
           "material": {
             "color": "#5f5442",
@@ -716,9 +746,11 @@
           ],
           "parent": "knee_l",
           "castShadow": true,
-          "deform": {
-            "taper": 1.45
-          }
+          "scale": [
+            1,
+            1,
+            0.85
+          ]
         },
         {
           "name": "boot_l",
@@ -760,11 +792,12 @@
         },
         {
           "name": "thigh_r",
-          "type": "box",
+          "type": "cylinder",
           "params": [
-            0.1,
+            0.062,
+            0.08,
             0.42,
-            0.11
+            6
           ],
           "material": {
             "color": "#6b5f4a",
@@ -786,9 +819,11 @@
           ],
           "parent": "hip_r",
           "castShadow": true,
-          "deform": {
-            "taper": 1.35
-          }
+          "scale": [
+            1,
+            1,
+            0.85
+          ]
         },
         {
           "name": "knee_r",
@@ -802,11 +837,12 @@
         },
         {
           "name": "shin_r",
-          "type": "box",
+          "type": "cylinder",
           "params": [
-            0.082,
+            0.05,
+            0.068,
             0.46,
-            0.09
+            6
           ],
           "material": {
             "color": "#5f5442",
@@ -828,9 +864,11 @@
           ],
           "parent": "knee_r",
           "castShadow": true,
-          "deform": {
-            "taper": 1.45
-          }
+          "scale": [
+            1,
+            1,
+            0.85
+          ]
         },
         {
           "name": "boot_r",
@@ -871,11 +909,12 @@
         },
         {
           "name": "pelvis",
-          "type": "box",
+          "type": "cylinder",
           "params": [
-            0.27,
+            0.115,
+            0.14,
             0.15,
-            0.165
+            8
           ],
           "material": {
             "color": "#4e5766",
@@ -897,9 +936,11 @@
           ],
           "parent": "figure_root",
           "castShadow": true,
-          "deform": {
-            "taper": 0.86
-          }
+          "scale": [
+            1,
+            1,
+            0.6
+          ]
         },
         {
           "name": "belt",
@@ -925,11 +966,12 @@
         },
         {
           "name": "waist",
-          "type": "box",
+          "type": "cylinder",
           "params": [
-            0.19,
-            0.12,
-            0.13
+            0.105,
+            0.095,
+            0.13,
+            8
           ],
           "material": {
             "color": "#7d4034",
@@ -951,17 +993,20 @@
           ],
           "parent": "figure_root",
           "castShadow": true,
-          "deform": {
-            "taper": 1.15
-          }
+          "scale": [
+            1,
+            1,
+            0.6
+          ]
         },
         {
           "name": "chest",
-          "type": "box",
+          "type": "cylinder",
           "params": [
-            0.225,
+            0.145,
+            0.11,
             0.23,
-            0.145
+            8
           ],
           "material": {
             "color": "#8a4538",
@@ -983,9 +1028,11 @@
           ],
           "parent": "figure_root",
           "castShadow": true,
-          "deform": {
-            "taper": 1.28
-          }
+          "scale": [
+            1,
+            1,
+            0.6
+          ]
         },
         {
           "name": "chest_plate",
@@ -1016,10 +1063,10 @@
           "name": "neck",
           "type": "cylinder",
           "params": [
-            0.04,
-            0.045,
+            0.042,
+            0.05,
             0.09,
-            8
+            6
           ],
           "material": {
             "color": "#c9a084",
@@ -1049,10 +1096,10 @@
           "name": "skull",
           "type": "capsule",
           "params": [
-            0.09,
-            0.05,
-            2,
-            8
+            0.095,
+            0.055,
+            1,
+            6
           ],
           "material": {
             "color": "#c9a084",
@@ -1062,11 +1109,16 @@
           },
           "position": [
             0,
-            0.11499999999999999,
+            0.1225,
             0
           ],
           "parent": "head",
-          "castShadow": true
+          "castShadow": true,
+          "scale": [
+            1,
+            1,
+            0.9
+          ]
         },
         {
           "name": "jaw",
@@ -1085,7 +1137,7 @@
           "position": [
             0,
             0.035,
-            0.045
+            0.05
           ],
           "parent": "head",
           "castShadow": true,
@@ -1099,7 +1151,7 @@
           "params": [
             0.19,
             0.075,
-            0.2
+            0.18
           ],
           "material": {
             "color": "#453931",
@@ -1109,7 +1161,7 @@
           },
           "position": [
             0,
-            0.18049999999999997,
+            0.19549999999999998,
             -0.015
           ],
           "parent": "head",
@@ -1134,8 +1186,8 @@
           },
           "position": [
             0,
-            0.010000000000000009,
-            -0.098
+            0.01999999999999999,
+            -0.10300000000000001
           ],
           "parent": "head",
           "castShadow": true,
@@ -1152,7 +1204,7 @@
           "name": "shoulder_l",
           "type": "group",
           "position": [
-            -0.185,
+            -0.175,
             1.405,
             0
           ],
@@ -1160,11 +1212,12 @@
         },
         {
           "name": "upperarm_l",
-          "type": "box",
+          "type": "cylinder",
           "params": [
-            0.07,
+            0.047,
+            0.06,
             0.25,
-            0.078
+            6
           ],
           "material": {
             "color": "#8a4538",
@@ -1186,9 +1239,11 @@
           ],
           "parent": "shoulder_l",
           "castShadow": true,
-          "deform": {
-            "taper": 1.3
-          }
+          "scale": [
+            1,
+            1,
+            0.85
+          ]
         },
         {
           "name": "elbow_l",
@@ -1202,11 +1257,12 @@
         },
         {
           "name": "forearm_l",
-          "type": "box",
+          "type": "cylinder",
           "params": [
-            0.058,
+            0.038,
+            0.049,
             0.23,
-            0.065
+            6
           ],
           "material": {
             "color": "#c9a084",
@@ -1221,9 +1277,11 @@
           ],
           "parent": "elbow_l",
           "castShadow": true,
-          "deform": {
-            "taper": 1.35
-          }
+          "scale": [
+            1,
+            1,
+            0.85
+          ]
         },
         {
           "name": "fist_l",
@@ -1251,7 +1309,7 @@
           "name": "shoulder_r",
           "type": "group",
           "position": [
-            0.185,
+            0.175,
             1.405,
             0
           ],
@@ -1259,11 +1317,12 @@
         },
         {
           "name": "upperarm_r",
-          "type": "box",
+          "type": "cylinder",
           "params": [
-            0.07,
+            0.047,
+            0.06,
             0.25,
-            0.078
+            6
           ],
           "material": {
             "color": "#8a4538",
@@ -1285,9 +1344,11 @@
           ],
           "parent": "shoulder_r",
           "castShadow": true,
-          "deform": {
-            "taper": 1.3
-          }
+          "scale": [
+            1,
+            1,
+            0.85
+          ]
         },
         {
           "name": "elbow_r",
@@ -1301,11 +1362,12 @@
         },
         {
           "name": "forearm_r",
-          "type": "box",
+          "type": "cylinder",
           "params": [
-            0.058,
+            0.038,
+            0.049,
             0.23,
-            0.065
+            6
           ],
           "material": {
             "color": "#c9a084",
@@ -1320,9 +1382,11 @@
           ],
           "parent": "elbow_r",
           "castShadow": true,
-          "deform": {
-            "taper": 1.35
-          }
+          "scale": [
+            1,
+            1,
+            0.85
+          ]
         },
         {
           "name": "fist_r",
@@ -1358,11 +1422,12 @@
         },
         {
           "name": "thigh_l",
-          "type": "box",
+          "type": "cylinder",
           "params": [
-            0.088,
+            0.054,
+            0.07,
             0.42,
-            0.098
+            6
           ],
           "material": {
             "color": "#4e5766",
@@ -1384,9 +1449,11 @@
           ],
           "parent": "hip_l",
           "castShadow": true,
-          "deform": {
-            "taper": 1.35
-          }
+          "scale": [
+            1,
+            1,
+            0.85
+          ]
         },
         {
           "name": "knee_l",
@@ -1400,11 +1467,12 @@
         },
         {
           "name": "shin_l",
-          "type": "box",
+          "type": "cylinder",
           "params": [
-            0.068,
+            0.042,
+            0.06,
             0.45,
-            0.078
+            6
           ],
           "material": {
             "color": "#454d5a",
@@ -1426,9 +1494,11 @@
           ],
           "parent": "knee_l",
           "castShadow": true,
-          "deform": {
-            "taper": 1.45
-          }
+          "scale": [
+            1,
+            1,
+            0.85
+          ]
         },
         {
           "name": "boot_l",
@@ -1470,11 +1540,12 @@
         },
         {
           "name": "thigh_r",
-          "type": "box",
+          "type": "cylinder",
           "params": [
-            0.088,
+            0.054,
+            0.07,
             0.42,
-            0.098
+            6
           ],
           "material": {
             "color": "#4e5766",
@@ -1496,9 +1567,11 @@
           ],
           "parent": "hip_r",
           "castShadow": true,
-          "deform": {
-            "taper": 1.35
-          }
+          "scale": [
+            1,
+            1,
+            0.85
+          ]
         },
         {
           "name": "knee_r",
@@ -1512,11 +1585,12 @@
         },
         {
           "name": "shin_r",
-          "type": "box",
+          "type": "cylinder",
           "params": [
-            0.068,
+            0.042,
+            0.06,
             0.45,
-            0.078
+            6
           ],
           "material": {
             "color": "#454d5a",
@@ -1538,9 +1612,11 @@
           ],
           "parent": "knee_r",
           "castShadow": true,
-          "deform": {
-            "taper": 1.45
-          }
+          "scale": [
+            1,
+            1,
+            0.85
+          ]
         },
         {
           "name": "boot_r",
