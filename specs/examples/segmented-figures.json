@@ -338,11 +338,11 @@
         },
         {
           "name": "skull",
-          "type": "capsule",
+          "type": "cylinder",
           "params": [
-            0.105,
-            0.07,
-            1,
+            0.098,
+            0.078,
+            0.18,
             6
           ],
           "material": {
@@ -353,27 +353,22 @@
           },
           "position": [
             0,
-            0.14,
+            0.06999999999999999,
             0
           ],
           "parent": "head",
-          "castShadow": true,
-          "scale": [
-            1,
-            1,
-            0.9
-          ],
           "options": {
             "exactSegments": true
-          }
+          },
+          "castShadow": true
         },
         {
           "name": "jaw",
           "type": "box",
           "params": [
-            0.13,
-            0.06,
-            0.09
+            0.1,
+            0.05,
+            0.05
           ],
           "material": {
             "color": "#c49a7a",
@@ -383,22 +378,23 @@
           },
           "position": [
             0,
-            0.04,
-            0.055
+            0.005000000000000001,
+            0.048547999999999994
           ],
           "parent": "head",
-          "castShadow": true,
           "deform": {
-            "taper": 1.25
-          }
+            "taper": 1.15
+          },
+          "castShadow": true
         },
         {
           "name": "hair",
-          "type": "box",
+          "type": "cylinder",
           "params": [
-            0.21,
-            0.07,
-            0.2
+            0.106,
+            0.106,
+            0.055,
+            6
           ],
           "material": {
             "color": "#4a3b2a",
@@ -408,14 +404,36 @@
           },
           "position": [
             0,
-            0.233,
-            -0.015
+            0.1755,
+            0
           ],
           "parent": "head",
-          "castShadow": true,
-          "deform": {
-            "taper": 0.8
-          }
+          "options": {
+            "exactSegments": true
+          },
+          "castShadow": true
+        },
+        {
+          "name": "hair_fringe",
+          "type": "box",
+          "params": [
+            0.15,
+            0.04,
+            0.022
+          ],
+          "material": {
+            "color": "#4a3b2a",
+            "roughness": 0.85,
+            "metalness": 0.0,
+            "flatShading": true
+          },
+          "position": [
+            0,
+            0.14,
+            0.076868
+          ],
+          "parent": "head",
+          "castShadow": true
         },
         {
           "name": "shoulder_l",
@@ -1145,11 +1163,11 @@
         },
         {
           "name": "skull",
-          "type": "capsule",
+          "type": "cylinder",
           "params": [
-            0.095,
-            0.055,
-            1,
+            0.088,
+            0.068,
+            0.17,
             6
           ],
           "material": {
@@ -1160,27 +1178,22 @@
           },
           "position": [
             0,
-            0.1225,
+            0.065,
             0
           ],
           "parent": "head",
-          "castShadow": true,
-          "scale": [
-            1,
-            1,
-            0.9
-          ],
           "options": {
             "exactSegments": true
-          }
+          },
+          "castShadow": true
         },
         {
           "name": "jaw",
           "type": "box",
           "params": [
-            0.11,
-            0.05,
-            0.08
+            0.088,
+            0.045,
+            0.045
           ],
           "material": {
             "color": "#c9a084",
@@ -1190,22 +1203,23 @@
           },
           "position": [
             0,
-            0.035,
-            0.05
+            0.0024999999999999988,
+            0.042388
           ],
           "parent": "head",
-          "castShadow": true,
           "deform": {
-            "taper": 1.25
-          }
+            "taper": 1.15
+          },
+          "castShadow": true
         },
         {
           "name": "hair",
-          "type": "box",
+          "type": "cylinder",
           "params": [
-            0.19,
-            0.075,
-            0.18
+            0.095,
+            0.095,
+            0.05,
+            6
           ],
           "material": {
             "color": "#453931",
@@ -1215,22 +1229,45 @@
           },
           "position": [
             0,
-            0.19549999999999998,
-            -0.015
+            0.163,
+            0
           ],
           "parent": "head",
-          "castShadow": true,
-          "deform": {
-            "taper": 0.8
-          }
+          "options": {
+            "exactSegments": true
+          },
+          "castShadow": true
+        },
+        {
+          "name": "hair_fringe",
+          "type": "box",
+          "params": [
+            0.135,
+            0.035,
+            0.02
+          ],
+          "material": {
+            "color": "#453931",
+            "roughness": 0.85,
+            "metalness": 0.0,
+            "flatShading": true
+          },
+          "position": [
+            0,
+            0.1325,
+            0.069208
+          ],
+          "parent": "head",
+          "castShadow": true
         },
         {
           "name": "ponytail",
-          "type": "box",
+          "type": "cylinder",
           "params": [
-            0.045,
+            0.03,
+            0.016,
             0.3,
-            0.05
+            6
           ],
           "material": {
             "color": "#453931",
@@ -1240,19 +1277,19 @@
           },
           "position": [
             0,
-            0.01999999999999999,
-            -0.10300000000000001
+            2.7755575615628914e-17,
+            -0.091208
           ],
-          "parent": "head",
-          "castShadow": true,
           "rotation": [
-            16,
+            14,
             0,
             0
           ],
-          "deform": {
-            "taper": 1.7
-          }
+          "parent": "head",
+          "options": {
+            "exactSegments": true
+          },
+          "castShadow": true
         },
         {
           "name": "shoulder_l",
