@@ -39,6 +39,18 @@ Use these as practical defaults unless the user specifies otherwise:
 - Keep the rest pose readable and balanced before adding expressive asymmetry.
 - Exaggerate hands, feet, and head enough to read at the intended viewing distance.
 
+### Segmented (Quake 2 / md2-style) figures
+
+Reference build: `specs/examples/segmented-figures.json` — a man and a woman, ~600 tris each, every lesson below paid for in review rounds (PRs #106–113).
+
+- **Segments are faceted frustum prisms, not boxes.** Limbs: `cylinder [r_distal, r_proximal, len, 6]` — top/bottom radii carry the taper natively. Torso stack: 8-sided. Z-squash parts (`scale: [1, 1, ~0.6–0.85]`) for elliptical cross-sections. Boxes read as furniture.
+- **Pin every deliberate facet count with `options: {exactSegments: true}`** or the quality tier multiplies it (`high` = 3×) and your hex limb silently renders as an 18-gon.
+- **Bury each child segment's root inside its parent** (~0.03–0.05 overlap through every joint node). Butt-jointed segments show daylight at knees/elbows the moment the camera moves.
+- **Heads are two stacked frustums, not one** — face segment widens jaw→temple, crown segment narrows temple→crown. One frustum reads as a garbage can: straight walls + overhanging hair cap = lid. Hair must *continue the crown taper*, never overhang it. A tapered nose box + two dark eye decals (`inset`, on the face segment's front) do more than any added geometry. Fringe/bangs boxes read as sunglasses — twice tested, twice dead.
+- **Hardware may be a box; straps may not.** Belts and chest plates wrapping a prism torso must be prism bands (8-sided, same squash, `exactSegments`). Buckles, fists, boots, backpacks stay boxes.
+- **Wear on gear needs per-piece tints and low amounts** (`edgeWear` curvature, amount ~0.12, color = lightened base) — neutral grey at default strength repaints prisms as primer, because every facet edge is a crease.
+- **Review at the distance the defect lives**: `inspect-model.js --target <part>` close-ups for anything head- or joint-scale. Full sweeps render a head at ~40px; three rounds of defects shipped that way before the close-up mode existed.
+
 ## Environments And Architecture
 
 - Lock the ground plane, circulation path, and focal wall or focal axis first.

@@ -168,7 +168,20 @@
             "color": "#3a332c",
             "roughness": 0.5,
             "metalness": 0.2,
-            "flatShading": true
+            "flatShading": true,
+            "breakup": {
+              "noise": {
+                "amount": 0.05,
+                "scale": 6
+              },
+              "roughnessVariation": 0.1,
+              "edgeWear": {
+                "amount": 0.12,
+                "size": 0.18,
+                "mode": "curvature",
+                "color": "#524a56"
+              }
+            }
           },
           "position": [
             0,
@@ -297,7 +310,24 @@
             "color": "#464f38",
             "roughness": 0.55,
             "metalness": 0.35,
-            "flatShading": true
+            "flatShading": true,
+            "breakup": {
+              "noise": {
+                "amount": 0.05,
+                "scale": 6
+              },
+              "roughnessVariation": 0.1,
+              "edgeWear": {
+                "amount": 0.12,
+                "size": 0.18,
+                "mode": "curvature",
+                "color": "#5c6449"
+              }
+            },
+            "detail": {
+              "scale": 9,
+              "amount": 0.07
+            }
           },
           "position": [
             0,
@@ -386,7 +416,41 @@
             "color": "#c49a7a",
             "roughness": 0.6,
             "metalness": 0.0,
-            "flatShading": true
+            "flatShading": true,
+            "decals": [
+              {
+                "face": "front",
+                "size": [
+                  0.02,
+                  0.013
+                ],
+                "offset": [
+                  -0.03,
+                  0.028
+                ],
+                "inset": 0.02,
+                "material": {
+                  "color": "#2a2118",
+                  "roughness": 0.4
+                }
+              },
+              {
+                "face": "front",
+                "size": [
+                  0.02,
+                  0.013
+                ],
+                "offset": [
+                  0.03,
+                  0.028
+                ],
+                "inset": 0.02,
+                "material": {
+                  "color": "#2a2118",
+                  "roughness": 0.4
+                }
+              }
+            ]
           },
           "position": [
             0,
@@ -523,7 +587,20 @@
             "color": "#464f38",
             "roughness": 0.55,
             "metalness": 0.35,
-            "flatShading": true
+            "flatShading": true,
+            "breakup": {
+              "noise": {
+                "amount": 0.05,
+                "scale": 6
+              },
+              "roughnessVariation": 0.1,
+              "edgeWear": {
+                "amount": 0.12,
+                "size": 0.18,
+                "mode": "curvature",
+                "color": "#5c6449"
+              }
+            }
           },
           "position": [
             -0.015,
@@ -546,7 +623,7 @@
             6
           ],
           "material": {
-            "color": "#5a6248",
+            "color": "#4f563d",
             "roughness": 0.75,
             "metalness": 0.0,
             "flatShading": true,
@@ -659,7 +736,20 @@
             "color": "#464f38",
             "roughness": 0.55,
             "metalness": 0.35,
-            "flatShading": true
+            "flatShading": true,
+            "breakup": {
+              "noise": {
+                "amount": 0.05,
+                "scale": 6
+              },
+              "roughnessVariation": 0.1,
+              "edgeWear": {
+                "amount": 0.12,
+                "size": 0.18,
+                "mode": "curvature",
+                "color": "#5c6449"
+              }
+            }
           },
           "position": [
             0.015,
@@ -682,7 +772,7 @@
             6
           ],
           "material": {
-            "color": "#5a6248",
+            "color": "#4f563d",
             "roughness": 0.75,
             "metalness": 0.0,
             "flatShading": true,
@@ -881,7 +971,20 @@
             "color": "#35302a",
             "roughness": 0.8,
             "metalness": 0.0,
-            "flatShading": true
+            "flatShading": true,
+            "breakup": {
+              "noise": {
+                "amount": 0.05,
+                "scale": 6
+              },
+              "roughnessVariation": 0.1,
+              "edgeWear": {
+                "amount": 0.12,
+                "size": 0.18,
+                "mode": "curvature",
+                "color": "#4d463e"
+              }
+            }
           },
           "position": [
             0,
@@ -1005,7 +1108,20 @@
             "color": "#35302a",
             "roughness": 0.8,
             "metalness": 0.0,
-            "flatShading": true
+            "flatShading": true,
+            "breakup": {
+              "noise": {
+                "amount": 0.05,
+                "scale": 6
+              },
+              "roughnessVariation": 0.1,
+              "edgeWear": {
+                "amount": 0.12,
+                "size": 0.18,
+                "mode": "curvature",
+                "color": "#4d463e"
+              }
+            }
           },
           "position": [
             0,
@@ -1081,7 +1197,20 @@
             "color": "#3d3542",
             "roughness": 0.5,
             "metalness": 0.2,
-            "flatShading": true
+            "flatShading": true,
+            "breakup": {
+              "noise": {
+                "amount": 0.05,
+                "scale": 6
+              },
+              "roughnessVariation": 0.1,
+              "edgeWear": {
+                "amount": 0.12,
+                "size": 0.18,
+                "mode": "curvature",
+                "color": "#544c58"
+              }
+            }
           },
           "position": [
             0,
@@ -1210,7 +1339,24 @@
             "color": "#7a3c30",
             "roughness": 0.55,
             "metalness": 0.1,
-            "flatShading": true
+            "flatShading": true,
+            "breakup": {
+              "noise": {
+                "amount": 0.05,
+                "scale": 6
+              },
+              "roughnessVariation": 0.1,
+              "edgeWear": {
+                "amount": 0.12,
+                "size": 0.18,
+                "mode": "curvature",
+                "color": "#96574a"
+              }
+            },
+            "detail": {
+              "scale": 9,
+              "amount": 0.07
+            }
           },
           "position": [
             0,
@@ -1277,7 +1423,41 @@
             "color": "#c9a084",
             "roughness": 0.6,
             "metalness": 0.0,
-            "flatShading": true
+            "flatShading": true,
+            "decals": [
+              {
+                "face": "front",
+                "size": [
+                  0.018,
+                  0.012
+                ],
+                "offset": [
+                  -0.027,
+                  0.026
+                ],
+                "inset": 0.02,
+                "material": {
+                  "color": "#241d16",
+                  "roughness": 0.4
+                }
+              },
+              {
+                "face": "front",
+                "size": [
+                  0.018,
+                  0.012
+                ],
+                "offset": [
+                  0.027,
+                  0.026
+                ],
+                "inset": 0.02,
+                "material": {
+                  "color": "#241d16",
+                  "roughness": 0.4
+                }
+              }
+            ]
           },
           "position": [
             0,
@@ -1443,7 +1623,7 @@
             6
           ],
           "material": {
-            "color": "#8a4538",
+            "color": "#7b3e32",
             "roughness": 0.75,
             "metalness": 0.0,
             "flatShading": true,
@@ -1554,7 +1734,7 @@
             6
           ],
           "material": {
-            "color": "#8a4538",
+            "color": "#7b3e32",
             "roughness": 0.75,
             "metalness": 0.0,
             "flatShading": true,
@@ -1753,7 +1933,20 @@
             "color": "#3f3a47",
             "roughness": 0.8,
             "metalness": 0.0,
-            "flatShading": true
+            "flatShading": true,
+            "breakup": {
+              "noise": {
+                "amount": 0.05,
+                "scale": 6
+              },
+              "roughnessVariation": 0.1,
+              "edgeWear": {
+                "amount": 0.12,
+                "size": 0.18,
+                "mode": "curvature",
+                "color": "#544e5c"
+              }
+            }
           },
           "position": [
             0,
@@ -1877,7 +2070,20 @@
             "color": "#3f3a47",
             "roughness": 0.8,
             "metalness": 0.0,
-            "flatShading": true
+            "flatShading": true,
+            "breakup": {
+              "noise": {
+                "amount": 0.05,
+                "scale": 6
+              },
+              "roughnessVariation": 0.1,
+              "edgeWear": {
+                "amount": 0.12,
+                "size": 0.18,
+                "mode": "curvature",
+                "color": "#544e5c"
+              }
+            }
           },
           "position": [
             0,
