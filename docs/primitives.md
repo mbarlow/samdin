@@ -58,6 +58,56 @@ Primitive types you can use as a part's `type`. `params` is type-specific.
 
 **ExtrudePath shapes**: `"circle"` `[radius]`, `"square"` `[size]`, `"rectangle"` `[width, height]`
 
+### PolyMesh
+
+`type: "polyMesh"` provides deterministic Nendo/Wings3D-style box modelling
+inside a normal Samdin part. It keeps a polygon control cage while operations
+run, addresses faces through persistent tags, then emits a flat-shaded triangle
+mesh for the existing material, hierarchy, pose, inspection, and GLTF pipeline.
+
+```json
+{
+  "name": "torso",
+  "type": "polyMesh",
+  "polyMesh": {
+    "base": { "type": "cube", "size": [0.22, 0.25, 0.2], "center": [0.11, 0, 0] },
+    "operations": [
+      { "op": "select", "tag": "top" },
+      { "op": "extrude", "distance": 0.16, "scale": [1.12, 1, 0.92], "pivot": [0, 0, 0], "tag": "waist" },
+      { "op": "extrude", "distance": 0.24, "scale": [1.28, 1, 1.16], "pivot": [0, 0, 0], "tag": "chest" }
+    ],
+    "modifiers": [
+      { "type": "mirror", "axis": "x", "threshold": 0.00001 }
+    ]
+  },
+  "material": { "color": "#54708a", "flatShading": true }
+}
+```
+
+Cube bases begin with `front`, `back`, `left`, `right`, `top`, and `bottom`
+face tags. An explicit cage uses `base.type: "mesh"` with `vertices` and convex
+polygon `faces`; a face may be an index array or `{vertices, tag|tags}`.
+
+| Operation | Key fields | Result |
+|-----------|------------|--------|
+| `select` | `tag`, `criteria` | Replaces the active face selection |
+| `extrude` | `distance` or `offset`, `scale`, `pivot`, `tag` | Extrudes each selected face and selects the new cap |
+| `inset` | `factor` or `amount`, `tag` | Creates and selects an inner face plus a border ring |
+| `translate` | `offset` | Moves the selected faces' shared vertices |
+| `scale` | `factor`, optional `pivot` | Scales selected vertices around their centroid or pivot |
+| `rotate` | `angle`, `axis`, optional `pivot` | Rotates selected vertices in degrees |
+
+An edit operation can use `selection: "tag"` instead of a preceding `select`.
+`tag` on `extrude`/`inset` names the new cap; it is not an input selector.
+Selection criteria support `lastCreated`, `all`, face normal, face-center
+position, and numeric face IDs. Prefer tags because IDs change with topology.
+
+The `mirror` modifier expects a half-cage on one side of its axis. Faces lying
+entirely on the center plane are removed, center vertices are welded, and the
+remaining faces are duplicated with corrected winding. Region extrusion,
+Catmull-Clark subdivision, UV generation, and concave polygon triangulation are
+not part of the initial runtime contract. See `specs/fixtures/polymesh-test.json`.
+
 ### Loft
 
 `type: "loft"` lofts faceted cross-sections along an arbitrary (curved) path into one continuous flat-shaded mesh — the sculpted-hull look the primitive kitbash can't reach (creature bodies, boat hulls, fins, sleek fuselages). Same math as `cli/hullgen.mjs`; see `specs/fixtures/loft-test.json` (the hullgen whale rebuilt as spec parts).

@@ -1,0 +1,78 @@
+{
+  "name": "polymesh-test",
+  "description": "Box-modelling primitive test: tagged face extrusion, inset, transforms, explicit polygon cages, and welded symmetry.",
+  "root": "scene_root",
+  "scene": {
+    "quality": "standard",
+    "background": { "type": "gradient", "top": "#303946", "bottom": "#11161d" },
+    "lighting": { "preset": "studio", "environment": "studio", "envMapIntensity": 0.9 },
+    "camera": { "preset": "threeQuarter", "distanceMultiplier": 0.8, "targetOffset": [0, 0.65, 0] }
+  },
+  "parts": [
+    { "name": "scene_root", "type": "group" },
+    {
+      "name": "mirrored_torso",
+      "type": "polyMesh",
+      "polyMesh": {
+        "base": { "type": "cube", "size": [0.22, 0.25, 0.2], "center": [0.11, 0, 0] },
+        "operations": [
+          { "op": "select", "tag": "top" },
+          { "op": "extrude", "distance": 0.16, "scale": [1.12, 1, 0.92], "pivot": [0, 0, 0], "tag": "waist" },
+          { "op": "extrude", "distance": 0.24, "scale": [1.28, 1, 1.16], "pivot": [0, 0, 0], "tag": "chest" },
+          { "op": "extrude", "distance": 0.12, "scale": [0.82, 1, 0.94], "pivot": [0, 0, 0], "tag": "shoulders" }
+        ],
+        "modifiers": [
+          { "type": "mirror", "axis": "x", "threshold": 0.00001 }
+        ]
+      },
+      "material": { "color": "#54708a", "roughness": 0.72, "flatShading": true },
+      "position": [-0.38, 0.48, 0],
+      "parent": "scene_root",
+      "castShadow": true
+    },
+    {
+      "name": "inset_head",
+      "type": "polyMesh",
+      "polyMesh": {
+        "base": { "type": "cube", "size": [0.3, 0.34, 0.28] },
+        "operations": [
+          { "op": "select", "tag": "top" },
+          { "op": "extrude", "distance": 0.12, "scale": [0.78, 1, 0.82], "tag": "crown" },
+          { "op": "select", "tag": "front" },
+          { "op": "inset", "factor": [0.42, 0.34, 1], "tag": "nose_base" },
+          { "op": "translate", "offset": [0, -0.035, 0] },
+          { "op": "extrude", "distance": 0.085, "scale": [0.72, 0.8, 1], "tag": "nose" }
+        ]
+      },
+      "material": { "color": "#c49a7a", "roughness": 0.68, "flatShading": true },
+      "position": [0.38, 0.7, 0],
+      "parent": "scene_root",
+      "castShadow": true
+    },
+    {
+      "name": "explicit_foot",
+      "type": "polyMesh",
+      "polyMesh": {
+        "base": {
+          "type": "mesh",
+          "vertices": [
+            [-0.09, -0.05, -0.12], [0.09, -0.05, -0.12],
+            [0.08, 0.05, -0.09], [-0.08, 0.05, -0.09],
+            [-0.11, -0.05, 0.17], [0.11, -0.05, 0.17],
+            [0.075, 0.025, 0.15], [-0.075, 0.025, 0.15]
+          ],
+          "faces": [
+            { "vertices": [0, 3, 2, 1], "tag": "heel" },
+            { "vertices": [4, 5, 6, 7], "tag": "toe" },
+            [0, 1, 5, 4], [3, 7, 6, 2], [0, 4, 7, 3], [1, 2, 6, 5]
+          ]
+        },
+        "operations": []
+      },
+      "material": { "color": "#403a35", "roughness": 0.8, "flatShading": true },
+      "position": [0.38, 0.18, 0],
+      "parent": "scene_root",
+      "castShadow": true
+    }
+  ]
+}

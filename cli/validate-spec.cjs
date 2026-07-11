@@ -28,6 +28,7 @@ const PRIMITIVE_PARAMS = {
   module: { min: 0, max: 0, requiresSrc: true },
   csg: { min: 0, max: 0, validate: validateEmbeddedCSG },
   loft: { min: 0, max: 0, validate: validateLoft },
+  polyMesh: { min: 0, max: 0, validate: validatePolyMesh },
 
   tetrahedron: { min: 0, max: 2 },
   octahedron: { min: 0, max: 2 },
@@ -256,6 +257,79 @@ function validatePoses(spec, issues, warnings) {
   }
 }
 
+function validateClips(spec, issues, warnings) {
+  if (spec.clips === undefined) return;
+  if (!spec.clips || typeof spec.clips !== 'object' || Array.isArray(spec.clips)) {
+    issues.push('clips must be an object of named animation clips');
+    return;
+  }
+
+  const placementNames = new Set(flattenParts(spec.parts || []).map((part) => part.name));
+  for (const [clipName, clip] of Object.entries(spec.clips)) {
+    const prefix = `clips.${clipName}`;
+    if (!clip || typeof clip !== 'object' || Array.isArray(clip)) {
+      issues.push(`${prefix} must be an object`);
+      continue;
+    }
+    if (clip.duration !== undefined && (typeof clip.duration !== 'number' || clip.duration <= 0)) {
+      issues.push(`${prefix}.duration must be a positive number`);
+    }
+    if (clip.instances !== undefined) {
+      if (!Array.isArray(clip.instances) || clip.instances.length === 0 ||
+          clip.instances.some((name) => typeof name !== 'string' || !name)) {
+        issues.push(`${prefix}.instances must be a non-empty array of placement names`);
+      } else {
+        for (const name of clip.instances) {
+          if (!placementNames.has(name)) warnings.push(`${prefix} instance "${name}" is not a top-level part`);
+        }
+      }
+    }
+    if (!clip.tracks || typeof clip.tracks !== 'object' || Array.isArray(clip.tracks) ||
+        Object.keys(clip.tracks).length === 0) {
+      issues.push(`${prefix}.tracks must be a non-empty object`);
+      continue;
+    }
+
+    for (const [joint, channels] of Object.entries(clip.tracks)) {
+      const trackPrefix = `${prefix}.tracks.${joint}`;
+      if (!channels || typeof channels !== 'object' || Array.isArray(channels)) {
+        issues.push(`${trackPrefix} must contain rotation and/or position keyframes`);
+        continue;
+      }
+      const channelNames = ['rotation', 'position'].filter((name) => channels[name] !== undefined);
+      if (channelNames.length === 0) {
+        issues.push(`${trackPrefix} must contain rotation and/or position keyframes`);
+      }
+      for (const channelName of channelNames) {
+        const keyframes = channels[channelName];
+        if (!Array.isArray(keyframes) || keyframes.length < 2) {
+          issues.push(`${trackPrefix}.${channelName} must contain at least two [time, [x, y, z]] keyframes`);
+          continue;
+        }
+        let previousTime = -Infinity;
+        for (let index = 0; index < keyframes.length; index++) {
+          const keyframe = keyframes[index];
+          const valid = Array.isArray(keyframe) && keyframe.length === 2 &&
+            typeof keyframe[0] === 'number' && keyframe[0] >= 0 &&
+            Array.isArray(keyframe[1]) && keyframe[1].length === 3 &&
+            keyframe[1].every((value) => typeof value === 'number');
+          if (!valid) {
+            issues.push(`${trackPrefix}.${channelName}[${index}] must be [non-negative time, [x, y, z]]`);
+            continue;
+          }
+          if (keyframe[0] <= previousTime) {
+            issues.push(`${trackPrefix}.${channelName} times must be strictly increasing`);
+          }
+          if (clip.duration !== undefined && keyframe[0] > clip.duration) {
+            issues.push(`${trackPrefix}.${channelName}[${index}] exceeds clip duration ${clip.duration}`);
+          }
+          previousTime = keyframe[0];
+        }
+      }
+    }
+  }
+}
+
 function validateSceneSettings(scene, issues, warnings) {
   if (!scene || typeof scene !== 'object') {
     issues.push('scene must be an object');
@@ -452,6 +526,149 @@ function validateLoft(part) {
   return errors;
 }
 
+function validatePolyMesh(part) {
+  const errors = [];
+  const def = part.polyMesh;
+  if (!def || typeof def !== 'object' || Array.isArray(def)) {
+    return ['polyMesh part requires a polyMesh object'];
+  }
+
+  const isVec = (value, size) =>
+    Array.isArray(value) && value.length === size && value.every((item) => typeof item === 'number');
+  const base = def.base || { type: 'cube' };
+  const baseType = base.type || 'cube';
+  if (!['cube', 'mesh'].includes(baseType)) {
+    errors.push('polyMesh base.type must be "cube" or "mesh"');
+  }
+  if (baseType === 'cube') {
+    if (base.size !== undefined && !isVec(base.size, 3)) {
+      errors.push('polyMesh cube base.size must be [width, height, depth]');
+    }
+    if (isVec(base.size, 3) && base.size.some((value) => value <= 0)) {
+      errors.push('polyMesh cube base.size values must be positive');
+    }
+    if (base.center !== undefined && !isVec(base.center, 3)) {
+      errors.push('polyMesh cube base.center must be [x, y, z]');
+    }
+  }
+  if (baseType === 'mesh') {
+    if (!Array.isArray(base.vertices) || base.vertices.length < 4 ||
+        base.vertices.some((vertex) => !isVec(vertex, 3))) {
+      errors.push('polyMesh mesh base.vertices needs at least four [x, y, z] vertices');
+    }
+    if (!Array.isArray(base.faces) || base.faces.length < 4) {
+      errors.push('polyMesh mesh base.faces needs at least four polygon faces');
+    } else {
+      const vertexCount = Array.isArray(base.vertices) ? base.vertices.length : 0;
+      base.faces.forEach((face, index) => {
+        const vertices = Array.isArray(face) ? face : face?.vertices;
+        if (!Array.isArray(vertices) || vertices.length < 3 ||
+            vertices.some((value) => !Number.isInteger(value) || value < 0 || value >= vertexCount)) {
+          errors.push(`polyMesh mesh face ${index} needs at least three valid vertex indices`);
+        }
+      });
+    }
+  }
+
+  const operations = def.operations || [];
+  if (!Array.isArray(operations)) {
+    errors.push('polyMesh operations must be an array');
+  } else {
+    let hasSelection = false;
+    const knownTags = new Set(baseType === 'cube'
+      ? ['front', 'back', 'left', 'right', 'top', 'bottom']
+      : (base.faces || []).flatMap((face) => {
+          if (Array.isArray(face)) return [];
+          return [...(face?.tags || []), ...(face?.tag ? [face.tag] : [])];
+        }));
+    const selectionOn = (operation) =>
+      operation.selection !== undefined || operation.criteria !== undefined;
+    operations.forEach((operation, index) => {
+      const prefix = `polyMesh operation ${index}`;
+      if (!operation || typeof operation !== 'object' || Array.isArray(operation)) {
+        errors.push(`${prefix} must be an object`);
+        return;
+      }
+      if (!['select', 'extrude', 'inset', 'translate', 'scale', 'rotate'].includes(operation.op)) {
+        errors.push(`${prefix} has unsupported op "${operation.op}"`);
+        return;
+      }
+      const selector = operation.op === 'select'
+        ? (operation.selection ?? operation.tag ?? operation.criteria?.tag)
+        : (operation.selection ?? operation.criteria?.tag);
+      const selectedTags = selector === undefined ? [] : (Array.isArray(selector) ? selector : [selector]);
+      selectedTags.forEach((tag) => {
+        if (typeof tag === 'string' && !knownTags.has(tag)) {
+          errors.push(`${prefix} selects unknown face tag "${tag}"`);
+        }
+      });
+      if (operation.op === 'select') hasSelection = true;
+      else if (selectionOn(operation)) hasSelection = true;
+      else if (!hasSelection) errors.push(`${prefix} has no active face selection`);
+
+      if (operation.op === 'extrude') {
+        if (operation.individual === false) errors.push(`${prefix} region extrusion is not supported yet`);
+        if (operation.distance !== undefined && typeof operation.distance !== 'number') {
+          errors.push(`${prefix} distance must be a number`);
+        }
+        if (operation.amount !== undefined && typeof operation.amount !== 'number') {
+          errors.push(`${prefix} amount must be a number`);
+        }
+        if (operation.offset !== undefined && !isVec(operation.offset, 3)) {
+          errors.push(`${prefix} offset must be [x, y, z]`);
+        }
+        if (operation.pivot !== undefined && !isVec(operation.pivot, 3)) {
+          errors.push(`${prefix} pivot must be [x, y, z]`);
+        }
+      }
+      if (operation.op === 'inset') {
+        const factor = operation.factor ?? operation.scale;
+        if (factor !== undefined && typeof factor !== 'number' && !isVec(factor, 3)) {
+          errors.push(`${prefix} inset factor must be a number or [x, y, z]`);
+        }
+        if (operation.amount !== undefined &&
+            (typeof operation.amount !== 'number' || operation.amount < 0 || operation.amount >= 1)) {
+          errors.push(`${prefix} inset amount must be a number from 0 up to 1`);
+        }
+      }
+      if ((operation.op === 'extrude' || operation.op === 'inset') && operation.tag) {
+        knownTags.add(operation.tag);
+        knownTags.add(operation.sideTag || operation.borderTag || `${operation.tag}.${operation.op === 'extrude' ? 'side' : 'border'}`);
+      }
+      if (operation.op === 'translate' && !isVec(operation.offset, 3)) {
+        errors.push(`${prefix} translate requires offset: [x, y, z]`);
+      }
+      if (operation.op === 'rotate') {
+        if (typeof operation.angle !== 'number') errors.push(`${prefix} rotate requires a numeric angle`);
+        if (operation.axis !== undefined &&
+            !['x', 'y', 'z'].includes(operation.axis) && !isVec(operation.axis, 3)) {
+          errors.push(`${prefix} rotate axis must be x, y, z, or [x, y, z]`);
+        }
+      }
+      if (operation.op === 'scale') {
+        const factor = operation.factor ?? operation.scale;
+        if (typeof factor !== 'number' && !isVec(factor, 3)) {
+          errors.push(`${prefix} scale requires factor as a number or [x, y, z]`);
+        }
+      }
+    });
+  }
+
+  const modifiers = def.modifiers || [];
+  if (!Array.isArray(modifiers)) {
+    errors.push('polyMesh modifiers must be an array');
+  } else {
+    modifiers.forEach((modifier, index) => {
+      if (modifier?.type !== 'mirror') {
+        errors.push(`polyMesh modifier ${index} has unsupported type "${modifier?.type}"`);
+      } else if (modifier.axis !== undefined && !['x', 'y', 'z'].includes(modifier.axis)) {
+        errors.push(`polyMesh modifier ${index} mirror axis must be x, y, or z`);
+      }
+    });
+  }
+  return errors;
+}
+
 function validateEmbeddedCSG(part) {
   const errors = [];
   if (!part.shapes || typeof part.shapes !== 'object') {
@@ -577,7 +794,7 @@ function validatePartCollection(parts, issues, warnings, scopeLabel = 'spec', re
 
     if (typeInfo) {
       validateParams(part, typeInfo, prefix, issues, warnings);
-      // Paramless structural types (csg, loft) validate the part itself —
+      // Paramless structural types (csg, loft, polyMesh) validate the part itself —
       // validateParams early-returns when there's no params array.
       if (typeInfo.validate && !part.params) {
         issues.push(...typeInfo.validate(part).map((issue) => `${prefix} ${issue}`));
@@ -819,6 +1036,7 @@ function validateSpec(specPath, strict = false) {
   }
 
   validatePoses(spec, issues, warnings);
+  validateClips(spec, issues, warnings);
 
   const strictFindings = [];
 

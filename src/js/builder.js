@@ -12,6 +12,7 @@ import { buildCSG } from './CSGBuilder.js';
 import { CSGPrimitives, CSG_PRIMITIVE_TYPES } from './CSGPrimitives.js';
 import { applyTerrainCompositor } from './terrain-compositor.js';
 import { buildLoftGeometry } from './loft.js';
+import { buildPolyMeshGeometry } from './polymesh.js';
 import { applyDeform } from './deform.js';
 import { flipNormalsOnObject } from './terrain/sampler.js';
 
@@ -33,7 +34,7 @@ import { flipNormalsOnObject } from './terrain/sampler.js';
  *     },
  *     ...
  *   ],
- *   animations: { ... }  // optional animation definitions
+ *   clips: { ... }       // optional joint animation clips
  * }
  */
 
@@ -344,10 +345,71 @@ class ModelBuilder {
     model.userData.parts = assembler.getAnimatableParts();
 
     this.applyPoses(model, spec);
+    model.userData.animations = this.buildAnimationClips(model, spec);
     applyTerrainCompositor(model, spec);
     this.applyGroundSnap(model);
 
     return model;
+  }
+
+  /**
+   * Compile readable spec keyframes into Three.js clips. Track targets are
+   * joint names, optionally expanded across named top-level placements.
+   */
+  buildAnimationClips(model, spec) {
+    if (!spec.clips || typeof spec.clips !== 'object') return [];
+
+    const clips = [];
+    const euler = new THREE.Euler();
+    const quaternion = new THREE.Quaternion();
+
+    for (const [clipName, clipDef] of Object.entries(spec.clips)) {
+      const tracks = [];
+      const prefixes = clipDef.instances?.length ? clipDef.instances : [''];
+
+      for (const prefix of prefixes) {
+        for (const [joint, channels] of Object.entries(clipDef.tracks || {})) {
+          const nodeName = prefix ? `${prefix}_${joint}` : joint;
+          if (!model.getObjectByName(nodeName)) {
+            console.warn(`[clip:${clipName}] joint not found: ${nodeName}`);
+            continue;
+          }
+
+          if (Array.isArray(channels.rotation)) {
+            const times = [];
+            const values = [];
+            for (const [time, degrees] of channels.rotation) {
+              times.push(time);
+              euler.set(
+                THREE.MathUtils.degToRad(degrees[0]),
+                THREE.MathUtils.degToRad(degrees[1]),
+                THREE.MathUtils.degToRad(degrees[2]),
+                'XYZ'
+              );
+              quaternion.setFromEuler(euler);
+              values.push(quaternion.x, quaternion.y, quaternion.z, quaternion.w);
+            }
+            tracks.push(new THREE.QuaternionKeyframeTrack(`${nodeName}.quaternion`, times, values));
+          }
+
+          if (Array.isArray(channels.position)) {
+            const times = [];
+            const values = [];
+            for (const [time, position] of channels.position) {
+              times.push(time);
+              values.push(position[0], position[1], position[2]);
+            }
+            tracks.push(new THREE.VectorKeyframeTrack(`${nodeName}.position`, times, values));
+          }
+        }
+      }
+
+      if (tracks.length) {
+        clips.push(new THREE.AnimationClip(clipName, clipDef.duration ?? -1, tracks));
+      }
+    }
+
+    return clips;
   }
 
   /**
@@ -1115,6 +1177,15 @@ class ModelBuilder {
 
       case 'loft': {
         const geometry = buildLoftGeometry(def.loft || {});
+        const mesh = new THREE.Mesh(
+          geometry,
+          opts.material || Materials.create({ color: 0x888888, flatShading: true })
+        );
+        return this.finalizePart(mesh, def);
+      }
+
+      case 'polyMesh': {
+        const geometry = buildPolyMeshGeometry(def.polyMesh || {});
         const mesh = new THREE.Mesh(
           geometry,
           opts.material || Materials.create({ color: 0x888888, flatShading: true })

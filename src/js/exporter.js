@@ -11,11 +11,12 @@ class ModelExporter {
   /**
    * Export model as GLTF (JSON) or GLB (binary)
    * @param {THREE.Object3D} model
-   * @param {object} options - { binary: true/false, name: 'model' }
+   * @param {object} options - { binary: true/false, name: 'model', animations: [] }
    */
   async export(model, options = {}) {
     const binary = options.binary ?? true;
     const name = options.name || model.name || 'model';
+    const animations = options.animations ?? model.userData.animations ?? [];
     
     return new Promise((resolve, reject) => {
       this.exporter.parse(
@@ -38,7 +39,7 @@ class ModelExporter {
           console.error('Export failed:', error);
           reject(error);
         },
-        { binary }
+        { binary, animations }
       );
     });
   }

@@ -1,5 +1,25 @@
 # Release Notes
 
+## 2026-07-10
+
+### Tagged PolyMesh Box Modelling
+
+- Added parts-based `type: "polyMesh"` geometry for Nendo/Wings3D-style
+  low-poly control cages without leaving the normal Samdin hierarchy.
+- Cube and explicit polygon bases support persistent face tags plus
+  `select`, `extrude`, `inset`, `translate`, `scale`, and `rotate` operations.
+- Half-cage mirroring removes construction caps, welds center-plane vertices,
+  and corrects mirrored face winding.
+- The CLI validator and JSON Schema reject malformed cages, unsupported edit
+  operations, missing selections, and unknown face tags.
+- Added `polymesh-test.json` and a side-by-side segmented humanoid bust proof.
+- Rebuilt the canonical segmented man and woman with directional polyMesh body
+  cages and complete waist/head/shoulder/elbow/wrist/hip/knee/ankle chains.
+- Added validated, reusable joint clips with degree-to-quaternion compilation,
+  viewer playback, and GLTF/GLB animation export; the figures ship idle and
+  walk cycles.
+- Existing quality anchors remain structurally unchanged.
+
 ## 2026-03-07
 
 This update expands Samdin from a basic parts-based model builder into a more complete scene-authoring workflow.

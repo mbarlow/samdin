@@ -219,3 +219,22 @@ Spec-level named poses put the joint-chain convention to work: a pose maps joint
 ```
 
 Activate with `"pose": "sitting"` at spec level, or per module/prefab placement — `{ "type": "module", "src": "worker", "name": "worker_sitting", "pose": "sitting" }` resolves joints with the placement prefix (`worker_sitting_hip_l`). Unknown joints warn and are skipped. See `specs/fixtures/pose-test.json` for the reference articulated-figure module (shoulder/elbow/hip/knee groups at anatomical pivots, meshes offset below them).
+
+## Joint animation clips (`clips`)
+
+Validated clips animate those same named joint groups and are exposed in the viewer's animation controls. Keyframe rotations use degrees and compile to quaternion tracks; positions use model-space units. `instances` expands reusable joint names across named top-level module placements.
+
+```json
+"clips": {
+  "walk": {
+    "duration": 1,
+    "instances": ["worker_a", "worker_b"],
+    "tracks": {
+      "hip_l": { "rotation": [[0, [-30, 0, 0]], [0.5, [30, 0, 0]], [1, [-30, 0, 0]]] },
+      "knee_l": { "rotation": [[0, [40, 0, 0]], [0.5, [10, 0, 0]], [1, [40, 0, 0]]] }
+    }
+  }
+}
+```
+
+Each channel needs at least two `[time, [x, y, z]]` keyframes with strictly increasing non-negative times. When `duration` is omitted, Three.js derives it from the last keyframe. The clips are included in GLTF/GLB export. See `specs/examples/segmented-figures.json` for complete idle and walk cycles across waist, head, arms, hips, knees, and ankles.

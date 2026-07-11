@@ -28,7 +28,11 @@
     "output": { "type": "string" },
     "outputs": { "type": "array", "items": { "type": "object" } },
     "material": { "$ref": "#/definitions/material" },
-    "animations": { "type": "object" }
+    "animations": { "type": "object" },
+    "clips": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/definitions/animationClip" }
+    }
   },
   "definitions": {
     "vec3": {
@@ -36,6 +40,42 @@
       "items": { "type": "number" },
       "minItems": 3,
       "maxItems": 3
+    },
+    "keyframe": {
+      "type": "array",
+      "items": [
+        { "type": "number", "minimum": 0 },
+        { "$ref": "#/definitions/vec3" }
+      ],
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "animationClip": {
+      "type": "object",
+      "required": ["tracks"],
+      "properties": {
+        "duration": { "type": "number", "exclusiveMinimum": 0 },
+        "instances": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "tracks": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "rotation": { "type": "array", "items": { "$ref": "#/definitions/keyframe" }, "minItems": 2 },
+              "position": { "type": "array", "items": { "$ref": "#/definitions/keyframe" }, "minItems": 2 }
+            },
+            "additionalProperties": false,
+            "anyOf": [{ "required": ["rotation"] }, { "required": ["position"] }]
+          }
+        }
+      },
+      "additionalProperties": false
     },
     "lintIgnore": {
       "type": "array",
@@ -48,7 +88,7 @@
     "primitiveType": {
       "enum": [
         "box", "cylinder", "sphere", "cone", "torus", "capsule", "roundedBox", "plane",
-        "group", "prefab", "module", "csg", "loft", "region",
+        "group", "prefab", "module", "csg", "loft", "polyMesh", "region",
         "tetrahedron", "octahedron", "dodecahedron", "icosahedron", "prism", "pyramid",
         "wedge", "tube", "ring", "stairs", "arch", "lathe", "extrudePath", "cable",
         "catenary", "helix", "rock", "canopy",
@@ -90,7 +130,8 @@
         "shapes": { "type": "object" },
         "operations": { "type": "array" },
         "output": { "type": "string" },
-        "outputs": { "type": "array" }
+        "outputs": { "type": "array" },
+        "polyMesh": { "$ref": "#/definitions/polyMesh" }
       },
       "additionalProperties": true
     },
@@ -101,6 +142,47 @@
         "root": { "type": "string" },
         "parts": { "type": "array", "items": { "$ref": "#/definitions/part" } }
       }
+    },
+    "polyMesh": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "type": "object",
+          "properties": {
+            "type": { "enum": ["cube", "mesh"] },
+            "size": { "$ref": "#/definitions/vec3" },
+            "center": { "$ref": "#/definitions/vec3" },
+            "vertices": { "type": "array", "items": { "$ref": "#/definitions/vec3" } },
+            "faces": { "type": "array" }
+          },
+          "additionalProperties": true
+        },
+        "operations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["op"],
+            "properties": {
+              "op": { "enum": ["select", "extrude", "inset", "translate", "scale", "rotate"] }
+            },
+            "additionalProperties": true
+          }
+        },
+        "modifiers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["type"],
+            "properties": {
+              "type": { "enum": ["mirror"] },
+              "axis": { "enum": ["x", "y", "z"] },
+              "threshold": { "type": "number" }
+            },
+            "additionalProperties": true
+          }
+        }
+      },
+      "additionalProperties": false
     },
     "modifiers": {
       "type": "object",
